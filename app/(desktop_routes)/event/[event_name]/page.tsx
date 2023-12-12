@@ -39,14 +39,14 @@ export const metadata: Metadata = {
 	description: "DESC",
 }; */
 
-/* export const metadata: Metadata = {
+export const metadata: Metadata = {
 	title: "TITLE!!!!!!",
 	description: "DESC",
 	openGraph: {
 		description: "OG DESC!!!!!!",
 		title: "OG TITLE!!!!!!",
 	},
-}; */
+};
 
 function page({ params }: { params: { event_name: string } }) {
 	return <NewEventPage eventNameFromParams={params.event_name} />;
