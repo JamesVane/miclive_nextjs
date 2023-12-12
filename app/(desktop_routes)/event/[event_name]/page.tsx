@@ -18,18 +18,16 @@ export async function generateMetadata(
 		const id = params.id;
 
 		// fetch data
-		const signedUrl = await getSignedUrl(`event`, "88");
+		// const signedUrl = await getSignedUrl(`event`, "88");
 
-		if (signedUrl) {
-			return {
-				title: "Speakeasy Open Mic",
-				openGraph: {
-					images: [signedUrl],
-				},
-			};
-		} else {
-			return { title: "Speakeasy Open Mic" };
-		}
+		return {
+			title: "Speakeasy Open Mic",
+			openGraph: {
+				images: [
+					"https://yt3.googleusercontent.com/JfcqVinxsIc8dYsPIrp6IBDRMBb420BqVd2bzS9wqcMWBTzmnjUJ74Q0VByY1gUA8p-AYZQzxQ=s176-c-k-c0x00ffffff-no-rj",
+				],
+			},
+		};
 	} catch (error) {
 		return {
 			title: "Not Found",
