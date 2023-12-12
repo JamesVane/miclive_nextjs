@@ -7,7 +7,7 @@ import { RootState } from "@/store/rootStore";
 import { getPromoterEventPageDataV2pt0 } from "@/api_functions/getPromoterEventPageDataV2pt0";
 import { setPageData } from "@/store/PromoterEventPageV2pt0Slice";
 import SplashPage from "@/SplashPage";
-import { useSessionState } from "@/custom_hooks/useSessionState";
+// import { useSessionState } from "@/custom_hooks/useSessionState";
 import PromoterEditBaseEvent from ".//PromoterEditBaseEventDesktop";
 import { Snackbar, Alert } from "@mui/material";
 import { getDjBaseInviteLink } from "@/api_functions/getDjInviteLinkAgain";
@@ -26,7 +26,8 @@ function PromoterBaseEventPageV2pt0Container({
 	const [isLoading, setIsLoading] = useState(true);
 	const [inviteLink, setInviteLink] = useState("");
 	const noInviteLinkSet = inviteLink === "";
-	const [editIsOpen, setEditIsOpen] = useSessionState("editIsOpen", false);
+	// const [editIsOpen, setEditIsOpen] = useSessionState("editIsOpen", false);
+	const [editIsOpen, setEditIsOpen] = useState(false);
 	const [djLinkIsLoading, setDjLinkIsLoading] = useState(false);
 	const [notOffered, setNotOffered] = useState(false);
 	const [eventSnack, setEventSnack] = useState(false);

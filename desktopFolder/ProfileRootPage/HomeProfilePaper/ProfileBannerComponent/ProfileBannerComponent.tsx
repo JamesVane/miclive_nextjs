@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../../store/rootStore";
 import { Button, LinearProgress } from "@mui/material";
 import { EditRounded, CheckRounded, CloseRounded } from "@mui/icons-material";
-import { useSessionState } from "../../../../custom_hooks/useSessionState";
+// import { useSessionState } from "../../../../custom_hooks/useSessionState";
 import EditFourBanner from "./EditFourBanner";
 import EditThreeBanner from "./EditThreeBanner";
 import BothBannersSelected from "./BothBannersSelected";
@@ -24,31 +24,47 @@ function ProfileBannerComponent() {
 		(state: RootState) => state.usersState
 	);
 
-	const [editingProfileBanner, setEditingProfileBanner] = useSessionState(
+	const [editingProfileBanner, setEditingProfileBanner] = useState(false);
+	/* const [editingProfileBanner, setEditingProfileBanner] = useSessionState(
 		"editProfilebanner",
 		false
-	);
+	); */
 
-	const [page, setPage] = useSessionState("page", 1);
+	const [page, setPage] = useState(1);
+	// const [page, setPage] = useSessionState("page", 1);
 
 	const [threeByFoursrc, setThreeByFoursrc] = useState<any>(null);
 	const [isUploading, setIsUploading] = useState(false);
 	const [uploadingError, setUploadingError] = useState(false);
 
-	const [main4, setMain4] = useSessionState<any>("main4image", null);
-	const [main3, setMain3] = useSessionState<any>("main3image", null);
-	const [displayHelp4, setDisplayHelp4] = useSessionState<any>("displayHelp4", {
+	// const [main4, setMain4] = useSessionState<any>("main4image", null);
+	const [main4, setMain4] = useState<any>(null);
+	// const [main3, setMain3] = useSessionState<any>("main3image", null);
+	const [main3, setMain3] = useState<any>(null);
+	const [displayHelp4, setDisplayHelp4] = useState<any>({
 		imageSelected: false,
 		displayName: null,
 		displayURL: null,
 		confirmImage: false,
 	});
-	const [displayHelp3, setDisplayHelp3] = useSessionState<any>("displayHelp3", {
+	/* const [displayHelp4, setDisplayHelp4] = useSessionState<any>("displayHelp4", {
+		imageSelected: false,
+		displayName: null,
+		displayURL: null,
+		confirmImage: false,
+	}); */
+	const [displayHelp3, setDisplayHelp3] = useState<any>({
 		imageSelected: false,
 		displayName: null,
 		displayURL: null,
 		confirmImage: false,
 	});
+	/* const [displayHelp3, setDisplayHelp3] = useSessionState<any>("displayHelp3", {
+		imageSelected: false,
+		displayName: null,
+		displayURL: null,
+		confirmImage: false,
+	}); */
 
 	const bothConfirmed = displayHelp3.confirmImage && displayHelp4.confirmImage;
 

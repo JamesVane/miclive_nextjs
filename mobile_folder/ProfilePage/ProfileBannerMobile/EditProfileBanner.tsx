@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 import EditProfileBannerThreeMobile from "./EditProfileBannerThreeMobile";
 import EditProfileBannerFourMobile from "./EditProfileBannerFourMobile";
 import BothBannersSelectedMobile from "./BothBannersSelectedMobile";
-import { useSessionState } from "@/custom_hooks/useSessionState";
+// import { useSessionState } from "@/custom_hooks/useSessionState";
 import { Crop } from "react-image-crop";
 import { CheckRounded } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
@@ -36,27 +36,42 @@ function EditProfileBanner() {
 
 	const [isUploading, setIsUploading] = useState(false);
 	const [uploadingError, setUploadingError] = useState(false);
-	const [page, setPage] = useSessionState("page", 1);
+	const [page, setPage] = useState(1);
+	// const [page, setPage] = useSessionState("page", 1);
 
 	function handleClickBack() {
 		selectDifferentHandle();
 		router.back();
 	}
 
-	const [main4, setMain4] = useSessionState<any>("main4image", null);
-	const [main3, setMain3] = useSessionState<any>("main3image", null);
-	const [displayHelp4, setDisplayHelp4] = useSessionState<any>("displayHelp4", {
+	const [main4, setMain4] = useState<any>(null);
+	// const [main4, setMain4] = useSessionState<any>("main4image", null);
+	const [main3, setMain3] = useState<any>(null);
+	// const [main3, setMain3] = useSessionState<any>("main3image", null);
+	const [displayHelp4, setDisplayHelp4] = useState<any>({
 		imageSelected: false,
 		displayName: null,
 		displayURL: null,
 		confirmImage: false,
 	});
-	const [displayHelp3, setDisplayHelp3] = useSessionState<any>("displayHelp3", {
+	/* const [displayHelp4, setDisplayHelp4] = useSessionState<any>("displayHelp4", {
+		imageSelected: false,
+		displayName: null,
+		displayURL: null,
+		confirmImage: false,
+	}); */
+	const [displayHelp3, setDisplayHelp3] = useState<any>({
 		imageSelected: false,
 		displayName: null,
 		displayURL: null,
 		confirmImage: false,
 	});
+	/* const [displayHelp3, setDisplayHelp3] = useSessionState<any>("displayHelp3", {
+		imageSelected: false,
+		displayName: null,
+		displayURL: null,
+		confirmImage: false,
+	}); */
 
 	const bothConfirmed = displayHelp3.confirmImage && displayHelp4.confirmImage;
 
@@ -77,11 +92,9 @@ function EditProfileBanner() {
 		croppedImageUrl: null,
 	};
 
-	const [cropSelectStateBanner, setCropSelectStateBanner] =
-		useSessionState<State>(
-			"cropSelectStateBanner",
-			defaultCropSelectStateBanner
-		);
+	const [cropSelectStateBanner, setCropSelectStateBanner] = useState<State>(
+		defaultCropSelectStateBanner
+	);
 
 	function handleNextPage() {
 		setPage(2);

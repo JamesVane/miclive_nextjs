@@ -24,16 +24,19 @@ import PerformerFollowingPage from "../Performer/PerformerFollowingPage";
 import PerformerTicketPage from "../Performer/PerformerTicketPage";
 import AppBarMobile from "@mobi/AppBarMobile";
 import PerformerMyAudioPage from "./PerformerMyAudioPage";
-import { useSessionState } from "@/custom_hooks/useSessionState";
+// import { useSessionState } from "@/custom_hooks/useSessionState";
 
 function PerformerHome() {
 	const router = useRouter();
 	const dispatch = useDispatch();
 
 	const [isLoading, setIsLoading] = useState(true);
-	const [selectedTab, setSelectedTab] = useSessionState<
+	const [selectedTab, setSelectedTab] = useState<
 		"following" | "my_events" | "my_audio"
-	>("performerTabMobile", "following");
+	>("following");
+	/* const [selectedTab, setSelectedTab] = useSessionState<
+		"following" | "my_events" | "my_audio"
+	>("performerTabMobile", "following"); */
 
 	async function initPerformerData() {
 		const user = await Auth.currentAuthenticatedUser();

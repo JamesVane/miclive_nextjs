@@ -1,5 +1,5 @@
 /** @format */
-
+import { useState } from "react";
 import ConversationPageDesktop from "./ConversationPageDesktop";
 import SplashPage from "@/SplashPage";
 import {
@@ -13,7 +13,7 @@ import { useEffect } from "react";
 import _ from "lodash";
 import { conversationObject } from "./ConversationPageDesktop";
 import { getFirstMessages } from "@/api_functions/getFirstMessages";
-import { useSessionState } from "@/custom_hooks/useSessionState";
+// import { useSessionState } from "@/custom_hooks/useSessionState";
 import { Auth } from "aws-amplify";
 import { setOpenConversationDesktop } from "@/store/openConversationDesktopSlice";
 
@@ -26,9 +26,13 @@ function ConversationPageDesktopContainer({
 }: ConversationPageDesktopContainerProps) {
 	const dispatch = useDispatch();
 
-	const [transformedDataState, setTransformedDataState] = useSessionState<
+	/* const [transformedDataState, setTransformedDataState] = useSessionState<
 		conversationObject[]
-	>("transformedDataState", []);
+	>("transformedDataState", []); */
+
+	const [transformedDataState, setTransformedDataState] = useState<
+		conversationObject[]
+	>([]);
 
 	const conversationMessages = useSelector(
 		(state: RootState) => state.conversationMessages

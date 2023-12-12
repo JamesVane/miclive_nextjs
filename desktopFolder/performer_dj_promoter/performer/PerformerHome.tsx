@@ -17,7 +17,7 @@ import { setPerformerTicketsV2pt0 } from "@/store/performerTicketsV2pt0";
 import PerformerEventDateModalV2 from "./PerformerEventDateModalV2";
 import { getPerformerProfileAudioKeys } from "@/api_functions/getPerformerProfileAudioKeys";
 import { setPerformerAudioKey } from "@/store/performerAudioKeysStore";
-import { useSessionState } from "@/custom_hooks/useSessionState";
+// import { useSessionState } from "@/custom_hooks/useSessionState";
 
 // THIS WILL GET USER ATTRIBUTES FROM THE BACKEND AND NOT THE CACHE
 // const user = await Auth.currentAuthenticatedUser({ bypassCache: true });
@@ -33,7 +33,8 @@ function PerformerHome({
 }: PerformerHomeProps) {
 	const dispatch = useDispatch();
 	const [isLoading, setIsLoading] = useState(true);
-	const [performerPage, setPerformerPage] = useSessionState("performerPage", 0);
+	// const [performerPage, setPerformerPage] = useSessionState("performerPage", 0);
+	const [performerPage, setPerformerPage] = useState(0);
 
 	function handleTabChange(event: React.SyntheticEvent, newValue: number) {
 		setPerformerPage(newValue);

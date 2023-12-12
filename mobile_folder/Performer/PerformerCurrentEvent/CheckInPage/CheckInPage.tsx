@@ -1,6 +1,6 @@
 /** @format */
 
-import React from "react";
+import { useState } from "react";
 import styles from "./styles.module.css";
 import { Button, Divider } from "@mui/material";
 import {
@@ -14,7 +14,7 @@ import KeyCheckIn from "./KeyCheckIn";
 import QrCodeCheckIn from "./QrCodeCheckIn";
 import { useRouter } from "next/navigation";
 import LocationCheckIn from "./LocationCheckIn";
-import { useSessionState } from "@/custom_hooks/useSessionState";
+// import { useSessionState } from "@/custom_hooks/useSessionState";
 
 interface CheckInPageProps {
 	eventName: string;
@@ -39,9 +39,12 @@ function CheckInPage({
 		router.push("/m/performer");
 	}
 
-	const [pageTabState, setPageTabState] = useSessionState<
+	const [pageTabState, setPageTabState] = useState<
 		"start" | "key" | "qr" | "location"
-	>("checkInPageTabMobilee", "start");
+	>("start");
+	/* const [pageTabState, setPageTabState] = useSessionState<
+		"start" | "key" | "qr" | "location"
+	>("checkInPageTabMobilee", "start"); */
 
 	function handleKeyClick() {
 		setPageTabState("key");

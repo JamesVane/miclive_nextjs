@@ -11,7 +11,7 @@ import SplashPage from "@/SplashPage";
 import styles from "./styles.module.css";
 import CheckInQrAndKeyModal from "./CheckInQrAndKeyModal";
 import PromoterEditEventDesktop from "./PromoterEditEventDesktop";
-import { useSessionState } from "@/custom_hooks/useSessionState";
+// import { useSessionState } from "@/custom_hooks/useSessionState";
 import { getDjDateInviteLinkAgain } from "@/api_functions/getDjInviteLinkAgain";
 import { Snackbar, Alert } from "@mui/material";
 
@@ -34,7 +34,8 @@ function PromoterEventDateModalContainer({
 		(state: RootState) => state.promoterDateInfoV2pt0Slice
 	);
 
-	const [editIsOpen, setEditIsOpen] = useSessionState("editIsOpen", false);
+	// const [editIsOpen, setEditIsOpen] = useSessionState("editIsOpen", false);
+	const [editIsOpen, setEditIsOpen] = useState(false);
 	const [isLoading, setIsLoading] = useState(true);
 	const [qrModalOpen, setQrModalOpen] = useState(false);
 	const [dateLink, setDateLink] = useState("");

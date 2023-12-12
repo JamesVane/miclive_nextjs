@@ -3,7 +3,7 @@
 
 import { useState } from "react";
 import AddProfileBannerMobile from "./AddProfileBannerMobile";
-import { useSessionState } from "../../../custom_hooks/useSessionState";
+// import { useSessionState } from "../../../custom_hooks/useSessionState";
 import { useDispatch, useSelector } from "react-redux";
 import {
 	setBanner4X10DisplayHelp,
@@ -46,7 +46,8 @@ function AddProfileBannerMobileContainer() {
 		croppedImageUrl: null,
 	};
 
-	const [page, setPage] = useSessionState("page", 1);
+	// const [page, setPage] = useSessionState("page", 1);
+	const [page, setPage] = useState(1);
 	const [cropSelectStateBanner, setCropSelectStateBanner] = useState<State>(
 		defaultCropSelectStateBanner
 	);

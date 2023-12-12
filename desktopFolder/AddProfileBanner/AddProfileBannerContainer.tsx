@@ -5,7 +5,7 @@ import { useState } from "react";
 import AddProfileBanner from "./AddProfileBanner";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
-import { useSessionState } from "@/custom_hooks/useSessionState";
+// import { useSessionState } from "@/custom_hooks/useSessionState";
 import {
 	setBanner4X10DisplayHelp,
 	setBanner3X10DisplayHelp,
@@ -22,7 +22,8 @@ function AddProfileBannerContainer() {
 		(state: RootState) => state.createAccount
 	);
 
-	const [page, setPage] = useSessionState("page", 1);
+	// const [page, setPage] = useSessionState("page", 1);
+	const [page, setPage] = useState(1);
 	const [threeByFoursrc, setThreeByFoursrc] = useState<any>(null);
 
 	const bothConfirmed =

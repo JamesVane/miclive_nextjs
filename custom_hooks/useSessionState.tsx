@@ -1,14 +1,20 @@
-import { useState, useEffect } from 'react';
+/** @format */
 
-export function useSessionState<T>(key: string, defaultValue: T): [T, React.Dispatch<React.SetStateAction<T>>] {
-  const [state, setState] = useState<T>(() => {
-    const storedValue = sessionStorage.getItem(key);
-    return storedValue !== null ? JSON.parse(storedValue) : defaultValue;
-  });
+/* import { useState, useEffect } from "react";
 
-  useEffect(() => {
-    sessionStorage.setItem(key, JSON.stringify(state));
-  }, [key, state]);
+export function useSessionState<T>(
+	key: string,
+	defaultValue: T
+): [T, React.Dispatch<React.SetStateAction<T>>] {
+	const [state, setState] = useState<T>(() => {
+		const storedValue = sessionStorage.getItem(key);
+		return storedValue !== null ? JSON.parse(storedValue) : defaultValue;
+	});
 
-  return [state, setState];
+	useEffect(() => {
+		sessionStorage.setItem(key, JSON.stringify(state));
+	}, [key, state]);
+
+	return [state, setState];
 }
+ */

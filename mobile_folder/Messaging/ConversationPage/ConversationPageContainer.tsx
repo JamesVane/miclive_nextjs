@@ -1,6 +1,6 @@
 /** @format */
 "use client";
-
+import { useState } from "react";
 import ConversationPage from "./ConversationPage";
 import SplashPage from "@/SplashPage";
 import {
@@ -15,16 +15,19 @@ import _ from "lodash";
 import { conversationObject } from "./ConversationPage";
 import { usePathname } from "next/navigation";
 import { getFirstMessages } from "@/api_functions/getFirstMessages";
-import { useSessionState } from "@/custom_hooks/useSessionState";
+// import { useSessionState } from "@/custom_hooks/useSessionState";
 import { Auth } from "aws-amplify";
 
 function ConversationPageContainer() {
 	const dispatch = useDispatch();
 	const locationPathname = usePathname();
 
-	const [transformedDataState, setTransformedDataState] = useSessionState<
+	const [transformedDataState, setTransformedDataState] = useState<
 		conversationObject[]
-	>("transformedDataState", []);
+	>([]);
+	/* const [transformedDataState, setTransformedDataState] = useSessionState<
+		conversationObject[]
+	>("transformedDataState", []); */
 
 	const UrlConversationSub =
 		locationPathname.split("/")[locationPathname.split("/").length - 1];

@@ -1,7 +1,7 @@
 /** @format */
 
 import { useState } from "react";
-import { useSessionState } from "@/custom_hooks/useSessionState";
+// import { useSessionState } from "@/custom_hooks/useSessionState";
 import EditEventBannerFour from "./EditEventBannerFour";
 import EditEventBannerThree from "./EditEventBannerThree";
 import EditEventBannerBothSelected from "./EditEventBannerBothSelected";
@@ -46,12 +46,14 @@ function EditBaseEventBanner({ handleExit }: EditBaseEventBannerProps) {
 	const threeDisplay = banner3X10DisplayHelp.displayURL;
 	const fourDisplay = banner4X10DisplayHelp.displayURL;
 
-	const [page, setPage] = useSessionState<1 | 2>("EditBannerPageDesktop", 1);
+	// const [page, setPage] = useSessionState<1 | 2>("EditBannerPageDesktop", 1);
+	const [page, setPage] = useState<1 | 2>(1);
 
-	const [threeByFoursrc, setThreeByFoursrc] = useSessionState<any>(
+	const [threeByFoursrc, setThreeByFoursrc] = useState<any>(null);
+	/* const [threeByFoursrc, setThreeByFoursrc] = useSessionState<any>(
 		"editEventBannerThreeByFoursrcDestop",
 		null
-	);
+	); */
 
 	const bothConfirmed =
 		banner3X10DisplayHelp.confirmImage && banner4X10DisplayHelp.confirmImage;
