@@ -5,12 +5,12 @@ import NewEventPage from "@desk/NewEventPage";
 import type { Metadata, ResolvingMetadata } from "next";
 import { getSignedUrl } from "@/api_functions/getAnySignedUrl";
 
-type Props = {
+/* type Props = {
 	params: { event_name: string };
 	searchParams: { [key: string]: string | string[] | undefined };
-};
+}; */
 
-export async function generateMetadata(
+/* export async function generateMetadata(
 	{ params, searchParams }: Props,
 	parent: ResolvingMetadata
 ): Promise<Metadata> {
@@ -32,7 +32,12 @@ export async function generateMetadata(
 			description: "The page you are looking for does not exist",
 		};
 	}
-}
+} */
+
+export const metadata: Metadata = {
+	title: "MIC.LIVE",
+	description: "DESC",
+};
 
 function page({ params }: { params: { event_name: string } }) {
 	return <NewEventPage eventNameFromParams={params.event_name} />;
