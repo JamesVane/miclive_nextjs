@@ -3,15 +3,6 @@
 import type { Metadata, ResolvingMetadata } from "next";
 import Head from "next/head";
 
-export const metadata: Metadata = {
-	title: "TITLE!!!!!!",
-	description: "DESC",
-	openGraph: {
-		description: "OG DESC!!!!!!",
-		title: "OG TITLE!!!!!!",
-	},
-};
-
 export default function Layout({ children }: { children: React.ReactNode }) {
 	return (
 		<>
