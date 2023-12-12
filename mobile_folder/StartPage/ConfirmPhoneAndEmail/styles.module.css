@@ -1,0 +1,39 @@
+/** @format */
+
+.main_div {
+	width: 100vw;
+	height: 40vh;
+	composes: column_center from "@styl/base_flexbox.module.css";
+}
+.title_div {
+	color: var(--primary-main);
+	margin-bottom: 10px;
+	font-size: 25px;
+	width: 100%;
+	composes: row_center from "@styl/base_flexbox.module.css";
+}
+.divider_div {
+	width: 100%;
+	composes: column from "@styl/base_flexbox.module.css";
+	height: 2px;
+}
+.confirm_input_div {
+	width: 90%;
+	composes: row_center from "@styl/base_flexbox.module.css";
+}
+.confirm_email_top {
+	width: 100%;
+	composes: row_center from "@styl/base_flexbox.module.css";
+	color: var(--primary-main);
+	font-size: 20px;
+}
+.loading_div {
+	width: 100vw;
+	height: 100vh;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	position: fixed;
+	background-color: rgba(0, 0, 0, 0.4);
+	z-index: 5000;
+	color: var(--primary-main);
+	font-size: 30px;
+}

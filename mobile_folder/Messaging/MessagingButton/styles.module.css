@@ -1,0 +1,20 @@
+/** @format */
+
+.paper_main {
+	height: 55px;
+	width: 55px;
+	position: fixed;
+	right: 10px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+}
+.paper_main_not_abs {
+	height: 55px;
+	width: 55px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+}
+.helper_div {
+	background-color: var(--background-paper);
+	composes: column_center from "@styl/base_flexbox.module.css";
+	width: 100%;
+	height: 100%;
+}

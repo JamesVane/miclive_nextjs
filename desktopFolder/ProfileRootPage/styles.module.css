@@ -1,0 +1,14 @@
+/** @format */
+
+.not_auth_main {
+	width: 100vw;
+	height: 100vh;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	font-size: 40px;
+	color: var(--primary-main);
+}
+.splash_container {
+	width: 100%;
+	height: 100vh;
+	composes: column_center from "@styl/base_flexbox.module.css";
+}

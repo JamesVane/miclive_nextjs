@@ -1,0 +1,62 @@
+/** @format */
+
+export const Pallate = [
+	"transparent",
+	"#edefea",
+	"black",
+	"#f8dca1",
+	"#9ca1a3",
+	"#FFB6C1",
+	"#FFFFE0",
+	"#87CEFA",
+	"#FFA500",
+	"#FF7F50",
+	"#FFD700",
+	"#3CB371",
+	"#20B2AA",
+	"#9370DB",
+	"#F5DEB3",
+	"#F4A460",
+	"#B22222",
+	"red",
+	"blue",
+	"green",
+	"yellow",
+	"purple",
+	"orange",
+	"brown",
+	"darkblue",
+	"darkred",
+];
+
+export const modules = {
+	toolbar: [
+		[{ header: [1, 2, 3, 4, 5, 6, false] }],
+		[{ size: [] }],
+		["bold", "italic", "underline", "strike", "blockquote"],
+		[{ align: ["right", "center", "justify"] }],
+		[{ list: "ordered" }, { list: "bullet" }],
+		["link", "image"],
+		[{ color: Pallate }],
+		[{ background: Pallate }],
+		["clean"],
+	],
+};
+
+export const formats = [
+	"header",
+	"bold",
+	"italic",
+	"underline",
+	"strike",
+	"blockquote",
+	"list",
+	"bullet",
+	"link",
+	"color",
+	"image",
+	"background",
+	"align",
+	"size",
+	"clean",
+];

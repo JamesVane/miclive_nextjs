@@ -1,0 +1,345 @@
+/** @format */
+.desktop_main_div {
+	width: 100vw;
+	height: calc(100vh - 70px);
+	top: 70px;
+	position: fixed;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	z-index: 1200;
+	background-color: rgba(0, 0, 0, 0.7);
+}
+.dims_row_div {
+	width: 100%;
+	height: 35px;
+	font-size: 18px;
+	font-weight: bold;
+	color: var(--primary-main);
+	composes: row_center from "@styl/base_flexbox.module.css";
+}
+.desktop_main_paper {
+	height: 90%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: var(--background-default);
+	border-radius: 5px;
+	overflow: hidden;
+}
+.banner_edit_main_div {
+	width: 100%;
+	composes: column from "@styl/base_flexbox.module.css";
+	height: calc(100% - 40px);
+	position: relative;
+}
+.banner_head {
+	width: 100%;
+	height: 40px;
+	composes: row_center from "@styl/base_flexbox.module.css";
+	position: relative;
+	font-size: 20px;
+}
+.header_div {
+	font-size: 20px;
+	width: 100%;
+	height: 50px;
+	composes: row_center from "@styl/base_flexbox.module.css";
+	position: relative;
+}
+.button_selector_div {
+	width: 100%;
+	composes: column from "@styl/base_flexbox.module.css";
+}
+.bottom_row {
+	z-index: 100;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	height: 55px;
+	composes: row from "@styl/base_flexbox.module.css";
+	justify-content: space-between;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.pic_edit_wrap_selected {
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	z-index: 1000;
+	padding-bottom: 70px;
+	background-color: var(--background-default);
+	composes: column from "@styl/base_flexbox.module.css";
+}
+.pic_edit_wrap {
+	composes: column from "@styl/base_flexbox.module.css";
+	width: 100%;
+	max-width: 100%;
+	max-height: calc(100% - 75px);
+	flex: 1;
+}
+.base_event_paper {
+	position: relative;
+	composes: column from "@styl/base_flexbox.module.css";
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+.pic_div {
+	height: 120px;
+	width: 120px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+}
+.pic_row {
+	height: 120px;
+	width: 100%;
+	composes: row from "@styl/base_flexbox.module.css";
+}
+.image_decoration {
+	width: 85%;
+	height: 85%;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	border-radius: 5px;
+	overflow: hidden;
+}
+.pic_row_right {
+	height: 100%;
+	width: calc(100% - 120px);
+	composes: row_center from "@styl/base_flexbox.module.css";
+}
+.not_sure_box:hover {
+	color: var(--secondary-dark);
+}
+.crumbs_wrapper {
+	width: 100%;
+	height: 55px;
+	composes: row_center from "@styl/base_flexbox.module.css";
+}
+.description_main_div {
+	width: 100%;
+	height: 100%;
+	composes: column from "@styl/base_flexbox.module.css";
+	overflow-x: hidden;
+	position: relative;
+}
+.description_second_div {
+	composes: column from "@styl/base_flexbox.module.css";
+	width: 100%;
+}
+.selected_banners_end {
+	width: 100%;
+	height: 100%;
+	composes: column from "@styl/base_flexbox.module.css";
+}
+.banner_file_name {
+	margin-top: 10px;
+	background-color: var(--background-paper);
+	color: var(--secondary-main);
+	padding-left: 10px;
+	padding-right: 10px;
+	font-size: 20px;
+	border-radius: 5px;
+	overflow: hidden;
+	margin-bottom: 10px;
+	width: 250px;
+}
+.banner_row_help {
+	width: 100%;
+	composes: row_center from "@styl/base_flexbox.module.css";
+}
+.three_confirm_pic {
+	height: 150px;
+	width: 450px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	overflow: hidden;
+	border-radius: 5px;
+	margin-left: 25px;
+	margin-bottom: 10px;
+}
+.four_confirm_pic {
+	height: 150px;
+	width: 600px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	overflow: hidden;
+	border-radius: 5px;
+	margin-left: 25px;
+	margin-top: 10px;
+}
+.elipses_text {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.quill :global(.ql-container.ql-snow) {
+	border-radius: 0px 0px 4px 4px;
+	border-color: #f8dca1ff;
+	border-width: 3px;
+	border-top: 1px #f8dca1ff solid !important;
+	background-color: var(--background-paper);
+}
+.quill :global(.ql-toolbar.ql-snow) {
+	border-color: #9ca1a3ff;
+	border-right-width: 1px;
+	border-left-width: 1px;
+	background-color: var(--background-paper);
+}
+.quill :global(.ql-stroke) {
+	stroke: #9ca1a3ff !important;
+}
+.quill :global(.ql-picker-label) {
+	color: #9ca1a3ff !important;
+}
+.quill :global(.ql-fill) {
+	color: #9ca1a3ff !important;
+
+	fill: #9ca1a3ff !important;
+}
+
+.quill :global(.ql-picker-label:hover svg polygon.ql-stroke) {
+	stroke: #f8dca1ff !important;
+}
+
+.quill :global(.ql-picker-label:hover svg path),
+.quill :global(.ql-picker-label:hover svg rect),
+.quill :global(.ql-picker-label:hover svg polygon) {
+	fill: #f8dca1ff !important;
+	color: #f8dca1ff !important;
+}
+
+.quill :global(.ql-picker-label:hover svg line),
+.quill :global(.ql-picker-label:hover svg polyline) {
+	stroke: #f8dca1ff !important;
+}
+
+.quill :global(.ql-image:hover svg polyline),
+.quill :global(.ql-image:hover svg circle) {
+	fill: #f8dca1ff !important;
+}
+
+.quill :global(.ql-image:hover svg rect) {
+	stroke: #f8dca1ff !important;
+}
+
+.quill :global(.ql-underline:hover svg rect),
+.quill :global(.ql-underline:hover svg path) {
+	stroke: #f8dca1ff !important;
+}
+
+.quill :global(.ql-list:hover svg :nth-child(5)) {
+	fill: #f8dca1ff !important;
+}
+
+.quill :global(.ql-list:hover svg line) {
+	fill: #f8dca1ff !important;
+	stroke: #f8dca1ff !important;
+}
+.quill :global(.ql-list:hover svg :nth-child(7)),
+.quill :global(.ql-list:hover svg :nth-child(6)) {
+	stroke: #f8dca1ff !important;
+}
+.quill :global(.ql-italic:hover svg line) {
+	stroke: #f8dca1ff !important;
+}
+
+.quill :global(.ql-blockquote:hover svg path),
+.quill :global(.ql-blockquote:hover svg rect) {
+	stroke: #f8dca1ff !important;
+	fill: #f8dca1ff !important;
+}
+
+.quill :global(.ql-bold:hover svg path) {
+	stroke: #f8dca1ff !important;
+}
+
+.quill :global(.ql-link:hover svg line),
+.quill :global(.ql-link:hover svg path) {
+	stroke: #f8dca1ff !important;
+}
+.quill :global(.ql-strike:hover svg line) {
+	stroke: #f8dca1ff !important;
+}
+.quill :global(.ql-strike:hover svg path) {
+	fill: #f8dca1ff !important;
+}
+
+.quill :global(.ql-picker-label:hover::before) {
+	fill: #f8dca1ff !important;
+	stroke: #f8dca1ff !important;
+	color: #f8dca1ff !important;
+}
+
+.quill :global(.ql-picker-label.ql-active svg polygon.ql-stroke) {
+	stroke: #f8dca1ff !important;
+}
+
+.quill :global(.ql-picker-label.ql-active svg path),
+.quill :global(.ql-picker-label.ql-active svg rect),
+.quill :global(.ql-picker-label.ql-active svg polygon) {
+	fill: #f8dca1ff !important;
+	color: #f8dca1ff !important;
+}
+
+.quill :global(.ql-picker-label.ql-active svg line),
+.quill :global(.ql-picker-label.ql-active svg polyline) {
+	stroke: #f8dca1ff !important;
+}
+
+.quill :global(.ql-image.ql-active svg polyline),
+.quill :global(.ql-image.ql-active svg circle) {
+	fill: #f8dca1ff !important;
+}
+
+.quill :global(.ql-image.ql-active svg rect) {
+	stroke: #f8dca1ff !important;
+}
+
+.quill :global(.ql-underline.ql-active svg rect),
+.quill :global(.ql-underline.ql-active svg path) {
+	stroke: #f8dca1ff !important;
+}
+
+.quill :global(.ql-list.ql-active svg :nth-child(5)) {
+	fill: #f8dca1ff !important;
+}
+
+.quill :global(.ql-list.ql-active svg line) {
+	fill: #f8dca1ff !important;
+	stroke: #f8dca1ff !important;
+}
+.quill :global(.ql-list.ql-active svg :nth-child(7)),
+.quill :global(.ql-list.ql-active svg :nth-child(6)) {
+	stroke: #f8dca1ff !important;
+}
+.quill :global(.ql-italic.ql-active svg line) {
+	stroke: #f8dca1ff !important;
+}
+
+.quill :global(.ql-blockquote.ql-active svg path),
+.quill :global(.ql-blockquote.ql-active svg rect) {
+	stroke: #f8dca1ff !important;
+	fill: #f8dca1ff !important;
+}
+
+.quill :global(.ql-bold.ql-active svg path) {
+	stroke: #f8dca1ff !important;
+}
+
+.quill :global(.ql-link.ql-active svg line),
+.quill :global(.ql-link.ql-active svg path) {
+	stroke: #f8dca1ff !important;
+}
+.quill :global(.ql-strike.ql-active svg line) {
+	stroke: #f8dca1ff !important;
+}
+.quill :global(.ql-strike.ql-active svg path) {
+	fill: #f8dca1ff !important;
+}
+
+.quill :global(.ql-picker-label.ql-active::before) {
+	fill: #f8dca1ff !important;
+	stroke: #f8dca1ff !important;
+	color: #f8dca1ff !important;
+}

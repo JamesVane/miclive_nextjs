@@ -1,0 +1,404 @@
+/** @format */
+
+.base_event_paper {
+	position: relative;
+	composes: column from "@styl/base_flexbox.module.css";
+	height: 95%;
+	width: 800px;
+	overflow: hidden;
+	background-color: black;
+	border-radius: 5px;
+}
+.header_helper {
+	width: 100%;
+	height: 48px;
+	composes: row_center from "@styl/base_flexbox.module.css";
+}
+.header_wrapper {
+	font-size: 25px;
+	composes: column from "@styl/base_flexbox.module.css";
+	position: relative;
+	width: 100%;
+	height: 50px;
+}
+.desc_container_div {
+	composes: column from "@styl/base_flexbox.module.css";
+	width: 100%;
+	height: calc(100% - 110px);
+}
+.crumbs_wrapper {
+	width: 100%;
+	height: 55px;
+	composes: row_center from "@styl/base_flexbox.module.css";
+}
+.base_event_body_wrap {
+	width: 100%;
+	height: calc(100% - 110px);
+	composes: row from "@styl/base_flexbox.module.css";
+}
+.base_event_LRWrapper {
+	composes: column from "@styl/base_flexbox.module.css";
+	height: 100%;
+	position: relative;
+	width: calc(50% - 1px);
+}
+.divider_vert {
+	width: 2px;
+	height: 100%;
+	composes: row_center from "@styl/base_flexbox.module.css";
+}
+.not_sure_box {
+	cursor: pointer;
+	color: var(--secondary-main);
+	composes: row from "@styl/base_flexbox.module.css";
+	margin-top: 10px;
+	transition: color 0.2s ease-in-out;
+}
+.not_sure_box:hover {
+	color: var(--secondary-dark);
+}
+.selected_image_box {
+	border-radius: 5px;
+	margin-top: 15px;
+	font-size: 20px;
+	width: 95%;
+	composes: column from "@styl/base_flexbox.module.css";
+	background-color: var(--background-default);
+}
+.selected_avatar_namer_paper {
+	padding-left: 10px;
+	padding-right: 10px;
+	background-color: var(--background-paper);
+	border-radius: 10px;
+	max-width: 240px;
+}
+.elipses {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.filename_box {
+	width: 240px;
+	composes: column from "@styl/base_flexbox.module.css";
+}
+.event_image_title_box {
+	font-size: 25px;
+	width: 100%;
+	height: 40px;
+	align-items: end;
+	composes: row_center from "@styl/base_flexbox.module.css";
+	margin-bottom: -10px;
+}
+.start_end_div {
+	margin-bottom: 0px;
+	margin-top: 20px;
+	width: 90%;
+	position: relative;
+	composes: row_between from "@styl/base_flexbox.module.css";
+}
+.error_range {
+	color: red;
+	font-size: 12px;
+	position: absolute;
+	right: 5px;
+	bottom: -19px;
+}
+.invite_dj_section {
+	width: 100%;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	color: var(--secondary-main);
+	font-size: 25px;
+	height: 125px;
+	width: 350px;
+	background-color: var(--background-paper);
+	margin: 10px;
+	border-radius: 10px;
+	overflow: hidden;
+}
+.invite_row {
+	width: 100%;
+	composes: row_center from "@styl/base_flexbox.module.css";
+	margin-bottom: 10px;
+}
+.primary_text {
+	color: var(--primary-main);
+	margin-right: 6px;
+	margin-left: 6px;
+	font-weight: 400;
+}
+.error_generic {
+	position: absolute;
+	font-size: 12px;
+	color: red;
+}
+.invite_dj_body {
+	margin-top: -200px;
+	width: 100%;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	flex: 1;
+}
+.dj_row {
+	width: 100%;
+	composes: row_center from "@styl/base_flexbox.module.css";
+}
+.dj_invite_warning {
+	width: 65%;
+	text-align: center;
+	font-size: 20px;
+	display: flex;
+	flex-direction: row;
+}
+.banner_paper {
+	position: relative;
+	composes: column from "@styl/base_flexbox.module.css";
+	height: 95%;
+	width: 800px;
+	overflow: hidden;
+	background-color: black;
+	border-radius: 5px;
+	overflow: hidden;
+}
+.banner_body {
+	width: 100%;
+	composes: column from "@styl/base_flexbox.module.css";
+}
+.selected_banners_end {
+	width: 100%;
+	height: 100%;
+	composes: column from "@styl/base_flexbox.module.css";
+}
+.banner_row_help {
+	width: 100%;
+	composes: row_center from "@styl/base_flexbox.module.css";
+	font-size: 18px;
+	font-weight: bold;
+	color: var(--primary-main);
+}
+.three_confirm_pic {
+	height: 150px;
+	width: 450px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	overflow: hidden;
+	border-radius: 5px;
+	margin-left: 25px;
+	margin-bottom: 10px;
+}
+.four_confirm_pic {
+	height: 150px;
+	width: 600px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	overflow: hidden;
+	border-radius: 5px;
+	margin-left: 25px;
+	margin-top: 10px;
+}
+.banner_file_name {
+	margin-top: 10px;
+	background-color: var(--background-default);
+	color: var(--secondary-main);
+	padding-left: 10px;
+	padding-right: 10px;
+	font-size: 20px;
+	border-radius: 5px;
+	overflow: hidden;
+	margin-bottom: 10px;
+}
+.banner_step_off {
+	font-weight: 500;
+	margin-left: 5px;
+	margin-right: 5px;
+	color: var(--secondary-main);
+	background-color: var(--background-paper);
+	padding-left: 4px;
+	padding-right: 4px;
+	overflow: hidden;
+	border-radius: 12px;
+	font-size: 22px;
+}
+.banner_step_on {
+	font-weight: 500;
+	margin-left: 5px;
+	margin-right: 5px;
+	color: #66bb69ff;
+	background-color: var(--background-paper);
+	padding-left: 4px;
+	padding-right: 4px;
+	overflow: hidden;
+	border-radius: 12px;
+	font-size: 22px;
+}
+.header_primary {
+	color: var(--primary-main);
+	margin-right: 6px;
+	font-weight: 400;
+}
+.quill :global(.ql-container.ql-snow) {
+	border-radius: 0px 0px 4px 4px;
+	border-color: #888661ff;
+	border-width: 3px;
+	border-top: 1px #888661ff solid !important;
+	background-color: black;
+}
+.quill :global(.ql-toolbar.ql-snow) {
+	border-color: #9ca1a3ff;
+	border-right-width: 1px;
+	border-left-width: 1px;
+	background-color: black;
+}
+.quill :global(.ql-stroke) {
+	stroke: #9ca1a3ff !important;
+}
+.quill :global(.ql-picker-label) {
+	color: #9ca1a3ff !important;
+}
+.quill :global(.ql-fill) {
+	color: #9ca1a3ff !important;
+
+	fill: #9ca1a3ff !important;
+}
+
+.quill :global(.ql-picker-label:hover svg polygon.ql-stroke) {
+	stroke: #888661ff !important;
+}
+
+.quill :global(.ql-picker-label:hover svg path),
+.quill :global(.ql-picker-label:hover svg rect),
+.quill :global(.ql-picker-label:hover svg polygon) {
+	fill: #888661ff !important;
+	color: #888661ff !important;
+}
+
+.quill :global(.ql-picker-label:hover svg line),
+.quill :global(.ql-picker-label:hover svg polyline) {
+	stroke: #888661ff !important;
+}
+
+.quill :global(.ql-image:hover svg polyline),
+.quill :global(.ql-image:hover svg circle) {
+	fill: #888661ff !important;
+}
+
+.quill :global(.ql-image:hover svg rect) {
+	stroke: #888661ff !important;
+}
+
+.quill :global(.ql-underline:hover svg rect),
+.quill :global(.ql-underline:hover svg path) {
+	stroke: #888661ff !important;
+}
+
+.quill :global(.ql-list:hover svg :nth-child(5)) {
+	fill: #888661ff !important;
+}
+
+.quill :global(.ql-list:hover svg line) {
+	fill: #888661ff !important;
+	stroke: #888661ff !important;
+}
+.quill :global(.ql-list:hover svg :nth-child(7)),
+.quill :global(.ql-list:hover svg :nth-child(6)) {
+	stroke: #888661ff !important;
+}
+.quill :global(.ql-italic:hover svg line) {
+	stroke: #888661ff !important;
+}
+
+.quill :global(.ql-blockquote:hover svg path),
+.quill :global(.ql-blockquote:hover svg rect) {
+	stroke: #888661ff !important;
+	fill: #888661ff !important;
+}
+
+.quill :global(.ql-bold:hover svg path) {
+	stroke: #888661ff !important;
+}
+
+.quill :global(.ql-link:hover svg line),
+.quill :global(.ql-link:hover svg path) {
+	stroke: #888661ff !important;
+}
+.quill :global(.ql-strike:hover svg line) {
+	stroke: #888661ff !important;
+}
+.quill :global(.ql-strike:hover svg path) {
+	fill: #888661ff !important;
+}
+
+.quill :global(.ql-picker-label:hover::before) {
+	fill: #888661ff !important;
+	stroke: #888661ff !important;
+	color: #888661ff !important;
+}
+
+.quill :global(.ql-picker-label.ql-active svg polygon.ql-stroke) {
+	stroke: #888661ff !important;
+}
+
+.quill :global(.ql-picker-label.ql-active svg path),
+.quill :global(.ql-picker-label.ql-active svg rect),
+.quill :global(.ql-picker-label.ql-active svg polygon) {
+	fill: #888661ff !important;
+	color: #888661ff !important;
+}
+
+.quill :global(.ql-picker-label.ql-active svg line),
+.quill :global(.ql-picker-label.ql-active svg polyline) {
+	stroke: #888661ff !important;
+}
+
+.quill :global(.ql-image.ql-active svg polyline),
+.quill :global(.ql-image.ql-active svg circle) {
+	fill: #888661ff !important;
+}
+
+.quill :global(.ql-image.ql-active svg rect) {
+	stroke: #888661ff !important;
+}
+
+.quill :global(.ql-underline.ql-active svg rect),
+.quill :global(.ql-underline.ql-active svg path) {
+	stroke: #888661ff !important;
+}
+
+.quill :global(.ql-list.ql-active svg :nth-child(5)) {
+	fill: #888661ff !important;
+}
+
+.quill :global(.ql-list.ql-active svg line) {
+	fill: #888661ff !important;
+	stroke: #888661ff !important;
+}
+.quill :global(.ql-list.ql-active svg :nth-child(7)),
+.quill :global(.ql-list.ql-active svg :nth-child(6)) {
+	stroke: #888661ff !important;
+}
+.quill :global(.ql-italic.ql-active svg line) {
+	stroke: #888661ff !important;
+}
+
+.quill :global(.ql-blockquote.ql-active svg path),
+.quill :global(.ql-blockquote.ql-active svg rect) {
+	stroke: #888661ff !important;
+	fill: #888661ff !important;
+}
+
+.quill :global(.ql-bold.ql-active svg path) {
+	stroke: #888661ff !important;
+}
+
+.quill :global(.ql-link.ql-active svg line),
+.quill :global(.ql-link.ql-active svg path) {
+	stroke: #888661ff !important;
+}
+.quill :global(.ql-strike.ql-active svg line) {
+	stroke: #888661ff !important;
+}
+.quill :global(.ql-strike.ql-active svg path) {
+	fill: #888661ff !important;
+}
+
+.quill :global(.ql-picker-label.ql-active::before) {
+	fill: #888661ff !important;
+	stroke: #888661ff !important;
+	color: #888661ff !important;
+}

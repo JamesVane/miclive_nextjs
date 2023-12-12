@@ -1,0 +1,80 @@
+/** @format */
+
+.main_div {
+	composes: column from "@styl/base_flexbox.module.css";
+	width: 100%;
+	height: 100%;
+}
+.paper_header {
+	background-color: #1d2831ff;
+	position: relative;
+	z-index: 52;
+	width: 100%;
+	height: 80px;
+	composes: row from "@styl/base_flexbox.module.css";
+}
+.my_submitted_text {
+	font-size: 25px;
+	width: 100%;
+	height: 50px;
+	padding-left: 10px;
+	composes: row from "@styl/base_flexbox.module.css";
+}
+.header_data {
+	composes: row from "@styl/base_flexbox.module.css";
+	width: 100%;
+	flex: 1;
+}
+.icon_wrap {
+	height: 80px;
+	width: 80px;
+	composes: row from "@styl/base_flexbox.module.css";
+	justify-content: end;
+}
+.text_column_wrap {
+	composes: column from "@styl/base_flexbox.module.css";
+	height: 100%;
+	width: calc(100% - 75px);
+}
+.time_track_limit {
+	margin-top: -10px;
+	composes: row from "@styl/base_flexbox.module.css";
+	padding-left: 10px;
+	height: 100%;
+	width: 100%;
+	color: var(--primary-main);
+	font-weight: bold;
+}
+.value_text {
+	margin-left: 10px;
+	color: var(--secondary-main);
+	font-weight: bold;
+}
+.paper_helper_wrapper {
+	position: relative;
+	composes: column from "@styl/base_flexbox.module.css";
+	width: 100%;
+	height: calc(100% - 75px);
+	overflow: auto;
+}
+.modal_wrap {
+	z-index: 100;
+	width: 100%;
+	height: 100%;
+	background-color: var(--background-default);
+	composes: column from "@styl/base_flexbox.module.css";
+}
+.select_from_existing_header {
+	z-index: 1000;
+	width: 100%;
+	height: 50px;
+	composes: row_center from "@styl/base_flexbox.module.css";
+	position: relative;
+}
+.audio_rows_scroll {
+	width: 100%;
+	height: calc(100% - 50px);
+	composes: column from "@styl/base_flexbox.module.css";
+	overflow-x: hidden;
+	overflow-y: auto;
+}

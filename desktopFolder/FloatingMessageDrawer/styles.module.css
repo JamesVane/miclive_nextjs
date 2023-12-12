@@ -1,0 +1,9 @@
+/** @format */
+
+.main_div {
+	composes: column from "@styl/base_flexbox.module.css";
+	width: 500px;
+	height: 100%;
+	position: relative;
+	z-index: 10000;
+}

@@ -1,0 +1,138 @@
+/** @format */
+
+.main_div {
+	width: 100%;
+	composes: column from "@styl/base_flexbox.module.css";
+}
+.pic_name_div {
+	width: 100%;
+	height: 75px;
+	composes: row from "@styl/base_flexbox.module.css";
+}
+.pic_div {
+	width: 70px;
+	height: 70px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+}
+.pic_deco {
+	width: 90%;
+	height: 90%;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	overflow: hidden;
+	border-radius: 5px;
+}
+.name_div {
+	width: calc(100% - 70px);
+	height: 100%;
+	composes: row from "@styl/base_flexbox.module.css";
+	padding-left: 5px;
+	font-size: 28px;
+}
+.date_location_div {
+	color: var(--primary-main);
+	width: 100%;
+	height: 38px;
+	composes: row from "@styl/base_flexbox.module.css";
+	overflow: hidden;
+}
+.date_time_split {
+	width: 50%;
+	height: 100%;
+	composes: row from "@styl/base_flexbox.module.css";
+}
+.elipse_text {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	padding-right: 2.5px;
+}
+.buttons_div {
+	width: 100%;
+	height: 45px;
+	composes: row from "@styl/base_flexbox.module.css";
+}
+.promoter_dj_row {
+	margin-top: 10px;
+	width: 100%;
+	height: 75px;
+	composes: row_center from "@styl/base_flexbox.module.css";
+}
+.desc_div {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+.confirm_resign_main {
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	top: 0px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	background-color: rgba(0, 0, 0, 0.7);
+	z-index: 1100;
+}
+.confirm_resign_paper {
+	width: 90%;
+	height: 170px;
+	composes: column from "@styl/base_flexbox.module.css";
+	background-color: var(--background-default);
+	border-radius: 5px;
+	overflow: hidden;
+	position: relative;
+}
+.confirm_resign_top {
+	width: 100%;
+	height: 103px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	font-size: 25px;
+}
+.confirm_resign_buttons {
+	width: 100%;
+	height: 65px;
+	composes: row_center from "@styl/base_flexbox.module.css";
+}
+.roster_paper {
+	width: 100%;
+	height: 82px;
+	min-height: 82px;
+	composes: column from "@styl/base_flexbox.module.css";
+	cursor: pointer;
+	transition: all 0.2s ease-in-out;
+}
+.roster_paper_content {
+	width: 100%;
+	height: calc(100% - 2px);
+	composes: row from "@styl/base_flexbox.module.css";
+}
+.performer_pic_number_div {
+	height: 80px;
+	width: 80px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+}
+.roster_row_middle_div {
+	height: 100%;
+	width: calc(100vw - 160px);
+	composes: row from "@styl/base_flexbox.module.css";
+	font-size: 22px;
+	position: relative;
+	transition: all 0.2s ease-in-out;
+}
+.performed_at_div {
+	position: absolute;
+	bottom: 2.5px;
+	width: 100%;
+	height: 25%;
+	composes: row from "@styl/base_flexbox.module.css";
+	color: var(--secondary-main);
+	font-size: 15px;
+}
+.row_number {
+	height: 85%;
+	width: 85%;
+	border: 1px solid var(--primary-main);
+	border-radius: 10px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	color: var(--primary-main);
+	font-size: 40px;
+}

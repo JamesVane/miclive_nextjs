@@ -1,0 +1,83 @@
+/** @format */
+.inner_wrapper {
+	position: relative;
+	height: 90%;
+	width: 100%;
+	composes: column from "@styl/base_flexbox.module.css";
+	overflow: hidden;
+	border-radius: 5px;
+	background-color: rgba(0, 0, 0, 0.2);
+}
+.top_button_div {
+	width: 100%;
+	height: 60px;
+	composes: row_center from "@styl/base_flexbox.module.css";
+	background-color: black;
+}
+.helper_wrapper {
+	height: calc(100% - 60px);
+	min-height: calc(100% - 60px);
+	composes: column from "@styl/base_flexbox.module.css";
+	width: 100%;
+	overflow: auto;
+}
+.paper_main_div {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: 100px;
+	min-height: 100px;
+	background-color: rgba(50, 50, 50, 0.2);
+	overflow: hidden;
+	border-radius: 10px;
+	margin-bottom: 10px;
+}
+.paper_modal {
+	width: 100%;
+	height: 100%;
+	background-color: var(--background-paper);
+	z-index: 20;
+	position: absolute;
+	composes: column from "@styl/base_flexbox.module.css";
+}
+.divider_div {
+	width: 100%;
+	height: 2px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+}
+.paper_button_and_name {
+	width: 100%;
+	height: 50%;
+	composes: row from "@styl/base_flexbox.module.css";
+	font-size: 20px;
+	overflow: hidden;
+}
+.paper_remove_div {
+	height: 100%;
+	composes: row_center from "@styl/base_flexbox.module.css";
+	width: 105px;
+}
+.paper_name_div {
+	width: calc(100% - 105px);
+	height: 50%;
+	composes: row_center from "@styl/base_flexbox.module.css";
+}
+.remove_buttons {
+	composes: row_center from "@styl/base_flexbox.module.css";
+	width: 100%;
+	height: calc(50% - 2px);
+}
+.playback_wrapper {
+	height: 50%;
+	width: 100%;
+}
+.elipse_text {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.bottom_buffer {
+	width: 100%;
+	height: 75px;
+}

@@ -1,0 +1,68 @@
+/** @format */
+
+.main_wrapper {
+	composes: column from "@styl/base_flexbox.module.css";
+	width: 100%;
+	height: 100px;
+	background-color: black;
+	margin-bottom: 5px;
+	border-radius: 5px;
+	overflow: hidden;
+}
+.player_wrapper {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-evenly;
+	width: 100%;
+	height: 50%;
+}
+.top_div {
+	width: 100%;
+	height: 48px;
+	composes: row from "@styl/base_flexbox.module.css";
+}
+.number_50px {
+	height: 50px;
+	width: 50px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-end;
+}
+.number_deco {
+	height: 90%;
+	width: 90%;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	border: 1px solid var(--primary-main);
+	border-radius: 10px;
+	color: var(--primary-main);
+	font-size: 27px;
+}
+.name_button_div {
+	height: 100%;
+	width: calc(100% - 50px);
+	composes: row from "@styl/base_flexbox.module.css";
+}
+.upload_audio_div {
+	width: 100%;
+	height: 100%;
+	composes: row from "@styl/base_flexbox.module.css";
+}
+.change_button {
+	height: 100%;
+	composes: row_center from "@styl/base_flexbox.module.css";
+	width: 95px;
+}
+.name_container {
+	height: 100%;
+	composes: row_center from "@styl/base_flexbox.module.css";
+	width: calc(100% - 95px);
+	overflow: hidden;
+}
+.elipse_text {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-size: 20px;
+}

@@ -1,0 +1,60 @@
+/** @format */
+
+.main_div {
+	width: 96vw;
+	height: 44vw;
+	margin-top: 5px;
+	margin-bottom: 10px;
+	overflow: hidden;
+	position: relative;
+	border-radius: 5px;
+}
+.filter_div {
+	width: 100%;
+	height: 100%;
+	backdrop-filter: blur(18px) brightness(45%);
+	z-index: 100;
+	bottom: 0px;
+	position: absolute;
+	composes: column from "@styl/base_flexbox.module.css";
+}
+.top_div {
+	width: 100%;
+	height: 24vw;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	overflow: hidden;
+}
+.bottom_div {
+	width: 100%;
+	height: 20vw;
+	composes: row from "@styl/base_flexbox.module.css";
+}
+.pic_div {
+	height: 20vw;
+	width: 20vw;
+	composes: column_center from "@styl/base_flexbox.module.css";
+}
+.pic_deco {
+	height: 90%;
+	width: 90%;
+	border-radius: 5px;
+	overflow: hidden;
+	composes: column_center from "@styl/base_flexbox.module.css";
+}
+.right_div {
+	width: calc(100% - 20vw);
+	height: 100%;
+	composes: column from "@styl/base_flexbox.module.css";
+}
+.name_div {
+	width: 100%;
+	height: 40%;
+	composes: row from "@styl/base_flexbox.module.css";
+	font-size: 22px;
+	font-weight: 400;
+}
+.tagline_div {
+	composes: row from "@styl/base_flexbox.module.css";
+	width: 100%;
+	line-height: 19px;
+}

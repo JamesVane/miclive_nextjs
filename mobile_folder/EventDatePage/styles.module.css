@@ -1,0 +1,230 @@
+/** @format */
+.main_div {
+	width: 100%;
+	composes: column from "@styl/base_flexbox.module.css";
+}
+.pic_name_div {
+	width: 100%;
+	height: 75px;
+	composes: row from "@styl/base_flexbox.module.css";
+}
+.pic_div {
+	width: 70px;
+	height: 70px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+}
+.pic_deco {
+	width: 90%;
+	height: 90%;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	overflow: hidden;
+	border-radius: 5px;
+}
+.name_div {
+	width: calc(100% - 70px);
+	height: 100%;
+	composes: row from "@styl/base_flexbox.module.css";
+	padding-left: 5px;
+	font-size: 28px;
+}
+.divider_div {
+	width: 100%;
+	height: 2px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+}
+.date_location_div {
+	color: var(--primary-main);
+	width: 100%;
+	height: 33px;
+	composes: row from "@styl/base_flexbox.module.css";
+	overflow: hidden;
+}
+.date_time_split {
+	width: 50%;
+	height: 100%;
+	composes: row from "@styl/base_flexbox.module.css";
+}
+.logo_div {
+	position: absolute;
+	right: 15px;
+	width: 100px;
+	height: 100%;
+	composes: column_center from "@styl/base_flexbox.module.css";
+}
+.elipse_text {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	padding-right: 2.5px;
+}
+.buttons_div {
+	width: 100%;
+	height: 35px;
+	composes: row from "@styl/base_flexbox.module.css";
+}
+.desc_div {
+	width: 100vw;
+	max-width: 100vw;
+	composes: column from "@styl/base_flexbox.module.css";
+}
+.promoter_dj_row {
+	margin-top: 7.5px;
+	width: 100%;
+	height: 70px;
+	min-height: 70px;
+	composes: row_center from "@styl/base_flexbox.module.css";
+}
+.roster_paper {
+	width: 100%;
+	height: 82px;
+	min-height: 82px;
+	composes: column from "@styl/base_flexbox.module.css";
+	cursor: pointer;
+	transition: all 0.2s ease-in-out;
+}
+.roster_paper_content {
+	width: 100%;
+	height: calc(100% - 2px);
+	composes: row from "@styl/base_flexbox.module.css";
+}
+.performer_pic_number_div {
+	height: 80px;
+	width: 80px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+}
+.roster_row_middle_div {
+	height: 100%;
+	width: calc(100% - 160px);
+	composes: row from "@styl/base_flexbox.module.css";
+	font-size: 22px;
+	position: relative;
+	transition: all 0.2s ease-in-out;
+}
+.performed_at_div {
+	position: absolute;
+	bottom: 2.5px;
+	width: 100%;
+	height: 25%;
+	composes: row from "@styl/base_flexbox.module.css";
+	color: var(--secondary-main);
+	font-size: 15px;
+}
+.row_number {
+	height: 85%;
+	width: 85%;
+	border: 1px solid var(--primary-main);
+	border-radius: 10px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	color: var(--primary-main);
+	font-size: 40px;
+}
+.audio_main_div {
+	width: 100%;
+	composes: column from "@styl/base_flexbox.module.css";
+}
+.audio_time {
+	margin-top: 7.5px;
+	padding-bottom: 5px;
+	font-size: 18px;
+	composes: row from "@styl/base_flexbox.module.css";
+}
+.primary_color {
+	margin-right: 5px;
+	margin-left: 5px;
+	color: var(--primary-main);
+}
+.secondary_color {
+	margin-right: 5px;
+	margin-left: 5px;
+	color: var(--secondary-main);
+}
+.audio_row_top_div {
+	width: 100%;
+	height: 48px;
+	composes: row from "@styl/base_flexbox.module.css";
+}
+.time_used_deco {
+	composes: row from "@styl/base_flexbox.module.css";
+	margin-left: 5px;
+	background-color: var(--background-paper);
+	border-radius: 10px;
+	overflow: hidden;
+}
+.audio_row_number_50px {
+	height: 45px;
+	width: 45px;
+	min-width: 45px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-end;
+}
+.audio_row_number_deco {
+	height: 90%;
+	width: 90%;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	border: 1px solid var(--primary-main);
+	border-radius: 10px;
+	color: var(--primary-main);
+	font-size: 27px;
+}
+.upload_audio_div {
+	width: calc(100% - 45px);
+	height: 100%;
+	composes: row from "@styl/base_flexbox.module.css";
+}
+.audio_name_container {
+	height: 100%;
+	composes: row_center from "@styl/base_flexbox.module.css";
+	width: calc(100% - 95px);
+	overflow: hidden;
+}
+.change_button {
+	height: 100%;
+	composes: row_center from "@styl/base_flexbox.module.css";
+	width: 95px;
+}
+.player_wrapper {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-evenly;
+	width: 100%;
+	height: 50%;
+}
+.audio_main_wrapper {
+	composes: column from "@styl/base_flexbox.module.css";
+	width: calc(100% - 10px);
+	height: 100px;
+	background-color: black;
+	margin-bottom: 5px;
+	border-radius: 5px;
+	overflow: hidden;
+}
+.audio_name_button_div {
+	height: 100%;
+	width: calc(100% - 45px);
+	composes: row from "@styl/base_flexbox.module.css";
+}
+.sign_up_in_buy_modal_back {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	background-color: rgba(0, 0, 0, 0.6);
+	z-index: 11000;
+	top: 0;
+}
+.but_ticket_modal_body {
+	width: 350px;
+	height: 400px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	border-radius: 5px;
+	background-color: var(--background-default);
+	position: relative;
+}
+.buy_text_div {
+	color: var(--secondary-main);
+	margin: 5px;
+	font-size: 30px;
+}

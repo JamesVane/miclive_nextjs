@@ -1,0 +1,17 @@
+/** @format */
+.main_div {
+	width: 100vw;
+	overflow-x: hidden;
+	composes: column from "@styl/base_flexbox.module.css";
+}
+.no_convos {
+	width: 100%;
+	height: calc(100vh - 55px);
+	composes: column_center from "@styl/base_flexbox.module.css";
+	color: var(--secondary-main);
+	font-size: 30px;
+}
+.top_bumper {
+	width: 100%;
+	height: 55px;
+}

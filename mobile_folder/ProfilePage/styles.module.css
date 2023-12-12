@@ -1,0 +1,63 @@
+/** @format */
+
+.main_div {
+	position: relative;
+	width: 100vw;
+	composes: column from "@styl/base_flexbox.module.css";
+	border-bottom: var(--secondary-main) 1px solid;
+}
+.top_half {
+	composes: row from "@styl/base_flexbox.module.css";
+	width: 100vw;
+}
+
+.picture_wrap {
+	height: 90px;
+	width: 90px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+}
+.name_tagline_wrap {
+	composes: column from "@styl/base_flexbox.module.css";
+	height: 90px;
+	width: calc(100% - 90px);
+}
+.name_wrap {
+	margin-top: 15px;
+	font-size: 25px;
+	composes: row from "@styl/base_flexbox.module.css";
+	height: 20%;
+	width: 100%;
+}
+.tagline_wrap {
+	padding-top: 5px;
+	composes: row from "@styl/base_flexbox.module.css";
+	align-content: start;
+	width: 100%;
+}
+.info_row {
+	padding-left: 10px;
+	composes: row from "@styl/base_flexbox.module.css";
+	width: 100%;
+	height: 30px;
+}
+.info_row_left {
+	height: 100%;
+	composes: row from "@styl/base_flexbox.module.css";
+	width: 35%;
+}
+.edit_row {
+	height: 50px;
+	composes: row from "@styl/base_flexbox.module.css";
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.splash_container {
+	width: 100%;
+	height: 100vh;
+	composes: column_center from "@styl/base_flexbox.module.css";
+}

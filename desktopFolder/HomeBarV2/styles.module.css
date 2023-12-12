@@ -1,0 +1,45 @@
+/** @format */
+
+.main_paper {
+	width: 100%;
+	height: 70px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	overflow: hidden;
+	z-index: 1000;
+}
+.inner_div {
+	width: 100%;
+	height: 100%;
+	composes: row_center from "@styl/base_flexbox.module.css";
+	position: relative;
+}
+.profile_messages_div {
+	height: 100%;
+	width: 230px;
+	display: flex;
+	flex-direction: row-reverse;
+	align-items: center;
+	position: absolute;
+	right: 0;
+}
+.mic_live {
+	height: 90%;
+	width: 230px;
+	composes: row_center from "@styl/base_flexbox.module.css";
+	position: absolute;
+	left: 0;
+	cursor: pointer;
+}
+.message_right_div {
+	height: 100%;
+	width: 300px;
+	composes: row_around from "@styl/base_flexbox.module.css";
+	position: absolute;
+	right: 0;
+}

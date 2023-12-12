@@ -1,0 +1,86 @@
+/** @format */
+
+.main_div {
+	width: 100%;
+	height: 100%;
+	composes: row from "@styl/base_flexbox.module.css";
+}
+.paper_container {
+	height: 100%;
+	composes: row_center from "@styl/base_flexbox.module.css";
+}
+.change_button {
+	composes: column_center from "@styl/base_flexbox.module.css";
+}
+.dj_paper {
+	height: calc(100% - 10px);
+	width: 100%;
+	overflow: hidden !important;
+	border-radius: 10px !important;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+	transition: filter 0.2s ease-in-out;
+	cursor: pointer;
+}
+
+.dj_paper:hover {
+	filter: brightness(80%);
+}
+.dj_pic {
+	composes: column_center from "@styl/base_flexbox.module.css";
+	position: relative;
+	background-color: var(--background-paper);
+}
+.dj_icon_avatar {
+	composes: column_center from "@styl/base_flexbox.module.css";
+	position: absolute;
+	bottom: 5px;
+	right: 5px;
+	z-index: 20;
+	border: 1px solid var(--primary-main);
+	background-color: var(--background-paper);
+	border-radius: 50%;
+	overflow: hidden;
+}
+.dj_right {
+	background-color: var(--background-paper);
+	position: relative;
+	height: 100%;
+	composes: column from "@styl/base_flexbox.module.css";
+}
+.primary_dj_name {
+	width: 100%;
+	height: 70%;
+	composes: row from "@styl/base_flexbox.module.css";
+	font-weight: lighter !important;
+}
+.event_dj_label {
+	width: 100%;
+	composes: row from "@styl/base_flexbox.module.css";
+	color: var(--primary-main);
+	font-weight: bold;
+	position: absolute;
+	bottom: 7px;
+}
+.confirm_div {
+	composes: column from "@styl/base_flexbox.module.css";
+	width: 100%;
+	height: calc(100% - 10px);
+	background-color: var(--background-paper);
+	border-radius: 10px;
+	overflow: hidden;
+	position: relative;
+}
+.confirm_top {
+	width: 100%;
+	height: 45%;
+	composes: row_center from "@styl/base_flexbox.module.css";
+	font-size: 22px;
+}
+.confirm_bottom {
+	width: 100%;
+	height: 50%;
+	composes: row_center from "@styl/base_flexbox.module.css";
+}

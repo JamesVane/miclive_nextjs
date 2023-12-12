@@ -1,0 +1,42 @@
+/** @format */
+
+.main_div {
+	width: 100vw;
+	composes: column from "@styl/base_flexbox.module.css";
+}
+.header_div {
+	width: 100%;
+	height: 50px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	font-size: 20px;
+	position: relative;
+}
+.body_div {
+	width: 100vw;
+	composes: column from "@styl/base_flexbox.module.css";
+}
+.error_styles {
+	color: #ff0000ff;
+	font-size: 13px;
+	margin-top: -20px;
+}
+.bottom_buttons {
+	margin-top: 10px;
+	margin-bottom: 20px;
+	width: 90%;
+	composes: row_between from "@styl/base_flexbox.module.css";
+}
+.divider_div {
+	width: 100%;
+	composes: column from "@styl/base_flexbox.module.css";
+	height: 2px;
+}
+.bottom_div {
+	background-color: #0f0f0f;
+	width: 100%;
+	position: fixed;
+	composes: column from "@styl/base_flexbox.module.css";
+	bottom: 0;
+	left: 0;
+	right: 0;
+}

@@ -1,0 +1,198 @@
+/** @format */
+
+.main_div {
+	position: relative;
+	width: 100vw;
+	composes: column from "@styl/base_flexbox.module.css";
+	overflow-x: hidden;
+}
+.backdrop_banner {
+	width: 100vw;
+	height: 55vw;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	position: relative;
+}
+.overlay_div {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0px;
+	backdrop-filter: blur(18px) brightness(80%);
+	composes: column from "@styl/base_flexbox.module.css";
+}
+.main_banner_container {
+	width: 100vw;
+	height: 35vw;
+	composes: column_center from "@styl/base_flexbox.module.css";
+}
+.main_banner {
+	width: 96vw;
+	height: 32vw;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	border-radius: 5px;
+	overflow: hidden;
+}
+.pic_name_tagline_div {
+	width: 96%;
+	height: 20vw;
+	composes: row from "@styl/base_flexbox.module.css";
+	position: absolute;
+	bottom: 0px;
+	z-index: 200;
+}
+.fade_out_div {
+	width: 100%;
+	height: 20vw;
+	background: linear-gradient(rgba(15, 15, 15, 0), rgba(15, 15, 15, 1));
+}
+.pic_div {
+	width: 20vw;
+	height: 20vw;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+}
+.pic_deco {
+	width: 90%;
+	height: 90%;
+	border-radius: 5px;
+	overflow: hidden;
+	composes: column_center from "@styl/base_flexbox.module.css";
+}
+.name_tagline {
+	height: 100%;
+	width: calc(96vw - 20vw);
+	composes: column from "@styl/base_flexbox.module.css";
+	overflow: hidden;
+}
+.name_div {
+	width: 100%;
+	height: 40%;
+	font-size: 23px;
+	composes: row from "@styl/base_flexbox.module.css";
+}
+.tagline_div {
+	width: 100%;
+	composes: row from "@styl/base_flexbox.module.css";
+	line-height: 20px;
+	font-size: 15px;
+}
+.buttons_div {
+	width: 100%;
+	height: 45px;
+	composes: row from "@styl/base_flexbox.module.css";
+}
+.dj_div {
+	width: 100%;
+	height: 80px;
+	composes: row_center from "@styl/base_flexbox.module.css";
+}
+.desc_dov {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+.upcoming_prev_divider {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	height: 45px;
+	min-height: 45px;
+	composes: row from "@styl/base_flexbox.module.css";
+	position: relative;
+	font-size: 22.5px;
+	background-color: rgba(39, 39, 39, 1);
+	width: calc(100% - 10px);
+	overflow: hidden;
+	border-radius: 5px;
+}
+.upcoming_divider_text {
+	margin-top: -5px;
+	color: var(--primary-main);
+	margin-left: 5px;
+}
+.upcming_line {
+	width: 200px;
+	height: 2px;
+	background-color: var(--primary-main);
+	position: absolute;
+	bottom: 5px;
+	left: 5px;
+}
+.previous_divider_text {
+	margin-top: -5px;
+	color: grey;
+	margin-left: 5px;
+}
+.previous_line {
+	width: 200px;
+	height: 2px;
+	background-color: grey;
+	position: absolute;
+	bottom: 5px;
+	left: 5px;
+}
+.date_card_div_prev {
+	color: var(--secondary-main);
+	width: calc(100% - 10px);
+	height: 65px;
+	min-height: 65px;
+	composes: column from "@styl/base_flexbox.module.css";
+	background-color: var(--background-paper);
+	margin-bottom: 5px;
+	margin-top: 5px;
+	border-radius: 10px;
+	font-size: 15px;
+	position: relative;
+}
+.date_card_div_up {
+	color: var(--primary-main);
+	width: calc(100% - 10px);
+	height: 65px;
+	min-height: 65px;
+	composes: column from "@styl/base_flexbox.module.css";
+	background-color: var(--background-paper);
+	margin-bottom: 5px;
+	margin-top: 5px;
+	border-radius: 10px;
+	font-size: 15px;
+	position: relative;
+}
+.date_care_row {
+	width: 100%;
+	height: 50%;
+	composes: row from "@styl/base_flexbox.module.css";
+	overflow: hidden;
+}
+.date_time_split {
+	width: 50%;
+	height: 100%;
+	composes: row from "@styl/base_flexbox.module.css";
+}
+.elipse_text {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	padding-right: 2.5px;
+}
+.invite_dj_div {
+	width: 100%;
+	height: 80px;
+	composes: row_center from "@styl/base_flexbox.module.css";
+}
+.loaded_invite_div {
+	width: 100%;
+	height: 100%;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	background-color: rgba(0, 0, 0, 0.2);
+}
+.invite_warning_box {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	margin-top: 5px;
+	margin-bottom: -7.5px;
+}

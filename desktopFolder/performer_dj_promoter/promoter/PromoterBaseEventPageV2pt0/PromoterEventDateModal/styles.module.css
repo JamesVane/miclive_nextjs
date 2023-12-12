@@ -1,0 +1,177 @@
+/** @format */
+
+.main_div {
+	position: fixed;
+	width: 100%;
+	height: calc(100vh - 70px);
+	min-height: calc(100vh - 70px);
+	background-color: rgba(0, 0, 0, 0.7);
+	z-index: 500;
+	composes: column_center from "@styl/base_flexbox.module.css";
+}
+.paper_div {
+	width: 902px;
+	height: 90%;
+	composes: column from "@styl/base_flexbox.module.css";
+	background-color: var(--background-default);
+	border-radius: 5px;
+	overflow: hidden;
+	position: relative;
+}
+.divider_vert {
+	width: 2px;
+	height: 100%;
+	composes: row_center from "@styl/base_flexbox.module.css";
+}
+.main_header_div {
+	width: 100%;
+	height: 50px;
+	composes: row_center from "@styl/base_flexbox.module.css";
+	position: relative;
+	background-color: black;
+}
+.main_body_div {
+	width: 100%;
+	height: calc(100% - 50px);
+	composes: row from "@styl/base_flexbox.module.css";
+}
+.info_section {
+	height: 100%;
+	width: 500px;
+	composes: column from "@styl/base_flexbox.module.css";
+}
+.roster_section {
+	width: 400px;
+	height: 100%;
+	composes: column from "@styl/base_flexbox.module.css";
+}
+.info_name_pic {
+	width: 100%;
+	height: 80px;
+	composes: row from "@styl/base_flexbox.module.css";
+}
+.divider_div {
+	width: 100%;
+	height: 2px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+}
+.pic_div {
+	width: 80px;
+	height: 80px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+}
+.pic_deco {
+	width: 90%;
+	height: 90%;
+	border-radius: 5px;
+	overflow: hidden;
+	composes: column_center from "@styl/base_flexbox.module.css";
+}
+.event_name {
+	height: 100%;
+	width: calc(100% - 85px);
+	composes: row from "@styl/base_flexbox.module.css";
+	font-size: 27px;
+}
+.date_loc_div {
+	color: var(--primary-main);
+	width: 100%;
+	height: 38px;
+	composes: row from "@styl/base_flexbox.module.css";
+	overflow: hidden;
+}
+.date_time_split {
+	height: 100%;
+	width: 50%;
+	composes: row from "@styl/base_flexbox.module.css";
+}
+.buttons_div {
+	width: 100%;
+	height: 40px;
+	composes: row from "@styl/base_flexbox.module.css";
+}
+.dj_card_div {
+	width: calc(100% - 10px);
+	height: 80px;
+	composes: row_center from "@styl/base_flexbox.module.css";
+}
+.elipse_text {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.info_row {
+	margin-top: 2.5px;
+	height: 38px;
+	width: 100%;
+	composes: row from "@styl/base_flexbox.module.css";
+	padding-left: 5px;
+}
+.primary_text {
+	color: var(--primary-main);
+	margin-right: 4px;
+}
+.secondary_text {
+	color: var(--secondary-main);
+	margin-right: 4px;
+}
+.desc_div {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: flex-start;
+}
+.inner_desc_div {
+	transform: scale(1.6); /* Increase the size by 50% */
+	transform-origin: top left; /* Adjust as needed */
+}
+.roster_header {
+	width: 100%;
+	height: 50px;
+	composes: row_center from "@styl/base_flexbox.module.css";
+	font-size: 23px;
+}
+.roster_container {
+	width: 100%;
+	height: calc(100% - 50px);
+	composes: column from "@styl/base_flexbox.module.css";
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+.roster_paper {
+	width: 100%;
+	height: 80px;
+	min-height: 82px;
+	composes: column from "@styl/base_flexbox.module.css";
+}
+.roster_paper_top {
+	width: 100%;
+	composes: row from "@styl/base_flexbox.module.css";
+	height: 80px;
+}
+.roster_pic_div {
+	width: 80px;
+	height: 80px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+}
+.invite_dj_div {
+	width: 100%;
+	height: 80px;
+	composes: row_center from "@styl/base_flexbox.module.css";
+}
+.loaded_invite_div {
+	width: 100%;
+	height: 100%;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	background-color: rgba(0, 0, 0, 0.2);
+}
+.invite_warning_box {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	margin-top: 5px;
+	margin-bottom: -7.5px;
+}

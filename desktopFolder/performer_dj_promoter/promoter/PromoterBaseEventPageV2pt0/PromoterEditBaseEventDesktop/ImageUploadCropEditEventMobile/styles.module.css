@@ -1,0 +1,56 @@
+/** @format */
+
+.main_div {
+	composes: column from "@styl/base_flexbox.module.css";
+	width: 100%;
+	height: 100%;
+	max-height: 100%;
+	max-width: 100%;
+}
+.display_name {
+	margin-top: -20px;
+	font-size: 20px;
+	color: #66bb6aff;
+	border: 1px solid rgba(0, 0, 0, 0.5);
+	background-color: rgba(0, 0, 0, 0.2);
+	padding-right: 5px;
+	padding-left: 5px;
+	border-radius: 5px;
+}
+.pick_new_div {
+	width: 100%;
+	height: 10%;
+	composes: row_center from "@styl/base_flexbox.module.css";
+}
+.ReactCrop_div {
+	composes: column_center from "@styl/base_flexbox.module.css";
+	max-width: 100%;
+	max-height: 70%;
+	width: 100%;
+	height: 70%;
+	position: relative;
+	background-color: rgba(0, 0, 0, 0.3);
+}
+.bottom_div {
+	composes: row_center from "@styl/base_flexbox.module.css";
+	width: 100%;
+	height: 20%;
+	min-height: 20%;
+}
+.cropped_image_text {
+	composes: column_center from "@styl/base_flexbox.module.css";
+	position: relative;
+	color: var(--primary-main);
+	font-weight: bold;
+	font-size: 25px;
+	height: 100%;
+	overflow: visible;
+}
+.picture_div {
+	margin-left: 10px;
+	width: 80px;
+	height: 80px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	border-radius: 5px;
+	overflow: hidden;
+}

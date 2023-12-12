@@ -1,0 +1,53 @@
+/** @format */
+
+.main_wrapper {
+	composes: column_center from "@styl/base_flexbox.module.css";
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.6);
+	z-index: 2000;
+}
+.main_inner {
+	width: 80%;
+	height: 225px;
+	display: relative;
+	composes: column from "@styl/base_flexbox.module.css";
+	justify-content: flex-end;
+	background-color: var(--background-paper);
+	border-radius: 5px;
+	overflow: hidden;
+}
+.buttons_box {
+	width: 100%;
+	composes: row_center from "@styl/base_flexbox.module.css";
+	height: 75px;
+	position: relative;
+}
+.success_display {
+	composes: column_center from "@styl/base_flexbox.module.css";
+	width: 100%;
+	height: 100%;
+}
+.border_div {
+	width: 100%;
+	height: 2px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+}
+.display_name {
+	font-size: 20px;
+	color: #66bb6aff;
+	border: 1px solid rgba(0, 0, 0, 0.5);
+	background-color: rgba(0, 0, 0, 0.2);
+	padding-right: 5px;
+	padding-left: 5px;
+	border-radius: 5px;
+	margin-bottom: 10px;
+	display: flex;
+}
+.selected_file_words {
+	width: 100%;
+	composes: row_center from "@styl/base_flexbox.module.css";
+	font-size: 15px;
+	color: var(--primary-main);
+}

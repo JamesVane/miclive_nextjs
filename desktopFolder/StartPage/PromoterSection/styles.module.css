@@ -1,0 +1,65 @@
+/** @format */
+
+.main_div {
+	width: 100%;
+	height: 100vh;
+	padding-top: 80px;
+	position: relative;
+	min-height: 100vh;
+	scroll-snap-align: start;
+	scroll-snap-stop: always;
+}
+.pic_div {
+	width: 100vw;
+	height: 100vh;
+	position: absolute;
+	top: 0px;
+}
+.info_section_container {
+	height: calc(100vh - 60px);
+	position: fixed;
+	left: 0px;
+	top: 80px;
+	overflow: hidden;
+	pointer-events: none;
+}
+.info_section {
+	height: calc(100vh - 60px);
+	width: 500px;
+	min-width: 500px;
+	background-color: rgba(0, 0, 0, 0);
+	backdrop-filter: sepia(100%) blur(6px) brightness(65%);
+	-webkit-backdrop-filter: sepia(100%) blur(6px) brightness(65%); /* for Safari support */
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.person_title {
+	width: 100%;
+	height: 70px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	font-size: 60px;
+	color: var(--primary-main);
+	margin-top: -25px;
+}
+.bullet_point_div {
+	width: 100%;
+	padding: 10px;
+	font-size: 30px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	text-align: left;
+}
+.divider_div {
+	width: 100%;
+	height: 2px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}

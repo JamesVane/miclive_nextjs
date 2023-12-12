@@ -1,0 +1,12 @@
+/** @format */
+
+:root {
+	--primary-main: #898661;
+	--primary-light: #f7e3b2ff;
+	--primary-dark: #ac9a70ff;
+	--secondary-main: #bbbab9ff;
+	--secondary-light: #afb3b5ff;
+	--secondary-dark: #6e7072ff;
+	--background-default: #0f0f0fff;
+	--background-paper: #272727;
+}

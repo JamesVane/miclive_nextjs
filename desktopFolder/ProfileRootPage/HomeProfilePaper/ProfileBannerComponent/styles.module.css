@@ -1,0 +1,100 @@
+/** @format */
+
+.main_div {
+	width: 550px;
+	height: 90%;
+	background-color: var(--background-paper);
+	overflow: hidden;
+	border-radius: 5px;
+	composes: column from "@styl/base_flexbox.module.css";
+	position: relative;
+}
+.row_div {
+	width: 100%;
+	height: 55px;
+	composes: row_center from "@styl/base_flexbox.module.css";
+	font-size: 25px;
+	color: var(--primary-main);
+}
+.four_banner {
+	height: 125px;
+	width: 500px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	overflow: hidden;
+	border-radius: 5px;
+}
+.three_banner {
+	height: 125px;
+	width: 375px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	overflow: hidden;
+	border-radius: 5px;
+}
+.header_div {
+	width: 100%;
+	height: 45px;
+	composes: row_center from "@styl/base_flexbox.module.css";
+	font-size: 20px;
+}
+.banner_body_div {
+	width: 100%;
+	composes: column from "@styl/base_flexbox.module.css";
+}
+.selected_banners_end {
+	width: 100%;
+	height: 100%;
+	composes: column from "@styl/base_flexbox.module.css";
+	position: relative;
+}
+.banner_file_name {
+	margin-top: 10px;
+	background-color: var(--background-default);
+	color: var(--secondary-main);
+	padding-left: 10px;
+	padding-right: 10px;
+	font-size: 22px;
+	border-radius: 5px;
+	overflow: hidden;
+	margin-bottom: 10px;
+	max-width: 250px;
+}
+.banner_row_help {
+	width: 100%;
+	composes: row_center from "@styl/base_flexbox.module.css";
+	font-size: 18px;
+	font-weight: bold;
+	color: var(--primary-main);
+}
+.three_confirm_pic {
+	height: 125px;
+	width: 375px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	overflow: hidden;
+	border-radius: 5px;
+	margin-bottom: 10px;
+}
+.four_confirm_pic {
+	height: 125px;
+	width: 500px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	overflow: hidden;
+	border-radius: 5px;
+	margin-top: 10px;
+}
+.elipse_text {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.both_selected_dimension_text {
+	width: 100%;
+	height: 40px;
+	composes: row_center from "@styl/base_flexbox.module.css";
+	font-size: 25px;
+}
+.profile_page_banners_text_header {
+	width: 100%;
+	height: 45px;
+	composes: row_center from "@styl/base_flexbox.module.css";
+	font-size: 20px;
+}

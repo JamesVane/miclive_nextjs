@@ -1,0 +1,79 @@
+/** @format */
+
+.main_div {
+	width: 100%;
+	composes: column from "@styl/base_flexbox.module.css";
+	margin-bottom: 10px;
+}
+.pic_div {
+	height: 90px;
+	width: 90px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	position: relative;
+}
+.right_side {
+	height: 100%;
+	width: calc(100% - 90px);
+	composes: column from "@styl/base_flexbox.module.css";
+}
+.right_top {
+	position: relative;
+	width: 100%;
+	height: 45px;
+	composes: row from "@styl/base_flexbox.module.css";
+	padding-left: 10px;
+	border-left: 1px solid var(--primary-main);
+	border-bottom: 1px solid var(--primary-main);
+	border-radius: 0 0 0 5px;
+	font-size: 20px;
+}
+.right_bottom {
+	width: 100%;
+	height: 55px;
+	composes: row from "@styl/base_flexbox.module.css";
+}
+.bottom_left {
+	height: 100%;
+	max-height: 50px;
+	width: calc(100% - 50px);
+	text-align: left;
+	padding-left: 10px;
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
+.bottom_right {
+	height: 100%;
+	width: 50px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+}
+.time_date_div {
+	width: 100%;
+	composes: row_center from "@styl/base_flexbox.module.css";
+	color: var(--primary-main);
+	font-size: 14px;
+}
+.notification_number {
+	height: 25px;
+	width: 25px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	color: #f4a727ff;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.no_convos {
+	width: 100%;
+	height: calc(100vh - 55px);
+	composes: column_center from "@styl/base_flexbox.module.css";
+	color: var(--secondary-main);
+	font-size: 30px;
+}
+.list_div_scroll {
+	composes: column from "@styl/base_flexbox.module.css";
+	width: 100%;
+	max-height: calc(100vh - 55px);
+	overflow-y: auto;
+	padding-top: 10px;
+}

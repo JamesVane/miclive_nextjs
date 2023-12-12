@@ -1,0 +1,47 @@
+/** @format */
+
+.main_div {
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(0, 0, 0, 0.7);
+	position: fixed;
+	top: 0px;
+	z-index: 1000;
+	composes: column_center from "@styl/base_flexbox.module.css";
+}
+.paper_div {
+	width: 90%;
+	height: 400px;
+	composes: column from "@styl/base_flexbox.module.css";
+	background-color: var(--background-default);
+	overflow: hidden;
+	border-radius: 5px;
+	position: relative;
+}
+.qr_div {
+	width: 250px;
+	height: 250px;
+	margin-top: 45px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	border-radius: 10px;
+	overflow: hidden;
+}
+.key_row {
+	margin-top: 25px;
+	width: 250px;
+	height: 60px;
+	background-color: var(--background-paper);
+	composes: row_center from "@styl/base_flexbox.module.css";
+	overflow: hidden;
+	border-radius: 10px;
+}
+.key_title {
+	color: var(--secondary-main);
+	font-size: 20px;
+	margin-right: 5px;
+}
+.checkin_key {
+	color: var(--primary-main);
+	font-weight: 500;
+	font-size: 30px;
+}

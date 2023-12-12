@@ -1,0 +1,368 @@
+/** @format */
+
+.desktop_main_div {
+	width: 100vw;
+	height: calc(100vh - 70px);
+	top: 70px;
+	position: fixed;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	z-index: 1100;
+	background-color: rgba(0, 0, 0, 0.7);
+}
+.splash_div {
+	width: 500px;
+	height: 85%;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	border-radius: 5px;
+	overflow: hidden;
+}
+.desktop_main_paper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	position: relative;
+	overflow: hidden;
+	border-radius: 5px;
+	overflow: hidden;
+	background-color: var(--background-default);
+}
+.specific_splitter {
+	height: 100%;
+	width: 499px;
+	composes: column from "@styl/base_flexbox.module.css";
+}
+.header_div {
+	font-size: 20px;
+	width: 100%;
+	height: 50px;
+	composes: row_center from "@styl/base_flexbox.module.css";
+	position: relative;
+}
+.button_selector_div {
+	width: 100%;
+	height: 30vh;
+	composes: column from "@styl/base_flexbox.module.css";
+	justify-content: space-around;
+}
+.path_selector_title {
+	width: 100%;
+	height: 50px;
+	composes: row_center from "@styl/base_flexbox.module.css";
+	font-size: 20px;
+}
+.divider_div {
+	width: 100%;
+	height: 2px;
+	composes: column from "@styl/base_flexbox.module.css";
+}
+.base_event_paper {
+	position: relative;
+	composes: column from "@styl/base_flexbox.module.css";
+	width: 100%;
+	height: 70vh;
+	overflow: hidden;
+}
+.specific_event_main {
+	width: 100%;
+	composes: row from "@styl/base_flexbox.module.css";
+}
+.not_sure_box {
+	composes: row_center from "@styl/base_flexbox.module.css";
+	text-align: center;
+	width: 75%;
+	cursor: pointer;
+	color: var(--secondary-main);
+	composes: row from "@styl/base_flexbox.module.css";
+	margin-top: 10px;
+	transition: color 0.2s ease-in-out;
+}
+.not_sure_box:hover {
+	color: var(--secondary-dark);
+}
+.event_image_title_box {
+	font-size: 20px;
+	width: 100%;
+	height: 40px;
+	align-items: end;
+	composes: row_center from "@styl/base_flexbox.module.css";
+	margin-bottom: -10px;
+}
+.selected_image_box {
+	border-radius: 5px;
+	margin-top: 15px;
+	font-size: 20px;
+	width: 95%;
+	composes: row from "@styl/base_flexbox.module.css";
+	background-color: var(--background-paper);
+}
+.filename_box {
+	width: 200px;
+	composes: column from "@styl/base_flexbox.module.css";
+}
+.crumbs_wrapper {
+	width: 100%;
+	height: 55px;
+	composes: row_center from "@styl/base_flexbox.module.css";
+}
+.image_decoration {
+	width: 85%;
+	height: 85%;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	border-radius: 5px;
+	overflow: hidden;
+}
+.pic_div {
+	height: 120px;
+	width: 120px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+}
+.pic_row {
+	height: 120px;
+	width: 100%;
+	composes: row from "@styl/base_flexbox.module.css";
+}
+.pic_row_right {
+	height: 100%;
+	width: calc(100% - 120px);
+	composes: row_center from "@styl/base_flexbox.module.css";
+}
+.pic_edit_wrap_selected {
+	width: 100%;
+	height: 100vh;
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	z-index: 100;
+	padding-bottom: 70px;
+	background-color: var(--background-default);
+	composes: column from "@styl/base_flexbox.module.css";
+}
+.pic_edit_wrap {
+	composes: column from "@styl/base_flexbox.module.css";
+	width: 100%;
+	max-width: 100%;
+	max-height: calc(100% - 75px);
+	flex: 1;
+}
+.bottom_row {
+	z-index: 100;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	height: 55px;
+	composes: row from "@styl/base_flexbox.module.css";
+	justify-content: space-between;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.base_event_body_wrap {
+	width: 100%;
+	height: 625px;
+	composes: row from "@styl/base_flexbox.module.css";
+}
+.start_end_div {
+	margin-bottom: 0px;
+	margin-top: 20px;
+	width: 90%;
+	position: relative;
+	composes: row_between from "@styl/base_flexbox.module.css";
+}
+.error_range {
+	color: red;
+	font-size: 12px;
+	position: absolute;
+	right: 5px;
+	bottom: -19px;
+}
+.error_generic {
+	position: absolute;
+	font-size: 12px;
+	color: red;
+}
+.specific_event_bumper {
+	width: 100%;
+	height: 75px;
+}
+.description_main_div {
+	width: 100%;
+	composes: column from "@styl/base_flexbox.module.css";
+	overflow-x: hidden;
+}
+.description_second_div {
+	composes: column from "@styl/base_flexbox.module.css";
+	width: 100%;
+	height: 100%;
+}
+.quill :global(.ql-container.ql-snow) {
+	border-radius: 0px 0px 4px 4px;
+	border-color: #f8dca1ff;
+	border-width: 3px;
+	border-top: 1px #f8dca1ff solid !important;
+	background-color: var(--background-paper);
+}
+.quill :global(.ql-toolbar.ql-snow) {
+	border-color: #9ca1a3ff;
+	border-right-width: 1px;
+	border-left-width: 1px;
+	background-color: var(--background-paper);
+}
+.quill :global(.ql-stroke) {
+	stroke: #9ca1a3ff !important;
+}
+.quill :global(.ql-picker-label) {
+	color: #9ca1a3ff !important;
+}
+.quill :global(.ql-fill) {
+	color: #9ca1a3ff !important;
+
+	fill: #9ca1a3ff !important;
+}
+
+.quill :global(.ql-picker-label:hover svg polygon.ql-stroke) {
+	stroke: #f8dca1ff !important;
+}
+
+.quill :global(.ql-picker-label:hover svg path),
+.quill :global(.ql-picker-label:hover svg rect),
+.quill :global(.ql-picker-label:hover svg polygon) {
+	fill: #f8dca1ff !important;
+	color: #f8dca1ff !important;
+}
+
+.quill :global(.ql-picker-label:hover svg line),
+.quill :global(.ql-picker-label:hover svg polyline) {
+	stroke: #f8dca1ff !important;
+}
+
+.quill :global(.ql-image:hover svg polyline),
+.quill :global(.ql-image:hover svg circle) {
+	fill: #f8dca1ff !important;
+}
+
+.quill :global(.ql-image:hover svg rect) {
+	stroke: #f8dca1ff !important;
+}
+
+.quill :global(.ql-underline:hover svg rect),
+.quill :global(.ql-underline:hover svg path) {
+	stroke: #f8dca1ff !important;
+}
+
+.quill :global(.ql-list:hover svg :nth-child(5)) {
+	fill: #f8dca1ff !important;
+}
+
+.quill :global(.ql-list:hover svg line) {
+	fill: #f8dca1ff !important;
+	stroke: #f8dca1ff !important;
+}
+.quill :global(.ql-list:hover svg :nth-child(7)),
+.quill :global(.ql-list:hover svg :nth-child(6)) {
+	stroke: #f8dca1ff !important;
+}
+.quill :global(.ql-italic:hover svg line) {
+	stroke: #f8dca1ff !important;
+}
+
+.quill :global(.ql-blockquote:hover svg path),
+.quill :global(.ql-blockquote:hover svg rect) {
+	stroke: #f8dca1ff !important;
+	fill: #f8dca1ff !important;
+}
+
+.quill :global(.ql-bold:hover svg path) {
+	stroke: #f8dca1ff !important;
+}
+
+.quill :global(.ql-link:hover svg line),
+.quill :global(.ql-link:hover svg path) {
+	stroke: #f8dca1ff !important;
+}
+.quill :global(.ql-strike:hover svg line) {
+	stroke: #f8dca1ff !important;
+}
+.quill :global(.ql-strike:hover svg path) {
+	fill: #f8dca1ff !important;
+}
+
+.quill :global(.ql-picker-label:hover::before) {
+	fill: #f8dca1ff !important;
+	stroke: #f8dca1ff !important;
+	color: #f8dca1ff !important;
+}
+
+.quill :global(.ql-picker-label.ql-active svg polygon.ql-stroke) {
+	stroke: #f8dca1ff !important;
+}
+
+.quill :global(.ql-picker-label.ql-active svg path),
+.quill :global(.ql-picker-label.ql-active svg rect),
+.quill :global(.ql-picker-label.ql-active svg polygon) {
+	fill: #f8dca1ff !important;
+	color: #f8dca1ff !important;
+}
+
+.quill :global(.ql-picker-label.ql-active svg line),
+.quill :global(.ql-picker-label.ql-active svg polyline) {
+	stroke: #f8dca1ff !important;
+}
+
+.quill :global(.ql-image.ql-active svg polyline),
+.quill :global(.ql-image.ql-active svg circle) {
+	fill: #f8dca1ff !important;
+}
+
+.quill :global(.ql-image.ql-active svg rect) {
+	stroke: #f8dca1ff !important;
+}
+
+.quill :global(.ql-underline.ql-active svg rect),
+.quill :global(.ql-underline.ql-active svg path) {
+	stroke: #f8dca1ff !important;
+}
+
+.quill :global(.ql-list.ql-active svg :nth-child(5)) {
+	fill: #f8dca1ff !important;
+}
+
+.quill :global(.ql-list.ql-active svg line) {
+	fill: #f8dca1ff !important;
+	stroke: #f8dca1ff !important;
+}
+.quill :global(.ql-list.ql-active svg :nth-child(7)),
+.quill :global(.ql-list.ql-active svg :nth-child(6)) {
+	stroke: #f8dca1ff !important;
+}
+.quill :global(.ql-italic.ql-active svg line) {
+	stroke: #f8dca1ff !important;
+}
+
+.quill :global(.ql-blockquote.ql-active svg path),
+.quill :global(.ql-blockquote.ql-active svg rect) {
+	stroke: #f8dca1ff !important;
+	fill: #f8dca1ff !important;
+}
+
+.quill :global(.ql-bold.ql-active svg path) {
+	stroke: #f8dca1ff !important;
+}
+
+.quill :global(.ql-link.ql-active svg line),
+.quill :global(.ql-link.ql-active svg path) {
+	stroke: #f8dca1ff !important;
+}
+.quill :global(.ql-strike.ql-active svg line) {
+	stroke: #f8dca1ff !important;
+}
+.quill :global(.ql-strike.ql-active svg path) {
+	fill: #f8dca1ff !important;
+}
+
+.quill :global(.ql-picker-label.ql-active::before) {
+	fill: #f8dca1ff !important;
+	stroke: #f8dca1ff !important;
+	color: #f8dca1ff !important;
+}

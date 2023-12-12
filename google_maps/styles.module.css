@@ -1,0 +1,11 @@
+/** @format */
+
+.list_item {
+	background-color: rgba(0, 0, 0, 0);
+	transition: background-color 0.2s ease-in-out;
+	border-radius: 5px;
+}
+
+.list_item:hover {
+	background-color: rgba(0, 0, 0, 0.3);
+}

@@ -1,0 +1,83 @@
+/** @format */
+
+.main_div {
+	width: 100vw;
+	height: calc(100vh - 70px);
+	composes: row_center from "@styl/base_flexbox.module.css";
+	margin-top: 70px;
+}
+
+.link_box {
+	composes: row from "@styl/base_flexbox.module.css";
+	width: 100%;
+	flex: 1;
+}
+.paper_wrapper {
+	composes: column from "@styl/base_flexbox.module.css";
+	position: relative;
+	width: 550px;
+	height: 90%;
+	margin: 20px;
+	overflow: hidden;
+	background-color: var(--background-paper);
+	border-radius: 5px;
+	overflow: hidden;
+}
+.left_split {
+	composes: row_center from "@styl/base_flexbox.module.css";
+	height: 100%;
+	width: 85px;
+	font-size: 22px;
+	font-weight: bold;
+	color: var(--primary-main);
+}
+.right_split {
+	composes: row_center from "@styl/base_flexbox.module.css";
+	height: 75%;
+	width: calc(100% - 85px);
+}
+.pic_square {
+	composes: row_center from "@styl/base_flexbox.module.css";
+	position: relative;
+	height: 110px;
+	width: 110px;
+	padding: 5px;
+}
+.content_box {
+	composes: row_center from "@styl/base_flexbox.module.css";
+	position: relative;
+	height: 100%;
+	max-width: 100%;
+	flex: 1;
+}
+.edit_box {
+	composes: row_center from "@styl/base_flexbox.module.css";
+	height: 100%;
+	width: 100px;
+}
+.empty_row {
+	composes: row_center from "@styl/base_flexbox.module.css";
+	width: 100%;
+	flex: 1;
+}
+.pic_edit_modal {
+	composes: column from "@styl/base_flexbox.module.css";
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	z-index: 40;
+	background-color: var(--background-paper);
+}
+.pic_edit_wrap {
+	composes: column from "@styl/base_flexbox.module.css";
+	width: 100%;
+	max-width: 100%;
+	max-height: calc(100% - 75px);
+	flex: 1;
+}
+.pic_edit_save_cancel {
+	position: relative;
+	composes: row_center from "@styl/base_flexbox.module.css";
+	width: 100%;
+	height: 75px;
+}

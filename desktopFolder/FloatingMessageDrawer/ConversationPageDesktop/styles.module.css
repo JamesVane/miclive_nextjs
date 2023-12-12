@@ -1,0 +1,118 @@
+/** @format */
+.main_div {
+	width: 100%;
+	height: 100%;
+	composes: column from "@styl/base_flexbox.module.css";
+	position: relative;
+}
+.paper_header {
+	position: relative;
+	z-index: 1000;
+	width: 100%;
+	height: 75px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	font-size: 25px;
+}
+.messages_list_div {
+	width: 100%;
+	max-height: calc(100% - 150px);
+	composes: column from "@styl/base_flexbox.module.css";
+	flex-direction: column-reverse;
+	overflow-y: auto;
+	overflow-x: hidden;
+	padding-bottom: 10px;
+}
+.pic_div {
+	height: 60px;
+	width: 60px;
+	margin-right: 5px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+}
+.into_div {
+	font-size: 18px;
+	width: 100%;
+	height: 150px;
+	min-height: 150px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+}
+.intro_picture {
+	height: 60px;
+	width: 60px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+}
+.divider_horiz {
+	width: 100%;
+	height: 2px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+}
+.single_message_wrapper {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.single_message {
+	position: relative;
+	padding: 5px;
+	padding-left: 15px;
+	padding-right: 15px;
+	max-width: 65%;
+	text-align: left;
+	color: black;
+	margin-bottom: 2px;
+	margin-right: 7.5px;
+	margin-left: 7.5px;
+	font-size: 15px;
+}
+.message_group {
+	margin-top: 7.5px;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+.message_time {
+	height: 20px;
+	width: 100%;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	color: var(--secondary-main);
+	font-size: 13px;
+}
+.bottom_paper {
+	width: 100%;
+	height: 75px;
+	composes: row from "@styl/base_flexbox.module.css";
+	z-index: 1000;
+	position: absolute;
+	bottom: 0;
+}
+.text_field_div {
+	height: 100%;
+	width: calc(100% - 75px);
+	composes: row_center from "@styl/base_flexbox.module.css";
+}
+.send_button_div {
+	height: 75px;
+	width: 75px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+}
+.reaction_popup {
+	height: 25px;
+	width: 90px;
+	border: 1px solid white;
+	opacity: 0.9;
+	border-radius: 5px;
+	composes: row_around from "@styl/base_flexbox.module.css";
+	margin-right: 7.5px;
+	margin-left: 7.5px;
+}
+.no_messages_text {
+	width: 100%;
+	height: 50vh;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	color: var(--secondary-main);
+	font-size: 25px;
+	text-align: center;
+}

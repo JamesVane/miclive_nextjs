@@ -1,0 +1,46 @@
+/** @format */
+
+.main_div {
+	width: 100vw;
+	height: 100vh;
+	composes: column_center from "@styl/base_flexbox.module.css";
+}
+.paper_container {
+	width: 40%;
+	height: 80%;
+	min-height: 590px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	position: relative;
+}
+.header_div {
+	width: 100%;
+	height: 75px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	font-size: 25px;
+	position: relative;
+}
+.body_div {
+	width: 100%;
+	composes: column from "@styl/base_flexbox.module.css";
+}
+.error_styles {
+	color: #ff0000ff;
+	font-size: 13px;
+	margin-top: -20px;
+}
+.bottom_buttons {
+	margin-top: 10px;
+	margin-bottom: 20px;
+	width: 90%;
+	composes: row_between from "@styl/base_flexbox.module.css";
+}
+.bottom_div {
+	width: 100%;
+	position: absolute;
+	composes: column from "@styl/base_flexbox.module.css";
+	bottom: 0;
+	left: 0;
+	right: 0;
+}

@@ -1,0 +1,182 @@
+/** @format */
+"use client";
+
+import { useSelector } from "react-redux";
+import { useState } from "react";
+import { RootState } from "@/store/rootStore";
+import CreateBaseEvent from "./CreateBaseEvent";
+import CreateEventDesc from "./CreateEventDesc";
+import CreateSpecificEvent from "./CreateSpecificEvent";
+import InviteDjPage from "./InviteDjPage";
+import { useDispatch } from "react-redux";
+import { createBaseAndSpecificEventContainer } from "@/api_functions/postCreateBaseAndSpecificEvent/postCreateBaseAndSpecificEventContainer";
+import { postUploadS3Image } from "@/api_functions/postUploadS3Image";
+import { switchPage, setToDefault } from "@/store/promoterCreateEventSlice";
+import CreateBaseEventDescription from "./CreateBaseEventDescription";
+import { useRouter } from "next/navigation";
+import { Auth } from "aws-amplify";
+import { getPromoterEventListV2pt0 } from "@/api_functions/getPromoterEventListV2pt0";
+import { setPromoterEventListV2pt0Slice } from "@/store/promoterEventListV2pt0Slice";
+import CreateEventBanner from "./CreateEventBanner";
+import HomeBarV2 from "@desk/HomeBarV2";
+import { Tabs, Tab, Button } from "@mui/material";
+import { CloseRounded } from "@mui/icons-material";
+
+function PromoterCreateEventContainer() {
+	const router = useRouter();
+	const dispatch = useDispatch();
+	const EventData = useSelector(
+		(state: RootState) => state.promoterCreateEvent
+	);
+	const [errorMessage, setErrorMessage] = useState("");
+
+	const handleUpdateDjKeyState = ({
+		dateKey,
+		eventKey,
+	}: {
+		dateKey: string;
+		eventKey: string;
+	}) => {
+		router.push(location.pathname);
+	};
+
+	/* const handleUpdateDjKeyState = ({
+		dateKey, 
+		eventKey,
+	}: {
+		dateKey: string;https://nextjs.org/docs/getting-started
+		eventKey: string;
+	}) => {
+		router.push(location.pathname, {
+			state: {
+				...location.state,
+				inviteDateKey: dateKey,
+				inviteEventKey: eventKey,
+			},
+			replace: true,
+		});
+	}; */
+
+	function handleExit() {
+		router.push("/promoter");
+	}
+
+	async function handleCreateEvent() {
+		try {
+			const user = await Auth.currentAuthenticatedUser();
+			const roleId = user.attributes["custom:RoleId"];
+
+			const stringPromoterId =
+				typeof roleId === "number" ? roleId.toString() : roleId;
+			createBaseAndSpecificEventContainer(stringPromoterId, EventData).then(
+				async (res) => {
+					if (res.baseEventId) {
+						handleUpdateDjKeyState({
+							dateKey: res.DjDateInviteUrlKey,
+							eventKey: res.DjEventInviteUrlKey,
+						});
+						const [threeBanner, fourBanner] = await Promise.all([
+							postUploadS3Image(
+								EventData.baseEvent.banner3X10,
+								`event_banner_3X1/banner_${res.baseEventId}`
+							),
+							postUploadS3Image(
+								EventData.baseEvent.banner4X10,
+								`event_banner_4X1/banner_${res.baseEventId}`
+							),
+						]);
+						postUploadS3Image(
+							EventData.baseEvent.imageFile,
+							`event_pictures/event_${res.baseEventId}.jpg`
+						).then(async () => {
+							try {
+								const user = await Auth.currentAuthenticatedUser();
+								const roleId = user.attributes["custom:RoleId"];
+
+								getPromoterEventListV2pt0(roleId).then((res) => {
+									if (res) {
+										dispatch(setPromoterEventListV2pt0Slice(res));
+									}
+								});
+							} catch (err) {
+								console.log("Error fetching user profile or perform er data");
+							}
+							dispatch(setToDefault());
+							dispatch(switchPage({ page: "DjInvite" }));
+						});
+					} else if (res.message === "An event already exists on this date.") {
+						dispatch(switchPage({ page: "specificEvent" }));
+						setErrorMessage("An event already exists on this date");
+					}
+				}
+			);
+		} catch (err) {
+			console.log(err);
+		}
+	}
+
+	return (
+		<>
+			<HomeBarV2 noMessage={true} hasProfile={false}>
+				<Button
+					sx={{ position: "absolute", left: "230px" }}
+					size="large"
+					variant="outlined"
+					startIcon={<CloseRounded />}
+					color="error"
+					onClick={handleExit}>
+					exit
+				</Button>
+				<div
+					style={{
+						height: "100%",
+						display: "flex",
+						flexDirection: "row",
+						alignItems: "flex-end",
+					}}>
+					<Tabs
+						value={"create"}
+						onChange={() => {}}
+						textColor="primary"
+						indicatorColor="primary">
+						<Tab
+							value="create"
+							label="Create Event"
+							sx={{ fontSize: "25px" }}
+						/>
+					</Tabs>
+				</div>
+			</HomeBarV2>
+			<div
+				style={{
+					marginTop: "70px",
+					width: "100vw",
+					height: "calc(100vh - 70px)",
+					display: "flex",
+					flexDirection: "row",
+					alignItems: "center",
+					justifyContent: "center",
+					position: "relative",
+				}}>
+				{EventData.page === "baseEvent" ? (
+					<CreateBaseEvent />
+				) : EventData.page === "Banner" ? (
+					<CreateEventBanner />
+				) : EventData.page === "baseEventDescription" ? (
+					<CreateBaseEventDescription />
+				) : EventData.page === "specificEvent" ? (
+					<CreateSpecificEvent
+						setDateErrorMessage={setErrorMessage}
+						dateErrorMessage={errorMessage}
+					/>
+				) : EventData.page === "specificEventDesc" ? (
+					<CreateEventDesc handleCreateEvent={handleCreateEvent} />
+				) : EventData.page === "DjInvite" ? (
+					<InviteDjPage />
+				) : null}
+			</div>
+		</>
+	);
+}
+
+export default PromoterCreateEventContainer;

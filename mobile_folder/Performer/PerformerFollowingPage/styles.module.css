@@ -1,0 +1,6 @@
+/** @format */
+
+.main_div {
+	width: 100%;
+	composes: column from "@styl/base_flexbox.module.css";
+}

@@ -1,0 +1,46 @@
+/** @format */
+
+.picture_box {
+	composes: row_between from "@styl/base_flexbox.module.css";
+	width: 100%;
+	height: 110px;
+}
+.pic_square {
+	composes: row_center from "@styl/base_flexbox.module.css";
+	position: relative;
+	height: 110px;
+	width: 110px;
+	padding: 5px;
+}
+.name_and_tagline {
+	composes: column from "@styl/base_flexbox.module.css";
+	height: 100%;
+	width: 75%;
+}
+.name_tagline_row {
+	composes: row from "@styl/base_flexbox.module.css";
+	width: 100%;
+	height: 50%;
+}
+.editing_top_modal {
+	composes: row from "@styl/base_flexbox.module.css";
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.25);
+	position: relative;
+}
+.name_tag_confirm {
+	composes: row_around from "@styl/base_flexbox.module.css";
+	width: 125px;
+	height: 100%;
+}
+.name_tag_input {
+	composes: column_center from "@styl/base_flexbox.module.css";
+	height: 100%;
+	flex: 1;
+}
+.pic_input {
+	composes: row from "@styl/base_flexbox.module.css";
+	height: 100%;
+	flex: 1;
+}

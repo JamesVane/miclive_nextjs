@@ -1,0 +1,44 @@
+/** @format */
+
+.main_wrapper {
+	composes: column from "@styl/base_flexbox.module.css";
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: #0f0f0fff;
+	z-index: 26;
+}
+.dashed_box {
+	composes: column_center from "@styl/base_flexbox.module.css";
+	padding: 20px;
+	width: calc(100% - 40px);
+	flex: 1;
+	margin-top: 20px;
+	position: relative;
+}
+.buttons_box {
+	width: 100%;
+	composes: row_center from "@styl/base_flexbox.module.css";
+	height: 75px;
+	position: relative;
+}
+.drag_text {
+	text-align: center;
+	color: var(--secondary-main);
+}
+.selected_text {
+	text-align: center;
+	margin: 20px;
+	color: var(--primary-main);
+	font-weight: bold;
+	font-size: 20px;
+}
+.selected_text_span {
+	color: var(--secondary-main);
+	font-weight: lighter;
+}
+.success_display {
+	composes: column_center from "@styl/base_flexbox.module.css";
+	width: 100%;
+	height: 100%;
+}

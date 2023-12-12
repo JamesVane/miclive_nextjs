@@ -1,0 +1,138 @@
+/** @format */
+.main_div {
+	width: 100vw;
+	position: relative;
+	composes: column from "@styl/base_flexbox.module.css";
+}
+.header_paper {
+	top: 0;
+	left: 0;
+	right: 0;
+	position: fixed;
+	width: 100%;
+	z-index: 200;
+	font-size: 20px;
+}
+.back_name_div {
+	width: 100%;
+	height: 40px;
+	composes: row_center from "@styl/base_flexbox.module.css";
+	position: relative;
+}
+.event_name_div {
+	height: 100%;
+	composes: row_center from "@styl/base_flexbox.module.css";
+	width: 52%;
+	overflow: hidden;
+	margin-left: -30px;
+}
+.elipses_test {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.timer_div {
+	margin-right: 5px;
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	width: 100px;
+	height: 40px;
+	composes: row_center from "@styl/base_flexbox.module.css";
+}
+.timer_decoration {
+	width: 100%;
+	height: 70%;
+	border: 1px solid var(--secondary-main);
+	border-radius: 15px;
+	composes: row_center from "@styl/base_flexbox.module.css";
+	color: var(--primary-main);
+}
+.bottom_bumper {
+	width: 100%;
+	height: 130px;
+}
+.bottom_bumper_not_cue {
+	width: 100%;
+	height: 55px;
+}
+.bottom_paper_cue {
+	composes: column from "@styl/base_flexbox.module.css";
+	width: 100%;
+	height: 100px;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+.bottom_paper {
+	composes: column from "@styl/base_flexbox.module.css";
+	width: 100%;
+	height: 50px;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+.bottom_paper_buttons {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	width: 100%;
+	height: 42.5px;
+	composes: row_around from "@styl/base_flexbox.module.css";
+}
+.bottom_paper_nav {
+	width: 100%;
+	height: 50px;
+}
+.top_bumper_roster {
+	width: 100%;
+	height: 95px;
+}
+.top_bumper {
+	width: 100%;
+	height: 45px;
+}
+.message_container {
+	width: 100%;
+	height: 75px;
+	position: fixed;
+	z-index: 1000;
+	bottom: 100px;
+	composes: row from "@styl/base_flexbox.module.css";
+}
+.message_container_small {
+	width: 100%;
+	height: 75px;
+	position: fixed;
+	z-index: 1000;
+	bottom: 50px;
+	composes: row from "@styl/base_flexbox.module.css";
+}
+.qr_div {
+	width: 250px;
+	height: 250px;
+	margin-top: 45px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	border-radius: 10px;
+	overflow: hidden;
+}
+.key_row {
+	margin-top: 25px;
+	width: 250px;
+	height: 60px;
+	background-color: var(--background-paper);
+	composes: row_center from "@styl/base_flexbox.module.css";
+	overflow: hidden;
+	border-radius: 10px;
+}
+.key_title {
+	color: var(--secondary-main);
+	font-size: 20px;
+	margin-right: 5px;
+}
+.checkin_key {
+	color: var(--primary-main);
+	font-weight: 500;
+	font-size: 30px;
+}

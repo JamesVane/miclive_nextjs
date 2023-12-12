@@ -1,0 +1,143 @@
+/** @format */
+
+.bad_url_main {
+	width: 100vw;
+	height: 100vh;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	color: var(--secondary-main);
+	font-size: 40px;
+}
+.wrong_page {
+	width: 100vw;
+	height: 100vh;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	color: var(--secondary-main);
+	font-size: 30px;
+	text-align: center;
+	margin-top: -25px;
+}
+.row_helper {
+	width: 100%;
+	composes: row_center from "@styl/base_flexbox.module.css";
+}
+.primary_helper {
+	color: var(--primary-main);
+	margin-right: 7px;
+	margin-left: 7px;
+	font-weight: 400;
+}
+.divider_div {
+	height: 2px;
+	width: 380px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+}
+.column_helper {
+	composes: column_center from "@styl/base_flexbox.module.css";
+}
+.smaller_text {
+	font-size: 22.5px;
+	line-height: 1;
+}
+.main_div {
+	width: 100vw;
+	height: 100vh;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	color: var(--secondary-main);
+	font-size: 35px;
+	font-weight: 300;
+}
+.mic_live {
+	color: var(--primary-main);
+	font-size: 60px;
+	margin-top: -100px;
+}
+.accept_main {
+	width: 100vw;
+	height: 100vh;
+	composes: column_center from "@styl/base_flexbox.module.css";
+}
+.accept_date_event_paper {
+	width: 90%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	position: relative;
+	overflow: hidden;
+}
+.accept_date_event_top {
+	width: 100%;
+	height: 65px;
+	composes: row_center from "@styl/base_flexbox.module.css";
+	font-size: 25px;
+}
+.bad_key_accept {
+	width: 100%;
+	height: 100px;
+	composes: row_center from "@styl/base_flexbox.module.css";
+	color: var(--secondary-main);
+	font-size: 25px;
+	font-weight: bold;
+}
+.date_event_accept_dj_pic {
+	width: 65px;
+	height: 65px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	margin-right: 5px;
+}
+.divider_div_hunned {
+	width: 100%;
+	height: 2px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+}
+.accept_date_event_bottom {
+	width: 100%;
+	composes: row_center from "@styl/base_flexbox.module.css";
+	font-size: 25px;
+	color: var(--secondary-main);
+}
+.date_event_decoration {
+	composes: column from "@styl/base_flexbox.module.css";
+	background-color: rgba(0, 0, 0, 0.2);
+	padding: 5px;
+	border-radius: 5px;
+}
+.date_event_row {
+	width: 100%;
+	height: 75px;
+	composes: row from "@styl/base_flexbox.module.css";
+	font-size: 30px;
+}
+.date_event_pic {
+	height: 75px;
+	width: 75px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	margin-right: 5px;
+}
+.date_event_pic_decoration {
+	width: 90%;
+	height: 90%;
+	border-radius: 5px;
+	overflow: hidden;
+	composes: column_center from "@styl/base_flexbox.module.css";
+}
+.accept_date_Date_time_row {
+	width: 100%;
+	height: 40px;
+	composes: row from "@styl/base_flexbox.module.css";
+	color: var(--primary-main);
+}
+.date_invite_overlaping_or_accept {
+	width: 100%;
+	font-size: 20px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	margin-top: 5px;
+	font-weight: bold;
+}
+.accept_date_buttons {
+	width: 100%;
+	height: 75px;
+	composes: row_center from "@styl/base_flexbox.module.css";
+}

@@ -1,0 +1,15 @@
+{
+  "jsmicdev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-jsmusicappdev-jsmicdev-153737-authRole",
+      "UnauthRoleArn": "arn:aws:iam::037762818695:role/amplify-jsmusicappdev-jsmicdev-153737-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::037762818695:role/amplify-jsmusicappdev-jsmicdev-153737-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-jsmusicappdev-jsmicdev-153737-deployment",
+      "UnauthRoleName": "amplify-jsmusicappdev-jsmicdev-153737-unauthRole",
+      "StackName": "amplify-jsmusicappdev-jsmicdev-153737",
+      "StackId": "arn:aws:cloudformation:us-east-2:037762818695:stack/amplify-jsmusicappdev-jsmicdev-153737/0e5119d0-c75f-11ed-9992-06ae1b01ac8c",
+      "AmplifyAppId": "d2rexcc2qeon20"
+    }
+  }
+}

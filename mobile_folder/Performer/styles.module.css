@@ -1,0 +1,30 @@
+/** @format */
+
+.bottom_div {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 200;
+	height: 70px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-evenly;
+}
+.nav_paper {
+	opacity: 0.9;
+	width: 270px;
+	height: 55px;
+	border-radius: 10px;
+	overflow: hidden;
+}
+.fade_div {
+	z-index: 190;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 100px;
+	background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), #0f0f0fff);
+}

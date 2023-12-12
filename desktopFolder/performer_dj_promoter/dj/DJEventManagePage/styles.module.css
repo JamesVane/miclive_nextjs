@@ -1,0 +1,198 @@
+/** @format */
+.main_div {
+	composes: row_center from "@styl/base_flexbox.module.css";
+	margin-top: 7.5vh;
+	width: 100vw;
+	height: 92.5vh;
+}
+.splash_container {
+	width: 100%;
+	height: 100vh;
+	composes: column_center from "@styl/base_flexbox.module.css";
+}
+.center_paper {
+	height: 95%;
+	flex: 1;
+	margin: 10px;
+	overflow: hidden;
+	position: relative;
+	background-color: black;
+	border-radius: 5px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+}
+.side_paper {
+	height: 95%;
+	width: 340px;
+	composes: column from "@styl/base_flexbox.module.css";
+	margin: 10px;
+	overflow: hidden;
+	background-color: black;
+	border-radius: 5px;
+}
+.buttons_div {
+	composes: row from "@styl/base_flexbox.module.css";
+	width: 100%;
+	height: 7%;
+	border-bottom: 2px solid var(--background-default);
+}
+.cue_wrapper {
+	composes: column from "@styl/base_flexbox.module.css";
+	flex: 1;
+	width: 100%;
+	overflow: auto;
+}
+.right_side_top {
+	composes: row_center from "@styl/base_flexbox.module.css";
+	width: 100%;
+	height: 30%;
+}
+.right_side_bottom {
+	composes: column_center from "@styl/base_flexbox.module.css";
+	width: 100%;
+	height: 70%;
+	max-height: 70%;
+	margin-top: -5px;
+}
+.event_title {
+	composes: row_center from "@styl/base_flexbox.module.css";
+	width: 100%;
+	height: 100%;
+	font-size: 20px;
+}
+.event_name_pic_div {
+	width: 100%;
+	height: 90px;
+	composes: row from "@styl/base_flexbox.module.css";
+}
+.event_pic_div {
+	height: 90px;
+	width: 90px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+}
+.event_pic_decoration {
+	width: 90%;
+	height: 90%;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	border-radius: 5px;
+	overflow: hidden;
+}
+.event_name_tagline {
+	height: 100%;
+	composes: column from "@styl/base_flexbox.module.css";
+	width: calc(100% - 90px);
+}
+.event_name {
+	width: 100%;
+	height: 40%;
+	composes: row from "@styl/base_flexbox.module.css";
+	font-size: 22px;
+}
+.event_tagline {
+	width: 100%;
+	color: var(--secondary-main);
+	composes: row from "@styl/base_flexbox.module.css";
+}
+.time_date_div {
+	width: 100%;
+	height: 40px;
+	color: var(--primary-main);
+	composes: row_center from "@styl/base_flexbox.module.css";
+	font-size: 23px;
+}
+.time_remaining_container {
+	width: 100%;
+	height: 125px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+}
+.time_remaining_decoraiton {
+	width: 95%;
+	composes: column from "@styl/base_flexbox.module.css";
+	height: 90%;
+	background-color: var(--background-paper);
+	overflow: hidden;
+	border-radius: 10px;
+}
+.time_title_div {
+	width: 100%;
+	height: 35px;
+	composes: row_center from "@styl/base_flexbox.module.css";
+	font-size: 18px;
+}
+.time_remaining_clock {
+	width: 100%;
+	height: calc(100% - 37px);
+	composes: row_center from "@styl/base_flexbox.module.css";
+	font-size: 45px;
+	margin-top: -5px;
+}
+.current_performer_title {
+	width: 100%;
+	height: 55px;
+	composes: row_center from "@styl/base_flexbox.module.css";
+	font-size: 25px;
+	color: var(--secondary-main);
+	font-weight: bold;
+}
+.current_performer_div {
+	width: 100%;
+	height: 95px;
+	composes: row from "@styl/base_flexbox.module.css";
+}
+.current_performer_pic {
+	height: 95px;
+	width: 95px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+}
+.current_performer_right {
+	height: 100%;
+	width: calc(100% - 95px);
+	composes: column from "@styl/base_flexbox.module.css";
+}
+.current_performer_name {
+	width: 100%;
+	composes: row from "@styl/base_flexbox.module.css";
+	height: 45%;
+	font-size: 22px;
+}
+.current_performer_tagline {
+	width: 100%;
+	composes: row from "@styl/base_flexbox.module.css";
+	color: var(--secondary-main);
+}
+.reco_time_div {
+	margin-top: 10px;
+	width: 100%;
+	height: 110px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+}
+.reco_time_decor {
+	width: 95%;
+	height: 90%;
+	background-color: var(--background-paper);
+	overflow: hidden;
+	composes: column from "@styl/base_flexbox.module.css";
+	border-radius: 10px;
+}
+.recomended_time_text {
+	width: 100%;
+	height: 35px;
+	font-size: 18px;
+	composes: row_center from "@styl/base_flexbox.module.css";
+}
+.reco_time_clock {
+	width: 100%;
+	height: calc(100% - 40px);
+	font-size: 40px;
+	composes: row_center from "@styl/base_flexbox.module.css";
+}
+.queue_pos_deco {
+	margin-left: 10px;
+	height: 40px;
+	width: 40px;
+	border: 2px solid var(--primary-main);
+	border-radius: 10px;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	font-size: 21px;
+	color: var(--primary-main);
+	background-color: rgba(0, 0, 0, 0.4);
+}

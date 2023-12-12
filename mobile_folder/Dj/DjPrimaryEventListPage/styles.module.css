@@ -1,0 +1,16 @@
+/** @format */
+
+.main_div {
+	width: 100%;
+	composes: column from "@styl/base_flexbox.module.css";
+}
+.no_events_div {
+	width: 100vw;
+	height: 80vh;
+	composes: column_center from "@styl/base_flexbox.module.css";
+}
+.text_div {
+	font-size: 25px;
+	font-weight: 500;
+	color: var(--secondary-main);
+}

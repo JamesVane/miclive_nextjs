@@ -1,0 +1,267 @@
+/** @format */
+
+.paper_header {
+	width: 100%;
+	height: 40px;
+	display: flex;
+	position: fixed;
+	top: 0;
+	z-index: 200;
+}
+.paper_header_helper {
+	width: 100%;
+	height: 100%;
+	composes: row_center from "@styl/base_flexbox.module.css";
+	position: relative;
+	font-weight: bold;
+	font-size: 20px;
+	color: var(--secondary-main);
+}
+.main_div {
+	width: 100%;
+	height: 100vh;
+	padding-top: 40px;
+	composes: column from "@styl/base_flexbox.module.css";
+}
+.crumbs_wrapper {
+	width: 100%;
+	height: 55px;
+	composes: row_center from "@styl/base_flexbox.module.css";
+}
+.base_event_paper {
+	position: relative;
+	composes: column from "@styl/base_flexbox.module.css";
+	width: 100%;
+	padding-bottom: 50px;
+}
+.invite_dj_section {
+	width: 100%;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	color: var(--secondary-main);
+	font-size: 25px;
+	height: 150px;
+	width: 350px;
+	background-color: rgba(0, 0, 0, 0.1);
+	margin: 10px;
+}
+.invite_row {
+	width: 100%;
+	composes: row_center from "@styl/base_flexbox.module.css";
+	margin-bottom: 10px;
+}
+.primary_text {
+	color: var(--primary-main);
+	margin-right: 6px;
+	margin-left: 6px;
+	font-weight: 400;
+}
+.dj_invite_warning {
+	width: 100%;
+	padding-left: 20px;
+	padding-right: 20px;
+	font-size: 20px;
+	text-align: center;
+}
+.start_end_div {
+	margin-bottom: 0px;
+	margin-top: 20px;
+	width: 90%;
+	position: relative;
+	composes: row_between from "@styl/base_flexbox.module.css";
+}
+.error_range {
+	color: red;
+	font-size: 12px;
+	position: absolute;
+	right: 5px;
+	bottom: -19px;
+}
+.error_generic {
+	position: absolute;
+	font-size: 12px;
+	color: red;
+}
+.bottom_paper_nav {
+	width: 100%;
+	height: 40px;
+	position: fixed;
+	bottom: 0;
+	display: flex;
+	z-index: 200;
+}
+.bottom_paper_div_helper {
+	width: 100%;
+	height: 100%;
+	composes: row_center from "@styl/base_flexbox.module.css";
+	position: relative;
+}
+.quill :global(.ql-container.ql-snow) {
+	border-radius: 0px 0px 4px 4px;
+	border-color: #f8dca1ff;
+	border-width: 3px;
+	border-top: 1px #f8dca1ff solid !important;
+	background-color: var(--background-paper);
+}
+.quill :global(.ql-toolbar.ql-snow) {
+	border-color: #9ca1a3ff;
+	border-right-width: 1px;
+	border-left-width: 1px;
+	background-color: var(--background-paper);
+}
+.quill :global(.ql-stroke) {
+	stroke: #9ca1a3ff !important;
+}
+.quill :global(.ql-picker-label) {
+	color: #9ca1a3ff !important;
+}
+.quill :global(.ql-fill) {
+	color: #9ca1a3ff !important;
+
+	fill: #9ca1a3ff !important;
+}
+
+.quill :global(.ql-picker-label:hover svg polygon.ql-stroke) {
+	stroke: #f8dca1ff !important;
+}
+
+.quill :global(.ql-picker-label:hover svg path),
+.quill :global(.ql-picker-label:hover svg rect),
+.quill :global(.ql-picker-label:hover svg polygon) {
+	fill: #f8dca1ff !important;
+	color: #f8dca1ff !important;
+}
+
+.quill :global(.ql-picker-label:hover svg line),
+.quill :global(.ql-picker-label:hover svg polyline) {
+	stroke: #f8dca1ff !important;
+}
+
+.quill :global(.ql-image:hover svg polyline),
+.quill :global(.ql-image:hover svg circle) {
+	fill: #f8dca1ff !important;
+}
+
+.quill :global(.ql-image:hover svg rect) {
+	stroke: #f8dca1ff !important;
+}
+
+.quill :global(.ql-underline:hover svg rect),
+.quill :global(.ql-underline:hover svg path) {
+	stroke: #f8dca1ff !important;
+}
+
+.quill :global(.ql-list:hover svg :nth-child(5)) {
+	fill: #f8dca1ff !important;
+}
+
+.quill :global(.ql-list:hover svg line) {
+	fill: #f8dca1ff !important;
+	stroke: #f8dca1ff !important;
+}
+.quill :global(.ql-list:hover svg :nth-child(7)),
+.quill :global(.ql-list:hover svg :nth-child(6)) {
+	stroke: #f8dca1ff !important;
+}
+.quill :global(.ql-italic:hover svg line) {
+	stroke: #f8dca1ff !important;
+}
+
+.quill :global(.ql-blockquote:hover svg path),
+.quill :global(.ql-blockquote:hover svg rect) {
+	stroke: #f8dca1ff !important;
+	fill: #f8dca1ff !important;
+}
+
+.quill :global(.ql-bold:hover svg path) {
+	stroke: #f8dca1ff !important;
+}
+
+.quill :global(.ql-link:hover svg line),
+.quill :global(.ql-link:hover svg path) {
+	stroke: #f8dca1ff !important;
+}
+.quill :global(.ql-strike:hover svg line) {
+	stroke: #f8dca1ff !important;
+}
+.quill :global(.ql-strike:hover svg path) {
+	fill: #f8dca1ff !important;
+}
+
+.quill :global(.ql-picker-label:hover::before) {
+	fill: #f8dca1ff !important;
+	stroke: #f8dca1ff !important;
+	color: #f8dca1ff !important;
+}
+
+.quill :global(.ql-picker-label.ql-active svg polygon.ql-stroke) {
+	stroke: #f8dca1ff !important;
+}
+
+.quill :global(.ql-picker-label.ql-active svg path),
+.quill :global(.ql-picker-label.ql-active svg rect),
+.quill :global(.ql-picker-label.ql-active svg polygon) {
+	fill: #f8dca1ff !important;
+	color: #f8dca1ff !important;
+}
+
+.quill :global(.ql-picker-label.ql-active svg line),
+.quill :global(.ql-picker-label.ql-active svg polyline) {
+	stroke: #f8dca1ff !important;
+}
+
+.quill :global(.ql-image.ql-active svg polyline),
+.quill :global(.ql-image.ql-active svg circle) {
+	fill: #f8dca1ff !important;
+}
+
+.quill :global(.ql-image.ql-active svg rect) {
+	stroke: #f8dca1ff !important;
+}
+
+.quill :global(.ql-underline.ql-active svg rect),
+.quill :global(.ql-underline.ql-active svg path) {
+	stroke: #f8dca1ff !important;
+}
+
+.quill :global(.ql-list.ql-active svg :nth-child(5)) {
+	fill: #f8dca1ff !important;
+}
+
+.quill :global(.ql-list.ql-active svg line) {
+	fill: #f8dca1ff !important;
+	stroke: #f8dca1ff !important;
+}
+.quill :global(.ql-list.ql-active svg :nth-child(7)),
+.quill :global(.ql-list.ql-active svg :nth-child(6)) {
+	stroke: #f8dca1ff !important;
+}
+.quill :global(.ql-italic.ql-active svg line) {
+	stroke: #f8dca1ff !important;
+}
+
+.quill :global(.ql-blockquote.ql-active svg path),
+.quill :global(.ql-blockquote.ql-active svg rect) {
+	stroke: #f8dca1ff !important;
+	fill: #f8dca1ff !important;
+}
+
+.quill :global(.ql-bold.ql-active svg path) {
+	stroke: #f8dca1ff !important;
+}
+
+.quill :global(.ql-link.ql-active svg line),
+.quill :global(.ql-link.ql-active svg path) {
+	stroke: #f8dca1ff !important;
+}
+.quill :global(.ql-strike.ql-active svg line) {
+	stroke: #f8dca1ff !important;
+}
+.quill :global(.ql-strike.ql-active svg path) {
+	fill: #f8dca1ff !important;
+}
+
+.quill :global(.ql-picker-label.ql-active::before) {
+	fill: #f8dca1ff !important;
+	stroke: #f8dca1ff !important;
+	color: #f8dca1ff !important;
+}
