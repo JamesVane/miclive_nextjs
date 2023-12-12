@@ -28,6 +28,7 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en">
+			<title>foofoo</title>
 			<LocalizationProviderHelper>
 				<Provider store={store}>
 					<ThemeProvider theme={darkTheme}>

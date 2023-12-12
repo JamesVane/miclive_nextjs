@@ -14,7 +14,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 				name="title"
 				content="Next.js 13 - Layouts and Pages Explained in 20 mins or so"
 			/>
-			<title>foofoo</title>
 			<main>{children}</main>
 		</>
 	);
