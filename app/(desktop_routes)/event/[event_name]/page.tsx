@@ -49,21 +49,7 @@ export const metadata: Metadata = {
 };
 
 function page({ params }: { params: { event_name: string } }) {
-	return (
-		<>
-			{/* <title>foofoo</title>
-			<meta
-				name="title"
-				content="Next.js 13 - Layouts and Pages Explained in 20 mins or so"
-			/>
-			<meta
-				property="og:description"
-				content="And a social description for our cool page"
-			/>
-			<meta property="og:title" content="Social Title for Cool Page" />{" "} */}
-			<NewEventPage eventNameFromParams={params.event_name} />
-		</>
-	);
+	return <NewEventPage eventNameFromParams={params.event_name} />;
 }
 
 export default page;
