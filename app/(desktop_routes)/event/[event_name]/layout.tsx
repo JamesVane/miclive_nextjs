@@ -16,20 +16,18 @@ import Head from "next/head";
 export default function Layout({ children }: { children: React.ReactNode }) {
 	return (
 		<>
-			<html lang="en">
-				<title>foofoo</title>
-				<meta
-					name="title"
-					content="Next.js 13 - Layouts and Pages Explained in 20 mins or so"
-				/>
-				<meta
-					property="og:description"
-					content="And a social description for our cool page"
-				/>
-				<meta property="og:title" content="Social Title for Cool Page" />
+			<title>foofoo</title>
+			<meta
+				name="title"
+				content="Next.js 13 - Layouts and Pages Explained in 20 mins or so"
+			/>
+			<meta
+				property="og:description"
+				content="And a social description for our cool page"
+			/>
+			<meta property="og:title" content="Social Title for Cool Page" />
 
-				<main>{children}</main>
-			</html>
+			<main>{children}</main>
 		</>
 	);
 }
