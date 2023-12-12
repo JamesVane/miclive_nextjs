@@ -37,7 +37,8 @@ function SignInPageContainer({
 	const dispatch = useDispatch();
 	const router = useRouter();
 
-	const fromUrl = localStorage.getItem("fromUrl");
+	// const fromUrl = localStorage.getItem("fromUrl");
+	const fromUrl = null;
 
 	const [signInError, setSignInError] = React.useState("");
 	const [isSubmitting, setIsSubmitting] = React.useState(false);

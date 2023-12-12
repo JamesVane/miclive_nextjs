@@ -8,11 +8,13 @@ import NewEventDatePaper from "./NewEventDatePaper";
 interface NewEventPageDateListHelperProps {
 	upcomingArray: DateType[];
 	previousArray: DateType[];
+	eventName: string;
 }
 
 function NewEventPageDateListHelper({
 	upcomingArray,
 	previousArray,
+	eventName,
 }: NewEventPageDateListHelperProps) {
 	return (
 		<>
@@ -28,7 +30,11 @@ function NewEventPageDateListHelper({
 
 					{upcomingArray.map((date) => {
 						return (
-							<NewEventDatePaper dateInfo={date} key={date.specific_event_id} />
+							<NewEventDatePaper
+								eventName={eventName}
+								dateInfo={date}
+								key={date.specific_event_id}
+							/>
 						);
 					})}
 				</>
@@ -41,7 +47,11 @@ function NewEventPageDateListHelper({
 					</div>
 					{previousArray.map((date) => {
 						return (
-							<NewEventDatePaper dateInfo={date} key={date.specific_event_id} />
+							<NewEventDatePaper
+								eventName={eventName}
+								dateInfo={date}
+								key={date.specific_event_id}
+							/>
 						);
 					})}
 				</>

@@ -4,7 +4,7 @@ import React from "react";
 import { Button, Divider } from "@mui/material";
 import styles from "./styles.module.css";
 import { PersonAddAltRounded, LoginRounded } from "@mui/icons-material";
-import SkeletonOrImage from "../../../../SkeletonOrImage";
+import SkeletonOrImage from "@/SkeletonOrImage";
 
 interface QrSignUpLogInCheckInProps {
 	navigateToSignIn: () => void;

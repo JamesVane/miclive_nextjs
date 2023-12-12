@@ -16,7 +16,7 @@ import audienceVert from "../../images/mid_audience_vert.png";
 import djVert from "../../images/mid_dj_vert.png";
 import performerVert from "../../images/mid_performer_vert.png";
 import promoterVert from "../../images/mid_promoter_vert.png";
-import smokeVideo from "../../images/fast_simple_lights.mp4";
+import smokeVideo from "@/images/fast_simple_lights.mp4";
 
 function StartPage() {
 	const router = useRouter();

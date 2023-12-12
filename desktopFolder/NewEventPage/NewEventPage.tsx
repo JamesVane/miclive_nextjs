@@ -173,6 +173,7 @@ function NewEventPage({
 					</div>
 					<div className={styles.main_right}>
 						<NewEventPageDateListHelper
+							eventName={AuthEventPageData.event_name}
 							upcomingArray={AuthEventPageData.upcomingDates}
 							previousArray={AuthEventPageData.previousDates}
 						/>

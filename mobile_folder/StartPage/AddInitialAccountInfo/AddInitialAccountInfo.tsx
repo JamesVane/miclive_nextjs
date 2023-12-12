@@ -10,7 +10,7 @@ import {
 	CheckRounded,
 	SkipNextRounded,
 } from "@mui/icons-material";
-import DividerH from "@DividerH";
+import DividerH from "@/universalComponents/DividerH";
 
 export type State = {
 	src: string | ArrayBuffer | null;

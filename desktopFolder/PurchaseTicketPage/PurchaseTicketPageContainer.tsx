@@ -1,4 +1,5 @@
 /** @format */
+"use client";
 
 import { useEffect, useState } from "react";
 import PurchaseTicketPage from "./PurchaseTicketPage";

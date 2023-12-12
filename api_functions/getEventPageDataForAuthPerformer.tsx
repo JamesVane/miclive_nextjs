@@ -4,7 +4,7 @@ import axios from "axios";
 import {
 	AuthEventPageData,
 	EventPageReducerType,
-} from "../desktop_folder/pages/NewEventPage/NewEventPageReducer";
+} from "@desk/NewEventPage/NewEventPageReducer";
 
 export async function getEventPageDataForAuthPerformer(
 	request_event_name: string,

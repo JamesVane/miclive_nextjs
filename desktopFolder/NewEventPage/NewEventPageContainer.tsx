@@ -127,8 +127,9 @@ function NewEventPageContainer({
 				<SplashPage />
 			) : (
 				<>
-					{dateOpen ? (
+					{dateOpen && specificIdfromParams ? (
 						<PerformerEventDateModalV2
+							specificIdfromParams={specificIdfromParams}
 							isFromEventPage
 							eventPageTicketPurchasedDate={ticketIsOpen ? true : false}
 						/>
