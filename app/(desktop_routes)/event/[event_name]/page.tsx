@@ -34,24 +34,24 @@ import { getSignedUrl } from "@/api_functions/getAnySignedUrl";
 	} 
 } */
 /* 
-export const metadata: Metadata = {
+export const metadata: Metadata = { 
 	title: "MIC.LIVE",
 	description: "DESC",
 }; */
 
-/* export const metadata: Metadata = {
+export const metadata: Metadata = {
 	title: "TITLE!!!!!!",
 	description: "DESC",
 	openGraph: {
 		description: "OG DESC!!!!!!",
 		title: "OG TITLE!!!!!!",
 	},
-}; */
+};
 
 function page({ params }: { params: { event_name: string } }) {
 	return (
 		<>
-			<title>foofoo</title>
+			{/* <title>foofoo</title>
 			<meta
 				name="title"
 				content="Next.js 13 - Layouts and Pages Explained in 20 mins or so"
@@ -60,7 +60,7 @@ function page({ params }: { params: { event_name: string } }) {
 				property="og:description"
 				content="And a social description for our cool page"
 			/>
-			<meta property="og:title" content="Social Title for Cool Page" />{" "}
+			<meta property="og:title" content="Social Title for Cool Page" />{" "} */}
 			<NewEventPage eventNameFromParams={params.event_name} />
 		</>
 	);

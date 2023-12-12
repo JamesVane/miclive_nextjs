@@ -9,7 +9,9 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { isMobile } from "react-device-detect";
 import { usePathname, useRouter } from "next/navigation";
 import awsExports from "../aws-exports";
+import { Provider } from "react-redux";
 import { Amplify } from "aws-amplify";
+import { store } from "@/store/rootStore";
 Amplify.configure(awsExports);
 
 function LocalizationProviderHelper({
@@ -36,9 +38,11 @@ function LocalizationProviderHelper({
 	}, [isMobile, pathname]);
 
 	return (
-		<LocalizationProvider dateAdapter={AdapterLuxon}>
-			{children}
-		</LocalizationProvider>
+		<Provider store={store}>
+			<LocalizationProvider dateAdapter={AdapterLuxon}>
+				{children}
+			</LocalizationProvider>
+		</Provider>
 	);
 }
 

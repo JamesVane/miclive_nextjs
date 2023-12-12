@@ -1,5 +1,4 @@
 /** @format */
-"use client";
 
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -7,8 +6,6 @@ import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { darkTheme } from "./muiprovider";
 import LocalizationProviderHelper from "./LocalizationProviderHelper";
-import { Provider } from "react-redux";
-import { store } from "@/store/rootStore";
 import SocketWrapperHelper from "./SocketWrapperHelper";
 import LayoutWrapper from "./LayoutWrapper";
 import "../theme-variables.css";
@@ -33,16 +30,14 @@ export default function RootLayout({
 				content="https://example.com/images/cool-page.jpg"
 			/>
 			<LocalizationProviderHelper>
-				<Provider store={store}>
-					<ThemeProvider theme={darkTheme}>
-						<SocketWrapperHelper>
-							<LayoutWrapper>
-								<CssBaseline />
-								<body className={inter.className}>{children}</body>
-							</LayoutWrapper>
-						</SocketWrapperHelper>
-					</ThemeProvider>
-				</Provider>
+				<ThemeProvider theme={darkTheme}>
+					<SocketWrapperHelper>
+						<LayoutWrapper>
+							<CssBaseline />
+							<body className={inter.className}>{children}</body>
+						</LayoutWrapper>
+					</SocketWrapperHelper>
+				</ThemeProvider>
 			</LocalizationProviderHelper>
 		</html>
 	);
