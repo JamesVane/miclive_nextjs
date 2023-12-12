@@ -33,11 +33,11 @@ import { getSignedUrl } from "@/api_functions/getAnySignedUrl";
 		};
 	}
 } */
-
+/* 
 export const metadata: Metadata = {
 	title: "MIC.LIVE",
 	description: "DESC",
-};
+}; */
 
 function page({ params }: { params: { event_name: string } }) {
 	return <NewEventPage eventNameFromParams={params.event_name} />;

@@ -1,10 +1,7 @@
 /** @format */
-
 "use client";
-/** @format */
-import { useEffect } from "react";
+
 import type { Metadata } from "next";
-import { usePathname, useRouter } from "next/navigation";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -14,12 +11,7 @@ import { Provider } from "react-redux";
 import { store } from "@/store/rootStore";
 import SocketWrapperHelper from "./SocketWrapperHelper";
 import LayoutWrapper from "./LayoutWrapper";
-import { isMobile } from "react-device-detect";
-import { Amplify } from "aws-amplify";
-import awsExports from "../aws-exports";
 import "../theme-variables.css";
-import { PersistGate } from "redux-persist/integration/react";
-Amplify.configure(awsExports);
 import "./global.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -34,24 +26,6 @@ export default function RootLayout({
 }: {
 	children: React.ReactNode;
 }) {
-	const pathname = usePathname();
-	const router = useRouter();
-
-	useEffect(() => {
-		if (isMobile && !pathname.startsWith("/m")) {
-			console.log("redirecting to mobile");
-			router.replace("/m" + pathname);
-		}
-		if (!isMobile && pathname.startsWith("/m")) {
-			console.log("redirecting to desktop");
-			if (pathname.length === 2) {
-				router.replace("/");
-			} else {
-				router.replace(pathname.slice(2));
-			}
-		}
-	}, [isMobile, pathname]);
-
 	return (
 		<html lang="en">
 			<LocalizationProviderHelper>
