@@ -29,6 +29,15 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<title>foofoo</title>
+			<meta property="og:title" content="Social Title for Cool Page" />
+			<meta
+				property="og:description"
+				content="And a social description for our cool page"
+			/>
+			<meta
+				property="og:image"
+				content="https://example.com/images/cool-page.jpg"
+			/>
 			<LocalizationProviderHelper>
 				<Provider store={store}>
 					<ThemeProvider theme={darkTheme}>
