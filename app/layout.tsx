@@ -29,7 +29,6 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<title>foofoo</title>
-			<meta property="og:title" content="Social Title for Cool Page" />
 			<meta
 				property="og:description"
 				content="And a social description for our cool page"

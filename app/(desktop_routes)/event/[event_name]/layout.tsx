@@ -14,6 +14,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 				name="title"
 				content="Next.js 13 - Layouts and Pages Explained in 20 mins or so"
 			/>
+			<meta property="og:title" content="Social Title for Cool Page" />
 			<main>{children}</main>
 		</>
 	);
