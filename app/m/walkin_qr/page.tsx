@@ -1,7 +1,10 @@
 /** @format */
 
 import React from "react";
-import WalkInQr from "@mobi/WalkInCheckIn/WalkInQr";
+import dynamic from "next/dynamic";
+const WalkInQr = dynamic(() => import("@mobi/WalkInCheckIn/WalkInQr"), {
+	ssr: false,
+});
 
 function page() {
 	return <WalkInQr />;

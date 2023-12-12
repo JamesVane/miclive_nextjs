@@ -1,7 +1,10 @@
 /** @format */
 
 import React from "react";
-import PromoterHome from "@desk/PromoterHome";
+import dynamic from "next/dynamic";
+const PromoterHome = dynamic(() => import("@desk/PromoterHome"), {
+	ssr: false,
+});
 
 function page() {
 	return <PromoterHome />;

@@ -1,4 +1,5 @@
 /** @format */
+"use client";
 
 import { useSelector } from "react-redux";
 import { useState } from "react";

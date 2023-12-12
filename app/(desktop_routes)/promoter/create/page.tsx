@@ -1,7 +1,13 @@
 /** @format */
 
 import React from "react";
-import PromoterCreateEventSub from "@desk/performer_dj_promoter/promoter/PromoterCreateEventSub";
+import dynamic from "next/dynamic";
+const PromoterCreateEventSub = dynamic(
+	() => import("@desk/performer_dj_promoter/promoter/PromoterCreateEventSub"),
+	{
+		ssr: false,
+	}
+);
 
 function page() {
 	return <PromoterCreateEventSub />;

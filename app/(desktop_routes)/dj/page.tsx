@@ -1,7 +1,10 @@
 /** @format */
 
 import React from "react";
-import DjHome from "@desk/performer_dj_promoter/dj";
+import dynamic from "next/dynamic";
+const DjHome = dynamic(() => import("@desk/performer_dj_promoter/dj"), {
+	ssr: false,
+});
 
 function page() {
 	return <DjHome />;

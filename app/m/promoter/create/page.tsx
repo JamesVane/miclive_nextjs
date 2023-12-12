@@ -1,7 +1,13 @@
 /** @format */
 
 import React from "react";
-import PromoterCreateEvent from "@mobi/Promoter/PromoterCreateEvent";
+import dynamic from "next/dynamic";
+const PromoterCreateEvent = dynamic(
+	() => import("@mobi/Promoter/PromoterCreateEvent"),
+	{
+		ssr: false,
+	}
+);
 
 function page() {
 	return <PromoterCreateEvent />;

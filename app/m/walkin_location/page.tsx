@@ -1,7 +1,13 @@
 /** @format */
 
 import React from "react";
-import WalkInLocation from "@mobi/WalkInCheckIn/WalkInLocation";
+import dynamic from "next/dynamic";
+const WalkInLocation = dynamic(
+	() => import("@mobi/WalkInCheckIn/WalkInLocation"),
+	{
+		ssr: false,
+	}
+);
 
 function page() {
 	return <WalkInLocation />;
