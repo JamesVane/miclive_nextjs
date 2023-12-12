@@ -6,7 +6,7 @@ import type { Metadata, ResolvingMetadata } from "next";
 import { getSignedUrl } from "@/api_functions/getAnySignedUrl";
 
 type Props = {
-	params: { id: string };
+	params: { event_name: string };
 	searchParams: { [key: string]: string | string[] | undefined };
 };
 
@@ -15,8 +15,6 @@ export async function generateMetadata(
 	parent: ResolvingMetadata
 ): Promise<Metadata> {
 	try {
-		const id = params.id;
-
 		// fetch data
 		// const signedUrl = await getSignedUrl(`event`, "88");
 
