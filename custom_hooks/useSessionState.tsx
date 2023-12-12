@@ -1,7 +1,7 @@
 /** @format */
 "use client";
 
-import { useState, useEffect } from "react";
+/* import { useState, useEffect } from "react";
 
 export function useSessionState<T>(
 	key: string,
@@ -18,3 +18,4 @@ export function useSessionState<T>(
 
 	return [state, setState];
 }
+ */
