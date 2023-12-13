@@ -64,7 +64,7 @@ function NewEventPage({
 					) : null}
 				</>
 			</HomeBarV2>
-			{/* <div className={styles.main_div}>
+			<div className={styles.main_div}>
 				<div className={styles.background_pic}>
 					<SkeletonOrImage
 						type="event4X1"
@@ -75,7 +75,7 @@ function NewEventPage({
 				<div className={styles.blur_overlay}>
 					<div className={styles.fade_away} />
 				</div>
-				<div className={styles.inner_main_div}>
+				{/* <div className={styles.inner_main_div}>
 					<div className={styles.main_left}>
 						<div className={styles.banner_container}>
 							<div className={styles.banner}>
@@ -187,8 +187,8 @@ function NewEventPage({
 							previousArray={AuthEventPageData.previousDates}
 						/>
 					</div>
-				</div>
-			</div> */}
+				</div> */}
+			</div>
 		</>
 	);
 }
