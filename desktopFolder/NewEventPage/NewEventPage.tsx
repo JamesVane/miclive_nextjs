@@ -173,20 +173,20 @@ function NewEventPage({
 							<DividerH />
 							<div className={styles.desc_div}>
 								<div className={styles.inner_desc_div}>
-									<DescriptionComponent
+									{/* <DescriptionComponent
 										text={AuthEventPageData.event_description}
-									/>
+									/> */}
 								</div>
 							</div>
 						</div>
 					</div>
-					{/* <div className={styles.main_right}>
+					<div className={styles.main_right}>
 						<NewEventPageDateListHelper
 							eventName={AuthEventPageData.event_name}
 							upcomingArray={AuthEventPageData.upcomingDates}
 							previousArray={AuthEventPageData.previousDates}
 						/>
-					</div> */}
+					</div>
 				</div>
 			</div>
 		</>
