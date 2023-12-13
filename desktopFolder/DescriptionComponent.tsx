@@ -2,21 +2,22 @@
 "use client";
 
 import React from "react";
-import ReactQuill from "react-quill";
+import dynamic from "next/dynamic";
+const ReactQuill = dynamic(() => import("react-quill"), {
+	ssr: false,
+});
 
 function DescriptionComponent({ text }: { text: string }) {
-	return <div></div>;
-}
-
-export default DescriptionComponent;
-
-{
-	/* <ReactQuill
+	return (
+		<ReactQuill
 			value={JSON.parse(text)}
 			readOnly={true}
 			theme="bubble"
 			style={{
 				width: "100%",
 			}}
-		/> */
+		/>
+	);
 }
+
+export default DescriptionComponent;
