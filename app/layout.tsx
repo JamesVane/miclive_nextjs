@@ -11,6 +11,8 @@ import LayoutWrapper from "./LayoutWrapper";
 import "../theme-variables.css";
 import "./global.css";
 
+export const revalidate = 0;
+
 const inter = Inter({ subsets: ["latin"] });
 /* 
 export const metadata: Metadata = {
