@@ -64,7 +64,7 @@ function NewEventPage({
 					) : null}
 				</>
 			</HomeBarV2>
-			<div className={styles.main_div}>
+			{/* <div className={styles.main_div}>
 				<div className={styles.background_pic}>
 					<SkeletonOrImage
 						type="event4X1"
@@ -188,7 +188,7 @@ function NewEventPage({
 						/>
 					</div>
 				</div>
-			</div>
+			</div> */}
 		</>
 	);
 }
