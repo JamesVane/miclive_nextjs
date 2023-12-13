@@ -27,8 +27,6 @@ function NewEventPageContainer({
 }: NewEventPageContainerProps) {
 	const router = useRouter();
 
-	const fromUrl = localStorage.getItem("fromUrl");
-
 	const [eventPageReducerState, dispatchEventPageReducerState] = useReducer(
 		eventPageReducer,
 		defaultEventPageData
@@ -38,12 +36,7 @@ function NewEventPageContainer({
 	const isLoading = eventPageReducerState.pageState === "loading";
 
 	async function handleBack() {
-		if (fromUrl) {
-			await new Promise(() => router.push(fromUrl));
-			localStorage.removeItem("fromUrl");
-		} else {
-			router.push("/performer");
-		}
+		router.back();
 	}
 
 	async function startInit() {
@@ -138,7 +131,7 @@ function NewEventPageContainer({
 						followingInProgress={followingInProgress}
 						handleFollowButton={handleFollowButton}
 						isAlreadyFollowing={isAlreadyFollowing}
-						hasFromState={fromUrl ? true : false}
+						hasFromState={true}
 						handleBack={handleBack}
 						AuthEventPageData={eventPageReducerState.data}
 						authStatus={
