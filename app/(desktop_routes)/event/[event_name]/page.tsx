@@ -86,8 +86,7 @@ const eventPageData = async (eventName: string): Promise<EventPageDataType> => {
 async function page({ params }: { params: { event_name: string } }) {
 	const fetchedEventData = await eventPageData(params.event_name);
 
-	return <div>foofoo</div>;
-	// return <NewEventPage eventPageData={fetchedEventData} />;
+	return <NewEventPage eventPageData={fetchedEventData} />;
 }
 
 export default page;
