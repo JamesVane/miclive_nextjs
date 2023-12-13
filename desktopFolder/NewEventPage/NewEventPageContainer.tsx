@@ -65,13 +65,15 @@ function NewEventPageContainer({
 
 	return (
 		<>
-			{dateOpen && specificIdfromParams ? (
-				<PerformerEventDateModalV2
+			{dateOpen && specificIdfromParams
+				? {
+						/* <PerformerEventDateModalV2
 					specificIdfromParams={specificIdfromParams}
 					isFromEventPage
 					eventPageTicketPurchasedDate={ticketIsOpen ? true : false}
-				/>
-			) : null}
+				/> */
+				  }
+				: null}
 			<NewEventPage
 				followingInProgress={false}
 				/* handleFollowButton={handleFollowButton} */
