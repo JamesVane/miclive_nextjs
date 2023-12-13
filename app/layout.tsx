@@ -10,6 +10,7 @@ import SocketWrapperHelper from "./SocketWrapperHelper";
 import LayoutWrapper from "./LayoutWrapper";
 import "../theme-variables.css";
 import "./global.css";
+import "react-quill/dist/quill.bubble.css";
 
 export const revalidate = 0;
 export const dynamic = "force-dynamic";

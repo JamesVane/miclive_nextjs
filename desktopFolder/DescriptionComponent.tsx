@@ -3,7 +3,6 @@
 
 import React from "react";
 import ReactQuill from "react-quill";
-import "react-quill/dist/quill.bubble.css";
 
 function DescriptionComponent({ text }: { text: string }) {
 	return (
