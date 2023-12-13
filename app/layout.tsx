@@ -12,6 +12,7 @@ import "../theme-variables.css";
 import "./global.css";
 
 export const revalidate = 0;
+export const dynamic = "force-dynamic";
 
 const inter = Inter({ subsets: ["latin"] });
 /* 
