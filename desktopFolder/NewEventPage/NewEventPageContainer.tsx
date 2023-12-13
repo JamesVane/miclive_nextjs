@@ -34,35 +34,6 @@ function NewEventPageContainer({
 	const [followingInProgress, setFollowingInProgress] = useState(false); */
 	const isLoading = dataForPage.pageState === "loading";
 
-	async function handleFollowButton() {
-		/* setFollowingInProgress(true);
-		try {
-			const user = await Auth.currentAuthenticatedUser();
-			const roleId = user.attributes["custom:RoleId"];
-			const roleIdAsNumber =
-				typeof roleId === "string" ? parseInt(roleId) : roleId;
-			if (eventPageReducerState.data.base_event_id !== 0) {
-				putPerformerFollowEvent({
-					request_performer_role_id: roleIdAsNumber,
-					request_new_following_id: eventPageReducerState.data.base_event_id,
-				}).then(async (res) => {
-					await Auth.updateUserAttributes(user, {
-						"custom:PerformerFollowing": JSON.stringify(res),
-					}).then(() => {
-						startInit();
-					});
-					setFollowingInProgress(false);
-				});
-			} else {
-				console.log("following failed");
-				setFollowingInProgress(false);
-			}
-		} catch {
-			console.log("following failed");
-			setFollowingInProgress(false);
-		} */
-	}
-
 	return (
 		<>
 			{dateOpen && specificIdfromParams ? (
