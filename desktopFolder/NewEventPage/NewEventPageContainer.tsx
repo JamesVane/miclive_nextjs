@@ -64,36 +64,34 @@ function NewEventPageContainer({
 	}
 
 	return (
-		<>
-			<div>foofoofoofwe</div>
-		</>
+		<div>
+			{isLoading ? (
+				<SplashPage />
+			) : (
+				<>
+					{dateOpen && specificIdfromParams ? (
+						<PerformerEventDateModalV2
+							specificIdfromParams={specificIdfromParams}
+							isFromEventPage
+							eventPageTicketPurchasedDate={ticketIsOpen ? true : false}
+						/>
+					) : null}
+					<NewEventPage
+						followingInProgress={false}
+						/* handleFollowButton={handleFollowButton} */
+						isAlreadyFollowing={eventPageData.alreadyFollowing}
+						hasFromState={true}
+						AuthEventPageData={dataForPage.data}
+						authStatus={
+							dataForPage.pageState === "performer auth"
+								? "performer auth"
+								: "not performer"
+						}
+					/>
+				</>
+			)}
+		</div>
 	);
 }
 
 export default NewEventPageContainer;
-
-/* {isLoading ? (
-	<SplashPage />
-) : (
-	<>
-		{dateOpen && specificIdfromParams ? (
-			<PerformerEventDateModalV2
-				specificIdfromParams={specificIdfromParams}
-				isFromEventPage
-				eventPageTicketPurchasedDate={ticketIsOpen ? true : false}
-			/>
-		) : null}
-		<NewEventPage
-			followingInProgress={false}
-			handleFollowButton={handleFollowButton} 
-			isAlreadyFollowing={eventPageData.alreadyFollowing}
-			hasFromState={true}
-			AuthEventPageData={dataForPage.data}
-			authStatus={
-				dataForPage.pageState === "performer auth"
-					? "performer auth"
-					: "not performer"
-			}
-		/>
-	</>
-)} */
