@@ -72,9 +72,9 @@ function NewEventPageContainer({
 					eventPageTicketPurchasedDate={ticketIsOpen ? true : false}
 				/>
 			) : null}
-			{/* <NewEventPage
+			<NewEventPage
 				followingInProgress={false}
-				 handleFollowButton={handleFollowButton} 
+				/* handleFollowButton={handleFollowButton} */
 				isAlreadyFollowing={eventPageData.alreadyFollowing}
 				hasFromState={true}
 				AuthEventPageData={dataForPage.data}
@@ -83,7 +83,7 @@ function NewEventPageContainer({
 						? "performer auth"
 						: "not performer"
 				}
-			/> */}
+			/>
 		</>
 	);
 }
