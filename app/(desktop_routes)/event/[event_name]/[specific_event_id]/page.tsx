@@ -8,13 +8,13 @@ function page({
 }: {
 	params: { event_name: string; specific_event_id: string };
 }) {
-	return (
-		<NewEventPage
+	return {
+		/* <NewEventPage
 			specificIdfromParams={params.specific_event_id}
 			eventNameFromParams={params.event_name}
 			dateOpen
-		/>
-	);
+		/> */
+	};
 }
 
 export default page;
