@@ -34,10 +34,11 @@ export async function generateMetadata(
 }; */
 
 function page({ params }: { params: { event_name: string } }) {
-	return <div>foo</div>;
+	return (
+		<div>
+			<NewEventPage eventNameFromParams={params.event_name} />
+		</div>
+	);
 }
-/* function page({ params }: { params: { event_name: string } }) {
-	return <NewEventPage eventNameFromParams={params.event_name} />;
-} */
 
 export default page;
