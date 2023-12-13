@@ -1,4 +1,5 @@
 /** @format */
+"use client";
 
 import { Box, Avatar } from "@mui/material";
 import SkeletonOrImage from "@/SkeletonOrImage";

@@ -1,4 +1,5 @@
 /** @format */
+"use client";
 
 import FloatingMessageDrawer from "./FloatingMessageDrawer";
 import { useSelector } from "react-redux";

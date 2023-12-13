@@ -1,4 +1,5 @@
 /** @format */
+"use client";
 
 import { Drawer } from "@mui/material";
 import styles from "./styles.module.css";

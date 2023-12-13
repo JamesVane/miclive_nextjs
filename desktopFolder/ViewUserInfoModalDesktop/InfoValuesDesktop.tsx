@@ -1,4 +1,6 @@
 /** @format */
+"use client";
+
 import { useState } from "react";
 import styles from "./styles.module.css";
 import { Avatar, Divider, Link, Popover } from "@mui/material";

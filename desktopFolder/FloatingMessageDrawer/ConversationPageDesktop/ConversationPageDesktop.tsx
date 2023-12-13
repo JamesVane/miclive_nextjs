@@ -1,4 +1,5 @@
 /** @format */
+"use client";
 
 import { useEffect, useState, useContext, useRef } from "react";
 import styles from "./styles.module.css";

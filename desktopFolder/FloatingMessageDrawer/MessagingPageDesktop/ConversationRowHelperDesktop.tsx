@@ -1,4 +1,5 @@
 /** @format */
+"use client";
 
 import ConversationRow from "./ConversationRowDesktop";
 

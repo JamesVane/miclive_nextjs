@@ -1,4 +1,5 @@
 /** @format */
+"use client";
 
 import { useState, useEffect } from "react";
 import { Skeleton } from "@mui/material";

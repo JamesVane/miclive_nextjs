@@ -1,4 +1,5 @@
 /** @format */
+"use client";
 
 import styles from "./styles.module.css";
 import { Paper, Avatar, IconButton, Button } from "@mui/material";

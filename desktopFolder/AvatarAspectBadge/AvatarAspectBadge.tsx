@@ -1,4 +1,5 @@
 /** @format */
+"use client";
 
 import { Campaign, Album, MicExternalOnRounded } from "@mui/icons-material";
 import { Avatar, Box } from "@mui/material";

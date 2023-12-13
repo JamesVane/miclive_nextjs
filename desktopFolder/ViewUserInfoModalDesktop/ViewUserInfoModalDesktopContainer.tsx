@@ -1,4 +1,5 @@
 /** @format */
+"use client";
 
 import ViewUserInfoModalMobile from "./ViewUserInfoModalDesktop";
 import { useSelector } from "react-redux";

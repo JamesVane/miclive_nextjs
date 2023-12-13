@@ -48,7 +48,7 @@ function NewEventPage({
 
 	return (
 		<>
-			{/* <HomeBarV2 hasProfile>
+			<HomeBarV2 hasProfile>
 				<>
 					{hasFromState ? (
 						<Button
@@ -188,7 +188,7 @@ function NewEventPage({
 						/>
 					</div>
 				</div>
-			</div> */}
+			</div>
 		</>
 	);
 }

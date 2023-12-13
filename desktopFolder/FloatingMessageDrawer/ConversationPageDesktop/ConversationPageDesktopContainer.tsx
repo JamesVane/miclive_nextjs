@@ -1,4 +1,6 @@
 /** @format */
+"use client";
+
 import { useState } from "react";
 import ConversationPageDesktop from "./ConversationPageDesktop";
 import SplashPage from "@/SplashPage";
