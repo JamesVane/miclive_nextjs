@@ -173,9 +173,9 @@ function NewEventPage({
 							<DividerH />
 							<div className={styles.desc_div}>
 								<div className={styles.inner_desc_div}>
-									{/* <DescriptionComponent
+									<DescriptionComponent
 										text={AuthEventPageData.event_description}
-									/> */}
+									/>
 								</div>
 							</div>
 						</div>
