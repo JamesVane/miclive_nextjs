@@ -13,7 +13,6 @@ import {
 	EventPageDataType,
 } from "./NewEventPageReducer";
 import SplashPage from "@/SplashPage";
-import { putPerformerFollowEvent } from "@/api_functions/putPerformerFollowEvent";
 
 interface NewEventPageContainerProps {
 	dateOpen?: boolean;
