@@ -32,7 +32,7 @@ function NewEventPage({
 	AuthEventPageData,
 	authStatus,
 	isAlreadyFollowing,
-	/* handleFollowButton, */
+	/* handleFollowButton,  */
 	followingInProgress,
 }: NewEventPageProps) {
 	const router = useRouter();
