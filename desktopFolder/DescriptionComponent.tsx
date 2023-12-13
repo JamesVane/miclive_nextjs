@@ -5,8 +5,13 @@ import React from "react";
 import ReactQuill from "react-quill";
 
 function DescriptionComponent({ text }: { text: string }) {
-	return {
-		/* <ReactQuill
+	return <div></div>;
+}
+
+export default DescriptionComponent;
+
+{
+	/* <ReactQuill
 			value={JSON.parse(text)}
 			readOnly={true}
 			theme="bubble"
@@ -14,7 +19,4 @@ function DescriptionComponent({ text }: { text: string }) {
 				width: "100%",
 			}}
 		/> */
-	};
 }
-
-export default DescriptionComponent;
