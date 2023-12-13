@@ -1,4 +1,5 @@
 /** @format */
+"use client";
 
 import { useEffect, useState, useReducer } from "react";
 import PerformerEventDateModalV2 from "./PerformerEventDateModalV2";

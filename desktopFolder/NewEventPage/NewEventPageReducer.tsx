@@ -48,6 +48,11 @@ export type AuthEventPageData = {
 	previousDates: DateType[];
 };
 
+export type EventPageDataType = {
+	alreadyFollowing: boolean;
+	pageState: EventPageReducerStateType; // Assuming EventPageReducerStateType is the type returned by eventPageReducer
+};
+
 export type eventPageStateType = "loading" | "performer auth" | "not performer";
 
 export const defaultEventPageData = {
@@ -74,10 +79,7 @@ export type EventPageReducerType = {
 	data: AuthEventPageData;
 };
 
-export function eventPageReducer(
-	state: EventPageReducerStateType,
-	action: EventPageReducerType
-) {
+export function eventPageReducer(action: EventPageReducerType) {
 	switch (action.type) {
 		case "performer auth": {
 			const dispatchData = action.data;

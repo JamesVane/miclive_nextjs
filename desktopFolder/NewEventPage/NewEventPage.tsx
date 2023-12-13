@@ -1,4 +1,6 @@
 /** @format */
+"use client";
+
 import styles from "./styles.module.css";
 import HomeBarV2 from "@desk/HomeBarV2";
 import SkeletonOrImage from "@/SkeletonOrImage";
@@ -12,30 +14,37 @@ import {
 	ArrowBackIosRounded,
 } from "@mui/icons-material";
 import { AuthEventPageData } from "./NewEventPageReducer";
+import { useRouter } from "next/navigation";
 import DescriptionComponent from "@desk/DescriptionComponent";
 import DividerH from "@/universalComponents/DividerH";
 
 interface NewEventPageProps {
-	handleBack: () => void;
 	hasFromState: boolean;
 	AuthEventPageData: AuthEventPageData;
 	authStatus: "performer auth" | "not performer";
 	isAlreadyFollowing: boolean;
-	handleFollowButton: () => void;
+	/* handleFollowButton: () => void; */
 	followingInProgress: boolean;
 }
 
 function NewEventPage({
-	handleBack,
 	hasFromState,
 	AuthEventPageData,
 	authStatus,
 	isAlreadyFollowing,
-	handleFollowButton,
+	/* handleFollowButton, */
 	followingInProgress,
 }: NewEventPageProps) {
+	const router = useRouter();
+
 	const djData = AuthEventPageData.dj;
 	const promoterData = AuthEventPageData.promoter;
+
+	async function handleBack() {
+		router.back();
+	}
+
+	function handleFollowButton() {}
 
 	return (
 		<>

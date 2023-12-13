@@ -1,5 +1,4 @@
 /** @format */
-"use client";
 
 import { useEffect, useReducer, useState } from "react";
 import NewEventPage from "./NewEventPage";
@@ -8,85 +7,35 @@ import { useRouter } from "next/navigation";
 import { getEventPageDataForAuthPerformer } from "@/api_functions/getEventPageDataForAuthPerformer";
 import { getEventPageDataForUnauthenticatedUser } from "@/api_functions/getEventPageDataForUnauthenticatedUser";
 import { Auth } from "aws-amplify";
-import { defaultEventPageData, eventPageReducer } from "./NewEventPageReducer";
+import {
+	defaultEventPageData,
+	eventPageReducer,
+	EventPageDataType,
+} from "./NewEventPageReducer";
 import SplashPage from "@/SplashPage";
 import { putPerformerFollowEvent } from "@/api_functions/putPerformerFollowEvent";
 
 interface NewEventPageContainerProps {
 	dateOpen?: boolean;
 	ticketIsOpen?: boolean;
-	eventNameFromParams: string;
+	eventPageData: EventPageDataType;
 	specificIdfromParams?: string;
 }
 
 function NewEventPageContainer({
 	dateOpen,
 	ticketIsOpen,
-	eventNameFromParams,
+	eventPageData,
 	specificIdfromParams,
 }: NewEventPageContainerProps) {
-	const router = useRouter();
+	const dataForPage = eventPageData.pageState;
 
-	const [eventPageReducerState, dispatchEventPageReducerState] = useReducer(
-		eventPageReducer,
-		defaultEventPageData
-	);
-	const [isAlreadyFollowing, setIsAlreadyFollowing] = useState(false);
-	const [followingInProgress, setFollowingInProgress] = useState(false);
-	const isLoading = eventPageReducerState.pageState === "loading";
-
-	async function handleBack() {
-		router.back();
-	}
-
-	async function startInit() {
-		try {
-			const currentUser = await Auth.currentAuthenticatedUser({
-				bypassCache: true,
-			});
-			const roleType = currentUser.attributes["custom:RoleType"];
-			const requestPerformerRoleId = currentUser.attributes["custom:RoleId"];
-			const followingArrayFromCog = JSON.parse(
-				currentUser.attributes["custom:PerformerFollowing"]
-			);
-			if (roleType === "performer" && eventNameFromParams) {
-				getEventPageDataForAuthPerformer(
-					eventNameFromParams,
-					requestPerformerRoleId
-				).then((data) => {
-					if (data.data.base_event_id) {
-						setIsAlreadyFollowing(
-							followingArrayFromCog.includes(
-								typeof data.data.base_event_id === "number"
-									? data.data.base_event_id
-									: Number(data.data.base_event_id)
-							)
-						);
-					}
-					dispatchEventPageReducerState(data);
-				});
-			} else {
-				getEventPageDataForUnauthenticatedUser(eventNameFromParams).then(
-					(data) => {
-						dispatchEventPageReducerState(data);
-					}
-				);
-			}
-		} catch {
-			getEventPageDataForUnauthenticatedUser(eventNameFromParams).then(
-				(data) => {
-					dispatchEventPageReducerState(data);
-				}
-			);
-		}
-	}
-
-	useEffect(() => {
-		startInit();
-	}, []);
+	/* const [isAlreadyFollowing, setIsAlreadyFollowing] = useState(false);
+	const [followingInProgress, setFollowingInProgress] = useState(false); */
+	const isLoading = dataForPage.pageState === "loading";
 
 	async function handleFollowButton() {
-		setFollowingInProgress(true);
+		/* setFollowingInProgress(true);
 		try {
 			const user = await Auth.currentAuthenticatedUser();
 			const roleId = user.attributes["custom:RoleId"];
@@ -111,7 +60,7 @@ function NewEventPageContainer({
 		} catch {
 			console.log("following failed");
 			setFollowingInProgress(false);
-		}
+		} */
 	}
 
 	return (
@@ -128,14 +77,13 @@ function NewEventPageContainer({
 						/>
 					) : null}
 					<NewEventPage
-						followingInProgress={followingInProgress}
-						handleFollowButton={handleFollowButton}
-						isAlreadyFollowing={isAlreadyFollowing}
+						followingInProgress={false}
+						/* handleFollowButton={handleFollowButton} */
+						isAlreadyFollowing={eventPageData.alreadyFollowing}
 						hasFromState={true}
-						handleBack={handleBack}
-						AuthEventPageData={eventPageReducerState.data}
+						AuthEventPageData={dataForPage.data}
 						authStatus={
-							eventPageReducerState.pageState === "performer auth"
+							dataForPage.pageState === "performer auth"
 								? "performer auth"
 								: "not performer"
 						}
