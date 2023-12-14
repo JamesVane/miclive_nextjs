@@ -38,8 +38,8 @@ export async function generateMetadata(
 			images: [
 				{
 					url: `https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/event_pictures/event_${eventMetadata.base_event_id}.jpg`,
-					width: 800,
-					height: 800,
+					width: 1200,
+					height: 630,
 				},
 			],
 		},
