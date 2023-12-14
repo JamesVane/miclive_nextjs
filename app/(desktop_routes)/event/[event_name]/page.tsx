@@ -35,6 +35,13 @@ export async function generateMetadata(
 			description: eventMetadata.event_tagline,
 			title: eventMetadata.event_name,
 			url: `https://www.micbeta.live/event/${params.event_name}`,
+			images: [
+				{
+					url: `https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/event_pictures/event_${eventMetadata.base_event_id}.jpg`,
+					width: 800,
+					height: 800,
+				},
+			],
 		},
 	};
 }
