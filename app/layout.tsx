@@ -11,6 +11,9 @@ import SocketWrapperHelper from "./SocketWrapperHelper";
 import LayoutWrapper from "./LayoutWrapper";
 import "../theme-variables.css";
 import "./global.css";
+import awsExports from "../aws-exports";
+import { Amplify } from "aws-amplify";
+Amplify.configure({ ...awsExports, ssr: true });
 
 export const revalidate = 0;
 export const dynamic = "force-dynamic";

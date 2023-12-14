@@ -8,11 +8,11 @@ import { AdapterLuxon } from "@mui/x-date-pickers/AdapterLuxon";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { isMobile } from "react-device-detect";
 import { usePathname, useRouter } from "next/navigation";
-import awsExports from "../aws-exports";
 import { Provider } from "react-redux";
-import { Amplify } from "aws-amplify";
 import { store } from "@/store/rootStore";
-Amplify.configure(awsExports);
+import awsExports from "@/aws-exports";
+import { Amplify } from "aws-amplify";
+Amplify.configure({ ...awsExports, ssr: true });
 
 function LocalizationProviderHelper({
 	children,
