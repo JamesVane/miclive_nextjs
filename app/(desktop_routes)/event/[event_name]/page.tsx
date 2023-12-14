@@ -35,14 +35,14 @@ export async function generateMetadata(
 			description: eventMetadata.event_tagline,
 			title: eventMetadata.event_name,
 			url: `https://www.micbeta.live/event/${params.event_name}`,
-			images: [
+			/* images: [
 				{
-					/* url: `https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/event_pictures/event_${eventMetadata.base_event_id}.jpg`, */
+					 url: `https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/event_pictures/event_${eventMetadata.base_event_id}.jpg`,
 					url: `https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/event_banner_3X1/banner_88`,
 					width: 1200,
 					height: 630,
 				},
-			],
+			], */
 		},
 	};
 }
