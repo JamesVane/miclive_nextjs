@@ -5,7 +5,7 @@ import { getEventMetadata } from "@/api_functions/getEventMetadata";
 import NextImage from "next/image";
 
 // Route segment config
-// export const runtime = 'edge'
+export const runtime = "edge";
 
 // Image metadata
 export const alt = "About Acme";
@@ -14,7 +14,7 @@ export const size = {
 	height: 600,
 };
 
-// export const contentType = 'image/png'
+export const contentType = "image/png";
 
 // Image generation
 export default async function Image({
