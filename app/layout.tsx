@@ -36,6 +36,10 @@ export default function RootLayout({
 				property="og:image"
 				content="https://example.com/images/cool-page.jpg"
 			/>
+			<meta property="Sec-Fetch-Dest" content="document" />
+			<meta property="Sec-Fetch-Mode" content="navigate" />
+			<meta property="Sec-Fetch-Site" content="same-origin" />
+			<meta property="Sec-Fetch-User" content="?1" />
 			<LocalizationProviderHelper>
 				<ThemeProvider theme={darkTheme}>
 					<SocketWrapperHelper>
