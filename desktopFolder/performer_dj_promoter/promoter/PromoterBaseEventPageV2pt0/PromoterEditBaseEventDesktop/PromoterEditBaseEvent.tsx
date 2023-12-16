@@ -30,6 +30,7 @@ import { getPromoterEventPageDataV2pt0 } from "@/api_functions/getPromoterEventP
 import { setPageData } from "@/store/PromoterEventPageV2pt0Slice";
 import DividerH from "@/universalComponents/DividerH";
 import EditBaseEventBanner from "./EditBaseEventBanner";
+import { updateBaseEventImageArray } from "@/api_functions/updateBaseEventImageArray";
 
 export type State = {
 	src: string | ArrayBuffer | null;
@@ -239,21 +240,28 @@ function PromoterEditBaseEvent({
 	const baseDescriptionPayload = {
 		baseEventId: baseEventId,
 		baseDescription: EventDataObject.event_description,
+		image_array: EventDataObject.image_array,
 	};
 
-	function updateDescription() {
+	function updateDescription(returnArray: string[]) {
 		setIsUploading(true);
 		try {
-			putEditBaseEventDescription(baseEventId, editState.baseDescription!).then(
-				(res) => {
+			updateBaseEventImageArray(baseEventId.toString(), returnArray);
+			if (editState.baseDescription && editState.baseDescription.description) {
+				putEditBaseEventDescription(
+					baseEventId,
+					editState.baseDescription.description
+				).then((res) => {
 					updateState({ isForBase: false }).then((res) => {
 						setIsUploading(false);
 						dispatch(setToDefault());
 						setSelectedPath("none");
 						setEditedDescriptionMessage(true);
 					});
-				}
-			);
+				});
+			} else {
+				console.log("no edit satate");
+			}
 		} catch (error) {
 			console.log(error);
 			setIsUploading(false);

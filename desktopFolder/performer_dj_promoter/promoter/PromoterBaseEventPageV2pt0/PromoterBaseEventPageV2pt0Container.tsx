@@ -45,14 +45,12 @@ function PromoterBaseEventPageV2pt0Container({
 	}
 
 	useEffect(() => {
-		if (paramsEventName) {
-			getPromoterEventPageDataV2pt0(paramsEventName).then((data) => {
-				if (data) {
-					dispatch(setPageData(data));
-				}
-				setIsLoading(false);
-			});
-		}
+		getPromoterEventPageDataV2pt0(paramsEventName).then((data) => {
+			if (data) {
+				dispatch(setPageData(data));
+			}
+			setIsLoading(false);
+		});
 	}, []);
 
 	function handleInviteHouseDj() {
