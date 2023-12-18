@@ -24,8 +24,8 @@ function EditBaseEventDescription({
 	const dispatch = useDispatch();
 	const [mountedState, setMountedState] = useState<string | null>("");
 	const quillRef = useRef<ReactQuill | null>(null);
-	const { baseDescription: description } = useSelector(
-		(state: RootState) => state.promoterEditEvent
+	const { description } = useSelector(
+		(state: RootState) => state.promoterEditEvent.baseDescription
 	);
 
 	useEffect(() => {
