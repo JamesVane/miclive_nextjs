@@ -30,6 +30,7 @@ import { putEditBaseEventDescription } from "@/api_functions/putEditBaseEventDes
 import { setPageData } from "@/store/PromoterEventPageV2pt0Slice";
 import { getPromoterEventPageDataV2pt0 } from "@/api_functions/getPromoterEventPageDataV2pt0";
 import EditBaseEventBannerMobile from "./EditBaseEventBannerMobile";
+import { updateBaseEventImageArray } from "@/api_functions/updateBaseEventImageArray";
 
 export type State = {
 	src: string | ArrayBuffer | null;
@@ -104,9 +105,17 @@ function PromoterEditBaseEvent() {
 		}
 	}
 
-	async function updateState() {
-		router.push(`/m/promoter/event/${baseEventState.event_name}`);
-		getPromoterEventPageDataV2pt0(editState.baseEvent.name).then((data) => {
+	async function updateState({ isForBase }: { isForBase: boolean }) {
+		if (isForBase) {
+			router.push(
+				`/promoter/event/${editState.baseEvent.name.trim().toLowerCase()}`
+			);
+		}
+		getPromoterEventPageDataV2pt0(
+			isForBase
+				? editState.baseEvent.name.trim().toLowerCase()
+				: baseEventState.event_name.trim().toLowerCase()
+		).then((data) => {
 			if (data) {
 				dispatch(setPageData(data));
 			}
@@ -153,18 +162,20 @@ function PromoterEditBaseEvent() {
 	};
 
 	async function updateBaseEventInfo() {
+		let returnData = "";
 		if (editState.baseEventId) {
 			await editBaseEvent({
 				query_name: editState.baseEvent.name,
 				query_tagline: editState.baseEvent.tagline,
 				query_base_event_id: editState.baseEventId,
 			}).then((res: any) => {
-				return "completed";
+				returnData = res.message;
 			});
 		} else {
 			console.log("ERROR, baseEventId is undefined");
 			return "error";
 		}
+		return returnData;
 	}
 
 	function updateBaseEvent() {
@@ -174,19 +185,24 @@ function PromoterEditBaseEvent() {
 			!_.isEqual(mountedState, defaultMountedState)
 		) {
 			updateBaseEventInfo().then(async (res) => {
-				updateState();
-				if (editState.baseEvent.imageFile !== null) {
-					updateBaseEventImage().then((res) => {
+				console.log("res", res);
+				if (res === "An event with the same name already exists.") {
+					console.log("an event with this name already exists");
+				} else {
+					updateState({ isForBase: true });
+					if (editState.baseEvent.imageFile !== null) {
+						updateBaseEventImage().then((res) => {
+							setIsUploading(false);
+							dispatch(setToDefault());
+							setSelectedPath("none");
+							setEditedBaseMessage(true);
+						});
+					} else {
 						setIsUploading(false);
 						dispatch(setToDefault());
 						setSelectedPath("none");
 						setEditedBaseMessage(true);
-					});
-				} else {
-					setIsUploading(false);
-					dispatch(setToDefault());
-					setSelectedPath("none");
-					setEditedBaseMessage(true);
+					}
 				}
 			});
 		} else {
@@ -201,6 +217,7 @@ function PromoterEditBaseEvent() {
 				setIsUploading(false);
 				dispatch(setToDefault());
 				setSelectedPath("none");
+				setEditedBaseMessage(true);
 			}
 		}
 	}
@@ -208,26 +225,30 @@ function PromoterEditBaseEvent() {
 	const baseDescriptionPayload = {
 		baseEventId: baseEventState.base_event_id,
 		baseDescription: baseEventState.event_description,
-		image_array: baseEventState.image_array,
 	};
 
-	function updateDescription() {
+	function updateDescription(returnArray: string[]) {
 		setIsUploading(true);
-		console.log("editState.description", editState.baseDescription);
 		try {
-			putEditBaseEventDescription(
-				baseEventState.base_event_id,
-				editState.baseDescription.description
-					? editState.baseDescription.description
-					: ""
-			).then((res) => {
-				updateState().then((res) => {
-					setIsUploading(false);
-					dispatch(setToDefault());
-					setSelectedPath("none");
-					setEditedDescriptionMessage(true);
-				});
-			});
+			const baseEventId = editState.baseEventId;
+			if (baseEventId) {
+				updateBaseEventImageArray(baseEventId.toString(), returnArray);
+				if (editState.baseDescription && editState.baseDescription) {
+					putEditBaseEventDescription(
+						baseEventId,
+						editState.baseDescription
+					).then((res) => {
+						updateState({ isForBase: false }).then((res) => {
+							setIsUploading(false);
+							dispatch(setToDefault());
+							setSelectedPath("none");
+							setEditedDescriptionMessage(true);
+						});
+					});
+				} else {
+					console.log("no edit satate");
+				}
+			}
 		} catch (error) {
 			console.log(error);
 			setIsUploading(false);
@@ -249,6 +270,7 @@ function PromoterEditBaseEvent() {
 	function openDescEdit() {
 		dispatch(setToDefault());
 		setSelectedPath("baseDescription");
+		console.log("baseDescriptionPayload", baseDescriptionPayload);
 		dispatch(setExistingBaseDescription(baseDescriptionPayload));
 	}
 	function handleEdit() {

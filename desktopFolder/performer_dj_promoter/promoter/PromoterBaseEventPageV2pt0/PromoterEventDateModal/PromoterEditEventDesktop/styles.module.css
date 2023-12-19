@@ -194,6 +194,7 @@
 .description_second_div {
 	composes: column from "@styl/base_flexbox.module.css";
 	width: 100%;
+	position: relative;
 	height: 100%;
 }
 .quill :global(.ql-container.ql-snow) {

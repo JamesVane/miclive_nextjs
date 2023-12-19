@@ -1,3 +1,2 @@
 SELECT *
-FROM base_event
-WHERE primary_key = 88;
+FROM specific_event;

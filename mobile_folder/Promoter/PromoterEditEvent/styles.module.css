@@ -167,6 +167,7 @@
 .description_second_div {
 	composes: column from "@styl/base_flexbox.module.css";
 	width: 100%;
+	position: relative;
 }
 .quill :global(.ql-container.ql-snow) {
 	border-radius: 0px 0px 4px 4px;

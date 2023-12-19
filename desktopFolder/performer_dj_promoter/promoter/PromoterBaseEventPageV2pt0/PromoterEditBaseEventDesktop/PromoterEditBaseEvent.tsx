@@ -240,17 +240,16 @@ function PromoterEditBaseEvent({
 	const baseDescriptionPayload = {
 		baseEventId: baseEventId,
 		baseDescription: EventDataObject.event_description,
-		image_array: EventDataObject.image_array,
 	};
 
 	function updateDescription(returnArray: string[]) {
 		setIsUploading(true);
 		try {
 			updateBaseEventImageArray(baseEventId.toString(), returnArray);
-			if (editState.baseDescription && editState.baseDescription.description) {
+			if (editState.baseDescription && editState.baseDescription) {
 				putEditBaseEventDescription(
 					baseEventId,
-					editState.baseDescription.description
+					editState.baseDescription
 				).then((res) => {
 					updateState({ isForBase: false }).then((res) => {
 						setIsUploading(false);

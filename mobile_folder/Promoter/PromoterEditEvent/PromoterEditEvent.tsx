@@ -24,6 +24,7 @@ import EditSnacksMobile from "../EditSnacksMobile";
 import { Auth } from "aws-amplify";
 import { getPromoterDateModalDataV2pt0 } from "@/api_functions/getPromoterDateModalDataV2pt0";
 import { setPromoterDateInfoV2pt0 } from "@/store/promoterDateInfoV2pt0Slice";
+import { updateDateImageArray } from "@/api_functions/updateDateImageArray";
 
 interface PromoterEditEventProps {
 	eventNameFromParams: string;
@@ -158,20 +159,23 @@ function PromoterEditEvent({ eventNameFromParams }: PromoterEditEventProps) {
 		description: dateState.date_description,
 	};
 
-	function updateDescription() {
-		setIsUploading(true);
+	function updateDescription(returnArray: string[]) {
 		try {
-			putUpdateEventDescription(
-				Number(editState.specificEventId!),
-				editState.description!
-			).then((res) => {
-				updateState().then((res) => {
-					setIsUploading(false);
-					dispatch(setToDefault());
-					setSelectedPath("none");
-					setEditedDescriptionMessage(true);
+			updateDateImageArray(dateState.specific_event_id.toString(), returnArray);
+			if (editState.description && editState.description) {
+				setIsUploading(true);
+				putUpdateEventDescription(
+					dateState.specific_event_id,
+					editState.description
+				).then((res) => {
+					updateState().then((res) => {
+						setIsUploading(false);
+						dispatch(setToDefault());
+						setSelectedPath("none");
+						setEditedDescriptionMessage(true);
+					});
 				});
-			});
+			}
 		} catch (error) {
 			console.log(error);
 			setIsUploading(false);

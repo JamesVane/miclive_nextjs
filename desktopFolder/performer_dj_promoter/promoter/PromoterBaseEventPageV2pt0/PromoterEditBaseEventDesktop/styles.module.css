@@ -126,6 +126,7 @@
 	position: relative;
 }
 .description_second_div {
+	position: relative;
 	composes: column from "@styl/base_flexbox.module.css";
 	width: 100%;
 }

@@ -1,9 +1,9 @@
 /** @format */
 
-import { useEffect, useRef, useState } from "react";
-import { Paper, Button } from "@mui/material";
+import { useEffect, useRef, useState, useMemo } from "react";
+import { Paper, Button, CircularProgress } from "@mui/material";
 import styles from "./styles.module.css";
-import { modules, formats } from "@/textEditorSettings";
+import { Pallate, formats } from "@/textEditorSettings";
 import { ClearRounded, CheckRounded } from "@mui/icons-material";
 import _ from "lodash";
 import ReactQuill from "react-quill";
@@ -11,9 +11,15 @@ import { useDispatch, useSelector } from "react-redux";
 import "quill/dist/quill.snow.css";
 import { RootState } from "@/store/rootStore";
 import { setBaseDescription } from "@/store/promoterEditEventSlice";
+import { v4 as uuidv4 } from "uuid";
+import imageCompression from "browser-image-compression";
+import { postUploadS3Image } from "@/api_functions/postUploadS3Image";
+import { addStringToBaseEventImageArray } from "@/api_functions/addStringToBaseEventImageArray";
+import { deleteImageFromS3 } from "@/api_functions/deleteImageFromS3";
+import { getBaseEventImageArray } from "@/api_functions/getBaseEventImageArray";
 
 interface EditBaseEventDescriptionProps {
-	updateDescription: () => void;
+	updateDescription: (returnArray: string[]) => void;
 	exit: () => void;
 }
 
@@ -22,11 +28,30 @@ function EditBaseEventDescription({
 	updateDescription,
 }: EditBaseEventDescriptionProps) {
 	const dispatch = useDispatch();
+
+	const [imageLoadingInProgress, setImageLoadingInProgress] = useState(false);
 	const [mountedState, setMountedState] = useState<string | null>("");
 	const quillRef = useRef<ReactQuill | null>(null);
-	const { description } = useSelector(
-		(state: RootState) => state.promoterEditEvent.baseDescription
+	const { baseDescription: description, baseEventId } = useSelector(
+		(state: RootState) => state.promoterEditEvent
 	);
+
+	async function getReturnArray() {
+		let holdEditArray = [];
+
+		if (baseEventId) {
+			const baseEventIdString = baseEventId.toString();
+			const editArray = await getBaseEventImageArray(baseEventIdString);
+			for (let x in editArray) {
+				if (description?.includes(editArray[x])) {
+					holdEditArray.push(editArray[x]);
+				} else {
+					deleteImageFromS3(editArray[x]);
+				}
+			}
+		}
+		return holdEditArray;
+	}
 
 	useEffect(() => {
 		if (quillRef.current) {
@@ -34,7 +59,7 @@ function EditBaseEventDescription({
 			quill.on("text-change", () => {
 				const deltaJson = JSON.stringify(quill.getContents());
 				dispatch(setBaseDescription({ description: deltaJson }));
-				console.log("deltaJson", typeof deltaJson);
+				console.log("deltaJson", deltaJson);
 			});
 		}
 	}, []);
@@ -43,10 +68,86 @@ function EditBaseEventDescription({
 		setMountedState(description);
 	}, []);
 
+	function insertToEditor(url: string) {
+		if (quillRef.current) {
+			const editor = quillRef.current.getEditor();
+			editor.insertEmbed(editor.getSelection()?.index!, "image", url);
+		}
+	}
+
+	async function saveToServer(file: File) {
+		const options = {
+			maxSizeMB: 1,
+			maxWidthOrHeight: 1920,
+			useWebWorker: true,
+		};
+
+		const compressedFile = await imageCompression(file, options);
+		const newUuid = uuidv4();
+		const reader = new FileReader();
+		reader.readAsDataURL(compressedFile);
+		reader.onload = async () => {
+			setImageLoadingInProgress(true);
+			const base64String = reader.result as string;
+			const adjustedBase64String = base64String.split(",")[1];
+			const newUrlPath = `rich_text_image/base_event_desc_${baseEventId}_${newUuid}`;
+
+			await postUploadS3Image(adjustedBase64String, newUrlPath).then((res) => {
+				if (res.status === 200) {
+					if (baseEventId) {
+						addStringToBaseEventImageArray(baseEventId.toString(), newUrlPath);
+						const returnUrl = `https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/${newUrlPath}`;
+						insertToEditor(returnUrl);
+					}
+				}
+			});
+			setImageLoadingInProgress(false);
+		};
+	}
+
+	const imageHandler = (a: any) => {
+		const input = document.createElement("input");
+		input.setAttribute("type", "file");
+		input.setAttribute("accept", "image/*");
+		input.click();
+
+		input.onchange = () => {
+			const file = input.files![0];
+			if (/^image\//.test(file.type)) {
+				saveToServer(file);
+			} else {
+				console.warn("You could only upload images.");
+			}
+		};
+	};
+
+	const modules = useMemo(
+		() => ({
+			toolbar: {
+				container: [
+					[{ header: [1, 2, 3, 4, 5, 6, false] }],
+					[{ size: [] }],
+					["bold", "italic", "underline", "strike", "blockquote"],
+					[{ align: ["right", "center", "justify"] }],
+					[{ list: "ordered" }, { list: "bullet" }],
+					["link", "image"],
+					[{ color: Pallate }],
+					[{ background: Pallate }],
+					["clean"],
+				],
+				handlers: {
+					image: imageHandler,
+				},
+			},
+		}),
+		[]
+	);
+
 	return (
 		<>
 			<Paper square className={styles.bottom_row}>
 				<Button
+					disabled={imageLoadingInProgress}
 					onClick={exit}
 					endIcon={<ClearRounded />}
 					variant="outlined"
@@ -56,6 +157,7 @@ function EditBaseEventDescription({
 				<Button
 					color="success"
 					disabled={
+						imageLoadingInProgress ||
 						mountedState === "" ||
 						_.isEqual(description, mountedState) ||
 						description === null ||
@@ -63,7 +165,10 @@ function EditBaseEventDescription({
 							? true
 							: false
 					}
-					onClick={updateDescription}
+					onClick={async () => {
+						const returnarray = await getReturnArray();
+						updateDescription(returnarray);
+					}}
 					endIcon={<CheckRounded />}
 					variant="outlined"
 					sx={{ position: "absolute", right: 10, bottom: 10 }}>
@@ -74,7 +179,19 @@ function EditBaseEventDescription({
 				className={styles.description_main_div}
 				style={{ overflow: "visible" }}>
 				<div className={styles.description_second_div}>
+					{imageLoadingInProgress ? (
+						<CircularProgress
+							size={100}
+							sx={{
+								position: "absolute",
+								top: "200px",
+								width: "100%",
+								zIndex: "20",
+							}}
+						/>
+					) : null}
 					<ReactQuill
+						readOnly={imageLoadingInProgress}
 						ref={quillRef}
 						placeholder="Enter Event Description Here"
 						className={styles.quill}

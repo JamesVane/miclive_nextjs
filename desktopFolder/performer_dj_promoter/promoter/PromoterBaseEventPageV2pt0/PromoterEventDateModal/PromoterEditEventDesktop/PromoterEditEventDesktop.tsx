@@ -27,6 +27,7 @@ import EditSnacksDesktop from "./EditSnacksDesktop";
 import { Auth } from "aws-amplify";
 import { getPromoterDateModalDataV2pt0 } from "@/api_functions/getPromoterDateModalDataV2pt0";
 import { setPromoterDateInfoV2pt0 } from "@/store/promoterDateInfoV2pt0Slice";
+import { updateDateImageArray } from "@/api_functions/updateDateImageArray";
 
 interface PromoterEditEventDesktopProps {
 	handleCloseModal: () => void;
@@ -153,10 +154,11 @@ function PromoterEditEventDesktop({
 		>
 	);
 
-	function updateDescription() {
-		if (editState.description) {
-			setIsUploading(true);
-			try {
+	function updateDescription(returnArray: string[]) {
+		try {
+			updateDateImageArray(specificEventId.toString(), returnArray);
+			if (editState.description && editState.description) {
+				setIsUploading(true);
 				putUpdateEventDescription(specificEventId, editState.description).then(
 					(res) => {
 						updateState().then((res) => {
@@ -167,10 +169,10 @@ function PromoterEditEventDesktop({
 						});
 					}
 				);
-			} catch (error) {
-				console.log(error);
-				setIsUploading(false);
 			}
+		} catch (error) {
+			console.log(error);
+			setIsUploading(false);
 		}
 	}
 

@@ -103,6 +103,7 @@
 .description_second_div {
 	composes: column from "@styl/base_flexbox.module.css";
 	width: 100%;
+	position: relative;
 }
 .selected_banners_end {
 	width: 100%;

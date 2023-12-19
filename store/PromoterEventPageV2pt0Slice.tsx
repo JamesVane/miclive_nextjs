@@ -29,7 +29,6 @@ export type EventPageData = {
 	event_name: string;
 	event_tagline: string;
 	event_description: string;
-	image_array: string[];
 	primary_dj: DJType | null;
 	upcoming_dates: DateType[];
 	previous_dates: DateType[];

@@ -61,10 +61,7 @@ type promoterEditEventType = {
 		early_bird_end_time: string | null;
 	};
 	description: string | null;
-	baseDescription: {
-		description: string | null;
-		image_array: string[];
-	};
+	baseDescription: string | null;
 };
 
 export const initialState: promoterEditEventType = {
@@ -114,10 +111,7 @@ export const initialState: promoterEditEventType = {
 		early_bird_end_time: null,
 	},
 	description: null,
-	baseDescription: {
-		description: "",
-		image_array: [],
-	},
+	baseDescription: null,
 };
 type imageDisplayHelpPayload = {
 	key: "imageSelected" | "displayName" | "displayURL" | "confirmImage";
@@ -206,7 +200,6 @@ type descriptionEventInitPayload = {
 type baseDescriptionEventInitPayload = {
 	baseEventId: number | null;
 	baseDescription: string | null;
-	image_array: string[];
 };
 
 const promoterEditEventSlice = createSlice({
@@ -233,10 +226,7 @@ const promoterEditEventSlice = createSlice({
 			state,
 			action: PayloadAction<baseDescriptionPayload>
 		) => {
-			state.baseDescription = {
-				...state.baseDescription,
-				description: action.payload.description,
-			};
+			state.baseDescription = action.payload.description;
 		},
 		setImageDisplayHelp: (
 			state,
@@ -318,10 +308,7 @@ const promoterEditEventSlice = createSlice({
 				early_bird_end_time: null,
 			};
 			state.description = null;
-			state.baseDescription = {
-				description: null,
-				image_array: [],
-			};
+			state.baseDescription = null;
 		},
 		openClose: (state) => {
 			state.isOpen = !state.isOpen;
@@ -357,12 +344,9 @@ const promoterEditEventSlice = createSlice({
 			state,
 			action: PayloadAction<baseDescriptionEventInitPayload>
 		) => {
-			const { baseEventId, baseDescription, image_array } = action.payload;
+			const { baseEventId, baseDescription } = action.payload;
 			state.baseEventId = baseEventId;
-			state.baseDescription = {
-				description: baseDescription,
-				image_array: image_array,
-			};
+			state.baseDescription = baseDescription;
 		},
 		setBanner3X10: (state, action: PayloadAction<any>) => {
 			state.banner3X10 = action.payload;
@@ -370,21 +354,10 @@ const promoterEditEventSlice = createSlice({
 		setBanner4X10: (state, action: PayloadAction<any>) => {
 			state.banner4X10 = action.payload;
 		},
-		addToEditArray: (state, action: PayloadAction<string>) => {
-			state.baseDescription.image_array = [
-				...state.baseDescription.image_array,
-				action.payload,
-			];
-		},
-		setBaseEventDescImageArray: (state, action: PayloadAction<string[]>) => {
-			state.baseDescription.image_array = action.payload;
-		},
 	},
 });
 
 export const {
-	setBaseEventDescImageArray,
-	addToEditArray,
 	setBaseDescription,
 	setExistingBaseDescription,
 	setBaseEvent,

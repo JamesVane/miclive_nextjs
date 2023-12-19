@@ -22,7 +22,7 @@ function EditEventBannerThree({
 }: EditEventBannerThreeProps) {
 	const dispatch = useDispatch();
 
-	const { banner3X10DisplayHelp, banner4X10DisplayHelp } = useSelector(
+	const { banner3X10DisplayHelp } = useSelector(
 		(state: RootState) => state.promoterEditEvent
 	);
 
