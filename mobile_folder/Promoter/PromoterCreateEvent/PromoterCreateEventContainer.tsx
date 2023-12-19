@@ -18,6 +18,9 @@ import { Crop } from "react-image-crop";
 import BaseEventDescriptionMobile from "./BaseEventDescriptionMobile";
 import CreateEventBanner from "./CreateEventBanner";
 import { Auth } from "aws-amplify";
+import { deleteImageFromS3 } from "@/api_functions/deleteImageFromS3";
+import { updateDateImageArray } from "@/api_functions/updateDateImageArray";
+import { updateBaseEventImageArray } from "@/api_functions/updateBaseEventImageArray";
 
 export type State = {
 	src: string | ArrayBuffer | null;
@@ -64,6 +67,37 @@ function PromoterCreateEventContainer() {
 		localStorage.setItem("inviteEventKey", eventKey);
 	};
 
+	async function getDateReturnArray(specificEventId: string) {
+		let holdEditArray = [];
+		const image_array = EventData.dateImageArray;
+		const description = EventData.description;
+		for (let x in image_array) {
+			if (description?.includes(image_array[x])) {
+				holdEditArray.push(image_array[x]);
+			} else {
+				deleteImageFromS3(image_array[x]);
+			}
+		}
+		updateDateImageArray(specificEventId, holdEditArray);
+	}
+
+	async function getEventReturnArray(baseEventId: string) {
+		let holdEditArray = [];
+
+		const editArray = EventData.baseEventImageArray;
+		const description = EventData.baseEventDescription;
+
+		for (let x in editArray) {
+			if (description?.includes(editArray[x])) {
+				holdEditArray.push(editArray[x]);
+			} else {
+				deleteImageFromS3(editArray[x]);
+			}
+		}
+
+		updateBaseEventImageArray(baseEventId, holdEditArray);
+	}
+
 	async function handleCreateEvent() {
 		try {
 			const user = await Auth.currentAuthenticatedUser();
@@ -74,6 +108,9 @@ function PromoterCreateEventContainer() {
 			createBaseAndSpecificEventContainer(stringPromoterId, EventData).then(
 				async (res) => {
 					if (res.baseEventId) {
+						await getDateReturnArray(res.specificEventId.toString());
+						await getEventReturnArray(res.baseEventId.toString());
+
 						handleUpdateDjKeyState({
 							dateKey: res.DjDateInviteUrlKey,
 							eventKey: res.DjEventInviteUrlKey,

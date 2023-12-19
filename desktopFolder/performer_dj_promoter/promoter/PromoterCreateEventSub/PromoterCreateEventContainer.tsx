@@ -21,6 +21,9 @@ import CreateEventBanner from "./CreateEventBanner";
 import HomeBarV2 from "@desk/HomeBarV2";
 import { Tabs, Tab, Button } from "@mui/material";
 import { CloseRounded } from "@mui/icons-material";
+import { deleteImageFromS3 } from "@/api_functions/deleteImageFromS3";
+import { updateDateImageArray } from "@/api_functions/updateDateImageArray";
+import { updateBaseEventImageArray } from "@/api_functions/updateBaseEventImageArray";
 
 function PromoterCreateEventContainer() {
 	const router = useRouter();
@@ -61,6 +64,37 @@ function PromoterCreateEventContainer() {
 		router.push("/promoter");
 	}
 
+	async function getDateReturnArray(specificEventId: string) {
+		let holdEditArray = [];
+		const image_array = EventData.dateImageArray;
+		const description = EventData.description;
+		for (let x in image_array) {
+			if (description?.includes(image_array[x])) {
+				holdEditArray.push(image_array[x]);
+			} else {
+				deleteImageFromS3(image_array[x]);
+			}
+		}
+		updateDateImageArray(specificEventId, holdEditArray);
+	}
+
+	async function getEventReturnArray(baseEventId: string) {
+		let holdEditArray = [];
+
+		const editArray = EventData.baseEventImageArray;
+		const description = EventData.baseEventDescription;
+
+		for (let x in editArray) {
+			if (description?.includes(editArray[x])) {
+				holdEditArray.push(editArray[x]);
+			} else {
+				deleteImageFromS3(editArray[x]);
+			}
+		}
+
+		updateBaseEventImageArray(baseEventId, holdEditArray);
+	}
+
 	async function handleCreateEvent() {
 		try {
 			const user = await Auth.currentAuthenticatedUser();
@@ -71,6 +105,9 @@ function PromoterCreateEventContainer() {
 			createBaseAndSpecificEventContainer(stringPromoterId, EventData).then(
 				async (res) => {
 					if (res.baseEventId) {
+						await getDateReturnArray(res.specificEventId.toString());
+						await getEventReturnArray(res.baseEventId.toString());
+
 						handleUpdateDjKeyState({
 							dateKey: res.DjDateInviteUrlKey,
 							eventKey: res.DjEventInviteUrlKey,

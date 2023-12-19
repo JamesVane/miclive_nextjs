@@ -72,7 +72,7 @@ function EditEventDescriptionMobile({
 			setImageLoadingInProgress(true);
 			const base64String = reader.result as string;
 			const adjustedBase64String = base64String.split(",")[1];
-			const newUrlPath = `rich_text_image/event_date_desc_${specificEventId}_${newUuid}`;
+			const newUrlPath = `rich_text_image/event_date_desc_${newUuid}`;
 
 			await postUploadS3Image(adjustedBase64String, newUrlPath).then((res) => {
 				if (res.status === 200) {

@@ -58,6 +58,8 @@ type promoterCreateEventType = {
 		early_bird_ticket_price: number | null;
 		early_bird_end_time: string | null;
 	};
+	dateImageArray: string[];
+	baseEventImageArray: string[];
 	baseEventDescription: string | null;
 	description: string | null;
 };
@@ -105,6 +107,8 @@ export const initialState: promoterCreateEventType = {
 		early_bird_ticket_price: 0,
 		early_bird_end_time: null,
 	},
+	dateImageArray: [],
+	baseEventImageArray: [],
 	baseEventDescription: null,
 	description: null,
 };
@@ -222,10 +226,21 @@ const promoterCreateEventSlice = createSlice({
 		openClose: (state) => {
 			state.isOpen = !state.isOpen;
 		},
+		addToBaseEventImageArray: (state, action: PayloadAction<string>) => {
+			state.baseEventImageArray = [
+				...state.baseEventImageArray,
+				action.payload,
+			]
+		},
+		addToDateImageArray: (state, action: PayloadAction<string>) => {
+			state.dateImageArray = [...state.dateImageArray, action.payload];
+		}
 	},
 });
 
 export const {
+	addToDateImageArray,
+	addToBaseEventImageArray,
 	setBaseEventDescription,
 	setBaseEvent,
 	switchPage,

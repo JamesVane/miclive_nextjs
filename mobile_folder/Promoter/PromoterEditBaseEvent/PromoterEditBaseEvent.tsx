@@ -314,7 +314,7 @@ function PromoterEditBaseEvent() {
 						setEditedSpecificMessage={setEditedSpecificMessage}
 						setEditedDescriptionMessage={setEditedDescriptionMessage}
 					/>
-					<Paper square className={styles.header_div}>
+					<div className={styles.header_div}>
 						<Button
 							onClick={handleBack}
 							startIcon={<ArrowBackIosRounded />}
@@ -334,7 +334,7 @@ function PromoterEditBaseEvent() {
 								? "Large Banner"
 								: "Small Banner"
 							: ""}
-					</Paper>
+					</div>
 					<div className={styles.main_div}>
 						{selectedPath === "none" ? (
 							<>

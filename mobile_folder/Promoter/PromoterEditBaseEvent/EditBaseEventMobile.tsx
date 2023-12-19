@@ -132,7 +132,7 @@ function EditBaseEventMobile({
 
 	return (
 		<>
-			<Paper square className={styles.bottom_row}>
+			<div className={styles.bottom_row}>
 				<Button
 					onClick={exit}
 					endIcon={<ClearRounded />}
@@ -148,7 +148,7 @@ function EditBaseEventMobile({
 					variant="outlined">
 					Save
 				</Button>
-			</Paper>
+			</div>
 
 			{imageSelected && !confirmImage ? (
 				<div className={styles.pic_edit_wrap_selected}>

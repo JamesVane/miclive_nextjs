@@ -9,6 +9,7 @@
 	height: 40px;
 	composes: row_center from "@styl/base_flexbox.module.css";
 	position: relative;
+	background-color: var(--background-default);
 }
 .path_selector_title {
 	width: 100%;
@@ -38,6 +39,7 @@
 	justify-content: space-between;
 	padding-left: 10px;
 	padding-right: 10px;
+	background-color: var(--background-default);
 }
 .pic_edit_wrap_selected {
 	width: 100vw;

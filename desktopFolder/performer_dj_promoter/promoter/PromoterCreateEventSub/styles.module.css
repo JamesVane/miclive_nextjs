@@ -25,6 +25,7 @@
 	composes: column from "@styl/base_flexbox.module.css";
 	width: 100%;
 	height: calc(100% - 110px);
+	position: relative;
 }
 .crumbs_wrapper {
 	width: 100%;
