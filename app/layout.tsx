@@ -32,10 +32,21 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en">
-			<meta
-				property="og:image"
-				content="https://example.com/images/cool-page.jpg"
-			/>
+			<head>
+				<link
+					rel="apple-touch-icon"
+					href="/apple-icon?<generated>"
+					type="image/<generated>"
+					sizes="<generated>"
+				/>
+				<link rel="icon" href="/favicon.ico" sizes="any" />
+				<link
+					rel="icon"
+					href="/icon?<generated>"
+					type="image/<generated>"
+					sizes="<generated>"
+				/>
+			</head>
 			<meta property="Sec-Fetch-Dest" content="document" />
 			<meta property="Sec-Fetch-Mode" content="navigate" />
 			<meta property="Sec-Fetch-Site" content="same-origin" />
