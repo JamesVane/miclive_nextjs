@@ -1,2 +1,3 @@
 SELECT *
-FROM specific_event;
+FROM roster
+WHERE performer = 135;

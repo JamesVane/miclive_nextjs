@@ -7,6 +7,7 @@ import {
 	ParsedPerformerTicketResponseStructure,
 } from "@/api_functions/getSingleDateInfoWithPerformerId";
 import { ParsedNotPerformerResponseStructure } from "@/api_functions/getSingleDateForNotPerformer";
+import { SubmittedAudioType } from "@/UniversalTypes";
 
 const defaultPromoterObj = {
 	promoter_sub: "",
@@ -62,9 +63,7 @@ export type DateModalStateType = {
 	end_time: number;
 	date_description: string;
 	location: { name: string; cords: { lat: number; lng: number } };
-	submitted_audio: {
-		[key: string]: { audioName: string; audioKey: string; length: number };
-	} | null;
+	submitted_audio: SubmittedAudioType | null;
 	base_event_id: number;
 	specific_event_id: number;
 	promoter: Promoter;

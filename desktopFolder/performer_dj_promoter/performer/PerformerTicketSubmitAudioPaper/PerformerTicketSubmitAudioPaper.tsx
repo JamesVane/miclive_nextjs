@@ -12,6 +12,8 @@ interface PerformerTicketSubmitAudioPaperProps {
 	trackNumber: string;
 	setSelectFromSongOpen: (index: number) => void;
 	setAddNewOpen: (index: number) => void;
+	hasNoAudioToPickFrom?: boolean;
+	disabled?: boolean;
 }
 
 function PerformerTicketSubmitAudioPaper({
@@ -19,6 +21,8 @@ function PerformerTicketSubmitAudioPaper({
 	payload,
 	setAddNewOpen,
 	trackNumber,
+	hasNoAudioToPickFrom,
+	disabled,
 }: PerformerTicketSubmitAudioPaperProps) {
 	function AudioComponent({
 		premadePath,
@@ -49,6 +53,7 @@ function PerformerTicketSubmitAudioPaper({
 						</div>
 						<div className={styles.change_button}>
 							<Button
+								disabled={disabled}
 								onClick={() => setForkOpen(forkOpen ? false : true)}
 								variant="outlined">
 								{forkOpen ? "cancel" : "change"}
@@ -61,12 +66,14 @@ function PerformerTicketSubmitAudioPaper({
 					{forkOpen ? (
 						<>
 							<Button
+								disabled={hasNoAudioToPickFrom || disabled}
 								startIcon={<QueueMusicRounded />}
 								onClick={() => setSelectFromSongOpen(Number(trackNumber))}
 								variant="outlined">
 								{"Select From my songs"}
 							</Button>
 							<Button
+								disabled={disabled}
 								onClick={() => setAddNewOpen(Number(trackNumber))}
 								startIcon={<AddRounded />}
 								color="success"
@@ -99,12 +106,14 @@ function PerformerTicketSubmitAudioPaper({
 				<DividerH />
 				<div className={styles.player_wrapper}>
 					<Button
+						disabled={hasNoAudioToPickFrom || disabled}
 						startIcon={<QueueMusicRounded />}
 						onClick={() => setSelectFromSongOpen(Number(trackNumber))}
 						variant="outlined">
 						{"Select From my songs"}
 					</Button>
 					<Button
+						disabled={disabled}
 						onClick={() => setAddNewOpen(Number(trackNumber))}
 						startIcon={<AddRounded />}
 						color="success"

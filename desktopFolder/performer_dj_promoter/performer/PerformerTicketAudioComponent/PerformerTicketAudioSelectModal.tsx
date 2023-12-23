@@ -13,6 +13,7 @@ import { Auth } from "aws-amplify";
 import SplashPage from "@/SplashPage";
 import { getPerformerProfileAudioKeys } from "@/api_functions/getPerformerProfileAudioKeys";
 import { setPerformerAudioKey } from "@/store/performerAudioKeysStore";
+import { PerformerRoleAudioKeys } from "@/api_functions/getPerformerProfileAudioKeys";
 
 interface PerformerTicketAudioSelectModal {
 	selectFromSongOpen: number;
@@ -21,6 +22,8 @@ interface PerformerTicketAudioSelectModal {
 	currentSongLength: number;
 	setSelectFromSongOpen: () => void;
 	specificEventId: number;
+	performerIdFromInput?: number;
+	audioKeysFromInput?: PerformerRoleAudioKeys;
 }
 
 function PerformerTicketAudioSelectModal({
@@ -30,6 +33,8 @@ function PerformerTicketAudioSelectModal({
 	allowedLength,
 	currentSongLength,
 	specificEventId,
+	performerIdFromInput,
+	audioKeysFromInput,
 }: PerformerTicketAudioSelectModal) {
 	const dispatch = useDispatch();
 
@@ -38,6 +43,9 @@ function PerformerTicketAudioSelectModal({
 	const audioKeysObject = useSelector(
 		(state: RootState) => state.performerAudioKeys
 	);
+	const audioKeysToUse = audioKeysFromInput
+		? audioKeysFromInput
+		: audioKeysObject;
 
 	async function selectExistingAudio(audioKey: {
 		audio_id: number;
@@ -52,13 +60,17 @@ function PerformerTicketAudioSelectModal({
 				? parseInt(requestPerformerRoleId)
 				: requestPerformerRoleId;
 
+		const performerIdToBeUsed = performerIdFromInput
+			? performerIdFromInput
+			: roleIdAsNumber;
+
 		PostPerformerChangeSubmittedAudioFromExisting(
-			roleIdAsNumber,
+			performerIdToBeUsed,
 			specificEventId,
 			{
 				[selectFromSongOpen]: {
 					audioName: audioKey.name,
-					audioKey: `performer_${roleIdAsNumber}/audio_${audioKey.audio_id}`,
+					audioKey: `performer_${performerIdToBeUsed}/audio_${audioKey.audio_id}`,
 					length: timeStringToSeconds(audioKey.audio_length),
 				},
 			}
@@ -108,8 +120,8 @@ function PerformerTicketAudioSelectModal({
 						</IconButton>
 					</div>
 					<div className={styles.audio_rows_scroll}>
-						{audioKeysObject &&
-							audioKeysObject.map((audioKey) => {
+						{audioKeysToUse &&
+							audioKeysToUse.map((audioKey) => {
 								return (
 									<PerformerTicketAudioSelectRow
 										isTooLong={

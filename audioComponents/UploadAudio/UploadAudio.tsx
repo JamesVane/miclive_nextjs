@@ -19,6 +19,7 @@ interface UploadAudioProps {
 	forTicket?: boolean;
 	specificEventId?: number;
 	addNewOpen?: number;
+	performerIdFromProps?: number;
 }
 
 function UploadAudio({
@@ -26,6 +27,7 @@ function UploadAudio({
 	forTicket,
 	specificEventId,
 	addNewOpen,
+	performerIdFromProps,
 }: UploadAudioProps) {
 	const [audioFile, setAudioFile] = useState<File | null>(null);
 	const [uploadedSuccess, setUploadedSuccess] = useState<boolean>(false);
@@ -39,6 +41,10 @@ function UploadAudio({
 			typeof requestPerformerRoleId === "string"
 				? parseInt(requestPerformerRoleId)
 				: requestPerformerRoleId;
+
+		const performerIdToBeUsed = performerIdFromProps
+			? performerIdFromProps
+			: roleIdAsNumber;
 		setUploadInProgress(true);
 		try {
 			const duration = await getAudioDuration(file);
@@ -51,12 +57,11 @@ function UploadAudio({
 				audioFile
 			);
 
-			const performerId = Number(roleIdAsNumber);
 			const audioName = file.name;
 			const audioLength = Math.floor(duration);
 
 			const response = await postAudio(
-				performerId,
+				performerIdToBeUsed,
 				audioName,
 				audioLength,
 				file
@@ -64,7 +69,7 @@ function UploadAudio({
 			if (response.message === "Audio file uploaded successfully") {
 				if (forTicket) {
 					PostPerformerChangeSubmittedAudioFromExisting(
-						performerId,
+						performerIdToBeUsed,
 						specificEventId!,
 						{
 							[addNewOpen!]: {

@@ -9,13 +9,18 @@ import {
 	defaultPerformerSelectFromExistingModal,
 } from "@/store/performerSelectFromExistingModalSlice";
 import { RootState } from "@/store/rootStore";
+import { PerformerRoleAudioKeys } from "@/api_functions/getPerformerProfileAudioKeys";
 
 interface PerformerSelectFromExistingModalProps {
 	refreshAudio: () => void;
+	performerIdFromInput?: number;
+	audioKeysFromInput?: PerformerRoleAudioKeys;
 }
 
 function PerformerSelectFromExistingModal({
 	refreshAudio,
+	performerIdFromInput,
+	audioKeysFromInput,
 }: PerformerSelectFromExistingModalProps) {
 	const dispatch = useDispatch();
 	const {
@@ -59,12 +64,14 @@ function PerformerSelectFromExistingModal({
 						sx={{ width: "450px", height: "700px", overflow: "hidden" }}
 						onClick={handleClickInside}>
 						<PerformerTicketAudioSelectModal
+							audioKeysFromInput={audioKeysFromInput}
 							specificEventId={specificEventId}
 							currentSongLength={currentSongLength}
 							totalAudioLength={totalAudioLength}
 							setSelectFromSongOpen={handleClose}
 							selectFromSongOpen={selectFromSongOpen}
 							allowedLength={allowedLength}
+							performerIdFromInput={performerIdFromInput}
 						/>
 					</Paper>
 				</div>

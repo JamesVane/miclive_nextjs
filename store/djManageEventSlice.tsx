@@ -2,6 +2,7 @@
 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import storage from "redux-persist/lib/storage";
+import { SubmittedAudioType } from "@/UniversalTypes";
 
 export type PerformerObjectType = {
 	cue_position: number;
@@ -10,11 +11,7 @@ export type PerformerObjectType = {
 	performer_name: string;
 	performer_tagline: string;
 	time_used: number;
-	submitted_audio:
-		| {
-				[key: string]: { audioName: string; audioKey: string; length: number };
-		  }
-		| {};
+	submitted_audio: SubmittedAudioType | {};
 };
 
 export type CueObjectType = {
@@ -33,7 +30,7 @@ export type djManageEventSliceType = {
 	event_cue_position: number;
 	start_time: number;
 	end_time: number;
-	tickets_can_be_sold: boolean; 
+	tickets_can_be_sold: boolean;
 	total_performers: number;
 	time_per_performer: number;
 	not_checked_in: CueArraytype;
@@ -48,7 +45,7 @@ export type swapPerformerCuePositionType = {
 
 const djManageEventSlice = createSlice({
 	name: "djManageEvent",
-	initialState: {} as djManageEventSliceType, 
+	initialState: {} as djManageEventSliceType,
 	reducers: {
 		setAllDjManageEventSlice: (
 			state,
@@ -65,19 +62,16 @@ const djManageEventSlice = createSlice({
 			const targetPerformer = state.checked_in[targetCuePosition];
 			state.checked_in[thisCuePosition] = {
 				...targetPerformer,
-				cue_position: thisCuePosition,			
+				cue_position: thisCuePosition,
 			};
 			state.checked_in[targetCuePosition] = {
 				...thisPerformer,
-				cue_position: targetCuePosition,						
+				cue_position: targetCuePosition,
 			};
 		},
 	},
 });
 
-export const {
-	setAllDjManageEventSlice,
-	swapPerformerCuePositionReducer,	
-} = djManageEventSlice.actions;
+export const { setAllDjManageEventSlice, swapPerformerCuePositionReducer } =
+	djManageEventSlice.actions;
 export default djManageEventSlice.reducer;
-  

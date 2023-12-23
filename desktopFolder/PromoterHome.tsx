@@ -3,6 +3,7 @@
 
 import { useState, useEffect } from "react";
 import SplashPage from "@/SplashPage";
+import { WarningRounded } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/rootStore";
 import _ from "lodash";
@@ -10,7 +11,6 @@ import { Auth } from "aws-amplify";
 import HomeBarV2 from "@desk/HomeBarV2";
 import { Tabs, Tab, Button } from "@mui/material";
 import { useRouter } from "next/navigation";
-import { CloseRounded } from "@mui/icons-material";
 import { setToDefaultDate } from "@/store/CreateEventDateSlice";
 import PromoterEventListPage from "@desk/performer_dj_promoter/promoter/PromoterEventListPage";
 import { getPromoterEventListV2pt0 } from "@/api_functions/getPromoterEventListV2pt0";
@@ -62,13 +62,8 @@ function PromoterHome() {
 		fetchData();
 	}, []);
 
-	const EventFromRedux = useSelector(
-		(state: RootState) => state.PromoterEventPageV2pt0Slice.event_data
-	);
-
-	function handleExit() {
-		setSelectedNav("event");
-		dispatch(setToDefaultDate());
+	function handleManageEvent() {
+		router.push("/promoter/manage_event/145");
 	}
 
 	return (
@@ -96,6 +91,14 @@ function PromoterHome() {
 						/>
 						<Tab value="event" label="My Events" sx={{ fontSize: "25px" }} />
 					</Tabs>
+					<Button
+						onClick={handleManageEvent}
+						sx={{ marginLeft: "20px", marginBottom: "7.5px" }}
+						color="success"
+						variant="outlined"
+						startIcon={<WarningRounded />}>
+						manage current event
+					</Button>
 				</div>
 			</HomeBarV2>
 

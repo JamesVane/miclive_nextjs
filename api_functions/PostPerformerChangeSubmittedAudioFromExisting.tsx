@@ -1,15 +1,12 @@
 /** @format */
 
 import React from "react";
-
-type SubmittedAudio = {
-	[key: string]: { audioName: string; audioKey: string; length: number };
-};
+import { SubmittedAudioType } from "@/UniversalTypes";
 
 export async function PostPerformerChangeSubmittedAudioFromExisting(
 	performerId: number,
 	specificEventId: number,
-	submittedAudio: SubmittedAudio
+	submittedAudio: SubmittedAudioType
 ) {
 	console.log("submittedAudio:", submittedAudio);
 	console.log("performerId:", performerId);

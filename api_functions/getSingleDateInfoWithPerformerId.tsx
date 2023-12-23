@@ -1,6 +1,7 @@
 /** @format */
 
 import axios from "axios";
+import { SubmittedAudioType } from "@/UniversalTypes";
 
 export interface Promoter {
 	promoter_sub: string;
@@ -52,9 +53,7 @@ export interface PreviousEvent {
 	end_time: number;
 	date_description: string;
 	location: { name: string; cords: { lat: number; lng: number } };
-	submitted_audio: {
-		[key: string]: { audioName: string; audioKey: string; length: number };
-	} | null;
+	submitted_audio: SubmittedAudioType | null;
 	base_event_id: number;
 	specific_event_id: number;
 	promoter: Promoter;
@@ -74,9 +73,7 @@ export interface UpcomingEvent {
 	base_event_id: number;
 	specific_event_id: number;
 	used_audio_time: number;
-	submitted_audio: {
-		[key: string]: { audioName: string; audioKey: string; length: number };
-	} | null;
+	submitted_audio: SubmittedAudioType | null;
 	promoter: Promoter;
 	dj: DJ;
 }
