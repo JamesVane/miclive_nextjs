@@ -12,12 +12,26 @@ import {
 
 interface InQueuePaperProps {
 	performerId: number;
+	performerName: string;
+	isTempAccount: boolean;
+	queuePosition: number;
+	isDragging: boolean;
 }
 
-function InQueuePaper({ performerId }: InQueuePaperProps) {
+function InQueuePaper({
+	performerId,
+	performerName,
+	isTempAccount,
+	queuePosition,
+	isDragging,
+}: InQueuePaperProps) {
 	return (
-		<PaperWrapper performerId={performerId}>
-			<div className={styles.name_div}>Thouxanbanfauno</div>
+		<PaperWrapper
+			queuePosition={queuePosition}
+			performerName={performerName}
+			isTempAccount={isTempAccount}
+			performerId={performerId}>
+			<div className={styles.name_div}>{performerName}</div>
 			<div className={styles.bottom_paper}>
 				<Button
 					disabled={true}

@@ -69,9 +69,18 @@ const djManageEventSlice = createSlice({
 				cue_position: targetCuePosition,
 			};
 		},
+		adjustQueuePositionFromDND: (
+			state,
+			action: PayloadAction<CueObjectType>
+		) => {
+			state.checked_in = action.payload;
+		},
 	},
 });
 
-export const { setAllDjManageEventSlice, swapPerformerCuePositionReducer } =
-	djManageEventSlice.actions;
+export const {
+	setAllDjManageEventSlice,
+	swapPerformerCuePositionReducer,
+	adjustQueuePositionFromDND,
+} = djManageEventSlice.actions;
 export default djManageEventSlice.reducer;

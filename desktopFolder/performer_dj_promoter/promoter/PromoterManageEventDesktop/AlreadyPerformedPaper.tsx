@@ -8,12 +8,24 @@ import { MessageRounded } from "@mui/icons-material";
 
 interface AlreadyPerformedPaperProps {
 	performerId: number;
+	performerName: string;
+	isTempAccount: boolean;
+	queuePosition: number;
 }
 
-function AlreadyPerformedPaper({ performerId }: AlreadyPerformedPaperProps) {
+function AlreadyPerformedPaper({
+	performerId,
+	performerName,
+	isTempAccount,
+	queuePosition,
+}: AlreadyPerformedPaperProps) {
 	return (
-		<PaperWrapper performerId={performerId}>
-			<div className={styles.name_div}>Performer Name Here</div>
+		<PaperWrapper
+			queuePosition={queuePosition}
+			performerName={performerName}
+			isTempAccount={isTempAccount}
+			performerId={performerId}>
+			<div className={styles.name_div}>{performerName}</div>
 			<div className={styles.bottom_paper}>
 				<Button
 					disabled={true}

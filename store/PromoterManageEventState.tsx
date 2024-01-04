@@ -19,6 +19,7 @@ export type PerformerType = {
 	has_audio: boolean;
 	cue_position: number;
 	checked_in: boolean;
+	is_temp_account: boolean;
 };
 
 type DjType = {
@@ -48,6 +49,10 @@ export type EventInfoType = {
 	dj: DjType;
 };
 
+export type PromoterCueObjectType = {
+	[key: number]: PerformerType;
+};
+
 export type PromoterManageEventStateType = {
 	event_state: string;
 	event_cue_position: number;
@@ -57,12 +62,8 @@ export type PromoterManageEventStateType = {
 	event: EventInfoType;
 	roster: {
 		not_checked_in: PerformerType[];
-		checked_in: {
-			[key: number]: PerformerType;
-		};
-		has_performed: {
-			[key: number]: PerformerType;
-		};
+		checked_in: PromoterCueObjectType;
+		has_performed: PromoterCueObjectType;
 	};
 };
 
@@ -76,8 +77,17 @@ const PromoterManageEventState = createSlice({
 		) => {
 			return action.payload;
 		},
+		promoterManageAdjustQueuePositionFromDND: (
+			state,
+			action: PayloadAction<PromoterCueObjectType>
+		) => {
+			state.roster.checked_in = action.payload;
+		},
 	},
 });
 
-export const { setPromoterManageState } = PromoterManageEventState.actions;
+export const {
+	setPromoterManageState,
+	promoterManageAdjustQueuePositionFromDND,
+} = PromoterManageEventState.actions;
 export default PromoterManageEventState.reducer;

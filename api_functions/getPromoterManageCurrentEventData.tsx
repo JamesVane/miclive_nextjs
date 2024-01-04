@@ -83,8 +83,8 @@ function performerArrayToPerformerType(
 	performerArray: string[]
 ): PerformerType {
 	let performerInfo = {};
-	if (performerArray[4] && performerArray[4] !== "") {
-		const correctedJsonString = performerArray[4].replace(/\"\"/g, '"');
+	if (performerArray[5] && performerArray[5] !== "") {
+		const correctedJsonString = performerArray[5].replace(/\"\"/g, '"');
 
 		const sanitizedString = correctedJsonString.slice(1, -1);
 
@@ -97,21 +97,56 @@ function performerArrayToPerformerType(
 	const performerType: PerformerType = {
 		performer_id: parseInt(performerArray[0]),
 		performer_name: performerArray[1].slice(1, -1),
-		performer_tagline: performerArray[2],
-		performer_sub: performerArray[3],
+		is_temp_account: performerArray[2] === "t",
+		performer_tagline: performerArray[3],
+		performer_sub: performerArray[4],
 		performer_info: performerInfo,
-		has_audio: performerArray[5] === "t",
-		cue_position: parseInt(performerArray[6]),
-		checked_in: performerArray[7] === "t",
+		has_audio: performerArray[6] === "t",
+		cue_position: parseInt(performerArray[7]),
+		checked_in: performerArray[8] === "t",
 	};
 	return performerType;
 }
 
 function parseStringToArray(str: string): string[] {
+	// Remove the leading and trailing parentheses
 	const trimmedStr = str.slice(1, -1);
-	const arr = trimmedStr.split(",");
-	const trimmedArr = arr.map((elem) => elem.trim());
-	return trimmedArr;
+
+	const resultArray: string[] = [];
+	let cursor = 0;
+	let inQuotes = false;
+	let buffer = "";
+
+	while (cursor < trimmedStr.length) {
+		const currentChar = trimmedStr[cursor];
+
+		// Toggle inQuotes boolean when a quote is encountered unless it is escaped
+		if (currentChar === '"' && trimmedStr[cursor - 1] !== "\\") {
+			inQuotes = !inQuotes;
+		} else if (currentChar === "," && !inQuotes) {
+			// When a comma is encountered outside of quotes, push the buffer to result and reset buffer
+			resultArray.push(buffer.trim());
+			buffer = "";
+		} else {
+			buffer += currentChar;
+		}
+
+		cursor++;
+	}
+
+	// Add the last buffered item to the array
+	if (buffer) {
+		resultArray.push(buffer.trim());
+	}
+
+	// Process the results to remove quotes from the simple strings
+	return resultArray.map((element) => {
+		if (element.startsWith('"') && element.endsWith('"')) {
+			// Remove the leading and trailing quotes from the string
+			return element.slice(1, -1).replace(/\\"/g, '"'); // Also unescape any escaped quotes
+		}
+		return element;
+	});
 }
 
 function parseRawDataRoster(rawDataRoster: string[]): PerformerType[] {
@@ -147,11 +182,11 @@ function parseRawDataRosterToRosterObjects(
 		if (item.checked_in === false) {
 			returnObject.not_checked_in.push(item);
 		} else if (item.cue_position >= currentCuePosition) {
-			returnObject.has_performed[item.cue_position] = item;
-		} else if (item.cue_position < currentCuePosition) {
 			returnObject.checked_in[item.cue_position] = item;
+		} else if (item.cue_position < currentCuePosition) {
+			returnObject.has_performed[item.cue_position] = item;
 		}
 	}
-
+	console.log("returnObject", returnObject);
 	return returnObject;
 }

@@ -8,12 +8,22 @@ import { MessageRounded } from "@mui/icons-material";
 
 interface NotCheckedInPaperProps {
 	performerId: number;
+	performerName: string;
+	isTempAccount: boolean;
 }
 
-function NotCheckedInPaper({ performerId }: NotCheckedInPaperProps) {
+function NotCheckedInPaper({
+	performerId,
+	performerName,
+	isTempAccount,
+}: NotCheckedInPaperProps) {
 	return (
-		<PaperWrapper noNumber performerId={performerId}>
-			<div className={styles.name_div}>Not Check In Perfor</div>
+		<PaperWrapper
+			performerName={performerName}
+			isTempAccount={isTempAccount}
+			noNumber
+			performerId={performerId}>
+			<div className={styles.name_div}>{performerName}</div>
 			<div className={styles.bottom_paper}>
 				<Button
 					disabled={true}

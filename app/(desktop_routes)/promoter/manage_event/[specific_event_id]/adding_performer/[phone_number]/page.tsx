@@ -7,15 +7,15 @@ import ConfirmTempModal from "@desk/performer_dj_promoter/promoter/PromoterManag
 function page({
 	params,
 }: {
-	params: { base_event_id: string; phone_number: string };
+	params: { specific_event_id: string; phone_number: string };
 }) {
 	return (
 		<>
 			<ConfirmTempModal
 				phoneNumber={params.phone_number}
-				baseEventId={Number(params.base_event_id)}
+				baseEventId={Number(params.specific_event_id)}
 			/>
-			<PromoterManageEventDesktop />
+			<PromoterManageEventDesktop specificEventId={params.specific_event_id} />
 		</>
 	);
 }

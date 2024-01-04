@@ -1,7 +1,7 @@
 /** @format */
 "use client";
 
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import {
 	Button,
 	TextField,
@@ -60,6 +60,23 @@ function SignInPage({
 	function handleWhatIsFocused(key: string, value: boolean) {
 		setWhatIsFocused({ ...whatIsFocused, [key]: value });
 	}
+
+	function handleKeyPress(event: KeyboardEvent) {
+		if (event.key == "Enter" || event.code == "NumpadEnter") {
+			if (!isSubmitting && !submitDisabled) {
+				handleSignIn();
+			}
+		}
+	}
+
+	useEffect(() => {
+		window.removeEventListener("keydown", handleKeyPress);
+		window.addEventListener("keydown", handleKeyPress);
+
+		return () => {
+			window.removeEventListener("keydown", handleKeyPress);
+		};
+	}, [submitDisabled, isSubmitting, phone, password, handleSignIn]);
 
 	return (
 		<div className={styles.main_div}>

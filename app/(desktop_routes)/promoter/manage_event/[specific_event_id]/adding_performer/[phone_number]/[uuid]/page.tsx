@@ -7,14 +7,14 @@ import AddWalkinDataModal from "@desk/performer_dj_promoter/promoter/PromoterMan
 async function page({
 	params,
 }: {
-	params: { base_event_id: string; phone_number: string; uuid: string };
+	params: { specific_event_id: string; phone_number: string; uuid: string };
 }) {
 	return (
 		<>
 			<AddWalkinDataModal
 				phoneNumber={params.phone_number}
 				uuidCode={params.uuid}
-				specificEventId={Number(params.base_event_id)}
+				specificEventId={Number(params.specific_event_id)}
 			/>
 			{/* <PromoterManageEventDesktop /> */}
 		</>

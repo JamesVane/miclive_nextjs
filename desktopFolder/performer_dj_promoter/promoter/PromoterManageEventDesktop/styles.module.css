@@ -242,3 +242,21 @@
 	align-items: center;
 	justify-content: flex-end;
 }
+.list_loading_overlay {
+	width: 100%;
+	height: 100%;
+	background-color: var(--background-default);
+	position: absolute;
+	z-index: 400;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.dnd_center {
+	width: 100%;
+	display: flex;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
