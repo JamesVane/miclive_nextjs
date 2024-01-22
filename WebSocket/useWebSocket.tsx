@@ -8,6 +8,7 @@ import {
 } from "../store/conversationListSlice";
 import { setSingleConversationMessage } from "../store/conversationMessagesSlice";
 import { RootState } from "../store/rootStore";
+import { setCurrentSub as setCurrentSubSlice } from "@/store/currentSubStore";
 
 interface createConversationData {
 	userSub: string;
@@ -45,8 +46,8 @@ const useWebSocket = (user_sub: string | null) => {
 		setSocket(socket);
 
 		// Connection opened
-		socket.addEventListener("open", (event) => {
-			console.log("Connection Established");
+		socket.addEventListener("open", (event: any) => {
+			console.log("Connection Established", event);
 
 			// Send a heartbeat message every 2 minutes
 			const intervalId = setInterval(() => {
@@ -56,7 +57,7 @@ const useWebSocket = (user_sub: string | null) => {
 				};
 				socket.send(JSON.stringify(data));
 				console.log("ba-bumm");
-			}, 6000); // 120000 ms = 2 minutes
+			}, 40000); // 40000 ms = 40 seconds
 
 			// Clear interval on connection close or error
 			socket.addEventListener("close", () => clearInterval(intervalId));
@@ -144,6 +145,7 @@ const useWebSocket = (user_sub: string | null) => {
 		// Connection closed
 		socket.addEventListener("close", (event) => {
 			console.log("Connection closed ", event);
+			dispatch(setCurrentSubSlice(null));
 		});
 
 		// Connection error

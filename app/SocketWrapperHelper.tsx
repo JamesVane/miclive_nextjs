@@ -25,6 +25,10 @@ function SocketWrapperHelper({ children }: { children: React.ReactNode }) {
 		(state: RootState) => state.CurrentSubStore
 	);
 
+	const isTimedOutSate = useSelector(
+		(state: RootState) => state.isTimedOutSlice
+	);
+
 	function handleSetCurrentSub(value: string | null) {
 		dispatch(setCurrentSubSlice(value));
 	}
@@ -78,7 +82,7 @@ function SocketWrapperHelper({ children }: { children: React.ReactNode }) {
 	async function checkUser() {
 		try {
 			const currentUser = await Auth.currentAuthenticatedUser();
-			if (currentUser.attributes) {
+			if (currentUser.attributes && !isTimedOutSate) {
 				handleSetCurrentSub(currentUser.attributes.sub);
 			}
 		} catch {
@@ -90,7 +94,7 @@ function SocketWrapperHelper({ children }: { children: React.ReactNode }) {
 		if (currentSub === null) {
 			checkUser();
 		}
-	}, []);
+	}, [currentSub]);
 
 	async function handleSetConversations() {
 		dispatch(setConversationMessagesDefault());

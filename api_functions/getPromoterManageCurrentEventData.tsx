@@ -96,7 +96,7 @@ function performerArrayToPerformerType(
 	}
 	const performerType: PerformerType = {
 		performer_id: parseInt(performerArray[0]),
-		performer_name: performerArray[1].slice(1, -1),
+		performer_name: performerArray[1],
 		is_temp_account: performerArray[2] === "t",
 		performer_tagline: performerArray[3],
 		performer_sub: performerArray[4],

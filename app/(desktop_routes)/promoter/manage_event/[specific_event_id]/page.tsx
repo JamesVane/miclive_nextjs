@@ -1,4 +1,5 @@
 /** @format */
+"use client";
 
 import React from "react";
 import PromoterManageEventDesktop from "@desk/performer_dj_promoter/promoter/PromoterManageEventDesktop";

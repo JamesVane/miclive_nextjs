@@ -3,12 +3,8 @@
 import React from "react";
 import styles from "./styles.module.css";
 import PaperWrapper from "./PaperWrapper";
-import { Button, ButtonGroup } from "@mui/material";
-import {
-	MessageRounded,
-	ArrowUpwardRounded,
-	ArrowDownwardRounded,
-} from "@mui/icons-material";
+import { Button } from "@mui/material";
+import { MessageRounded } from "@mui/icons-material";
 
 interface InQueuePaperProps {
 	performerId: number;
@@ -41,14 +37,6 @@ function InQueuePaper({
 					startIcon={<MessageRounded />}>
 					message
 				</Button>
-				<ButtonGroup size="small">
-					<Button>
-						<ArrowUpwardRounded />
-					</Button>
-					<Button>
-						<ArrowDownwardRounded />
-					</Button>
-				</ButtonGroup>
 			</div>
 		</PaperWrapper>
 	);

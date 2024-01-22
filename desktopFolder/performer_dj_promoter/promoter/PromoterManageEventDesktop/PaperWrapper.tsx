@@ -4,6 +4,7 @@ import React from "react";
 import styles from "./styles.module.css";
 import AvatarSimple from "@/desktopFolder/AvatarSimple";
 import { Avatar } from "@mui/material";
+import { letterToHexcodeObject, TwoLetterKey } from "@/lettersToHexcodesObject";
 
 interface PaperWrapperProps {
 	children: React.ReactNode;
@@ -22,6 +23,13 @@ function PaperWrapper({
 	performerName,
 	queuePosition,
 }: PaperWrapperProps) {
+	const firstTwoLettersOfPerformerNameCapitolized =
+		(performerName[0].toUpperCase() +
+			performerName[1].toUpperCase()) as TwoLetterKey;
+
+	const noPicColor =
+		letterToHexcodeObject[firstTwoLettersOfPerformerNameCapitolized];
+
 	return (
 		<div className={styles.roster_paper}>
 			<div className={styles.avatar_div}>
@@ -29,9 +37,10 @@ function PaperWrapper({
 					sx={{
 						height: "85%",
 						width: "85%",
+						backgroundColor: noPicColor,
 					}}>
 					{isTempAccount ? (
-						performerName
+						firstTwoLettersOfPerformerNameCapitolized
 					) : (
 						<img
 							src={`https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/performer_pictures/performer_${performerId}.jpg`}

@@ -16,6 +16,7 @@ import ViewUserInfoModalDesktop from "@desk/ViewUserInfoModalDesktop";
 import horizLogo from "@/images/miclive_svg_horiz.svg";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { Auth } from "aws-amplify";
 
 interface HomeBarV2Props {
 	children: JSX.Element | React.ReactNode;
@@ -40,10 +41,15 @@ function HomeBarV2({
 		router.push("/profile");
 	}
 
-	function handleLogOut() {
-		localStorage.clear();
-		sessionStorage.clear();
-		router.push("/");
+	async function handleLogOut() {
+		try {
+			await Auth.signOut();
+			localStorage.clear();
+			sessionStorage.clear();
+			router.push("/");
+		} catch (error) {
+			console.log("error signing out: ", error);
+		}
 	}
 
 	function MessageButton() {
