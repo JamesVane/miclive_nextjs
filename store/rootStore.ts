@@ -36,7 +36,7 @@ import promoterDateInfoV2pt0Slice from "./promoterDateInfoV2pt0Slice"
 import DjEventDateListV2pt0Slice from "./DjEventDateListV2pt0Slice"
 import DjPrimaryEventsListV2pt0Slice from "./DjPrimaryEventsListV2pt0Slice"
 import djEventDateModalDataV2pt0 from "./djEventDateModalDataV2pt0"
-import isTimedOutSlice from "./isTimedOutSlice"
+import shouldReFetchFromSocketSlice from "./shouldReFetchFromSocketSlice"
 
 
 
@@ -76,8 +76,8 @@ const rootReducer = combineReducers({
 	promoterDateInfoV2pt0Slice:promoterDateInfoV2pt0Slice,
 	DjEventDateListV2pt0Slice: DjEventDateListV2pt0Slice,
 	DjPrimaryEventsListV2pt0Slice: DjPrimaryEventsListV2pt0Slice,
-	djEventDateModalDataV2pt0: djEventDateModalDataV2pt0,
-	isTimedOutSlice: isTimedOutSlice,
+	djEventDateModalDataV2pt0: djEventDateModalDataV2pt0,	
+	shouldReFetchFromSocketSlice: shouldReFetchFromSocketSlice,
 });
 
 const store = configureStore({
@@ -86,4 +86,4 @@ const store = configureStore({
 
   export { store };
 export type RootState = ReturnType<typeof rootReducer>;
- 
+  

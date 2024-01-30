@@ -1,6 +1,5 @@
 /** @format */
 
-import type { Metadata } from "next";
 import "react-quill/dist/quill.bubble.css";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "@mui/material/styles";
@@ -8,7 +7,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { darkTheme } from "./muiprovider";
 import LocalizationProviderHelper from "./LocalizationProviderHelper";
 import SocketWrapperHelper from "./SocketWrapperHelper";
-import LayoutWrapper from "./LayoutWrapper";
 import "../theme-variables.css";
 import "./global.css";
 import awsExports from "../aws-exports";
@@ -53,11 +51,9 @@ export default function RootLayout({
 			<meta property="Sec-Fetch-User" content="?1" />
 			<LocalizationProviderHelper>
 				<ThemeProvider theme={darkTheme}>
+					<CssBaseline />
 					<SocketWrapperHelper>
-						<LayoutWrapper>
-							<CssBaseline />
-							<body className={inter.className}>{children}</body>
-						</LayoutWrapper>
+						<body className={inter.className}>{children}</body>
 					</SocketWrapperHelper>
 				</ThemeProvider>
 			</LocalizationProviderHelper>

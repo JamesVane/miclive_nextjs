@@ -10,8 +10,9 @@ import AlreadyPerformedHelper from "./AlreadyPerformedHelper";
 import { usePathname, useRouter } from "next/navigation";
 import { promoterGetQrAndKeyFromDynamo } from "@/api_functions/promoterGetQrAndKeyFromDynamo";
 import { getPromoterManageCurrentEventData } from "@/api_functions/getPromoterManageCurrentEventData";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import SplashPage from "@/SplashPage";
+import { RootState } from "@/store/rootStore";
 import { setPromoterManageState } from "@/store/PromoterManageEventState";
 
 interface PromoterManageEventDesktopProps {
@@ -24,6 +25,10 @@ function PromoterManageEventDesktop({
 	const dispatch = useDispatch();
 	const router = useRouter();
 	const pathname = usePathname();
+
+	const shouldReFetchFromSocketSlice = useSelector(
+		(state: RootState) => state.shouldReFetchFromSocketSlice
+	);
 
 	const [isLoading, setIsLoading] = useState(true);
 	const [checkinUuidAndId, setCheckinUuidAndQr] = useState<{
@@ -45,15 +50,13 @@ function PromoterManageEventDesktop({
 	}
 
 	useEffect(() => {
-		if (isLoading) {
-			handleQrAndId().then(() => {
-				getPromoterManageCurrentEventData(specificEventId!).then((data) => {
-					dispatch(setPromoterManageState(data));
-					setIsLoading(false);
-				});
+		handleQrAndId().then(() => {
+			getPromoterManageCurrentEventData(specificEventId!).then((data) => {
+				dispatch(setPromoterManageState(data));
+				setIsLoading(false);
 			});
-		}
-	}, []);
+		});
+	}, [shouldReFetchFromSocketSlice]);
 
 	return (
 		<>

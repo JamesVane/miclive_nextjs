@@ -16,7 +16,7 @@ async function page({
 				uuidCode={params.uuid}
 				specificEventId={Number(params.specific_event_id)}
 			/>
-			{/* <PromoterManageEventDesktop /> */}
+			<PromoterManageEventDesktop specificEventId={params.specific_event_id} />
 		</>
 	);
 }

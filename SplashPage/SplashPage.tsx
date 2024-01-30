@@ -32,9 +32,9 @@ const SplashPage = () => {
 				</div>
 			</BrowserView>
 			<Typography variant="subtitle1" component="div" gutterBottom>
-				<span className={styles.dot}></span>
-				<span className={styles.dot}></span>
-				<span className={styles.dot}></span>
+				<span className={styles.dot} />
+				<span className={styles.dot} />
+				<span className={styles.dot} />
 			</Typography>
 		</Box>
 	);

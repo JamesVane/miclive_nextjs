@@ -1,88 +1,52 @@
 /** @format */
 
 "use client";
-import { useEffect, useRef, useCallback } from "react";
+import { useEffect } from "react";
 import React from "react";
 import { useSelector } from "react-redux";
 import { Auth } from "aws-amplify";
 import { useDispatch } from "react-redux";
 import { getConversationList } from "@/api_functions/getConversationList";
-import { debounce } from "lodash";
 import { setAllConversationListSlice } from "@/store/conversationListSlice";
 import { setConversationMessagesDefault } from "@/store/conversationMessagesSlice";
 import { setCurrentSub as setCurrentSubSlice } from "@/store/currentSubStore";
 import useWebSocket from "@/WebSocket/useWebSocket";
 import { RootState } from "@/store/rootStore";
-import { setIsTimedOutState } from "@/store/isTimedOutSlice";
 import { SocketContext } from "@/SocketContext";
 
 function SocketWrapperHelper({ children }: { children: React.ReactNode }) {
 	const dispatch = useDispatch();
 
-	const activityTimeoutId = useRef<NodeJS.Timeout | null>(null);
-
 	const { userSub: currentSub } = useSelector(
 		(state: RootState) => state.CurrentSubStore
-	);
-
-	const isTimedOutSate = useSelector(
-		(state: RootState) => state.isTimedOutSlice
 	);
 
 	function handleSetCurrentSub(value: string | null) {
 		dispatch(setCurrentSubSlice(value));
 	}
 
-	const { createConversation } = useWebSocket(currentSub);
+	const { createConversation, tickFunction } = useWebSocket(currentSub);
 
-	const resetTimer = useCallback(() => {
-		if (activityTimeoutId.current) {
-			clearTimeout(activityTimeoutId.current);
+	function handleVisibilityChange() {
+		if (currentSub === null) {
+			checkUser();
+		} else {
+			tickFunction();
 		}
-		activityTimeoutId.current = setTimeout(() => {
-			console.log("activity timeout");
-			dispatch(setIsTimedOutState(true));
-			handleSetCurrentSub(null);
-		}, 120000);
-	}, []);
-
-	const handleUserActivity = useCallback(
-		debounce(() => {
-			if (currentSub) {
-				console.log("activity detected");
-				resetTimer();
-			}
-		}, 200),
-		[resetTimer, currentSub]
-	);
+	}
 
 	useEffect(() => {
-		window.addEventListener("mousemove", handleUserActivity);
-		window.addEventListener("keypress", handleUserActivity);
-		window.addEventListener("touchstart", handleUserActivity);
-		window.addEventListener("mousedown", handleUserActivity);
-		window.addEventListener("keydown", handleUserActivity);
+		window.addEventListener("visibilitychange", handleVisibilityChange);
 
 		return () => {
-			window.removeEventListener("mousemove", handleUserActivity);
-			window.removeEventListener("keypress", handleUserActivity);
-			window.removeEventListener("touchstart", handleUserActivity);
-			window.removeEventListener("mousedown", handleUserActivity);
-			window.removeEventListener("keydown", handleUserActivity);
+			window.removeEventListener("visibilitychange", handleVisibilityChange);
 		};
-	}, [handleUserActivity]);
-
-	useEffect(() => {
-		if (currentSub) {
-			console.log("interacted");
-			resetTimer();
-		}
-	}, [currentSub, resetTimer]);
+	}, []);
 
 	async function checkUser() {
 		try {
 			const currentUser = await Auth.currentAuthenticatedUser();
-			if (currentUser.attributes && !isTimedOutSate) {
+			if (currentUser.attributes) {
 				handleSetCurrentSub(currentUser.attributes.sub);
 			}
 		} catch {
