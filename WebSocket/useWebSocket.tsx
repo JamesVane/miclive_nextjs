@@ -10,6 +10,7 @@ import { setSingleConversationMessage } from "../store/conversationMessagesSlice
 import { RootState } from "../store/rootStore";
 import { setCurrentSub as setCurrentSubSlice } from "@/store/currentSubStore";
 import { setShouldReFetchSocket } from "@/store/shouldReFetchFromSocketSlice";
+import { setImtermissionTimestamp } from "@/store/PromoterManageEventState";
 
 interface createConversationData {
 	userSub: string;
@@ -68,76 +69,83 @@ const useWebSocket = (user_sub: string | null) => {
 				console.log("Message from server ", event.data);
 				const eventData = JSON.parse(event.data);
 
-				if (eventData && eventData.new_reaction) {
-					const newReactionData = eventData.new_reaction;
+				if (eventData) {
+					if (eventData.new_reaction) {
+						const newReactionData = eventData.new_reaction;
 
-					console.log("newReactionData", newReactionData);
+						console.log("newReactionData", newReactionData);
 
-					const senderName = newReactionData.sender_name;
+						const senderName = newReactionData.sender_name;
 
-					const newTopMessage = `${senderName} reacted to: "${newReactionData.message}"`;
-					const messageKey = newReactionData.request_primary_key;
+						const newTopMessage = `${senderName} reacted to: "${newReactionData.message}"`;
+						const messageKey = newReactionData.request_primary_key;
 
-					dispatch(
-						setUpdateTopMessage({
-							sub: newReactionData.senderSub,
-							topMessage: newTopMessage,
-							timestamp: newReactionData.currentTimestamp,
-							unOpened: true,
-						})
-					);
+						dispatch(
+							setUpdateTopMessage({
+								sub: newReactionData.senderSub,
+								topMessage: newTopMessage,
+								timestamp: newReactionData.currentTimestamp,
+								unOpened: true,
+							})
+						);
 
-					dispatch(
-						setSingleConversationMessage({
-							senderReciver: messageKey,
-							timestamp: newReactionData.timestamp,
-							message: newReactionData.message,
-							reaction: newReactionData.reaction,
-						})
-					);
-				}
+						dispatch(
+							setSingleConversationMessage({
+								senderReciver: messageKey,
+								timestamp: newReactionData.timestamp,
+								message: newReactionData.message,
+								reaction: newReactionData.reaction,
+							})
+						);
+					}
 
-				if (eventData && eventData.new_message) {
-					const newMessageData = eventData.new_message;
+					if (eventData.new_message) {
+						const newMessageData = eventData.new_message;
 
-					const themToMe = `${newMessageData.senderSub}-${user_sub}`;
+						const themToMe = `${newMessageData.senderSub}-${user_sub}`;
 
-					console.log("newMessageData", newMessageData);
-					dispatch(
-						setUpdateTopMessage({
-							sub: newMessageData.senderSub,
-							topMessage: newMessageData.topMessage,
-							timestamp: newMessageData.timestamp,
-							unOpened: true,
-						})
-					);
+						console.log("newMessageData", newMessageData);
+						dispatch(
+							setUpdateTopMessage({
+								sub: newMessageData.senderSub,
+								topMessage: newMessageData.topMessage,
+								timestamp: newMessageData.timestamp,
+								unOpened: true,
+							})
+						);
 
-					dispatch(
-						setSingleConversationMessage({
-							senderReciver: themToMe,
-							timestamp: newMessageData.timestamp,
-							message: newMessageData.topMessage,
-							reaction: { sender: null, reciver: null },
-						})
-					);
-				}
+						dispatch(
+							setSingleConversationMessage({
+								senderReciver: themToMe,
+								timestamp: newMessageData.timestamp,
+								message: newMessageData.topMessage,
+								reaction: { sender: null, reciver: null },
+							})
+						);
+					}
 
-				if (eventData && eventData.new_conversation) {
-					const newConversation = eventData.new_conversation;
-					console.log("New conversation data: ", newConversation);
-					dispatch(
-						setAddConversationToList({
-							sub: newConversation.senderSub,
-							name: newConversation.name,
-							type: newConversation.type,
-							roleId: newConversation.roleId,
-							DND: false,
-							pinned: false,
-							timestamp: newConversation.timestamp,
-							topMessage: newConversation.topMessage,
-							unOpened: true,
-						})
-					);
+					if (eventData.new_conversation) {
+						const newConversation = eventData.new_conversation;
+						console.log("New conversation data: ", newConversation);
+						dispatch(
+							setAddConversationToList({
+								sub: newConversation.senderSub,
+								name: newConversation.name,
+								type: newConversation.type,
+								roleId: newConversation.roleId,
+								DND: false,
+								pinned: false,
+								timestamp: newConversation.timestamp,
+								topMessage: newConversation.topMessage,
+								unOpened: true,
+							})
+						);
+					}
+
+					if (eventData.intermission_has_started) {
+						const intermissionStamp = eventData.intermission_has_started;
+						dispatch(setImtermissionTimestamp(intermissionStamp));
+					}
 				}
 			});
 
