@@ -15,12 +15,14 @@ interface PerformerSelectFromExistingModalProps {
 	refreshAudio: () => void;
 	performerIdFromInput?: number;
 	audioKeysFromInput?: PerformerRoleAudioKeys;
+	djSubForPromotersocket?: string;
 }
 
 function PerformerSelectFromExistingModal({
 	refreshAudio,
 	performerIdFromInput,
 	audioKeysFromInput,
+	djSubForPromotersocket,
 }: PerformerSelectFromExistingModalProps) {
 	const dispatch = useDispatch();
 	const {
@@ -72,6 +74,7 @@ function PerformerSelectFromExistingModal({
 							selectFromSongOpen={selectFromSongOpen}
 							allowedLength={allowedLength}
 							performerIdFromInput={performerIdFromInput}
+							djSubForPromotersocket={djSubForPromotersocket}
 						/>
 					</Paper>
 				</div>

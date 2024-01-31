@@ -1,49 +1,49 @@
 /** @format */
-"use client";
 
 import { useState, useEffect } from "react";
 import styles from "./styles.module.css";
-import { useRouter, useSearchParams } from "next/navigation";
 import {
 	IconButton,
 	CircularProgress,
 	Button,
 	LinearProgress,
 } from "@mui/material";
-import { CloseRounded, CheckCircle } from "@mui/icons-material";
 import DividerH from "@/universalComponents/DividerH";
-import { getNumberOfTracksFromBaseEventId } from "@/api_functions/getNumberOfTracksFromBaseEventId";
-import PerformerTicketSubmitAudioPaper from "@desk/performer_dj_promoter/performer/PerformerTicketSubmitAudioPaper";
-import { getSubmittedAudioForPerformerFromId } from "@/api_functions/getSubmittedAudioForPerformerFromId";
-import { SubmittedAudioType } from "@/UniversalTypes";
-import { useDispatch } from "react-redux";
-import { setAddNewAudioToEvent } from "@/store/performerAddNewAudioToEventSlice";
-import PerformerAddNewAudioToEventModal from "@desk/performer_dj_promoter/performer/PerformerAddNewAudioToEventModal";
-import { setSelectFromExisting } from "@/store/performerSelectFromExistingModalSlice";
-import PerformerSelectFromExistingModal from "@desk/performer_dj_promoter/performer/PerformerSelectFromExistingModal";
+import { CloseRounded, CheckCircle } from "@mui/icons-material";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/store/rootStore";
+import { formatMMSS } from "@/generic_functions/time_formaters";
 import {
 	getPerformerProfileAudioKeys,
 	PerformerRoleAudioKeys,
 } from "@/api_functions/getPerformerProfileAudioKeys";
-import { formatMMSS } from "@/generic_functions/time_formaters";
-import { checkInPerformerWithManualWalkinUuid } from "@/api_functions/checkInPerformerWithManualWalkinUuid";
+import { getNumberOfTracksFromBaseEventId } from "@/api_functions/getNumberOfTracksFromBaseEventId";
+import { SubmittedAudioType } from "@/UniversalTypes";
+import { getSubmittedAudioForPerformerFromId } from "@/api_functions/getSubmittedAudioForPerformerFromId";
+import { setSelectFromExisting } from "@/store/performerSelectFromExistingModalSlice";
+import { setAddNewAudioToEvent } from "@/store/performerAddNewAudioToEventSlice";
+import PerformerSelectFromExistingModal from "@desk/performer_dj_promoter/performer/PerformerSelectFromExistingModal";
+import PerformerAddNewAudioToEventModal from "@desk/performer_dj_promoter/performer/PerformerAddNewAudioToEventModal";
+import PerformerTicketSubmitAudioPaper from "@desk/performer_dj_promoter/performer/PerformerTicketSubmitAudioPaper";
 
-interface AddWalkinDataModalProps {
+interface ChangeAudioModalProps {
+	close: () => void;
 	specificEventId: number;
-	uuidCode: string;
-	phoneNumber: string;
+	performerId: number;
+	performerName: string;
 }
 
-function AddWalkinDataModal({
+function ChangeAudioModal({
+	close,
 	specificEventId,
-	uuidCode,
-	phoneNumber,
-}: AddWalkinDataModalProps) {
-	const router = useRouter();
+	performerId,
+	performerName,
+}: ChangeAudioModalProps) {
 	const dispatch = useDispatch();
-	const searchParams = useSearchParams();
 
-	const roleIdFromSearch = searchParams.get("performer_role_id");
+	const eventDjSub = useSelector(
+		(state: RootState) => state.PromoterManageEventState.event.dj.dj_sub
+	);
 
 	const [performersExistingAudioKeys, setPerformersExistingAudioKeys] =
 		useState<PerformerRoleAudioKeys>([]);
@@ -54,27 +54,19 @@ function AddWalkinDataModal({
 	const [submittedAudio, setSubmittedAudio] =
 		useState<SubmittedAudioType | null>();
 
-	function closeModal() {
-		if (!isInit) {
-			router.push(`/promoter/manage_event/${specificEventId}`);
-		}
-	}
-
 	async function init() {
-		if (roleIdFromSearch) {
-			await getPerformerProfileAudioKeys(roleIdFromSearch).then((response) => {
+		await getPerformerProfileAudioKeys(performerId.toString()).then(
+			(response) => {
 				setPerformersExistingAudioKeys(response);
-			});
-			await getSubmittedAudioForPerformerFromId({
-				requestPerformerId: roleIdFromSearch,
-				requestSpecificEventId: specificEventId.toString(),
-			}).then((response) => {
-				console.log("response", response);
-				setSubmittedAudio(response);
-			});
-		} else {
-			console.log("no role id from search");
-		}
+			}
+		);
+		await getSubmittedAudioForPerformerFromId({
+			requestPerformerId: performerId.toString(),
+			requestSpecificEventId: specificEventId.toString(),
+		}).then((response) => {
+			console.log("response", response);
+			setSubmittedAudio(response);
+		});
 		await getNumberOfTracksFromBaseEventId(specificEventId.toString()).then(
 			(response) => {
 				if (response) {
@@ -134,22 +126,7 @@ function AddWalkinDataModal({
 	const parsedAllowedTime = formatMMSS(Number(timePerPerformer));
 
 	async function handleCheckInPerformer() {
-		if (roleIdFromSearch) {
-			setIsLoading(true);
-			await checkInPerformerWithManualWalkinUuid({
-				requestUUID: uuidCode,
-				requestPerformerId: roleIdFromSearch,
-				requestSpecificEventId: specificEventId.toString(),
-			}).then((response) => {
-				if (response) {
-					router.push(`/promoter/manage_event/${specificEventId}`);
-				} else {
-					setIsLoading(false);
-				}
-			});
-		} else {
-			console.log("no role id from search");
-		}
+		close();
 	}
 
 	const noAudioSubmitted = submittedAudio
@@ -157,22 +134,26 @@ function AddWalkinDataModal({
 			? true
 			: false
 		: true;
-
 	return (
 		<>
 			<PerformerAddNewAudioToEventModal
-				performerIdFromProps={roleIdFromSearch ? Number(roleIdFromSearch) : 0}
+				djSubForPromotersocket={eventDjSub}
+				performerIdFromProps={performerId}
 				refreshAudio={() => init()}
 			/>
 			<PerformerSelectFromExistingModal
-				performerIdFromInput={roleIdFromSearch ? Number(roleIdFromSearch) : 0}
+				performerIdFromInput={performerId}
 				refreshAudio={() => init()}
 				audioKeysFromInput={performersExistingAudioKeys}
+				djSubForPromotersocket={eventDjSub}
 			/>
-			<div className={styles.modal_main_div}>
-				<div className={styles.add_data_modal_paper}>
+			<div className={styles.modal_main_div} onClick={close}>
+				<div
+					className={styles.change_audio_modal_paper}
+					onClick={(e) => e.stopPropagation()}>
 					<div className={styles.add_performer_header}>
-						Performer Audio
+						Change Audio For{" "}
+						<div className={styles.primary_perforer_name}>{performerName}</div>
 						<IconButton
 							disabled={isLoading}
 							sx={{
@@ -182,7 +163,7 @@ function AddWalkinDataModal({
 								height: "40px",
 								width: "40px",
 							}}
-							onClick={closeModal}>
+							onClick={close}>
 							<CloseRounded
 								sx={{
 									height: "35px",
@@ -234,9 +215,8 @@ function AddWalkinDataModal({
 											overflow: "hidden",
 										}}
 										variant="outlined"
-										color="success"
 										disabled={isLoading || noAudioSubmitted}>
-										Check-In Performer
+										done
 										{isLoading ? (
 											<LinearProgress
 												color="success"
@@ -258,4 +238,4 @@ function AddWalkinDataModal({
 	);
 }
 
-export default AddWalkinDataModal;
+export default ChangeAudioModal;

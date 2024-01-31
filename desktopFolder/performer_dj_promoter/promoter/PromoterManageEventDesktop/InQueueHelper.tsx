@@ -14,7 +14,16 @@ import { DragDropContext, Draggable } from "react-beautiful-dnd";
 import { CircularProgress } from "@mui/material";
 import { StrictModeDroppable } from "@/StrictModeDroppable";
 
-function InQueueHelper() {
+interface InQueueHelperProps {
+	setChangeAudioModal: React.Dispatch<
+		React.SetStateAction<{
+			performerId: number;
+			performerName: string;
+		}>
+	>;
+}
+
+function InQueueHelper({ setChangeAudioModal }: InQueueHelperProps) {
 	const dispatch = useDispatch();
 
 	const {
@@ -104,6 +113,7 @@ function InQueueHelper() {
 														{...provided.dragHandleProps}
 														{...provided.draggableProps}>
 														<InQueuePaper
+															setChangeAudioModal={setChangeAudioModal}
 															queuePosition={returnObject.cue_position}
 															performerName={returnObject.performer_name}
 															isTempAccount={returnObject.is_temp_account}

@@ -54,6 +54,7 @@ export type PromoterCueObjectType = {
 };
 
 export type PromoterManageEventStateType = {
+	intermission_timer_stamp: string | null;
 	event_state: string;
 	event_cue_position: number;
 	tickets_can_be_sold: boolean;
@@ -83,10 +84,14 @@ const PromoterManageEventState = createSlice({
 		) => {
 			state.roster.checked_in = action.payload;
 		},
+		setImtermissionTimestamp: (state, action: PayloadAction<string | null>) => {
+			state.intermission_timer_stamp = action.payload;
+		},
 	},
 });
 
 export const {
+	setImtermissionTimestamp,
 	setPromoterManageState,
 	promoterManageAdjustQueuePositionFromDND,
 } = PromoterManageEventState.actions;

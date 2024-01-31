@@ -2,12 +2,20 @@
 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+const defaultShouldReFetchFromSocket = {
+	stamp: "",
+};
+
+type shouldReFetchFromSocket = {
+	stamp: string;
+};
+
 const shouldReFetchFromSocketSlice = createSlice({
 	name: "shouldReFetchFromSocketSlice",
-	initialState: "",
+	initialState: defaultShouldReFetchFromSocket as shouldReFetchFromSocket,
 	reducers: {
 		setShouldReFetchSocket: (state, action: PayloadAction<string>) => {
-			state = action.payload;
+			state.stamp = action.payload;
 		},
 	},
 });

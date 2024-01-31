@@ -13,6 +13,7 @@ import { Auth } from "aws-amplify";
 import SplashPage from "@/SplashPage";
 import { getPerformerProfileAudioKeys } from "@/api_functions/getPerformerProfileAudioKeys";
 import { setPerformerAudioKey } from "@/store/performerAudioKeysStore";
+import { postSocketPerformerChangedAudioForCurrentEventToDj } from "@/api_functions/postSocketPerformerChangedAudioForCurrentEventToDj";
 import { PerformerRoleAudioKeys } from "@/api_functions/getPerformerProfileAudioKeys";
 
 interface PerformerTicketAudioSelectModal {
@@ -24,6 +25,7 @@ interface PerformerTicketAudioSelectModal {
 	specificEventId: number;
 	performerIdFromInput?: number;
 	audioKeysFromInput?: PerformerRoleAudioKeys;
+	djSubForPromotersocket?: string;
 }
 
 function PerformerTicketAudioSelectModal({
@@ -35,6 +37,7 @@ function PerformerTicketAudioSelectModal({
 	specificEventId,
 	performerIdFromInput,
 	audioKeysFromInput,
+	djSubForPromotersocket,
 }: PerformerTicketAudioSelectModal) {
 	const dispatch = useDispatch();
 
@@ -64,18 +67,29 @@ function PerformerTicketAudioSelectModal({
 			? performerIdFromInput
 			: roleIdAsNumber;
 
+		const bodyForAudio = {
+			audioName: audioKey.name,
+			audioKey: `performer_${performerIdToBeUsed}/audio_${audioKey.audio_id}`,
+			length: timeStringToSeconds(audioKey.audio_length),
+		};
+
 		PostPerformerChangeSubmittedAudioFromExisting(
 			performerIdToBeUsed,
 			specificEventId,
 			{
-				[selectFromSongOpen]: {
-					audioName: audioKey.name,
-					audioKey: `performer_${performerIdToBeUsed}/audio_${audioKey.audio_id}`,
-					length: timeStringToSeconds(audioKey.audio_length),
-				},
+				[selectFromSongOpen]: bodyForAudio,
 			}
 		)
 			.then((res) => {
+				if (djSubForPromotersocket) {
+					postSocketPerformerChangedAudioForCurrentEventToDj({
+						request_dj_sub: djSubForPromotersocket,
+						request_performer_id: performerIdToBeUsed.toString(),
+						request_specific_event_id: specificEventId.toString(),
+						request_audio_key: selectFromSongOpen.toString(),
+						request_audio_value: bodyForAudio,
+					});
+				}
 				setSelectFromSongOpen();
 			})
 			.catch((err) => {

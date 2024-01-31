@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import SplashPage from "@/SplashPage";
 import { RootState } from "@/store/rootStore";
 import { setPromoterManageState } from "@/store/PromoterManageEventState";
+import ChangeAudioModal from "./ChangeAudioModal";
 
 interface PromoterManageEventDesktopProps {
 	specificEventId: string;
@@ -31,6 +32,10 @@ function PromoterManageEventDesktop({
 	);
 
 	const [isLoading, setIsLoading] = useState(true);
+	const [changeAudioModal, setChangeAudioModal] = useState({
+		performerId: 0,
+		performerName: "",
+	});
 	const [checkinUuidAndId, setCheckinUuidAndQr] = useState<{
 		uuid: string;
 		key: string;
@@ -49,6 +54,13 @@ function PromoterManageEventDesktop({
 		});
 	}
 
+	function handleClostChangeAudioModal() {
+		setChangeAudioModal({
+			performerId: 0,
+			performerName: "",
+		});
+	}
+
 	useEffect(() => {
 		handleQrAndId().then(() => {
 			getPromoterManageCurrentEventData(specificEventId!).then((data) => {
@@ -63,26 +75,36 @@ function PromoterManageEventDesktop({
 			{isLoading ? (
 				<SplashPage />
 			) : (
-				<div className={styles.main_div}>
-					<PromoterManageHeader setAddPerformerModalOpen={handleOpenModal} />
-					<div className={styles.bottom_div}>
-						<div className={styles.roster_third_splitter}>
-							<div className={styles.roser_head}>Not Checked In</div>
-							<div className={styles.yellow_bar_thing} />
-							<NotCheckedInHelper />
-						</div>
-						<div className={styles.roster_third_splitter}>
-							<div className={styles.roser_head}>In Queue</div>
-							<div className={styles.yellow_bar_thing} />
-							<InQueueHelper />
-						</div>
-						<div className={styles.roster_third_splitter}>
-							<div className={styles.roser_head}>Has Performed</div>
-							<div className={styles.yellow_bar_thing} />
-							<AlreadyPerformedHelper />
+				<>
+					{changeAudioModal.performerName === "" ? null : (
+						<ChangeAudioModal
+							performerName={changeAudioModal.performerName}
+							performerId={changeAudioModal.performerId}
+							specificEventId={Number(specificEventId)}
+							close={handleClostChangeAudioModal}
+						/>
+					)}
+					<div className={styles.main_div}>
+						<PromoterManageHeader setAddPerformerModalOpen={handleOpenModal} />
+						<div className={styles.bottom_div}>
+							<div className={styles.roster_third_splitter}>
+								<div className={styles.roser_head}>Not Checked In</div>
+								<div className={styles.yellow_bar_thing} />
+								<NotCheckedInHelper />
+							</div>
+							<div className={styles.roster_third_splitter}>
+								<div className={styles.roser_head}>In Queue</div>
+								<div className={styles.yellow_bar_thing} />
+								<InQueueHelper setChangeAudioModal={setChangeAudioModal} />
+							</div>
+							<div className={styles.roster_third_splitter}>
+								<div className={styles.roser_head}>Has Performed</div>
+								<div className={styles.yellow_bar_thing} />
+								<AlreadyPerformedHelper />
+							</div>
 						</div>
 					</div>
-				</div>
+				</>
 			)}
 		</>
 	);

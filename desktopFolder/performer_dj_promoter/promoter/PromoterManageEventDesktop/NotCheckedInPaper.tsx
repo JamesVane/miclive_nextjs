@@ -30,7 +30,7 @@ function NotCheckedInPaper({
 					size="small"
 					variant="outlined"
 					startIcon={<MessageRounded />}>
-					message
+					msg
 				</Button>
 			</div>
 		</PaperWrapper>

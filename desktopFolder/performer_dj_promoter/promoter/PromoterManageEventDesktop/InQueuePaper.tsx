@@ -4,7 +4,7 @@ import React from "react";
 import styles from "./styles.module.css";
 import PaperWrapper from "./PaperWrapper";
 import { Button } from "@mui/material";
-import { MessageRounded } from "@mui/icons-material";
+import { MessageRounded, ChangeCircleRounded } from "@mui/icons-material";
 
 interface InQueuePaperProps {
 	performerId: number;
@@ -12,6 +12,12 @@ interface InQueuePaperProps {
 	isTempAccount: boolean;
 	queuePosition: number;
 	isDragging: boolean;
+	setChangeAudioModal: React.Dispatch<
+		React.SetStateAction<{
+			performerId: number;
+			performerName: string;
+		}>
+	>;
 }
 
 function InQueuePaper({
@@ -20,7 +26,14 @@ function InQueuePaper({
 	isTempAccount,
 	queuePosition,
 	isDragging,
+	setChangeAudioModal,
 }: InQueuePaperProps) {
+	function handleChangeAudio() {
+		setChangeAudioModal({
+			performerId: performerId,
+			performerName: performerName,
+		});
+	}
 	return (
 		<PaperWrapper
 			queuePosition={queuePosition}
@@ -35,7 +48,14 @@ function InQueuePaper({
 					size="small"
 					variant="outlined"
 					startIcon={<MessageRounded />}>
-					message
+					msg
+				</Button>
+				<Button
+					onClick={handleChangeAudio}
+					size="small"
+					variant="outlined"
+					startIcon={<ChangeCircleRounded />}>
+					change audio
 				</Button>
 			</div>
 		</PaperWrapper>

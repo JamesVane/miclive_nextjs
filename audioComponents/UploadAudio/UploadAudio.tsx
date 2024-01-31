@@ -13,6 +13,7 @@ import {
 import { postAudio } from "../../api_functions/postAudio";
 import { PostPerformerChangeSubmittedAudioFromExisting } from "../../api_functions/PostPerformerChangeSubmittedAudioFromExisting";
 import { Auth } from "aws-amplify";
+import { postSocketPerformerChangedAudioForCurrentEventToDj } from "@/api_functions/postSocketPerformerChangedAudioForCurrentEventToDj";
 
 interface UploadAudioProps {
 	close: () => void;
@@ -20,6 +21,7 @@ interface UploadAudioProps {
 	specificEventId?: number;
 	addNewOpen?: number;
 	performerIdFromProps?: number;
+	djSubForPromotersocket?: string;
 }
 
 function UploadAudio({
@@ -28,6 +30,7 @@ function UploadAudio({
 	specificEventId,
 	addNewOpen,
 	performerIdFromProps,
+	djSubForPromotersocket,
 }: UploadAudioProps) {
 	const [audioFile, setAudioFile] = useState<File | null>(null);
 	const [uploadedSuccess, setUploadedSuccess] = useState<boolean>(false);
@@ -67,18 +70,29 @@ function UploadAudio({
 				file
 			);
 			if (response.message === "Audio file uploaded successfully") {
-				if (forTicket) {
+				if (forTicket && specificEventId && addNewOpen) {
+					const bodyForAudio = {
+						audioName: audioName,
+						audioKey: response.s3_key,
+						length: audioLength,
+					};
 					PostPerformerChangeSubmittedAudioFromExisting(
 						performerIdToBeUsed,
-						specificEventId!,
+						specificEventId,
 						{
-							[addNewOpen!]: {
-								audioName: audioName,
-								audioKey: response.s3_key,
-								length: audioLength,
-							},
+							[addNewOpen]: bodyForAudio,
 						}
-					);
+					).then((res) => {
+						if (djSubForPromotersocket) {
+							postSocketPerformerChangedAudioForCurrentEventToDj({
+								request_dj_sub: djSubForPromotersocket,
+								request_performer_id: performerIdToBeUsed.toString(),
+								request_specific_event_id: specificEventId.toString(),
+								request_audio_key: addNewOpen.toString(),
+								request_audio_value: bodyForAudio,
+							});
+						}
+					});
 				}
 				setUploadedSuccess(true);
 				setUploadInProgress(false);

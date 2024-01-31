@@ -27,6 +27,10 @@ const useWebSocket = (user_sub: string | null) => {
 	const [socket, setSocket] = useState<WebSocket | null>(null);
 	const dispatch = useDispatch();
 
+	const getCurrentTimestamp = (): string => {
+		return new Date().toISOString();
+	};
+
 	const createConversation = useCallback(
 		(data: createConversationData) => {
 			if (socket && socket.readyState === WebSocket.OPEN) {
@@ -147,8 +151,8 @@ const useWebSocket = (user_sub: string | null) => {
 			});
 
 			setSocket(socket);
-			let currentTimeTimestamp = Date.now().toString();
-			dispatch(setShouldReFetchSocket(currentTimeTimestamp));
+
+			dispatch(setShouldReFetchSocket(getCurrentTimestamp()));
 		}
 	}
 

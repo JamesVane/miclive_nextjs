@@ -27,6 +27,7 @@ export async function getPromoterManageCurrentEventData(
 
 		const rawData = await response.json();
 		const mappedData = {
+			intermission_timer_stamp: rawData.intermission_timer_stamp || null,
 			event_state: rawData.event_state || "not_started",
 			event_cue_position: rawData.event_cue_position || 0,
 			tickets_can_be_sold: rawData.tickets_can_be_sold || true,
