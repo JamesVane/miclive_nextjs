@@ -10,7 +10,10 @@ import { setSingleConversationMessage } from "../store/conversationMessagesSlice
 import { RootState } from "../store/rootStore";
 import { setCurrentSub as setCurrentSubSlice } from "@/store/currentSubStore";
 import { setShouldReFetchSocket } from "@/store/shouldReFetchFromSocketSlice";
-import { setImtermissionTimestamp } from "@/store/PromoterManageEventState";
+import {
+	setImtermissionTimestamp,
+	setUpdateDNDFromSocketPromoter,
+} from "@/store/PromoterManageEventState";
 
 interface createConversationData {
 	userSub: string;
@@ -155,6 +158,12 @@ const useWebSocket = (user_sub: string | null) => {
 
 					if (eventData.dj_ended_intermission) {
 						dispatch(setImtermissionTimestamp(null));
+					}
+
+					if (eventData.queue_has_been_dragged_and_dropped_for_promoter) {
+						const returnArray =
+							eventData.queue_has_been_dragged_and_dropped_for_promoter;
+						dispatch(setUpdateDNDFromSocketPromoter(returnArray));
 					}
 				}
 			});

@@ -87,10 +87,49 @@ const PromoterManageEventState = createSlice({
 		setImtermissionTimestamp: (state, action: PayloadAction<string | null>) => {
 			state.intermission_timer_stamp = action.payload;
 		},
+		setUpdateDNDFromSocketPromoter: (
+			state,
+			action: PayloadAction<
+				[
+					{
+						request_performer_role_id: number;
+						request_cue_position: number;
+					}
+				]
+			>
+		) => {
+			let returnObj: PromoterCueObjectType = state.roster.checked_in;
+			const inputArray = action.payload;
+			let valueObjectLookupFromPerformerId: {
+				value: PerformerType;
+				queuePos: number;
+			}[] = [];
+			for (let x of inputArray) {
+				const loopedPerformerId = x.request_performer_role_id;
+				const loopedCuePosition = x.request_cue_position;
+				Object.entries(state.roster.checked_in).map(([key, mappedObj]) => {
+					if (mappedObj.performer_id == loopedPerformerId) {
+						const returnMappedObject = {
+							...mappedObj,
+							cue_position: loopedCuePosition,
+						};
+						valueObjectLookupFromPerformerId.push({
+							value: returnMappedObject,
+							queuePos: loopedCuePosition,
+						});
+					}
+				});
+			}
+			for (let x of valueObjectLookupFromPerformerId) {
+				returnObj[x.queuePos] = x.value;
+			}
+			state.roster.checked_in = returnObj;
+		},
 	},
 });
 
 export const {
+	setUpdateDNDFromSocketPromoter,
 	setImtermissionTimestamp,
 	setPromoterManageState,
 	promoterManageAdjustQueuePositionFromDND,
