@@ -146,6 +146,16 @@ const useWebSocket = (user_sub: string | null) => {
 						const intermissionStamp = eventData.intermission_has_started;
 						dispatch(setImtermissionTimestamp(intermissionStamp));
 					}
+
+					if (eventData.intermission_has_been_edited) {
+						const recivedData = eventData.intermission_has_been_edited;
+						const newTimestamp = recivedData.request_timestamp;
+						dispatch(setImtermissionTimestamp(newTimestamp));
+					}
+
+					if (eventData.dj_ended_intermission) {
+						dispatch(setImtermissionTimestamp(null));
+					}
 				}
 			});
 
