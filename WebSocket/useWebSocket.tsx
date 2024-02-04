@@ -13,6 +13,9 @@ import { setShouldReFetchSocket } from "@/store/shouldReFetchFromSocketSlice";
 import {
 	setImtermissionTimestamp,
 	setUpdateDNDFromSocketPromoter,
+	setNextPerformer,
+	setEventhasStarted as setEventhasStartedPromoter,
+	setEventHasEnded as setEventHasEndedPromoter,
 } from "@/store/PromoterManageEventState";
 
 interface createConversationData {
@@ -164,6 +167,18 @@ const useWebSocket = (user_sub: string | null) => {
 						const returnArray =
 							eventData.queue_has_been_dragged_and_dropped_for_promoter;
 						dispatch(setUpdateDNDFromSocketPromoter(returnArray));
+					}
+
+					if (eventData.event_mived_to_next_performer) {
+						const newQueuePosition = eventData.event_mived_to_next_performer;
+						dispatch(setNextPerformer(newQueuePosition));
+					}
+					if (eventData.event_started_for_promoter) {
+						dispatch(setEventhasStartedPromoter(true));
+					}
+					if (eventData.event_ended_promoter) {
+						const specificEventId = eventData.event_ended_promoter;
+						dispatch(setEventHasEndedPromoter(true));
 					}
 				}
 			});

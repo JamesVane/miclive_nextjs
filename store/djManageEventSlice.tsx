@@ -26,13 +26,13 @@ export type djManageEventSliceType = {
 	event_name: string;
 	event_tagline: string;
 	location: string;
-	event_state: "not_started" | "playing" | "paused" | "ended";
 	event_cue_position: number;
 	start_time: number;
 	end_time: number;
 	tickets_can_be_sold: boolean;
 	total_performers: number;
 	time_per_performer: number;
+	event_has_started: boolean;
 	not_checked_in: CueArraytype;
 	checked_in: CueObjectType;
 	has_performed: CueObjectType;

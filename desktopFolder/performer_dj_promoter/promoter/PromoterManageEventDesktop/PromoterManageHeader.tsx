@@ -37,7 +37,11 @@ function PromoterManageHeader({
 		roster: rosterObject,
 		event_cue_position: eventQueuePosition,
 		intermission_timer_stamp: IntermissionTimestamp,
+		event,
 	} = useSelector((state: RootState) => state.PromoterManageEventState);
+
+	const { has_ended: eventhasEnded, specific_event_id: specificEventId } =
+		event;
 
 	const [intermissionTime, setIntermissionTime] = useState(0);
 
@@ -82,6 +86,12 @@ function PromoterManageHeader({
 		},
 		intermissionTime > 0 ? 1000 : null
 	);
+
+	useEffect(() => {
+		if (eventhasEnded) {
+			router.push(`/promoter/event_ended/${specificEventId}`);
+		}
+	}, [eventhasEnded]);
 
 	const intermissionInProgress = intermissionTime !== 0;
 

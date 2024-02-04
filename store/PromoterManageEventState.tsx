@@ -36,6 +36,7 @@ export type EventInfoType = {
 	event_name: string;
 	event_tagline: string;
 	date_description: string;
+	has_ended: boolean;
 	start_time: number;
 	end_time: number;
 	location: { name: string; cords: { lat: number; lng: number } };
@@ -55,7 +56,7 @@ export type PromoterCueObjectType = {
 
 export type PromoterManageEventStateType = {
 	intermission_timer_stamp: string | null;
-	event_state: string;
+	event_has_started: boolean;
 	event_cue_position: number;
 	tickets_can_be_sold: boolean;
 	check_in_id: string;
@@ -125,10 +126,28 @@ const PromoterManageEventState = createSlice({
 			}
 			state.roster.checked_in = returnObj;
 		},
+		setNextPerformer: (state, action: PayloadAction<number>) => {
+			state.event_cue_position = action.payload;
+			state.roster.has_performed[action.payload - 1] =
+				state.roster.checked_in[action.payload - 1];
+			delete state.roster.checked_in[action.payload - 1];
+		},
+		setEventhasStarted: (state, action: PayloadAction<boolean>) => {
+			if (action.payload === true) {
+				state.event_cue_position = 1;
+			}
+			state.event_has_started = action.payload;
+		},
+		setEventHasEnded: (state, action: PayloadAction<boolean>) => {
+			state.event.has_ended = action.payload;
+		},
 	},
 });
 
 export const {
+	setEventHasEnded,
+	setEventhasStarted,
+	setNextPerformer,
 	setUpdateDNDFromSocketPromoter,
 	setImtermissionTimestamp,
 	setPromoterManageState,
