@@ -95,7 +95,6 @@ function CreateAccount({
 	const textFieldStyles = {
 		width: "90%",
 		margin: "10px",
-		marginBottom: "20px",
 	};
 
 	return (
@@ -123,6 +122,7 @@ function CreateAccount({
 					<DividerH />
 					<form className={styles.body_div}>
 						<TextField
+							helperText={usernameError}
 							error={usernameError !== ""}
 							autoComplete="username"
 							onFocus={() => handleWhatIsFocused("username", true)}
@@ -165,11 +165,9 @@ function CreateAccount({
 								),
 							}}
 						/>
-						{usernameError === "" ? null : (
-							<div className={styles.error_styles}>{usernameError}</div>
-						)}
 						<TextField
 							error={phoneError !== ""}
+							helperText={phoneError}
 							autoComplete="tel"
 							onFocus={() => handleWhatIsFocused("phone", true)}
 							onBlur={() => handleWhatIsFocused("phone", false)}
@@ -210,11 +208,9 @@ function CreateAccount({
 								),
 							}}
 						/>
-						{phoneError === "" ? null : (
-							<div className={styles.error_styles}>{phoneError}</div>
-						)}
 						<TextField
 							error={emailError !== ""}
+							helperText={emailError}
 							autoComplete="email"
 							onFocus={() => handleWhatIsFocused("email", true)}
 							onBlur={() => handleWhatIsFocused("email", false)}
@@ -255,11 +251,9 @@ function CreateAccount({
 								),
 							}}
 						/>
-						{emailError === "" ? null : (
-							<div className={styles.error_styles}>{emailError}</div>
-						)}
 						<TextField
 							error={passwordError !== ""}
+							helperText={passwordError}
 							autoComplete="new-password"
 							onFocus={() => handleWhatIsFocused("password", true)}
 							onBlur={() => handleWhatIsFocused("password", false)}
@@ -308,11 +302,9 @@ function CreateAccount({
 								),
 							}}
 						/>
-						{passwordError === "" ? null : (
-							<div className={styles.error_styles}>{passwordError}</div>
-						)}
 						<TextField
 							error={confirmPasswordError !== ""}
+							helperText={confirmPasswordError}
 							autoComplete="new-password"
 							onFocus={() => handleWhatIsFocused("confirmPassword", true)}
 							onBlur={() => handleWhatIsFocused("confirmPassword", false)}
@@ -361,9 +353,6 @@ function CreateAccount({
 								),
 							}}
 						/>
-						{confirmPasswordError === "" ? null : (
-							<div className={styles.error_styles}>{confirmPasswordError}</div>
-						)}
 						<div className={styles.bottom_div}>
 							<DividerH />
 							<div className={styles.bottom_buttons}>

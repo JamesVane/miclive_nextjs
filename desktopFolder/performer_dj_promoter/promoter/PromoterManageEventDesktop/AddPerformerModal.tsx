@@ -11,6 +11,7 @@ import {
 	InputAdornment,
 	LinearProgress,
 	Switch,
+	Tooltip,
 } from "@mui/material";
 import {
 	CloseRounded,
@@ -18,6 +19,7 @@ import {
 	LocalPhoneRounded,
 	CheckRounded,
 	AccountBoxRounded,
+	HelpOutlineOutlined,
 } from "@mui/icons-material";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
@@ -27,6 +29,7 @@ import {
 import { postCreateAndReturnTempAccountCode } from "@/api_functions/postCreateAndReturnTempAccountCode";
 import { validateUsernameWithMessage } from "@/generic_functions/validationFunctions";
 import { debounce } from "lodash";
+import { cleanUsername } from "@/generic_functions/validationFunctionsForForms";
 
 interface AddPerformerModalProps {
 	baseEventId: number;
@@ -109,7 +112,9 @@ function AddPerformerModal({ baseEventId }: AddPerformerModalProps) {
 
 	function handleSetUsername(event: React.ChangeEvent<HTMLInputElement>) {
 		if (event.target.value.length <= 25) {
-			setUsername(event.target.value);
+			const returnedUsernameValue = cleanUsername(event.target.value);
+			setUsernameError("");
+			setUsername(returnedUsernameValue);
 		}
 	}
 
@@ -117,17 +122,6 @@ function AddPerformerModal({ baseEventId }: AddPerformerModalProps) {
 		setUsername("");
 		setUsernameError("");
 	}
-
-	useEffect(() => {
-		const debouncedValidation = debounce(() => {
-			setUsernameError(validateUsernameWithMessage(username));
-		}, 1000);
-
-		debouncedValidation();
-		return () => {
-			debouncedValidation.cancel();
-		};
-	}, [username]);
 
 	return (
 		<div className={styles.modal_main_div}>
@@ -211,37 +205,37 @@ function AddPerformerModal({ baseEventId }: AddPerformerModalProps) {
 						}}
 					/>
 					{isNewUser ? (
-						<TextField
-							sx={{ width: "65%", marginTop: "20px" }}
-							error={usernameError !== ""}
-							helperText={usernameError}
-							autoComplete="username"
-							onFocus={() => setUsernameFocused(true)}
-							onBlur={() => setUsernameFocused(false)}
-							placeholder="Username"
-							value={username}
-							type="string"
-							label="Username"
-							onChange={handleSetUsername}
-							InputProps={{
-								startAdornment: (
-									<InputAdornment position="start">
-										<AccountBoxRounded
-											sx={{
-												color:
-													usernameError !== ""
-														? "error.main"
-														: usernameFocused
-														? "primary.main"
-														: "action.disabled",
-											}}
-										/>
-									</InputAdornment>
-								),
-								endAdornment: (
-									<InputAdornment sx={{ width: "30px" }} position="end">
-										<IconButton onClick={clearUsername}>
-											<ClearRounded
+						<div className={styles.username_field_helper_div}>
+							<Tooltip title="Username can only contain letters, numbers, dashes and spaces.">
+								<HelpOutlineOutlined
+									color="secondary"
+									sx={{
+										height: "28px",
+										width: "28px",
+										position: "absolute",
+										right: "-32px",
+										bottom: "0px",
+										opacity: ".7",
+									}}
+								/>
+							</Tooltip>
+
+							<TextField
+								sx={{ width: "100%" }}
+								error={usernameError !== ""}
+								helperText={usernameError}
+								autoComplete="username"
+								onFocus={() => setUsernameFocused(true)}
+								onBlur={() => setUsernameFocused(false)}
+								placeholder="Username"
+								value={username}
+								type="string"
+								label="Username"
+								onChange={handleSetUsername}
+								InputProps={{
+									startAdornment: (
+										<InputAdornment position="start">
+											<AccountBoxRounded
 												sx={{
 													color:
 														usernameError !== ""
@@ -251,11 +245,27 @@ function AddPerformerModal({ baseEventId }: AddPerformerModalProps) {
 															: "action.disabled",
 												}}
 											/>
-										</IconButton>
-									</InputAdornment>
-								),
-							}}
-						/>
+										</InputAdornment>
+									),
+									endAdornment: (
+										<InputAdornment sx={{ width: "30px" }} position="end">
+											<IconButton onClick={clearUsername}>
+												<ClearRounded
+													sx={{
+														color:
+															usernameError !== ""
+																? "error.main"
+																: usernameFocused
+																? "primary.main"
+																: "action.disabled",
+													}}
+												/>
+											</IconButton>
+										</InputAdornment>
+									),
+								}}
+							/>
+						</div>
 					) : null}
 					<Button
 						onClick={handleSubmit}

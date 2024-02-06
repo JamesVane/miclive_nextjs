@@ -39,11 +39,11 @@ export function validatePasswordWithMessage(password: string): string {
 }
 
 export function validateUsername(username: string): boolean {
-	// Check length
 	if (username.length > 25) return false;
+	if (username.length < 4) return false;
 
-	// Check if username only contains alphanumeric characters and underscores
-	if (!/^[a-zA-Z0-9_]+$/.test(username)) return false;
+	// Modified regular expression to allow whitespace at the beginning and end
+	if (!/^\s*[a-zA-Z0-9-]+(?: [a-zA-Z0-9-]+)*\s*$/.test(username)) return false;
 
 	return true;
 }
@@ -54,8 +54,8 @@ export function validateUsernameWithMessage(username: string): string {
 		return "";
 	} else if (username.length < 4) {
 		return "Username must be at least 4 characters long";
-	} else if (!/^[a-zA-Z0-9_]+$/.test(username)) {
-		return "Username can only contain numbers, letters and underscores";
+	} else if (!/^[a-zA-Z0-9-\s]+(?: [a-zA-Z0-9-\s]+)*$/.test(username)) {
+		return "Username can only contain letters, numbers, spaces, and dashes";
 	} else {
 		return "";
 	}

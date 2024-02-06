@@ -15,6 +15,8 @@ import SplashPage from "@/SplashPage";
 import { RootState } from "@/store/rootStore";
 import { setPromoterManageState } from "@/store/PromoterManageEventState";
 import ChangeAudioModal from "./ChangeAudioModal";
+import PromoterMakeAnnouncementManagePage from "./PromoterMakeAnnouncementManagePage";
+import { Snackbar, Alert } from "@mui/material";
 
 interface PromoterManageEventDesktopProps {
 	specificEventId: string;
@@ -32,6 +34,9 @@ function PromoterManageEventDesktop({
 	);
 
 	const [isLoading, setIsLoading] = useState(true);
+	const [successfulAnnouncementSnack, setSuccessfulAnnouncementSnack] =
+		useState(false);
+	const [announcementModalOpen, setAnnouncementModalOpen] = useState(false);
 	const [changeAudioModal, setChangeAudioModal] = useState({
 		performerId: 0,
 		performerName: "",
@@ -43,6 +48,10 @@ function PromoterManageEventDesktop({
 
 	function handleOpenModal() {
 		router.push(`${pathname}/adding_performer`);
+	}
+
+	function openAnnouncementMdal() {
+		setAnnouncementModalOpen(true);
 	}
 
 	async function handleQrAndId() {
@@ -76,6 +85,12 @@ function PromoterManageEventDesktop({
 				<SplashPage />
 			) : (
 				<>
+					<Snackbar
+						open={successfulAnnouncementSnack}
+						autoHideDuration={6000}
+						onClose={() => setSuccessfulAnnouncementSnack(false)}>
+						<Alert severity="success">Announcement Sent.</Alert>
+					</Snackbar>
 					{changeAudioModal.performerName === "" ? null : (
 						<ChangeAudioModal
 							performerName={changeAudioModal.performerName}
@@ -84,8 +99,20 @@ function PromoterManageEventDesktop({
 							close={handleClostChangeAudioModal}
 						/>
 					)}
+					{announcementModalOpen ? (
+						<PromoterMakeAnnouncementManagePage
+							successfulClose={() => {
+								setSuccessfulAnnouncementSnack(true);
+								setAnnouncementModalOpen(false);
+							}}
+							close={() => setAnnouncementModalOpen(false)}
+						/>
+					) : null}
 					<div className={styles.main_div}>
-						<PromoterManageHeader setAddPerformerModalOpen={handleOpenModal} />
+						<PromoterManageHeader
+							openAnnouncementMdal={openAnnouncementMdal}
+							setAddPerformerModalOpen={handleOpenModal}
+						/>
 						<div className={styles.bottom_div}>
 							<div className={styles.roster_third_splitter}>
 								<div className={styles.roser_head}>Not Checked In</div>

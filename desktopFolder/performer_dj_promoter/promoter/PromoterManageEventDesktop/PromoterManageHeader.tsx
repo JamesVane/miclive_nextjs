@@ -25,10 +25,12 @@ import { intermissionTimestampToMMSS } from "@/generic_functions/time_formaters"
 
 interface PromoterManageHeaderProps {
 	setAddPerformerModalOpen: () => void;
+	openAnnouncementMdal: () => void;
 }
 
 function PromoterManageHeader({
 	setAddPerformerModalOpen,
+	openAnnouncementMdal,
 }: PromoterManageHeaderProps) {
 	const router = useRouter();
 	const dispatch = useDispatch();
@@ -198,6 +200,7 @@ function PromoterManageHeader({
 				</Box>
 				<div className={styles.action_buttons_columns}>
 					<Button
+						onClick={openAnnouncementMdal}
 						sx={{
 							marginBottom: "2.5px",
 						}}

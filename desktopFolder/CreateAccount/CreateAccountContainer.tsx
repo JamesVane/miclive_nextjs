@@ -36,6 +36,7 @@ import {
 import { getCheckIfExistingEmailOrUsername } from "@/api_functions/getCheckIfExistingEmailOrUsername";
 import { deleteAccountIfNotConfirmed } from "@/api_functions/deleteAccountIfNotConfirmed";
 import { useRouter } from "next/navigation";
+import { cleanWhitespace } from "@/generic_functions/validationFunctionsForForms";
 
 interface CreateAccountContainerProps {
 	isForPurchase?: boolean;
@@ -151,7 +152,8 @@ function CreateAccountContainer({
 					return;
 				} else if (checkIfNoErrors()) {
 					try {
-						getCheckIfExistingEmailOrUsername(email, username).then(
+						const trimmedUsername = username.trim();
+						getCheckIfExistingEmailOrUsername(email, trimmedUsername).then(
 							async (res) => {
 								if (res.existingEmail) {
 									dispatch(setEmailErrorSlice("Email already exists"));
@@ -174,7 +176,7 @@ function CreateAccountContainer({
 											: forDjEventInvite
 											? "dj"
 											: userType,
-										"custom:DisplayUsername": username,
+										"custom:DisplayUsername": trimmedUsername,
 									},
 								})
 									.then((res) => {
@@ -226,7 +228,8 @@ function CreateAccountContainer({
 
 	function setUsername(event: React.ChangeEvent<HTMLInputElement>) {
 		if (event.target.value.length <= 25) {
-			dispatch(setUsernameSlice(event.target.value));
+			const whitespaceCleanedUsername = cleanWhitespace(event.target.value);
+			dispatch(setUsernameSlice(whitespaceCleanedUsername));
 		}
 	}
 

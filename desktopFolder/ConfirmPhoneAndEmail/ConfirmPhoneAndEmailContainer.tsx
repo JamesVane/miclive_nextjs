@@ -68,9 +68,10 @@ function ConfirmPhoneAndEmailContainer({
 					const user = await Auth.currentAuthenticatedUser();
 					const userSub = user.attributes.sub;
 					if (res) {
+						const trimmedUsername = username.trim();
 						postCreateAccountBase({
 							request_primary_key: userSub,
-							request_username: username,
+							request_username: trimmedUsername,
 							request_email: email,
 							request_role_name_number:
 								userType === "promoter" ? 1 : userType === "dj" ? 2 : 3,

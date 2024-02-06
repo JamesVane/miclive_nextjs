@@ -25,11 +25,6 @@
 	width: 100%;
 	composes: column from "@styl/base_flexbox.module.css";
 }
-.error_styles {
-	color: #ff0000ff;
-	font-size: 13px;
-	margin-top: -20px;
-}
 .bottom_buttons {
 	margin-top: 10px;
 	margin-bottom: 20px;
