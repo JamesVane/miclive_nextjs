@@ -13,6 +13,7 @@ type PersonInfoType = {
 export type PerformerType = {
 	performer_id: number;
 	performer_name: string;
+	performer_account_phone_number: string;
 	performer_tagline: string;
 	performer_sub: string;
 	performer_info: PersonInfoType;
@@ -36,7 +37,6 @@ export type EventInfoType = {
 	event_name: string;
 	event_tagline: string;
 	date_description: string;
-	has_ended: boolean;
 	start_time: number;
 	end_time: number;
 	location: { name: string; cords: { lat: number; lng: number } };
@@ -58,6 +58,7 @@ export type PromoterManageEventStateType = {
 	intermission_timer_stamp: string | null;
 	event_has_started: boolean;
 	event_cue_position: number;
+	has_ended: boolean;
 	tickets_can_be_sold: boolean;
 	check_in_id: string;
 	qr_code_uuid: string;
@@ -139,12 +140,19 @@ const PromoterManageEventState = createSlice({
 			state.event_has_started = action.payload;
 		},
 		setEventHasEnded: (state, action: PayloadAction<boolean>) => {
-			state.event.has_ended = action.payload;
+			state.has_ended = action.payload;
+		},
+		setCuePositionPlusOnePromoter: (state) => {
+			state.roster.has_performed[state.event_cue_position] =
+				state.roster.checked_in[state.event_cue_position];
+			delete state.roster.checked_in[state.event_cue_position];
+			state.event_cue_position = state.event_cue_position + 1;
 		},
 	},
 });
 
 export const {
+	setCuePositionPlusOnePromoter,
 	setEventHasEnded,
 	setEventhasStarted,
 	setNextPerformer,

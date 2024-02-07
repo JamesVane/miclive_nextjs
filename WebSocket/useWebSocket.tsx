@@ -16,6 +16,7 @@ import {
 	setNextPerformer,
 	setEventhasStarted as setEventhasStartedPromoter,
 	setEventHasEnded as setEventHasEndedPromoter,
+	setCuePositionPlusOnePromoter,
 } from "@/store/PromoterManageEventState";
 
 interface createConversationData {
@@ -161,6 +162,7 @@ const useWebSocket = (user_sub: string | null) => {
 
 					if (eventData.dj_ended_intermission) {
 						dispatch(setImtermissionTimestamp(null));
+						dispatch(setCuePositionPlusOnePromoter());
 					}
 
 					if (eventData.queue_has_been_dragged_and_dropped_for_promoter) {

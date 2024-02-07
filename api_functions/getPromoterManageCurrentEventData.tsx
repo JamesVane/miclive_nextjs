@@ -28,7 +28,8 @@ export async function getPromoterManageCurrentEventData(
 		const rawData = await response.json();
 		const mappedData = {
 			intermission_timer_stamp: rawData.intermission_timer_stamp || null,
-			event_state: rawData.event_state || "not_started",
+			event_has_started: rawData.event_has_started || false,
+			has_ended: rawData.has_ended || false,
 			event_cue_position: rawData.event_cue_position || 0,
 			tickets_can_be_sold: rawData.tickets_can_be_sold || true,
 			check_in_id: rawData.check_in_id || "",
@@ -84,8 +85,8 @@ function performerArrayToPerformerType(
 	performerArray: string[]
 ): PerformerType {
 	let performerInfo = {};
-	if (performerArray[5] && performerArray[5] !== "") {
-		const correctedJsonString = performerArray[5].replace(/\"\"/g, '"');
+	if (performerArray[6] && performerArray[6] !== "") {
+		const correctedJsonString = performerArray[6].replace(/\"\"/g, '"');
 
 		const sanitizedString = correctedJsonString.slice(1, -1);
 
@@ -98,13 +99,14 @@ function performerArrayToPerformerType(
 	const performerType: PerformerType = {
 		performer_id: parseInt(performerArray[0]),
 		performer_name: performerArray[1],
-		is_temp_account: performerArray[2] === "t",
-		performer_tagline: performerArray[3],
-		performer_sub: performerArray[4],
+		performer_account_phone_number: performerArray[2],
+		is_temp_account: performerArray[3] === "t",
+		performer_tagline: performerArray[4],
+		performer_sub: performerArray[5],
 		performer_info: performerInfo,
-		has_audio: performerArray[6] === "t",
-		cue_position: parseInt(performerArray[7]),
-		checked_in: performerArray[8] === "t",
+		has_audio: performerArray[7] === "t",
+		cue_position: parseInt(performerArray[8]),
+		checked_in: performerArray[9] === "t",
 	};
 	return performerType;
 }

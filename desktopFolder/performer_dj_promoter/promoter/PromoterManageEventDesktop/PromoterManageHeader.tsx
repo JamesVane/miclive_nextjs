@@ -20,7 +20,10 @@ import { RootState } from "@/store/rootStore";
 import { letterToHexcodeObject, TwoLetterKey } from "@/lettersToHexcodesObject";
 import { useInterval } from "@/useInterval/useInterval";
 import { useDispatch } from "react-redux";
-import { setImtermissionTimestamp } from "@/store/PromoterManageEventState";
+import {
+	setImtermissionTimestamp,
+	setNextPerformer,
+} from "@/store/PromoterManageEventState";
 import { intermissionTimestampToMMSS } from "@/generic_functions/time_formaters";
 
 interface PromoterManageHeaderProps {
@@ -39,11 +42,11 @@ function PromoterManageHeader({
 		roster: rosterObject,
 		event_cue_position: eventQueuePosition,
 		intermission_timer_stamp: IntermissionTimestamp,
+		has_ended: eventhasEnded,
 		event,
 	} = useSelector((state: RootState) => state.PromoterManageEventState);
 
-	const { has_ended: eventhasEnded, specific_event_id: specificEventId } =
-		event;
+	const { specific_event_id: specificEventId } = event;
 
 	const [intermissionTime, setIntermissionTime] = useState(0);
 
@@ -79,6 +82,7 @@ function PromoterManageHeader({
 			if (intermissionTime > 0) {
 				setIntermissionTime((prevTime) => {
 					if (prevTime <= 1) {
+						dispatch(setNextPerformer(eventQueuePosition + 1));
 						dispatch(setImtermissionTimestamp(null));
 						return 0; // reset time
 					}

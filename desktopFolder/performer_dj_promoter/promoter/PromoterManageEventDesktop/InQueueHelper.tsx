@@ -62,9 +62,20 @@ function InQueueHelper({ setChangeAudioModal }: InQueueHelperProps) {
 			returnObject[keyCuePosition] = returnedObject;
 		}
 		const postArray = Object.entries(returnObject).map((performer) => {
+			const hasChanged =
+				checkedInObjects[performer[1].cue_position].performer_id !=
+				performer[1].performer_id;
 			return {
 				request_performer_role_id: performer[1].performer_id,
 				request_cue_position: performer[1].cue_position,
+				request_performer_phone_number: hasChanged
+					? performer[1].performer_account_phone_number
+					: "NO CHANGE",
+				request_sms_message: hasChanged
+					? `[Mic.Live] The queue have been changed by the Event Manager. There are now ${
+							performer[1].cue_position - eventQueuePosition
+					  } performers in front of you.`
+					: "NO CHANGE",
 			};
 		});
 		const postSuccessBool = await putChangePerformerQueuePositionForDND({

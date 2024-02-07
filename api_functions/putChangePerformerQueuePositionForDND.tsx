@@ -3,6 +3,8 @@
 interface PerformerQueuePosition {
 	request_performer_role_id: number;
 	request_cue_position: number;
+	request_performer_phone_number: string;
+	request_sms_message: string;
 }
 
 interface putChangePerformerQueuePositionForDNDProps {
