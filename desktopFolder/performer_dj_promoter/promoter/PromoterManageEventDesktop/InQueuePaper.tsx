@@ -1,6 +1,6 @@
 /** @format */
 
-import React from "react";
+import { useState } from "react";
 import styles from "./styles.module.css";
 import PaperWrapper from "./PaperWrapper";
 import { Button } from "@mui/material";
@@ -28,6 +28,8 @@ function InQueuePaper({
 	isDragging,
 	setChangeAudioModal,
 }: InQueuePaperProps) {
+	const [isHovering, setIsHovering] = useState(false);
+
 	function handleChangeAudio() {
 		setChangeAudioModal({
 			performerId: performerId,
@@ -36,28 +38,37 @@ function InQueuePaper({
 	}
 	return (
 		<PaperWrapper
+			setIsHovering={setIsHovering}
 			queuePosition={queuePosition}
 			performerName={performerName}
 			isTempAccount={isTempAccount}
 			performerId={performerId}>
-			<div className={styles.name_div}>{performerName}</div>
-			<div className={styles.bottom_paper}>
-				<Button
-					disabled={true}
-					sx={{ marginRight: "10px" }}
-					size="small"
-					variant="outlined"
-					startIcon={<MessageRounded />}>
-					msg
-				</Button>
-				<Button
-					onClick={handleChangeAudio}
-					size="small"
-					variant="outlined"
-					startIcon={<ChangeCircleRounded />}>
-					change audio
-				</Button>
+			<div
+				className={styles.name_div}
+				style={{
+					marginTop: isHovering ? "4px" : "18px",
+				}}>
+				{performerName}
 			</div>
+			{isHovering ? (
+				<div className={styles.bottom_paper}>
+					<Button
+						disabled={true}
+						sx={{ marginRight: "10px" }}
+						size="small"
+						variant="outlined"
+						startIcon={<MessageRounded />}>
+						msg
+					</Button>
+					<Button
+						onClick={handleChangeAudio}
+						size="small"
+						variant="outlined"
+						startIcon={<ChangeCircleRounded />}>
+						change audio
+					</Button>
+				</div>
+			) : null}
 		</PaperWrapper>
 	);
 }

@@ -13,6 +13,7 @@ interface PaperWrapperProps {
 	performerName: string;
 	isTempAccount: boolean;
 	queuePosition?: number;
+	setIsHovering: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function PaperWrapper({
@@ -22,6 +23,7 @@ function PaperWrapper({
 	isTempAccount,
 	performerName,
 	queuePosition,
+	setIsHovering,
 }: PaperWrapperProps) {
 	const firstTwoLettersOfPerformerNameCapitolized =
 		(performerName[0].toUpperCase() +
@@ -31,7 +33,10 @@ function PaperWrapper({
 		letterToHexcodeObject[firstTwoLettersOfPerformerNameCapitolized];
 
 	return (
-		<div className={styles.roster_paper}>
+		<div
+			className={styles.roster_paper}
+			onMouseEnter={() => setIsHovering(true)}
+			onMouseLeave={() => setIsHovering(false)}>
 			<div className={styles.avatar_div}>
 				<Avatar
 					sx={{

@@ -1,6 +1,6 @@
 /** @format */
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./styles.module.css";
 import InQueuePaper from "./InQueuePaper";
 import { useDispatch, useSelector } from "react-redux";
@@ -33,8 +33,6 @@ function InQueueHelper({ setChangeAudioModal }: InQueueHelperProps) {
 	} = useSelector((state: RootState) => state.PromoterManageEventState);
 	const specificEventId = eventObject.specific_event_id;
 	const checkedInObjects = rosterObject.checked_in;
-
-	console.log("checkedInObjects", checkedInObjects);
 
 	const arrayOfCuePositions = Object.entries(checkedInObjects).map(
 		(performer) => performer[1].cue_position
@@ -87,8 +85,6 @@ function InQueueHelper({ setChangeAudioModal }: InQueueHelperProps) {
 		}
 		setIsLoading(false);
 	};
-
-	console.log("arrayOfCuePositions", arrayOfCuePositions);
 
 	return (
 		<>
