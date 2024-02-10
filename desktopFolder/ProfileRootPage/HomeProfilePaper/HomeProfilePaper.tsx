@@ -3,7 +3,6 @@
 import { useState } from "react";
 import HomeProfilePaperTop from "./HomeProfilePaperTop";
 import ImageUploadCrop from "@desk/ImageComponents/ImageUploadCrop/ImageUploadCrop";
-import { imgRequestQueue } from "@/utilityFunctions/requestQueue";
 import { setSrc } from "@/store/imgStore";
 import { useDispatch, useSelector } from "react-redux";
 import { getSignedUrl } from "@/api_functions/getAnySignedUrl";
@@ -64,44 +63,42 @@ function HomeProfilePaper({ performer, dj, promoter }: HomeProfilePaperProps) {
 						: "none"
 				).then((res) => {
 					if (res.data.message == "Image uploaded successfully") {
-						imgRequestQueue.add(async () => {
-							try {
-								const userRoleId = usersStateFromStore.primary_key;
-								const signedUrl = await getSignedUrl(
-									performer
-										? "performer"
-										: dj
-										? "dj"
-										: promoter
-										? "promoter"
-										: "performer",
-									userRoleId
+						try {
+							const userRoleId = usersStateFromStore.primary_key;
+							const signedUrl = await getSignedUrl(
+								performer
+									? "performer"
+									: dj
+									? "dj"
+									: promoter
+									? "promoter"
+									: "performer",
+								userRoleId
+							);
+							if (signedUrl) {
+								dispatch(
+									setSrc({
+										type: performer
+											? "performer"
+											: dj
+											? "dj"
+											: promoter
+											? "promoter"
+											: "performer",
+										id: userRoleId,
+										url: signedUrl,
+									})
 								);
-								if (signedUrl) {
-									dispatch(
-										setSrc({
-											type: performer
-												? "performer"
-												: dj
-												? "dj"
-												: promoter
-												? "promoter"
-												: "performer",
-											id: userRoleId,
-											url: signedUrl,
-										})
-									);
-								}
-								setIsUploading(false);
-								setEditingPicture(false);
-								setImageSelected(false);
-								setCroppedImage(null);
-							} catch (error) {
-								console.error("Error fetching signed URL:", error);
-								setIsUploadError(true);
-								setIsUploading(false);
 							}
-						});
+							setIsUploading(false);
+							setEditingPicture(false);
+							setImageSelected(false);
+							setCroppedImage(null);
+						} catch (error) {
+							console.error("Error fetching signed URL:", error);
+							setIsUploadError(true);
+							setIsUploading(false);
+						}
 					} else {
 						setIsUploadError(true);
 						setIsUploading(false);

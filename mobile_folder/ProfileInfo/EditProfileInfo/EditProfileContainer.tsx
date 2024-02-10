@@ -12,7 +12,6 @@ import {
 import _ from "lodash";
 import SplashPage from "@/SplashPage";
 import { postUploadS3Image } from "@/api_functions/postUploadS3Image";
-import { imgRequestQueue } from "@/utilityFunctions/requestQueue";
 import { getSignedUrl } from "@/api_functions/getAnySignedUrl";
 import { setSrc } from "@/store/imgStore";
 import { UserProfileResponse } from "@/api_functions/getUserProfile";
@@ -159,42 +158,40 @@ function EditProfileContainer({
 				)
 					.then((res) => {
 						if (res.data.message == "Image uploaded successfully") {
-							imgRequestQueue.add(async () => {
-								try {
-									const signedUrl = await getSignedUrl(
-										performer
-											? "performer"
-											: dj
-											? "dj"
-											: promoter
-											? "promoter"
-											: "performer",
-										userRoleKey
+							try {
+								const signedUrl = await getSignedUrl(
+									performer
+										? "performer"
+										: dj
+										? "dj"
+										: promoter
+										? "promoter"
+										: "performer",
+									userRoleKey
+								);
+								if (signedUrl) {
+									dispatch(
+										setSrc({
+											type: performer
+												? "performer"
+												: dj
+												? "dj"
+												: promoter
+												? "promoter"
+												: "performer",
+											id: userRoleKey,
+											url: signedUrl,
+										})
 									);
-									if (signedUrl) {
-										dispatch(
-											setSrc({
-												type: performer
-													? "performer"
-													: dj
-													? "dj"
-													: promoter
-													? "promoter"
-													: "performer",
-												id: userRoleKey,
-												url: signedUrl,
-											})
-										);
-									}
-									setIsUploadingImage(false);
-									setImageSelected(false);
-									setCroppedImage(null);
-								} catch (error) {
-									console.error("Error fetching signed URL:", error);
-									setPictureError(true);
-									setIsUploadingImage(false);
 								}
-							});
+								setIsUploadingImage(false);
+								setImageSelected(false);
+								setCroppedImage(null);
+							} catch (error) {
+								console.error("Error fetching signed URL:", error);
+								setPictureError(true);
+								setIsUploadingImage(false);
+							}
 						} else {
 							setPictureError(true);
 							setIsUploadingImage(false);

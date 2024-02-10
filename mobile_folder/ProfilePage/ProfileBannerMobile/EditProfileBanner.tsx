@@ -18,7 +18,6 @@ import { RootState } from "@/store/rootStore";
 import { postUploadS3Image } from "@/api_functions/postUploadS3Image";
 import { getSignedUrl } from "@/api_functions/getAnySignedUrl";
 import { setSrc } from "@/store/imgStore";
-import { imgRequestQueue } from "@/utilityFunctions/requestQueue";
 
 export type State = {
 	src: string | ArrayBuffer | null;
@@ -147,26 +146,25 @@ function EditProfileBanner() {
 					`promoter_banner_${size}X1/banner_${usersStateFromStore.primary_key}`
 				);
 				if (res.data.message == "Image uploaded successfully") {
-					imgRequestQueue.add(async () => {
-						try {
-							const userRoleId = usersStateFromStore.primary_key;
-							const signedUrl = await getSignedUrl(
-								`promoter${size}X1`,
-								userRoleId
+					try {
+						const userRoleId = usersStateFromStore.primary_key;
+						const signedUrl = await getSignedUrl(
+							`promoter${size}X1`,
+							userRoleId
+						);
+						if (signedUrl) {
+							dispatch(
+								setSrc({
+									type: `promoter${size}X1`,
+									id: userRoleId,
+									url: signedUrl,
+								})
 							);
-							if (signedUrl) {
-								dispatch(
-									setSrc({
-										type: `promoter${size}X1`,
-										id: userRoleId,
-										url: signedUrl,
-									})
-								);
-							}
-						} catch (error: any) {
-							throw new Error("Error fetching signed URL:", error);
 						}
-					});
+					} catch (error: any) {
+						throw new Error("Error fetching signed URL:", error);
+					}
+
 					return true;
 				} else {
 					return false;

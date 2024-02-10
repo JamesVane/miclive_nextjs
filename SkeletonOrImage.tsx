@@ -4,7 +4,6 @@
 import { useState, useEffect } from "react";
 import { Skeleton } from "@mui/material";
 import { getSignedUrl } from "./api_functions/getAnySignedUrl";
-import { imgRequestQueue } from "./utilityFunctions/requestQueue";
 import { useSelector, useDispatch } from "react-redux";
 import { setSrc } from "./store/imgStore";
 import { RootState } from "./store/rootStore";
@@ -45,16 +44,14 @@ function SkeletonOrImage({ type, id }: SkeletonOrImageProps) {
 	async function fetchImage() {
 		setIsLoaded(false);
 
-		imgRequestQueue.add(async () => {
-			try {
-				const signedUrl = await getSignedUrl(type, stringifiedId);
-				if (signedUrl) {
-					dispatch(setSrc({ type, id: stringifiedId, url: signedUrl }));
-				}
-			} catch (error) {
-				console.error("Error fetching signed URL:", error);
+		try {
+			const signedUrl = await getSignedUrl(type, stringifiedId);
+			if (signedUrl) {
+				dispatch(setSrc({ type, id: stringifiedId, url: signedUrl }));
 			}
-		});
+		} catch (error) {
+			console.error("Error fetching signed URL:", error);
+		}
 	}
 
 	function handleImageLoad() {

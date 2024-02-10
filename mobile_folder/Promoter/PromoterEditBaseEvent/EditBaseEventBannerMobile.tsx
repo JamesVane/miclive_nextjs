@@ -16,7 +16,6 @@ import {
 import { postUploadS3Image } from "@/api_functions/postUploadS3Image";
 import { getSignedUrl } from "@/api_functions/getAnySignedUrl";
 import { setSrc } from "@/store/imgStore";
-import { imgRequestQueue } from "@/utilityFunctions/requestQueue";
 
 export type State = {
 	src: string | ArrayBuffer | null;
@@ -111,25 +110,24 @@ function EditBaseEventBannerMobile({
 					`event_banner_${size}X1/banner_${baseEventId}`
 				);
 				if (res.data.message == "Image uploaded successfully") {
-					imgRequestQueue.add(async () => {
-						try {
-							const signedUrl = await getSignedUrl(
-								`event${size}X1`,
-								baseEventId.toString()
+					try {
+						const signedUrl = await getSignedUrl(
+							`event${size}X1`,
+							baseEventId.toString()
+						);
+						if (signedUrl) {
+							dispatch(
+								setSrc({
+									type: `event${size}X1`,
+									id: baseEventId.toString(),
+									url: signedUrl,
+								})
 							);
-							if (signedUrl) {
-								dispatch(
-									setSrc({
-										type: `event${size}X1`,
-										id: baseEventId.toString(),
-										url: signedUrl,
-									})
-								);
-							}
-						} catch (error: any) {
-							throw new Error("Error fetching signed URL:", error);
 						}
-					});
+					} catch (error: any) {
+						throw new Error("Error fetching signed URL:", error);
+					}
+
 					return true;
 				} else {
 					return false;

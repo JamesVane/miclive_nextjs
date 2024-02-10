@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { setAudioUrl } from "../store/audioUrlStore";
 import { getAudioSignedUrl } from "../api_functions/getAudioSignedUrl";
 import AudioPlayback from "./AudioPlayback";
-import { audioRequestQueue } from "../utilityFunctions/requestQueue";
 import { RootState } from "../store/rootStore";
 import SimpleAudioPlayback from "./SimpleAudioPlayback";
 
@@ -34,23 +33,22 @@ function S3PlaybackWrapper({
 	const updateSignedUrl = () => {
 		if (audioLoadAttempts < MAX_AUDIO_LOAD_ATTEMPTS) {
 			setAudioLoadAttempts(audioLoadAttempts + 1);
-			audioRequestQueue.add(async () => {
-				getAudioSignedUrl(premadePath ? premadePath : s3Path)
-					.then((signedUrlResponse) => {
-						dispatch(
-							setAudioUrl({
-								path: premadePath ? premadePath : s3Path,
-								url: signedUrlResponse.url,
-							})
-						);
-						setSrc(signedUrlResponse.url);
-						console.log("audio state set", s3Path);
-						console.log("signedURL", signedUrlResponse.url);
-					})
-					.catch((error) => {
-						console.error("Error getting signed URL:", error);
-					});
-			});
+
+			getAudioSignedUrl(premadePath ? premadePath : s3Path)
+				.then((signedUrlResponse) => {
+					dispatch(
+						setAudioUrl({
+							path: premadePath ? premadePath : s3Path,
+							url: signedUrlResponse.url,
+						})
+					);
+					setSrc(signedUrlResponse.url);
+					console.log("audio state set", s3Path);
+					console.log("signedURL", signedUrlResponse.url);
+				})
+				.catch((error) => {
+					console.error("Error getting signed URL:", error);
+				});
 		} else {
 			console.error("Max audio load attempts reached. Audio failed to load.");
 		}
