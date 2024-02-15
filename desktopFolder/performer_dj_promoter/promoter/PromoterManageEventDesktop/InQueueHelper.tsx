@@ -86,6 +86,37 @@ function InQueueHelper({ setChangeAudioModal }: InQueueHelperProps) {
 		setIsLoading(false);
 	};
 
+	const mappedPapers = arrayOfCuePositions.map((item, index) => {
+		let returnObject = checkedInObjects[item];
+		if (returnObject.cue_position !== eventQueuePosition) {
+			return (
+				<Draggable
+					key={returnObject.performer_id}
+					draggableId={returnObject.performer_id.toString()}
+					index={index}>
+					{(provided, snapshot) => (
+						<div
+							className={styles.dnd_center}
+							ref={provided.innerRef}
+							{...provided.dragHandleProps}
+							{...provided.draggableProps}>
+							<InQueuePaper
+								setChangeAudioModal={setChangeAudioModal}
+								queuePosition={returnObject.cue_position}
+								performerName={returnObject.performer_name}
+								isTempAccount={returnObject.is_temp_account}
+								performerId={returnObject.performer_id}
+								isDragging={snapshot.isDragging}
+							/>
+						</div>
+					)}
+				</Draggable>
+			);
+		}
+	});
+
+	const mappedPapersEmpty = mappedPapers.length == 0;
+
 	return (
 		<>
 			{isLoading ? (
@@ -98,46 +129,25 @@ function InQueueHelper({ setChangeAudioModal }: InQueueHelperProps) {
 				</div>
 			) : null}
 			<div className={styles.roster_main_div}>
-				<DragDropContext onDragEnd={handleDrop}>
-					<StrictModeDroppable droppableId="list-container">
-						{(provided) => (
-							<div
-								className={styles.dnd_center}
-								{...provided.droppableProps}
-								ref={provided.innerRef}>
-								{arrayOfCuePositions.map((item, index) => {
-									let returnObject = checkedInObjects[item];
-									if (returnObject.cue_position !== eventQueuePosition) {
-										return (
-											<Draggable
-												key={returnObject.performer_id}
-												draggableId={returnObject.performer_id.toString()}
-												index={index}>
-												{(provided, snapshot) => (
-													<div
-														className={styles.dnd_center}
-														ref={provided.innerRef}
-														{...provided.dragHandleProps}
-														{...provided.draggableProps}>
-														<InQueuePaper
-															setChangeAudioModal={setChangeAudioModal}
-															queuePosition={returnObject.cue_position}
-															performerName={returnObject.performer_name}
-															isTempAccount={returnObject.is_temp_account}
-															performerId={returnObject.performer_id}
-															isDragging={snapshot.isDragging}
-														/>
-													</div>
-												)}
-											</Draggable>
-										);
-									}
-								})}
-								{provided.placeholder}
-							</div>
-						)}
-					</StrictModeDroppable>
-				</DragDropContext>
+				{mappedPapersEmpty ? (
+					<div className={styles.no_performers_styles}>
+						No performers in queue
+					</div>
+				) : (
+					<DragDropContext onDragEnd={handleDrop}>
+						<StrictModeDroppable droppableId="list-container">
+							{(provided) => (
+								<div
+									className={styles.dnd_center}
+									{...provided.droppableProps}
+									ref={provided.innerRef}>
+									{mappedPapers}
+									{provided.placeholder}
+								</div>
+							)}
+						</StrictModeDroppable>
+					</DragDropContext>
+				)}
 			</div>
 		</>
 	);

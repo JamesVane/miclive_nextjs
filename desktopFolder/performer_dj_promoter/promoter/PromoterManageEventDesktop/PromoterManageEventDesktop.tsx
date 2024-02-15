@@ -120,7 +120,7 @@ function PromoterManageEventDesktop({
 								<NotCheckedInHelper />
 							</div>
 							<div className={styles.roster_third_splitter}>
-								<div className={styles.roser_head}>In Queue</div>
+								<div className={styles.roser_head}>Queue</div>
 								<div className={styles.yellow_bar_thing} />
 								<InQueueHelper setChangeAudioModal={setChangeAudioModal} />
 							</div>

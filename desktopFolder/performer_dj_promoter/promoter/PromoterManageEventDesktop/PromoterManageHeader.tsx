@@ -63,13 +63,14 @@ function PromoterManageHeader({
 	const currentPerformerObject = rosterObject.checked_in[eventQueuePosition];
 
 	const performerName = eventHasStarted
-		? currentPerformerObject.performer_name
+		? currentPerformerObject.performer_name ?? ""
 		: "";
 
-	const firstTwoLettersOfPerformerNameCapitolized = eventHasStarted
-		? ((performerName[0].toUpperCase() +
-				performerName[1].toUpperCase()) as TwoLetterKey)
-		: "";
+	const firstTwoLettersOfPerformerNameCapitolized =
+		eventHasStarted && performerName[0]
+			? ((performerName[0].toUpperCase() +
+					performerName[1].toUpperCase()) as TwoLetterKey)
+			: "";
 
 	const noPicColor =
 		firstTwoLettersOfPerformerNameCapitolized !== ""
@@ -219,27 +220,6 @@ function PromoterManageHeader({
 								</>
 							)}
 						</Box>
-						<div className={styles.action_buttons_columns}>
-							<Button
-								onClick={openAnnouncementMdal}
-								sx={{
-									marginBottom: "2.5px",
-								}}
-								startIcon={<CampaignRounded />}
-								variant="outlined">
-								make announcement
-							</Button>
-							<Button
-								color="info"
-								onClick={setAddPerformerModalOpen}
-								startIcon={<AddCircleRounded />}
-								sx={{
-									marginTop: "2.5px",
-								}}
-								variant="outlined">
-								add walkin performer
-							</Button>
-						</div>
 					</>
 				) : (
 					<>
@@ -282,6 +262,31 @@ function PromoterManageHeader({
 						</div>
 					</>
 				)}
+				<div
+					className={styles.action_buttons_columns}
+					style={{
+						marginLeft: !eventHasStarted ? "15px" : "0px",
+					}}>
+					<Button
+						onClick={openAnnouncementMdal}
+						sx={{
+							marginBottom: "2.5px",
+						}}
+						startIcon={<CampaignRounded />}
+						variant="outlined">
+						make announcement
+					</Button>
+					<Button
+						color="info"
+						onClick={setAddPerformerModalOpen}
+						startIcon={<AddCircleRounded />}
+						sx={{
+							marginTop: "2.5px",
+						}}
+						variant="outlined">
+						add walkin performer
+					</Button>
+				</div>
 			</div>
 			<DividerH />
 		</>

@@ -17,7 +17,7 @@ function PromoterEventListPage() {
 	);
 
 	function goToCurrent() {
-		router.push("/m/promoter/manage_event/145");
+		router.push("/m/promoter/manage_event/152");
 	}
 
 	return (

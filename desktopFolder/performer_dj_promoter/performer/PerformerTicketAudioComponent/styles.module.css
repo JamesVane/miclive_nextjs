@@ -70,6 +70,8 @@
 	height: 50px;
 	composes: row_center from "@styl/base_flexbox.module.css";
 	position: relative;
+	font-size: 25px;
+	color: var(--primary-main);
 }
 .audio_rows_scroll {
 	width: 100%;

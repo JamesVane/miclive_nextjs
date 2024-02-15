@@ -25,9 +25,10 @@ function PaperWrapper({
 	queuePosition,
 	setIsHovering,
 }: PaperWrapperProps) {
-	const firstTwoLettersOfPerformerNameCapitolized =
-		(performerName[0].toUpperCase() +
-			performerName[1].toUpperCase()) as TwoLetterKey;
+	const firstTwoLettersOfPerformerNameCapitolized = performerName[0]
+		? ((performerName[0].toUpperCase() +
+				performerName[1].toUpperCase()) as TwoLetterKey)
+		: ("" as TwoLetterKey);
 
 	const noPicColor =
 		letterToHexcodeObject[firstTwoLettersOfPerformerNameCapitolized];

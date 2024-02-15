@@ -55,7 +55,7 @@ function DJHome() {
 	}, []);
 
 	function goToCurrent() {
-		router.push("/dj/manage_event/145");
+		router.push("/dj/manage_event/152");
 	}
 
 	return (

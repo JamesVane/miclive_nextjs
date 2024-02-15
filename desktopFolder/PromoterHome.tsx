@@ -63,7 +63,7 @@ function PromoterHome() {
 	}, []);
 
 	function handleManageEvent() {
-		router.push("/promoter/manage_event/145");
+		router.push("/promoter/manage_event/152");
 	}
 
 	return (

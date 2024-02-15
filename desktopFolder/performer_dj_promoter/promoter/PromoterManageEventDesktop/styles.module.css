@@ -513,3 +513,10 @@
 	margin-left: 7.5px;
 	color: var(--primary-main);
 }
+.no_performers_styles {
+	margin-top: 15px;
+	color: var(--secondary-main);
+	font-size: 25px;
+	text-align: center;
+	opacity: 0.3;
+}

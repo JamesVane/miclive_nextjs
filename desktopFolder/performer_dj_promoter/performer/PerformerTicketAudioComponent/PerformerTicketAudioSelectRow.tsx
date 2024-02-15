@@ -1,8 +1,8 @@
 /** @format */
-
+import { useState } from "react";
 import S3PlaybackWrapper from "@/audioComponents/S3PlaybackWrapper";
-import React from "react";
-import { Button } from "@mui/material";
+import { Button, Divider } from "@mui/material";
+import { CheckRounded } from "@mui/icons-material";
 
 interface PerformerTicketAudioSelectRow {
 	audioKey: {
@@ -25,56 +25,106 @@ function PerformerTicketAudioSelectRow({
 	selectExistingAudio,
 	isTooLong,
 }: PerformerTicketAudioSelectRow) {
+	const [isHovering, setIsHovering] = useState(false);
 	return (
 		<div
 			style={{
 				display: "flex",
-				flexDirection: "row",
+				flexDirection: "column",
 				width: "100%",
-				height: "100px",
-				minHeight: "100px",
-				borderBottom: "2px solid #edefeaff",
 			}}>
 			<div
 				style={{
-					height: "100%",
 					display: "flex",
-					flex: 1,
-					flexDirection: "column",
+					flexDirection: "row",
+					justifyContent: "flex-start",
+					width: "100%",
+					height: "100px",
+					minHeight: "100px",
+					transition: "all 0.3s ease-in-out",
+				}}
+				onMouseEnter={() => {
+					setIsHovering(true);
+				}}
+				onMouseLeave={() => {
+					setIsHovering(false);
 				}}>
 				<div
 					style={{
-						width: "100%",
-						height: "50%",
+						height: "100%",
 						display: "flex",
-						alignItems: "center",
-						justifyContent: "center",
+						flexDirection: "column",
+						transition: "all 0.3s ease-in-out",
+						width: isHovering ? "calc(100% - 100px)" : "100%",
+						maxWidth: isHovering ? "calc(100% - 100px)" : "100%",
 					}}>
-					{audioKey.name}
+					<div
+						style={{
+							width: "100%",
+							maxWidth: "100%",
+							height: "50%",
+							display: "flex",
+							alignItems: "center",
+							justifyContent: "flex-start",
+							transition: "all 0.3s ease-in-out",
+							paddingLeft: "15px",
+							fontSize: "18px",
+						}}>
+						{audioKey.name}
+					</div>
+					<S3PlaybackWrapper
+						audioId={audioKey.audio_id.toString()}
+						performerId={audioKey.performer_id.toString()}
+					/>
 				</div>
-				<S3PlaybackWrapper
-					audioId={audioKey.audio_id.toString()}
-					performerId={audioKey.performer_id.toString()}
-				/>
+				{isHovering ? (
+					<div
+						style={{
+							display: "flex",
+							width: "100px",
+							minWidth: "100px",
+							height: "100px",
+							alignItems: "center",
+							justifyContent: "center",
+							transition: "all 0s ease-in-out",
+						}}>
+						<Button
+							onClick={() => {
+								selectExistingAudio(audioKey);
+							}}
+							color="success"
+							variant="outlined"
+							disabled={isTooLong}
+							sx={{
+								width: "80%",
+								height: "80%",
+								display: "flex",
+								flexDirection: "column",
+								alignItems: "center",
+								justifyContent: "center",
+								fontSize: "16px",
+							}}>
+							{isTooLong ? "too long" : "select"}
+							<CheckRounded
+								sx={{
+									height: "35px",
+									width: "35px",
+									marginTop: "-5px",
+								}}
+							/>
+						</Button>
+					</div>
+				) : null}
 			</div>
 			<div
 				style={{
+					width: "100%",
 					display: "flex",
-					width: "100px",
-					height: "100px",
+					flexDirection: "column",
 					alignItems: "center",
 					justifyContent: "center",
 				}}>
-				<Button
-					onClick={() => {
-						selectExistingAudio(audioKey);
-					}}
-					color="success"
-					variant="contained"
-					disabled={isTooLong}
-					sx={{ width: "80%", height: "80%" }}>
-					{isTooLong ? "too long" : "select"}
-				</Button>
+				<Divider variant="middle" flexItem />
 			</div>
 		</div>
 	);
