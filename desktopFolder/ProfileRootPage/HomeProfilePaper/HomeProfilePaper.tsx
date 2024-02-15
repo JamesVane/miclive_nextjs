@@ -61,7 +61,7 @@ function HomeProfilePaper({ performer, dj, promoter }: HomeProfilePaperProps) {
 						: dj
 						? `dj_pictures/dj_${usersStateFromStore.primary_key}.jpg`
 						: "none"
-				).then((res) => {
+				).then(async (res) => {
 					if (res.data.message == "Image uploaded successfully") {
 						try {
 							const userRoleId = usersStateFromStore.primary_key;
