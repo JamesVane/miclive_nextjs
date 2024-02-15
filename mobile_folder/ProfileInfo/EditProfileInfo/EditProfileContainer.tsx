@@ -156,7 +156,7 @@ function EditProfileContainer({
 						? `dj_pictures/dj_${userRoleKey}.jpg`
 						: "none"
 				)
-					.then((res) => {
+					.then(async (res) => {
 						if (res.data.message == "Image uploaded successfully") {
 							try {
 								const signedUrl = await getSignedUrl(
