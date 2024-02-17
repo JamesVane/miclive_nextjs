@@ -2,7 +2,6 @@
 
 import React from "react";
 import styles from "./styles.module.css";
-import SkeletonOrImage from "@/SkeletonOrImage";
 import { useRouter } from "next/navigation";
 
 interface NormalEventCardProps {
@@ -38,15 +37,27 @@ function NormalEventCard({
 
 	return (
 		<div className={styles.main_div} onClick={handleClick}>
-			<SkeletonOrImage type="event4X1" id={baseEventId} />
+			<img
+				src={`https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/event_banner_4X1/banner_${baseEventId}`}
+				style={{ height: "100%", width: "100%" }}
+			/>
 			<div className={styles.filter_div}>
 				<div className={styles.top_div}>
-					<SkeletonOrImage type="event4X1" id={baseEventId} />
+					<img
+						src={`https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/event_banner_4X1/banner_${baseEventId}`}
+						style={{ height: "100%", width: "100%" }}
+					/>
 				</div>
 				<div className={styles.bottom_div}>
 					<div className={styles.pic_div}>
 						<div className={styles.pic_deco}>
-							<SkeletonOrImage type="event" id={baseEventId} />
+							<img
+								src={`https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/event_pictures/event_${baseEventId}.jpg`}
+								style={{
+									width: "100%",
+									height: "100%",
+								}}
+							/>
 						</div>
 					</div>
 					<div className={styles.right_div}>

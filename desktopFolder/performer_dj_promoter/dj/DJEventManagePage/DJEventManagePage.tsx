@@ -31,7 +31,6 @@ import {
 } from "@mui/icons-material";
 import HomeBarV2 from "@desk/HomeBarV2";
 import styles from "./styles.module.css";
-import SkeletonOrImage from "@/SkeletonOrImage";
 import DividerH from "@/universalComponents/DividerH";
 
 function DJEventManagePage() {
@@ -257,7 +256,13 @@ function DJEventManagePage() {
 				<div className={styles.event_name_pic_div}>
 					<div className={styles.event_pic_div}>
 						<div className={styles.event_pic_decoration}>
-							<SkeletonOrImage type="event" id={base_event} />
+							<img
+								src={`https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/event_pictures/event_${base_event}.jpg`}
+								style={{
+									width: "100%",
+									height: "100%",
+								}}
+							/>
 						</div>
 					</div>
 					<div className={styles.event_name_tagline}>

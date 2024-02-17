@@ -14,7 +14,6 @@ import PerformerCurrentEventInfoInfo from "./PerformerCurrentEventInfoInfo";
 import DescriptionComponent from "@mobi/DescriptionComponent";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/rootStore";
-import SkeletonOrImage from "@/SkeletonOrImage";
 
 function PerformerCurrentEventInfo() {
 	const router = useRouter();
@@ -43,7 +42,13 @@ function PerformerCurrentEventInfo() {
 				</Button>
 				<div className={styles.pic_div}>
 					<div className={styles.pic_wrapper}>
-						<SkeletonOrImage type="event" id={eventInfo.base_event_id} />
+						<img
+							src={`https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/event_pictures/event_${eventInfo.base_event_id}.jpg`}
+							style={{
+								width: "100%",
+								height: "100%",
+							}}
+						/>
 					</div>
 				</div>
 				<div className={styles.right_head_div}>

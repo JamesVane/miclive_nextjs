@@ -2,7 +2,6 @@
 
 import React from "react";
 import styles from "./styles.module.css";
-import SkeletonOrImage from "@/SkeletonOrImage";
 import { Divider } from "@mui/material";
 import {
 	LocationOnRounded,
@@ -42,7 +41,13 @@ function DjDatePaper({ dateData, isUpcoming }: DjDatePaperProps) {
 			<div className={styles.date_card_top}>
 				<div className={styles.pic_div}>
 					<div className={styles.pic_deco}>
-						<SkeletonOrImage type="event" id={dateData.base_event_id} />
+						<img
+							src={`https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/event_pictures/event_${dateData.base_event_id}.jpg`}
+							style={{
+								width: "100%",
+								height: "100%",
+							}}
+						/>
 					</div>
 				</div>
 				<div className={styles.right_div}>{dateData.event_name}</div>

@@ -16,7 +16,6 @@ import {
 	LocationOnRounded,
 	WarningAmberRounded,
 } from "@mui/icons-material";
-import SkeletonOrImage from "@/SkeletonOrImage";
 import {
 	formatStringDate,
 	formatStringToTime,
@@ -123,9 +122,12 @@ function DjAcceptDatePage() {
 									<div className={styles.date_event_row}>
 										<div className={styles.date_event_pic}>
 											<div className={styles.date_event_pic_decoration}>
-												<SkeletonOrImage
-													type="event"
-													id={dateObject.baseEventId}
+												<img
+													src={`https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/event_pictures/event_${dateObject.baseEventId}.jpg`}
+													style={{
+														width: "100%",
+														height: "100%",
+													}}
 												/>
 											</div>
 										</div>

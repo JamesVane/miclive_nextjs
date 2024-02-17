@@ -4,7 +4,6 @@
 import { Campaign, Album, MicExternalOnRounded } from "@mui/icons-material";
 import { Avatar, Box } from "@mui/material";
 import styles from "./styles.module.css";
-import SkeletonOrImage from "@/SkeletonOrImage";
 
 interface AvatarAspectBadgeProps {
 	id: number;
@@ -23,6 +22,8 @@ function AvatarAspectBadge({
 		width: "75%",
 		height: "75%",
 	};
+
+	const typeToString = performer ? "performer" : dj ? "dj" : "promoter";
 
 	return (
 		<Box className={styles.box_style}>
@@ -57,9 +58,9 @@ function AvatarAspectBadge({
 					border: 1,
 					borderColor: "primary.main",
 				}}>
-				<SkeletonOrImage
-					id={id}
-					type={performer ? "performer" : dj ? "dj" : "promoter"}
+				<img
+					src={`https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/${typeToString}_pictures/${typeToString}_${id}.jpg`}
+					style={{ height: "100%", width: "100%" }}
 				/>
 			</Avatar>
 		</Box>

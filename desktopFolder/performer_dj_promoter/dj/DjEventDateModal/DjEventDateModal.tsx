@@ -2,7 +2,6 @@
 
 import styles from "./styles.module.css";
 import { Divider, Button, IconButton } from "@mui/material";
-import SkeletonOrImage from "../../../../SkeletonOrImage";
 import {
 	CalendarMonthRounded,
 	AccessTimeRounded,
@@ -60,7 +59,13 @@ function DjEventDateModal({
 				<div className={styles.info_name_pic}>
 					<div className={styles.pic_div}>
 						<div className={styles.pic_deco}>
-							<SkeletonOrImage type="event" id={24} />
+							<img
+								src={`https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/event_pictures/event_${dateDataObj.base_event_id}.jpg`}
+								style={{
+									width: "100%",
+									height: "100%",
+								}}
+							/>
 						</div>
 					</div>
 					<div className={styles.event_name}>{dateDataObj.event_name}</div>

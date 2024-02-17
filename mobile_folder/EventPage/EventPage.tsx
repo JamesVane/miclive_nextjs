@@ -3,7 +3,6 @@
 import { useState } from "react";
 import styles from "./styles.module.css";
 import AppBarMobile from "@mobi/AppBarMobile";
-import SkeletonOrImage from "@/SkeletonOrImage";
 import { Button, Tabs, Tab, LinearProgress } from "@mui/material";
 import {
 	BookmarkRemoveRounded,
@@ -56,16 +55,16 @@ function EventPage({
 			</AppBarMobile>
 			<div className={styles.main_div}>
 				<div className={styles.backdrop_banner}>
-					<SkeletonOrImage
-						type="event3X1"
-						id={AuthEventPageData.base_event_id}
+					<img
+						src={`https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/event_banner_3X1/banner_${AuthEventPageData.base_event_id}`}
+						style={{ height: "100%", width: "100%" }}
 					/>
 					<div className={styles.overlay_div}>
 						<div className={styles.main_banner_container}>
 							<div className={styles.main_banner}>
-								<SkeletonOrImage
-									type="event3X1"
-									id={AuthEventPageData.base_event_id}
+								<img
+									src={`https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/event_banner_3X1/banner_${AuthEventPageData.base_event_id}`}
+									style={{ height: "100%", width: "100%" }}
 								/>
 							</div>
 						</div>
@@ -73,9 +72,12 @@ function EventPage({
 						<div className={styles.pic_name_tagline_div}>
 							<div className={styles.pic_div}>
 								<div className={styles.pic_deco}>
-									<SkeletonOrImage
-										type="event"
-										id={AuthEventPageData.base_event_id}
+									<img
+										src={`https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/event_pictures/event_${AuthEventPageData.base_event_id}.jpg`}
+										style={{
+											width: "100%",
+											height: "100%",
+										}}
 									/>
 								</div>
 							</div>

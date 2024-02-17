@@ -30,7 +30,6 @@ import {
 	AttachMoneyRounded,
 } from "@mui/icons-material";
 import styles from "./styles.module.css";
-import SkeletonOrImage from "@/SkeletonOrImage";
 import PromoterEventDatePageRosterListHelper from "./PromoterEventDatePageRosterListHelper";
 import EventDjCard from "../EventDjCard";
 import EarlyBirdIcon from "@/SpecialIcons/EarlyBirdIcon";
@@ -94,7 +93,13 @@ function PromoterEventDatePageV2tp0Mobile({
 				<div className={styles.pic_name_div}>
 					<div className={styles.pic_div}>
 						<div className={styles.pic_deco}>
-							<SkeletonOrImage type="event" id={dateState.base_event_id} />
+							<img
+								src={`https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/event_pictures/event_${dateState.base_event_id}.jpg`}
+								style={{
+									width: "100%",
+									height: "100%",
+								}}
+							/>
 						</div>
 					</div>
 					<div className={styles.name_div}>{paramsEventName}</div>

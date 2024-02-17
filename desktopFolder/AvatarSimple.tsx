@@ -2,7 +2,6 @@
 "use client";
 
 import { Box, Avatar } from "@mui/material";
-import SkeletonOrImage from "@/SkeletonOrImage";
 
 interface AvatarSimple {
 	ninety?: boolean;
@@ -43,7 +42,10 @@ function AvatarSimple({ ninety, messageCount, id, type }: AvatarSimple) {
 					height: "100%",
 					width: "100%",
 				}}>
-				<SkeletonOrImage id={id} type={type} />
+				<img
+					src={`https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/${type}_pictures/${type}_${id}.jpg`}
+					style={{ height: "100%", width: "100%" }}
+				/>
 			</Avatar>
 		</Box>
 	);

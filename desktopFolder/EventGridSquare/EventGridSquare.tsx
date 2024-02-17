@@ -1,7 +1,6 @@
 /** @format */
 
 import styles from "./styles.module.css";
-import SkeletonOrImage from "@/SkeletonOrImage";
 import { VisibilityRounded } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
 
@@ -44,16 +43,28 @@ function EventGridSquare({
 				</div>
 			</div>
 			<div className={styles.absolute_pic}>
-				<SkeletonOrImage type="event3X1" id={baseEventId} />
+				<img
+					src={`https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/event_banner_3X1/banner_${baseEventId}`}
+					style={{ height: "100%", width: "100%" }}
+				/>
 			</div>
 			<div className={styles.overlay_div}>
 				<div className={styles.banner_top}>
-					<SkeletonOrImage type="event3X1" id={baseEventId} />
+					<img
+						src={`https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/event_banner_3X1/banner_${baseEventId}`}
+						style={{ height: "100%", width: "100%" }}
+					/>
 				</div>
 				<div className={styles.bottom_div}>
 					<div className={styles.pic_div}>
 						<div className={styles.pic_deco}>
-							<SkeletonOrImage type="event" id={baseEventId} />
+							<img
+								src={`https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/event_pictures/event_${baseEventId}.jpg`}
+								style={{
+									width: "100%",
+									height: "100%",
+								}}
+							/>
 						</div>
 					</div>
 					<div className={styles.name_and_tagline}>

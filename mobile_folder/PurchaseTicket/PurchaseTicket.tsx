@@ -9,7 +9,6 @@ import {
 	LocationOnRounded,
 } from "@mui/icons-material";
 import styles from "./styles.module.css";
-import SkeletonOrImage from "../../SkeletonOrImage";
 import {
 	formatDateString,
 	formatTimeHour,
@@ -41,7 +40,13 @@ function PurchaseTicket({
 			<div className={styles.event_data_div}>
 				<div className={styles.event_pic_container}>
 					<div className={styles.pic_div}>
-						<SkeletonOrImage type="event" id={pageData.base_event} />
+						<img
+							src={`https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/event_pictures/event_${pageData.base_event}.jpg`}
+							style={{
+								width: "100%",
+								height: "100%",
+							}}
+						/>
 					</div>
 				</div>
 				<div className={styles.right_div}>{pageData.name}</div>

@@ -2,7 +2,6 @@
 import { useState } from "react";
 import styles from "./styles.module.css";
 import { Paper, Divider } from "@mui/material";
-import SkeletonOrImage from "@/SkeletonOrImage";
 import {
 	LocationOnRounded,
 	AccessTimeRounded,
@@ -134,7 +133,13 @@ function EventDateGridSquare({
 			<div className={styles.top_div}>
 				<div className={styles.pic_div}>
 					<div className={styles.pic_deco}>
-						<SkeletonOrImage type="event" id={baseEventId} />
+						<img
+							src={`https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/event_pictures/event_${baseEventId}.jpg`}
+							style={{
+								width: "100%",
+								height: "100%",
+							}}
+						/>
 					</div>
 				</div>
 				<div className={styles.name_div}>

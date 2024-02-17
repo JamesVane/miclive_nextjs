@@ -9,7 +9,6 @@ import {
 	QrCode2Rounded,
 	ArrowBackIosNewRounded,
 } from "@mui/icons-material";
-import SkeletonOrImage from "@/SkeletonOrImage";
 import KeyCheckIn from "./KeyCheckIn";
 import QrCodeCheckIn from "./QrCodeCheckIn";
 import { useRouter } from "next/navigation";
@@ -85,7 +84,13 @@ function CheckInPage({
 							back
 						</Button>
 						<div className={styles.event_pic}>
-							<SkeletonOrImage type="event" id={baseEventId} />
+							<img
+								src={`https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/event_pictures/event_${baseEventId}.jpg`}
+								style={{
+									width: "100%",
+									height: "100%",
+								}}
+							/>
 						</div>
 						{eventName}
 					</div>

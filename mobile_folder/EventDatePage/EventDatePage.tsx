@@ -3,7 +3,6 @@
 import { useState } from "react";
 import AppBarMobile from "@mobi/AppBarMobile";
 import styles from "./styles.module.css";
-import SkeletonOrImage from "@/SkeletonOrImage";
 import { Button, Tabs, Tab, LinearProgress } from "@mui/material";
 import {
 	CalendarMonthRounded,
@@ -98,9 +97,12 @@ function EventDatePage({
 				<div className={styles.pic_name_div}>
 					<div className={styles.pic_div}>
 						<div className={styles.pic_deco}>
-							<SkeletonOrImage
-								type="event"
-								id={stateFromReducer.base_event_id}
+							<img
+								src={`https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/event_pictures/event_${stateFromReducer.base_event_id}.jpg`}
+								style={{
+									width: "100%",
+									height: "100%",
+								}}
 							/>
 						</div>
 					</div>

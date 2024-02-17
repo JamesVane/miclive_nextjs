@@ -15,7 +15,6 @@ import { Button, Tabs, Tab } from "@mui/material";
 import HomeBarV2 from "@desk/HomeBarV2";
 import { PromoterPreviewData } from "@/api_functions/getPromoterPreviewPageDataV2pt0";
 import PromoterProfileGridSquareHelper from "./PromoterProfileGridSquareHelper";
-import SkeletonOrImage from "@/SkeletonOrImage";
 
 interface ViewPromoterProfilePageProps {
 	pageData: PromoterPreviewData;
@@ -59,14 +58,17 @@ function ViewPromoterProfilePage({
 			</HomeBarV2>
 			<div className={styles.main_div}>
 				<div className={styles.top_bannaer_background}>
-					<SkeletonOrImage type="promoter4X1" id={pageData.promoter_id} />
+					<img
+						src={`https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/promoter_banner_4X1/banner_${pageData.promoter_id}`}
+						style={{ height: "100%", width: "100%" }}
+					/>
 					<div className={styles.filter_div}>
 						<div className={styles.top_left}>
 							<div className={styles.banner_container}>
 								<div className={styles.banner_pic}>
-									<SkeletonOrImage
-										type="promoter4X1"
-										id={pageData.promoter_id}
+									<img
+										src={`https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/event_banner_4X1/banner_${pageData.promoter_id}`}
+										style={{ height: "100%", width: "100%" }}
 									/>
 								</div>
 							</div>

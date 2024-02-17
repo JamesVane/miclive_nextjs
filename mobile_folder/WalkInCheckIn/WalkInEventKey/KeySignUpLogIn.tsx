@@ -4,7 +4,7 @@ import React from "react";
 import { Button, Divider } from "@mui/material";
 import styles from "../styles.module.css";
 import { PersonAddAltRounded, LoginRounded } from "@mui/icons-material";
-import SkeletonOrImage from "../../../SkeletonOrImage";
+
 interface KeySignUpLogInProps {
 	navigateToSignIn: () => void;
 	navigateToCreateAccount: () => void;
@@ -56,7 +56,13 @@ function KeySignUpLogIn({
 				<div className={styles.sign_up_event_decoration}>
 					<div className={styles.event_pic_div}>
 						<div className={styles.event_pic_decoration}>
-							<SkeletonOrImage type="event" id={baseEventId} />
+							<img
+								src={`https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/event_pictures/event_${baseEventId}.jpg`}
+								style={{
+									width: "100%",
+									height: "100%",
+								}}
+							/>
 						</div>
 					</div>
 					<div className={styles.event_display_right}>

@@ -2,7 +2,6 @@
 
 import React from "react";
 import styles from "./styles.module.css";
-import SkeletonOrImage from "@/SkeletonOrImage";
 import DividerH from "@/universalComponents/DividerH";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/rootStore";
@@ -29,16 +28,16 @@ function ProfileBannerMobile() {
 			<DividerH />
 			<div className={styles.row_div}>4 X 1</div>
 			<div className={styles.four_banner}>
-				<SkeletonOrImage
-					type="promoter4X1"
-					id={Number(usersStateFromStore?.primary_key)}
+				<img
+					src={`https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/promoter_banner_4X1/banner_${usersStateFromStore?.primary_key}`}
+					style={{ height: "100%", width: "100%" }}
 				/>
 			</div>
 			<div className={styles.row_div}>3 X 1</div>
 			<div className={styles.three_banner}>
-				<SkeletonOrImage
-					type="promoter3X1"
-					id={Number(usersStateFromStore?.primary_key)}
+				<img
+					src={`https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/promoter_banner_3X1/banner_${usersStateFromStore?.primary_key}`}
+					style={{ height: "100%", width: "100%" }}
 				/>
 			</div>
 			<Button

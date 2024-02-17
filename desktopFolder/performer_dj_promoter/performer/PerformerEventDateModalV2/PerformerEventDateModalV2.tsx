@@ -4,7 +4,6 @@ import { useState } from "react";
 import styles from "./styles.module.css";
 import { IconButton, Button, Divider, LinearProgress } from "@mui/material";
 import { CloseRounded } from "@mui/icons-material";
-import SkeletonOrImage from "@/SkeletonOrImage";
 import {
 	CalendarMonthRounded,
 	AccessTimeRounded,
@@ -111,9 +110,12 @@ function PerformerEventDateModalV2({
 						<div className={styles.pic_header}>
 							<div className={styles.pic_container}>
 								<div className={styles.pic_deco}>
-									<SkeletonOrImage
-										type="event"
-										id={stateFromReducer.base_event_id}
+									<img
+										src={`https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/event_pictures/event_${stateFromReducer.base_event_id}.jpg`}
+										style={{
+											width: "100%",
+											height: "100%",
+										}}
 									/>
 								</div>
 							</div>

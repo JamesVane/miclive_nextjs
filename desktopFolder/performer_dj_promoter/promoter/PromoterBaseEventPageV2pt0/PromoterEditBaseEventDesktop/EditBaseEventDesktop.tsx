@@ -13,7 +13,6 @@ import {
 	setImageDisplayHelp,
 } from "@/store/promoterEditEventSlice";
 import { Crop } from "react-image-crop";
-import SkeletonOrImage from "@/SkeletonOrImage";
 import DividerH from "@/universalComponents/DividerH";
 
 export type State = {
@@ -210,7 +209,13 @@ function EditBaseEventDesktop({
 										/>
 									) : (
 										<div className={styles.image_decoration}>
-											<SkeletonOrImage type={"event"} id={baseEventId!} />
+											<img
+												src={`https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/event_pictures/event_${baseEventId}.jpg`}
+												style={{
+													width: "100%",
+													height: "100%",
+												}}
+											/>
 										</div>
 									)}
 								</div>

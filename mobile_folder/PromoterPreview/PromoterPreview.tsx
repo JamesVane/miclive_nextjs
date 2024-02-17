@@ -15,7 +15,6 @@ import {
 } from "@mui/icons-material";
 import PromoterPreviewListHelper from "./PromoterPreviewListHelper";
 import styles from "./styles.module.css";
-import SkeletonOrImage from "@/SkeletonOrImage";
 import AvatarSimpleMobile from "@mobi/small_components/AvatarSimpleMobile";
 import AppBarMobile from "@mobi/AppBarMobile";
 import { Button } from "@mui/material";
@@ -50,11 +49,17 @@ function PromoterPreview({
 			</AppBarMobile>
 			<div className={styles.main_div}>
 				<div className={styles.backdrop_banner}>
-					<SkeletonOrImage type="promoter3X1" id={pageData.promoter_id} />
+					<img
+						src={`https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/promoter_banner_3X1/banner_${pageData.promoter_id}`}
+						style={{ height: "100%", width: "100%" }}
+					/>
 					<div className={styles.overlay_div}>
 						<div className={styles.main_banner_container}>
 							<div className={styles.main_banner}>
-								<SkeletonOrImage type="promoter3X1" id={pageData.promoter_id} />
+								<img
+									src={`https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/promoter_banner_3X1/banner_${pageData.promoter_id}`}
+									style={{ height: "100%", width: "100%" }}
+								/>
 							</div>
 						</div>
 						<div className={styles.fade_out_div} />

@@ -21,7 +21,6 @@ import {
 	PersonAddAltRounded,
 } from "@mui/icons-material";
 import styles from "./styles.module.css";
-import SkeletonOrImage from "@/SkeletonOrImage";
 import EventDjCard from "../EventDjCard";
 import PromoterEventDateListHelper from "./PromoterEventDateListHelper";
 import { PromoterEventPageV2pt0SliceType } from "@/store/PromoterEventPageV2pt0Slice";
@@ -70,13 +69,16 @@ function PromoterEventPageV2pt0Mobile({
 			</AppBarMobile>
 			<div className={styles.main_div}>
 				<div className={styles.backdrop_banner}>
-					<SkeletonOrImage type="event3X1" id={eventDataObj.base_event_id} />
+					<img
+						src={`https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/event_banner_3X1/banner_${eventDataObj.base_event_id}`}
+						style={{ height: "100%", width: "100%", opacity: "0.75" }}
+					/>
 					<div className={styles.overlay_div}>
 						<div className={styles.main_banner_container}>
 							<div className={styles.main_banner}>
-								<SkeletonOrImage
-									type="event3X1"
-									id={eventDataObj.base_event_id}
+								<img
+									src={`https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/event_banner_3X1/banner_${eventDataObj.base_event_id}`}
+									style={{ height: "100%", width: "100%", opacity: "0.75" }}
 								/>
 							</div>
 						</div>
@@ -84,9 +86,12 @@ function PromoterEventPageV2pt0Mobile({
 						<div className={styles.pic_name_tagline_div}>
 							<div className={styles.pic_div}>
 								<div className={styles.pic_deco}>
-									<SkeletonOrImage
-										type="event"
-										id={eventDataObj.base_event_id}
+									<img
+										src={`https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/event_pictures/event_${eventDataObj.base_event_id}.jpg`}
+										style={{
+											width: "100%",
+											height: "100%",
+										}}
 									/>
 								</div>
 							</div>

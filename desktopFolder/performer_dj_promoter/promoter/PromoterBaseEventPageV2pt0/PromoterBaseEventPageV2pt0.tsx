@@ -11,7 +11,6 @@ import {
 	ButtonGroup,
 	Box,
 } from "@mui/material";
-import SkeletonOrImage from "@/SkeletonOrImage";
 import {
 	AnnouncementRounded,
 	IosShareRounded,
@@ -77,7 +76,10 @@ function PromoterBaseEventPageV2pt0({
 			) : null}
 			<div className={styles.main_div}>
 				<div className={styles.background_pic}>
-					<SkeletonOrImage type="event4X1" id={eventData.base_event_id} />
+					<img
+						src={`https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/event_banner_4X1/banner_${eventData.base_event_id}`}
+						style={{ height: "100%", width: "100%" }}
+					/>
 				</div>
 
 				<div className={styles.blur_overlay}>
@@ -87,16 +89,22 @@ function PromoterBaseEventPageV2pt0({
 					<div className={styles.main_left}>
 						<div className={styles.banner_container}>
 							<div className={styles.banner}>
-								<SkeletonOrImage type="event4X1" id={eventData.base_event_id} />
+								<img
+									src={`https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/event_banner_4X1/banner_${eventData.base_event_id}`}
+									style={{ height: "100%", width: "100%" }}
+								/>
 							</div>
 						</div>
 						<div className={styles.main_below_banner}>
 							<div className={styles.pic_name_tagline}>
 								<div className={styles.pic_container}>
 									<div className={styles.pic_deco}>
-										<SkeletonOrImage
-											type="event"
-											id={eventData.base_event_id}
+										<img
+											src={`https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/event_pictures/event_${eventData.base_event_id}.jpg`}
+											style={{
+												width: "100%",
+												height: "100%",
+											}}
 										/>
 									</div>
 								</div>
