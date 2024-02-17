@@ -66,7 +66,7 @@ const useWebSocket = (user_sub: string | null) => {
 					};
 					socket.send(JSON.stringify(data));
 					console.log("ba-bumm");
-				}, 40000); // 40000 ms = 40 seconds
+				}, 60000); // 40000 ms = 40 seconds
 
 				socket.addEventListener("close", () => clearInterval(intervalId));
 				socket.addEventListener("error", () => clearInterval(intervalId));
