@@ -71,7 +71,9 @@ function InQueueHelper({ setChangeAudioModal }: InQueueHelperProps) {
 					: "NO CHANGE",
 				request_sms_message: hasChanged
 					? `[Mic.Live] The queue have been changed by the Event Manager. There are now ${
-							performer[1].cue_position - eventQueuePosition
+							eventQueuePosition === 0
+								? performer[1].cue_position - 1
+								: performer[1].cue_position - eventQueuePosition
 					  } performers in front of you.`
 					: "NO CHANGE",
 			};
