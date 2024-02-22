@@ -182,7 +182,7 @@ function StartPage() {
 			</div>
 			<div className={styles.main_div} id="home" ref={homeSectionRef}>
 				<div className={styles.top_div_container}>
-					<div className={styles.tagline_top}>Get Rid Of The Headache</div>
+					<div className={styles.tagline_top}>Get Rid Of The Headache test</div>
 					<div className={styles.tagline_bottom}>Focus On The Music</div>
 					<div className={styles.first_info_div}>
 						MIC.LIVE is a platform to make live music events streamlined and
