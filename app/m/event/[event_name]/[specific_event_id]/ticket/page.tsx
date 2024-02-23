@@ -10,7 +10,7 @@ function page({
 }) {
 	return (
 		<EventDatePage
-			isFromEventPage
+			isFromTicketsPage
 			eventPageTicketPurchasedDate
 			specificEventIdFromParams={params.specific_event_id}
 		/>

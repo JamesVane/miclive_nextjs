@@ -80,16 +80,13 @@ function EventDateAudioSubmit({
 			<DividerH />
 			{Array.from({ length: tracksPerPerformer }, (_, index) => (
 				<>
-					{" "}
-					{index === 0 ? null : (
-						<EventDateSubmittedAudioPaper
-							setSelectFromSongOpen={() => handleSetSelectFromSongOpen(index)}
-							setAddNewOpen={() => handleAddNewOpen(index)}
-							key={index}
-							trackNumber={String(index)}
-							payload={submittedAudio ? submittedAudio[index] : null}
-						/>
-					)}
+					<EventDateSubmittedAudioPaper
+						setSelectFromSongOpen={() => handleSetSelectFromSongOpen(index)}
+						setAddNewOpen={() => handleAddNewOpen(index)}
+						key={index}
+						trackNumber={String(index)}
+						payload={submittedAudio ? submittedAudio[index] : null}
+					/>
 				</>
 			))}
 		</div>
