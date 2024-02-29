@@ -239,7 +239,7 @@ function PromoterManageHeader({
 								</div>
 								<div className={styles.not_started_location}>
 									<LocationOnRounded />
-									{locationName}
+									<div className={styles.elipses_text}>{locationName}</div>
 								</div>
 							</div>
 						</div>

@@ -15,12 +15,14 @@ import { setToDefaultDate } from "@/store/CreateEventDateSlice";
 import PromoterEventListPage from "@desk/performer_dj_promoter/promoter/PromoterEventListPage";
 import { getPromoterEventListV2pt0 } from "@/api_functions/getPromoterEventListV2pt0";
 import { setPromoterEventListV2pt0Slice } from "@/store/promoterEventListV2pt0Slice";
+import { getNextUpEvent } from "@/api_functions/getNextUpEvent";
 
 function PromoterHome() {
 	const router = useRouter();
 	const dispatch = useDispatch();
 	const [isLoading, setIsLoading] = useState(true);
 	const [promoterNav, setPromoterNav] = useState<"create" | "event">("event");
+	const [nextUpEventId, setNextUpEventId] = useState<number | null>(null);
 
 	function setSelectedNav(value: "create" | "event") {
 		setPromoterNav(value);
@@ -47,6 +49,11 @@ function PromoterHome() {
 				const user = await Auth.currentAuthenticatedUser();
 				const roleId = user.attributes["custom:RoleId"];
 
+				const nextUpEventReturnData = await getNextUpEvent(roleId);
+				if (nextUpEventReturnData.event_id) {
+					setNextUpEventId(nextUpEventReturnData.event_id);
+				}
+
 				getPromoterEventListV2pt0(roleId).then((res) => {
 					if (res) {
 						dispatch(setPromoterEventListV2pt0Slice(res));
@@ -63,7 +70,7 @@ function PromoterHome() {
 	}, []);
 
 	function handleManageEvent() {
-		router.push("/promoter/manage_event/152");
+		router.push(`/promoter/manage_event/${nextUpEventId}`);
 	}
 
 	return (
@@ -92,6 +99,7 @@ function PromoterHome() {
 						<Tab value="event" label="My Events" sx={{ fontSize: "25px" }} />
 					</Tabs>
 					<Button
+						disabled={nextUpEventId === null}
 						onClick={handleManageEvent}
 						sx={{ marginLeft: "20px", marginBottom: "7.5px" }}
 						color="success"

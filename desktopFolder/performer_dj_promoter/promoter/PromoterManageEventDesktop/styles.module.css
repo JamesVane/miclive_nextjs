@@ -498,20 +498,24 @@
 }
 .not_started_event_name {
 	font-size: 25px;
-	margin-left: 7.5px;
+	margin-left: 10px;
 }
 .not_started_into_right {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
 	justify-content: center;
+	max-width: calc(100% - 85px);
+	overflow: hidden;
 }
 .not_started_location {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	margin-left: 7.5px;
+	margin-left: 5px;
 	color: var(--primary-main);
+	overflow: hidden;
+	max-width: 100%;
 }
 .no_performers_styles {
 	margin-top: 15px;
