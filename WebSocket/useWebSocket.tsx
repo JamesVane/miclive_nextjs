@@ -7,7 +7,7 @@ import {
 	setUpdateTopMessage,
 } from "../store/conversationListSlice";
 import { setSingleConversationMessage } from "../store/conversationMessagesSlice";
-import { RootState } from "../store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import { setCurrentSub as setCurrentSubSlice } from "@/store/currentSubStore";
 import { setShouldReFetchSocket } from "@/store/shouldReFetchFromSocketSlice";
 import {
