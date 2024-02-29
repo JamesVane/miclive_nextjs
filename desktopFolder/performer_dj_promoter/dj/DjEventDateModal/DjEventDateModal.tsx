@@ -16,7 +16,7 @@ import {
 } from "../../../../generic_functions/date_formaters";
 import PersonRow from "@desk/PersonRow";
 import { useSelector } from "react-redux";
-import { RootState } from "../../../../store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import DescriptionComponent from "@desk/DescriptionComponent";
 import DividerH from "@/universalComponents/DividerH";
 

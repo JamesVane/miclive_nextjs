@@ -17,7 +17,7 @@ import {
 	setEventObject,
 	setAccountType,
 } from "../../store/DjInviteState";
-import { RootState } from "../../store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import BadInviteUrl from "./BadInviteUrl";
 import SplashPage from "../../SplashPage";
 import { Auth } from "aws-amplify";

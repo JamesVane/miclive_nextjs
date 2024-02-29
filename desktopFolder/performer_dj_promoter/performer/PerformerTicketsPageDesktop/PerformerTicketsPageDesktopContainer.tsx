@@ -3,7 +3,7 @@
 import React from "react";
 import PerformerTicketsPageDesktop from "./PerformerTicketsPageDesktop";
 import { useSelector } from "react-redux";
-import { RootState } from "../../../../store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 
 function PerformerTicketsPageDesktopContainer() {
 	const { upcoming: upcomingArray, previous: previousArray } = useSelector(

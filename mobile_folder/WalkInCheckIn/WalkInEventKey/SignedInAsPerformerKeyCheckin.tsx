@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import { getPerformerCheckIfPurchasedTicket } from "../../../api_functions/getPerformerCheckIfPurchasedTicket";
 import { putPerformerCheckInWithKey } from "../../../api_functions/putPerformerCheckInWithKey";
 import { useSelector } from "react-redux";
-import { RootState } from "../../../store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 
 interface SignedInAsPerformerKeyCheckinProps {
 	checkinKey: string;

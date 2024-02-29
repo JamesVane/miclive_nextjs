@@ -3,7 +3,7 @@
 
 import ViewUserInfoModalMobile from "./ViewUserInfoModalDesktop";
 import { useSelector } from "react-redux";
-import { RootState } from "../../store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import { setViewUserInfoModalSliceDefault } from "../../store/viewUserInfoModalSlice";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";

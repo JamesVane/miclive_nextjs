@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setAudioUrl } from "../store/audioUrlStore";
 import { getAudioSignedUrl } from "../api_functions/getAudioSignedUrl";
 import AudioPlayback from "./AudioPlayback";
-import { RootState } from "../store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import SimpleAudioPlayback from "./SimpleAudioPlayback";
 
 interface S3PlaybackWrapperProps {

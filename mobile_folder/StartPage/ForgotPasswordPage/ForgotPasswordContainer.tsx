@@ -4,7 +4,7 @@
 import React, { useEffect } from "react";
 import ForgotPasswordPage from "./ForgotPasswordPage";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import {
 	formatPhoneNumber,
 	unformatPhoneNumber,

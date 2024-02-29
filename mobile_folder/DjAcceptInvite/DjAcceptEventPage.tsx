@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { Auth } from "aws-amplify";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
-import { RootState } from "../../store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import {
 	CheckRounded,
 	HomeRounded,

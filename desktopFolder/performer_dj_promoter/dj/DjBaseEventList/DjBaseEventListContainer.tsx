@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import DjBaseEventList from "./DjBaseEventList";
 import { useSelector } from "react-redux";
-import { RootState } from "../../../../store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import styles from "./styles.module.css";
 
 function DjBaseEventListContainer() {
