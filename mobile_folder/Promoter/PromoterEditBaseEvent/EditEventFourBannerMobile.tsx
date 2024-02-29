@@ -9,7 +9,7 @@ import {
 	setBanner4X10,
 } from "@/store/promoterEditEventSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import { Crop } from "react-image-crop";
 
 export type State = {

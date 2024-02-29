@@ -6,7 +6,7 @@ import EditEventBannerFour from "./EditEventBannerFour";
 import EditEventBannerThree from "./EditEventBannerThree";
 import EditEventBannerBothSelected from "./EditEventBannerBothSelected";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import {
 	setEditBanner4X10DisplayHelp,
 	setEditBanner3X10DisplayHelp,

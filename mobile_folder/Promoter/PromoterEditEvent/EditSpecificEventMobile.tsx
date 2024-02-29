@@ -14,7 +14,7 @@ import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import { TimePicker, TimePickerProps } from "@mui/x-date-pickers/TimePicker";
 import styles from "./styles.module.css";
 import { DateTime, Interval } from "luxon";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import { NumericFormat } from "react-number-format";
 import {
 	computeNewTime,

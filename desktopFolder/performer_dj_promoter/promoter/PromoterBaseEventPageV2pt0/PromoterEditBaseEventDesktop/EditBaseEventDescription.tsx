@@ -9,7 +9,7 @@ import _ from "lodash";
 import ReactQuill from "react-quill";
 import { useDispatch, useSelector } from "react-redux";
 import "quill/dist/quill.snow.css";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import { postUploadS3Image } from "@/api_functions/postUploadS3Image";
 import { setBaseDescription } from "@/store/promoterEditEventSlice";
 import { v4 as uuidv4 } from "uuid";

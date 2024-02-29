@@ -13,7 +13,7 @@ import {
 import PerformerCurrentEventInfoInfo from "./PerformerCurrentEventInfoInfo";
 import DescriptionComponent from "@mobi/DescriptionComponent";
 import { useSelector } from "react-redux";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 
 function PerformerCurrentEventInfo() {
 	const router = useRouter();

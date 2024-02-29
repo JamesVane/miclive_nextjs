@@ -12,7 +12,7 @@ import {
 	setDescription,
 	addToDateImageArray,
 } from "@/store/promoterCreateEventSlice";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import CreateEventCrumbsMobile from "./CreateEventCrumbsMobile";
 import { formats, Pallate } from "@/textEditorSettings";
 import CreateEventLoadingMobile from "../CreateEventLoadingMobile";

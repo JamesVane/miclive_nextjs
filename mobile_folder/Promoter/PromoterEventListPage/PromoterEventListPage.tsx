@@ -4,7 +4,7 @@ import styles from "./styles.module.css";
 import AppBarMobile from "@mobi/AppBarMobile";
 import NormalEventCard from "@mobi/NormalEventCard";
 import { useSelector } from "react-redux";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import { Button } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { PriorityHighRounded } from "@mui/icons-material";

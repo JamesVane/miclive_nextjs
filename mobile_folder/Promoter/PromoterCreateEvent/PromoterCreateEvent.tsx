@@ -8,7 +8,7 @@ import { ArrowBackIosNewRounded } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
 import PromoterCreateEventContainer from "./PromoterCreateEventContainer";
 import { useSelector } from "react-redux";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 
 function PromoterCreateEvent() {
 	const router = useRouter();

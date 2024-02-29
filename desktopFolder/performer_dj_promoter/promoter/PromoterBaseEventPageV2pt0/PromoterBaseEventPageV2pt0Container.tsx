@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import PromoterBaseEventPageV2pt0 from "./PromoterBaseEventPageV2pt0";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import { getPromoterEventPageDataV2pt0 } from "@/api_functions/getPromoterEventPageDataV2pt0";
 import { setPageData } from "@/store/PromoterEventPageV2pt0Slice";
 import SplashPage from "@/SplashPage";

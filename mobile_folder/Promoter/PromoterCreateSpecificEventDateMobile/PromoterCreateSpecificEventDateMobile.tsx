@@ -9,7 +9,7 @@ import { Paper, Button } from "@mui/material";
 import styles from "./styles.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { ArrowBackIosRounded } from "@mui/icons-material";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import { useRouter } from "next/navigation";
 import { createSpecificEventContainer } from "@/api_functions/postCreateSpecificEvent/postCreateSpecificEventContainer";
 import { switchPageDate, setToDefaultDate } from "@/store/CreateEventDateSlice";

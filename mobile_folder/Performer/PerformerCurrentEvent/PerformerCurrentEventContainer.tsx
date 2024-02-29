@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import PerformerCurrentEvent from "./PerformerCurrentEvent";
 import { checkIfCheckedIn } from "@/api_functions/getCheckIfCheckedIn";
 import { useSelector } from "react-redux";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import { Auth } from "aws-amplify";
 import SplashPage from "@/SplashPage";
 import CheckInPage from "./CheckInPage";

@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import { setPerformerAudioKey } from "@/store/performerAudioKeysStore";
 import { getPerformerProfileAudioKeys } from "@/api_functions/getPerformerProfileAudioKeys";
 import {

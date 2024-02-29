@@ -13,7 +13,7 @@ import {
 	addToBaseEventImageArray,
 } from "@/store/promoterCreateEventSlice";
 import "quill/dist/quill.snow.css";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import CreateEventCrumbsMobile from "./CreateEventCrumbsMobile";
 import ReactQuill from "react-quill";
 import styles from "./styles.module.css";

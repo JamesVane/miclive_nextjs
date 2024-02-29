@@ -48,10 +48,11 @@ function NewEventDatePaper({ dateInfo, eventName }: NewEventDatePaperProps) {
 	}, []);
 
 	function handleClick() {
+		const nameSlug = eventName.trim().replace(/\s+/g, "").toLowerCase();
 		if (dateInfo.performer_has_ticket) {
-			router.push(`/event/${eventName}/${dateInfo.specific_event_id}/ticket`);
+			router.push(`/event/${nameSlug}/${dateInfo.specific_event_id}/ticket`);
 		} else {
-			router.push(`/event/${eventName}/${dateInfo.specific_event_id}`);
+			router.push(`/event/${nameSlug}/${dateInfo.specific_event_id}`);
 		}
 	}
 

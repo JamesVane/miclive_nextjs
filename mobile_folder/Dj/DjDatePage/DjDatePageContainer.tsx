@@ -17,7 +17,7 @@ import SplashPage from "@/SplashPage";
 import { Auth } from "aws-amplify";
 import DropDateModalMobile from "./DropDateModalMobile";
 import { deleteDjDropEventDate } from "@/api_functions/DjResignDrop";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 
 interface DjDatePageContainerProps {
 	isDjForEvent?: boolean;

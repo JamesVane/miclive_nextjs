@@ -6,7 +6,7 @@ import styles from "./styles.module.css";
 import CreateDateInfo from "./CreateDateInfo";
 import CreatedateDescription from "./CreatedateDescription";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import CreateDateInviteDj from "./CreateDjInviteDj";
 import { createSpecificEventContainer } from "@/api_functions/postCreateSpecificEvent/postCreateSpecificEventContainer";
 import { switchPageDate, setToDefaultDate } from "@/store/CreateEventDateSlice";

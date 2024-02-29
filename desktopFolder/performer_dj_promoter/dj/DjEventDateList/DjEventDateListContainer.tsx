@@ -3,7 +3,7 @@
 import React from "react";
 import DjEventDateList from "./DjEventDateList";
 import { useSelector } from "react-redux";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import DjEventDateModal from "../DjEventDateModal";
 import styles from "./styles.module.css";
 

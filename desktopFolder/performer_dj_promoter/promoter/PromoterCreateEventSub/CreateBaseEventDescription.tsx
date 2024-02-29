@@ -9,7 +9,7 @@ import {
 } from "@mui/icons-material";
 import ReactQuill from "react-quill";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import CreateEventCrumbs from "./CreateEventCrumbs";
 import CreateHeader from "./CreateHeader";
 import { formats, Pallate } from "@/textEditorSettings";

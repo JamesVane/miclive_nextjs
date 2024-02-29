@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import DjEventDateModal from "./DjEventDateModal";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import { getDjEventDateModalInfoV2pt0 } from "@/api_functions/getDjEventDateModalInfoV2pt0";
 import {
 	setDjEventDateModalDataV2pt0ForTheirEvent,

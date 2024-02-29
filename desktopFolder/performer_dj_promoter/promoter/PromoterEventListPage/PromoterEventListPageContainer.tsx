@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import PromoterEventListPage from "./PromoterEventListPage";
 import { useSelector } from "react-redux";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 
 function PromoterEventListPageContainer() {
 	const [viewportWidth, setViewportWidth] = useState<"three" | "two">("three");

@@ -47,7 +47,10 @@ export async function postUserTagline(
 
 		const response = await axios.post(apiUrl, null, { params: queryParams });
 
-		return response.status; // return the status
+		if (response.status !== 200) {
+			return response.data.error;
+		}
+		return response.data.message; // return the status
 	} catch (error) {
 		console.error("Error updating user tagline:", error);
 		throw error;

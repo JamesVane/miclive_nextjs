@@ -12,7 +12,7 @@ import { promoterGetQrAndKeyFromDynamo } from "@/api_functions/promoterGetQrAndK
 import { getPromoterManageCurrentEventData } from "@/api_functions/getPromoterManageCurrentEventData";
 import { useDispatch, useSelector } from "react-redux";
 import SplashPage from "@/SplashPage";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import { setPromoterManageState } from "@/store/PromoterManageEventState";
 import ChangeAudioModal from "./ChangeAudioModal";
 import PromoterMakeAnnouncementManagePage from "./PromoterMakeAnnouncementManagePage";

@@ -27,11 +27,9 @@ interface CreateAccountProps {
 	phone: string;
 	email: string;
 	password: string;
-	confirmPassword: string;
 	username: string;
 	usernameError: string;
 	passwordError: string;
-	confirmPasswordError: string;
 	phoneError: string;
 	emailError: string;
 	handleSignUp: () => void;
@@ -39,14 +37,12 @@ interface CreateAccountProps {
 	setPhone: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	setEmail: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	setPassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
-	setConfirmPassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	snackMessage: string;
 	setSnackMessage: React.Dispatch<React.SetStateAction<string>>;
 	clearUsername: () => void;
 	clearPhone: () => void;
 	clearEmail: () => void;
 	clearPassword: () => void;
-	clearConfirmPassword: () => void;
 	handleExit: () => void;
 	accountType: string;
 }
@@ -55,11 +51,9 @@ function CreateAccount({
 	phone,
 	email,
 	password,
-	confirmPassword,
 	username,
 	usernameError,
 	passwordError,
-	confirmPasswordError,
 	phoneError,
 	emailError,
 	handleSignUp,
@@ -67,14 +61,12 @@ function CreateAccount({
 	setPhone,
 	setEmail,
 	setPassword,
-	setConfirmPassword,
 	snackMessage,
 	setSnackMessage,
 	clearUsername,
 	clearPhone,
 	clearEmail,
 	clearPassword,
-	clearConfirmPassword,
 	handleExit,
 	accountType,
 }: CreateAccountProps) {
@@ -83,10 +75,8 @@ function CreateAccount({
 		phone: false,
 		email: false,
 		password: false,
-		confirmPassword: false,
 	});
 	const [isHidden, setIsHidden] = useState(true);
-	const [isConfirmHidden, setIsConfirmHidden] = useState(true);
 
 	function handleWhatIsFocused(key: string, value: boolean) {
 		setWhatIsFocused({ ...whatIsFocused, [key]: value });
@@ -293,57 +283,6 @@ function CreateAccount({
 														passwordError !== ""
 															? "error.main"
 															: whatIsFocused.password
-															? "primary.main"
-															: "action.disabled",
-												}}
-											/>
-										</IconButton>
-									</InputAdornment>
-								),
-							}}
-						/>
-						<TextField
-							error={confirmPasswordError !== ""}
-							helperText={confirmPasswordError}
-							autoComplete="new-password"
-							onFocus={() => handleWhatIsFocused("confirmPassword", true)}
-							onBlur={() => handleWhatIsFocused("confirmPassword", false)}
-							sx={textFieldStyles}
-							placeholder="Confirm Password"
-							value={confirmPassword}
-							onChange={setConfirmPassword}
-							type={isConfirmHidden ? "password" : "text"}
-							InputProps={{
-								startAdornment: (
-									<InputAdornment position="start">
-										<IconButton
-											sx={{
-												marginRight: "-7.5px",
-												color:
-													confirmPasswordError !== ""
-														? "error.main"
-														: whatIsFocused.confirmPassword
-														? "primary.main"
-														: "action.disabled",
-											}}
-											onClick={() => setIsConfirmHidden(!isConfirmHidden)}>
-											{isConfirmHidden ? (
-												<VisibilityOffRounded />
-											) : (
-												<VisibilityRounded />
-											)}
-										</IconButton>
-									</InputAdornment>
-								),
-								endAdornment: (
-									<InputAdornment sx={{ width: "30px" }} position="end">
-										<IconButton onClick={clearConfirmPassword}>
-											<ClearRounded
-												sx={{
-													color:
-														confirmPasswordError !== ""
-															? "error.main"
-															: whatIsFocused.confirmPassword
 															? "primary.main"
 															: "action.disabled",
 												}}

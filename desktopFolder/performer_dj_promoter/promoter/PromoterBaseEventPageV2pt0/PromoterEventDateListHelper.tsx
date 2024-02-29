@@ -3,7 +3,7 @@
 import React from "react";
 import PromoterDatePaper from "./PromoterDatePaper";
 import styles from "./styles.module.css";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import { useDispatch, useSelector } from "react-redux";
 
 function PromoterEventDateListHelper() {

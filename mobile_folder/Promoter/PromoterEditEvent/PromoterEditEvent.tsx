@@ -15,7 +15,7 @@ import {
 	setExistingSpecific,
 	setExistingDescription,
 } from "@/store/promoterEditEventSlice";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import SplashPage from "@/SplashPage";
 import { putEditSpecificEventInfoContainer } from "@/api_functions/putEditSpecificEventInfo/putEditSpecificEventInfoContainer";
 import { DateTime } from "luxon";

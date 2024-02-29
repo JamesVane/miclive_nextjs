@@ -6,7 +6,7 @@ import ImageUploadCropEditEventMobile from "./ImageUploadCropEditEventMobile";
 import { Button, TextField } from "@mui/material";
 import styles from "./styles.module.css";
 import { CheckRounded, ClearRounded } from "@mui/icons-material";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import _ from "lodash";
 import {
 	setBaseEvent,

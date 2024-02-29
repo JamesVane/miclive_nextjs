@@ -3,7 +3,7 @@
 import { Button } from "@mui/material";
 import { MessageRounded } from "@mui/icons-material";
 import { useState } from "react";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "../styles.module.css";
 import _ from "lodash";

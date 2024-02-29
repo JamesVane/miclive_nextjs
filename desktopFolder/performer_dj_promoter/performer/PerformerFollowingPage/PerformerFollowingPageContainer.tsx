@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import PerformerFollowingPage from "./PerformerFollowingPage";
 import { useSelector } from "react-redux";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 
 function PerformerFollowingPageContainer() {
 	const followingArray = useSelector(

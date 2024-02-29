@@ -4,17 +4,15 @@
 import { useEffect, useState } from "react";
 import CreateAccount from "./CreateAccount";
 import { useSelector } from "react-redux";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import { useDispatch } from "react-redux";
 import {
 	setUsername as setUsernameSlice,
 	setPhone as setPhoneSlice,
 	setEmail as setEmailSlice,
 	setPassword as setPasswordSlice,
-	setConfirmPassword as setConfirmPasswordSlice,
 	setUsernameError as setUsernameErrorSlice,
 	setPasswordError as setPasswordErrorSlice,
-	setConfirmPasswordError as setConfirmPasswordErrorSlice,
 	setEmailError as setEmailErrorSlice,
 	setPhoneError as setPhoneErrorSlice,
 	setCreateAccountDefault,
@@ -64,14 +62,12 @@ function CreateAccountContainer({
 		phone,
 		email,
 		password,
-		confirmPassword,
 		username,
 		usernameError,
 		passwordError,
-		confirmPasswordError,
 		phoneError,
 		emailError,
-	} = useSelector((state: RootState) => state.createAccount);
+	} = useSelector((state: RootState) => state.createAccountSlice);
 
 	const somethingIsempty = () => {
 		if (username === "") {
@@ -84,9 +80,6 @@ function CreateAccountContainer({
 			return true;
 		}
 		if (password === "") {
-			return true;
-		}
-		if (confirmPassword === "") {
 			return true;
 		}
 		return false;
@@ -104,11 +97,6 @@ function CreateAccountContainer({
 		}
 		if (password === "") {
 			dispatch(setPasswordErrorSlice("Password cannot be empty"));
-		}
-		if (confirmPassword === "") {
-			dispatch(
-				setConfirmPasswordErrorSlice("Confirm Password cannot be empty")
-			);
 		}
 	}
 
@@ -132,8 +120,7 @@ function CreateAccountContainer({
 			usernameError === "" &&
 			phoneError === "" &&
 			emailError === "" &&
-			passwordError === "" &&
-			confirmPasswordError === ""
+			passwordError === ""
 		) {
 			return true;
 		} else {
@@ -147,10 +134,7 @@ function CreateAccountContainer({
 			return;
 		} else {
 			await setSignUpErrors().then(async () => {
-				if (password !== confirmPassword) {
-					dispatch(setConfirmPasswordErrorSlice("Passwords do not match"));
-					return;
-				} else if (checkIfNoErrors()) {
+				if (checkIfNoErrors()) {
 					try {
 						const trimmedUsername = username.trim();
 						getCheckIfExistingEmailOrUsername(email, trimmedUsername).then(
@@ -249,10 +233,6 @@ function CreateAccountContainer({
 		dispatch(setPasswordSlice(removeWhitespace(event.target.value)));
 	}
 
-	function setConfirmPassword(event: React.ChangeEvent<HTMLInputElement>) {
-		dispatch(setConfirmPasswordSlice(removeWhitespace(event.target.value)));
-	}
-
 	useEffect(() => {
 		const debouncedValidation = debounce(() => {
 			dispatch(setUsernameErrorSlice(validateUsernameWithMessage(username)));
@@ -286,12 +266,6 @@ function CreateAccountContainer({
 			dispatch(setPhoneErrorSlice(""));
 		}
 	}, [phone]);
-
-	useEffect(() => {
-		if (confirmPasswordError !== "") {
-			dispatch(setConfirmPasswordErrorSlice(""));
-		}
-	}, [confirmPassword]);
 
 	function handleExit() {
 		if (isForPurchase) {
@@ -329,22 +303,15 @@ function CreateAccountContainer({
 		dispatch(setPasswordErrorSlice(""));
 	}
 
-	function clearConfirmPassword() {
-		dispatch(setConfirmPasswordSlice(""));
-		dispatch(setConfirmPasswordErrorSlice(""));
-	}
-
 	return (
 		<CreateAccount
 			handleExit={handleExit}
 			phone={phone}
 			email={email}
 			password={password}
-			confirmPassword={confirmPassword}
 			username={username}
 			usernameError={usernameError}
 			passwordError={passwordError}
-			confirmPasswordError={confirmPasswordError}
 			phoneError={phoneError}
 			emailError={emailError}
 			handleSignUp={handleSignUp}
@@ -352,7 +319,6 @@ function CreateAccountContainer({
 			setPhone={setPhone}
 			setEmail={setEmail}
 			setPassword={setPassword}
-			setConfirmPassword={setConfirmPassword}
 			snackMessage={snackMessage}
 			setSnackMessage={setSnackMessage}
 			accountType={
@@ -368,7 +334,6 @@ function CreateAccountContainer({
 			clearPhone={clearPhone}
 			clearEmail={clearEmail}
 			clearPassword={clearPassword}
-			clearConfirmPassword={clearConfirmPassword}
 		/>
 	);
 }

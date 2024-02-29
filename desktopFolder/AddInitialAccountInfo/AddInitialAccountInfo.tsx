@@ -46,9 +46,8 @@ interface AddInitialAccountInfoProps {
 	imageFile: string | null;
 	imageDisplayHelp: any;
 	taglineErrorText: string;
-	goToNextStep: () => void;
+	handleSubmit: () => void;
 	isSubmitting: boolean;
-	handleSkip: () => void;
 	accountType: "promoter" | "dj" | "performer";
 }
 
@@ -73,9 +72,8 @@ function AddInitialAccountInfo({
 	imageFile,
 	imageDisplayHelp,
 	taglineErrorText,
-	goToNextStep,
+	handleSubmit,
 	isSubmitting,
-	handleSkip,
 	accountType,
 }: AddInitialAccountInfoProps) {
 	const submitDisabled = imageFile === null && tagline === "";
@@ -228,22 +226,9 @@ function AddInitialAccountInfo({
 						)}
 					</div>
 					<div className={styles.bottom_buttons}>
-						{accountType === "promoter" ? (
-							<div></div>
-						) : (
-							<Button
-								onClick={handleSkip}
-								disabled={isSubmitting}
-								endIcon={<SkipNextRounded />}
-								size="large"
-								variant="outlined"
-								color="secondary">
-								ß Skip
-							</Button>
-						)}
 						<Button
 							disabled={isSubmitting || submitDisabled}
-							onClick={goToNextStep}
+							onClick={handleSubmit}
 							startIcon={<CheckRounded />}
 							size="large"
 							variant="outlined"

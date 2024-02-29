@@ -3,7 +3,7 @@
 import React from "react";
 import PromoterCurrentEventCuePaper from "./PromoterCurrentEventCuePaper";
 import { useSelector } from "react-redux";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 
 function PromoterCurrentEventCueHelper() {
 	const { roster } = useSelector(

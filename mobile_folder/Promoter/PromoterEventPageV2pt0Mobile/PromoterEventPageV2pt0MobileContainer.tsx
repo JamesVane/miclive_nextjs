@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import PromoterEventPageV2pt0Mobile from "./PromoterEventPageV2pt0Mobile";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import { setPageData } from "@/store/PromoterEventPageV2pt0Slice";
 import { getPromoterEventPageDataV2pt0 } from "@/api_functions/getPromoterEventPageDataV2pt0";
 import SplashPage from "@/SplashPage";

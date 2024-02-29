@@ -10,14 +10,14 @@ import {
 } from "../../store/signInStateSlice";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { RootState } from "../../store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import {
 	formatPhoneNumber,
 	unformatPhoneNumber,
 } from "../../generic_functions/formatPhoneNumber";
 import { setCurrentSub } from "../../store/currentSubStore";
 import { setForgotPasswordDefault } from "../../store/forgotPasswordSlice";
-import { postCreateAccountRoleInfo } from "../../api_functions/postCreateAccountRoleInfo";
+//import { postCreateAccountRoleInfo } from "../../api_functions/postCreateAccountRoleInfo";
 import { setAccountType } from "../../store/DjInviteState";
 import { useRouter } from "next/navigation";
 
@@ -93,7 +93,7 @@ function SignInPageContainer({
 		user: any
 	) {
 		const userSub = user.attributes.sub;
-		postCreateAccountRoleInfo({
+		/* postCreateAccountRoleInfo({
 			has_no_image: true,
 			request_tagline: "",
 			request_sub: userSub,
@@ -108,7 +108,7 @@ function SignInPageContainer({
 			await Auth.updateUserAttributes(user, {
 				"custom:RoleId": res.new_id.toString(),
 			});
-		});
+		}); */
 	}
 
 	const handleSignIn = async () => {

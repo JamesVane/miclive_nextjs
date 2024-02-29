@@ -12,7 +12,7 @@ import {
 import AvatarSimple from "@desk/AvatarSimple";
 import TextMessageGroupDesktop from "./TextMessageGroupDesktop";
 import { useSelector } from "react-redux";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import {
 	setAddConversationToList,
 	setUpdateTopMessage,

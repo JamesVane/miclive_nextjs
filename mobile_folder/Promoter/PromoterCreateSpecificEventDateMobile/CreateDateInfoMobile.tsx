@@ -20,7 +20,7 @@ import { useDispatch, useSelector } from "react-redux";
 import SearchLocationInput from "@/google_maps/SearchLocationInput";
 import { NumericFormat } from "react-number-format";
 import { TimePicker, TimePickerProps } from "@mui/x-date-pickers/TimePicker";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import {
 	setSpecificEventDate as setSpecificEvent,
 	switchPageDate as switchPage,

@@ -16,6 +16,8 @@ interface DateTimeComponents {
 }
 
 type promoterCreateEventType = {
+	eventDjKey: string | null;
+	dateDjKey: string | null;
 	baseEventId: number | null;	
 	isOpen: boolean;
 	locationHelper: PlaceType | null; 
@@ -65,6 +67,8 @@ type promoterCreateEventType = {
 };
 
 export const initialState: promoterCreateEventType = {
+	eventDjKey: null,
+	dateDjKey: null,
 	baseEventId: null,	
 	isOpen: false,
 	locationHelper: null,
@@ -234,11 +238,19 @@ const promoterCreateEventSlice = createSlice({
 		},
 		addToDateImageArray: (state, action: PayloadAction<string>) => {
 			state.dateImageArray = [...state.dateImageArray, action.payload];
-		}
+		},
+		setDjDateKey: (state, action: PayloadAction<string>) => {
+			state.dateDjKey = action.payload;
+		},
+		setDjEventKey: (state, action: PayloadAction<string>) => {
+			state.eventDjKey = action.payload;
+		},
 	},
 });
 
 export const {
+	setDjDateKey,
+	setDjEventKey,
 	addToDateImageArray,
 	addToBaseEventImageArray,
 	setBaseEventDescription,

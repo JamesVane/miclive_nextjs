@@ -29,12 +29,14 @@ function PurchaseSignUpInModal({
 		closeModal();
 	}
 
+	const slugEventName = eventName.trim().replace(/\s+/g, "").toLowerCase();
+
 	function handleLogIn() {
-		router.push(`/buy_ticket/sign_in/${specificEventId}/${eventName}`);
+		router.push(`/buy_ticket/sign_in/${specificEventId}/${slugEventName}`);
 	}
 
 	function handleSignUp() {
-		router.push(`/buy_ticket/sign_up/${specificEventId}/${eventName}`);
+		router.push(`/buy_ticket/sign_up/${specificEventId}/${slugEventName}`);
 	}
 
 	return (
@@ -56,6 +58,7 @@ function PurchaseSignUpInModal({
 					<CloseRounded sx={{ height: "35px", width: "35px" }} />
 				</IconButton>
 				<Button
+					onClick={handleSignUp}
 					startIcon={
 						<PersonAddAltRounded sx={{ height: "30px", width: "30px" }} />
 					}

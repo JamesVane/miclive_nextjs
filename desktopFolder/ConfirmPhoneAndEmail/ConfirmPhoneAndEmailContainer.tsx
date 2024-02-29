@@ -4,35 +4,26 @@
 import React from "react";
 import ConfirmPhone from "./ConfirmPhone";
 import { Auth } from "aws-amplify";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import { useSelector } from "react-redux";
 import { unformatPhoneNumber } from "@/generic_functions/formatPhoneNumber";
 import { useRouter } from "next/navigation";
 import { postCreateAccountBase } from "@/api_functions/postCreateAccountBase";
+import { setUserRoleId } from "@/store/createAccountSlice";
+import { useDispatch } from "react-redux";
 
 interface ConfirmPhoneAndEmailContainerProps {
-	isForPurchase?: boolean;
-	forDjEventInvite?: boolean;
-	forDjDateInvite?: boolean;
 	paramsType: string;
 	paramsKey?: string;
 }
 
 function ConfirmPhoneAndEmailContainer({
-	isForPurchase,
-	forDjEventInvite,
-	forDjDateInvite,
 	paramsType,
 	paramsKey,
 }: ConfirmPhoneAndEmailContainerProps) {
 	const router = useRouter();
-	const userType = isForPurchase
-		? "performer"
-		: forDjEventInvite
-		? "dj"
-		: forDjDateInvite
-		? "dj"
-		: paramsType;
+	const userType = paramsType;
+	const dispatch = useDispatch();
 
 	const [message, setMessage] = React.useState("");
 	const [isLoading, setIsLoading] = React.useState(false); // [1
@@ -42,7 +33,7 @@ function ConfirmPhoneAndEmailContainer({
 		password: currentPassword,
 		username,
 		email,
-	} = useSelector((state: RootState) => state.createAccount);
+	} = useSelector((state: RootState) => state.createAccountSlice);
 
 	async function amplifySignIn(): Promise<boolean> {
 		try {
@@ -78,24 +69,17 @@ function ConfirmPhoneAndEmailContainer({
 							request_phone_number: `+1${unformatPhoneNumber(
 								currentPhoneNumber
 							)}`,
-						}).then((res: any) => {
-							if (isForPurchase) {
-								router.push(`/buy_ticket/add_info/${paramsKey}`);
-								setMessage("");
-								setIsLoading(false);
-							} else if (forDjDateInvite) {
-								router.push(`/dj_accept_date/${paramsKey}/add_info`);
-								setMessage("");
-								setIsLoading(false);
-							} else if (forDjEventInvite) {
-								router.push(`/dj_accept_event/${paramsKey}/add_info`);
-								setMessage("");
-								setIsLoading(false);
-							} else {
-								router.push(`/add_info/${userType}`);
-								setMessage("");
-								setIsLoading(false);
-							}
+						}).then(async (performerRoleId) => {
+							await Auth.updateUserAttributes(user, {
+								"custom:RoleId": performerRoleId.toString(),
+							});
+							await Auth.updateUserAttributes(user, {
+								"custom:RoleType": userType,
+							});
+							dispatch(setUserRoleId(Number(performerRoleId)));
+							router.push(`/add_info/${userType}`);
+							setMessage("");
+							setIsLoading(false);
 						});
 					} else {
 						setMessage("Login Failed.");

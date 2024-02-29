@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import EditProfileInfo from "./EditProfileInfo";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import {
 	setInitInfo,
 	setPicNameTagline,

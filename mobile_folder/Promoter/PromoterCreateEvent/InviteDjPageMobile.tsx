@@ -10,8 +10,12 @@ import {
 	WarningAmberRounded,
 } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
+import { setToDefault } from "@/store/promoterCreateEventSlice";
+import { useDispatch } from "react-redux";
 
 function InviteDjPage() {
+	const dispatch = useDispatch();
+
 	const router = useRouter();
 	const [dateSnack, setDateSnack] = useState(false);
 	const [eventSnack, setEventSnack] = useState(false);
@@ -100,6 +104,12 @@ function InviteDjPage() {
 
 		setEventSnack(false);
 	};
+
+	function handleClickDone() {
+		dispatch(setToDefault());
+		router.push("/m/promoter");
+	}
+
 	return (
 		<>
 			<Snackbar
@@ -182,7 +192,7 @@ function InviteDjPage() {
 					has it will be able to accept the invitiation
 				</Box>
 				<Button
-					onClick={() => router.push("/m/promoter")}
+					onClick={handleClickDone}
 					sx={{
 						height: "50px",
 						width: "130px",

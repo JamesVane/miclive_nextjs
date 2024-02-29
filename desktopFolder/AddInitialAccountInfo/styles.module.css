@@ -5,7 +5,7 @@
 	composes: column_center from "@styl/base_flexbox.module.css";
 }
 .paper_container {
-	width: 30%;
+	width: 500px;
 	height: 80%;
 	min-height: 590px;
 	display: flex;
@@ -62,7 +62,10 @@
 	margin-top: 10px;
 	margin-bottom: 20px;
 	width: 90%;
-	composes: row_between from "@styl/base_flexbox.module.css";
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-end;
 }
 .divider_div {
 	width: 100%;

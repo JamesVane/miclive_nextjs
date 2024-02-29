@@ -6,7 +6,7 @@
 	composes: column_center from "@styl/base_flexbox.module.css";
 }
 .paper_container {
-	width: 40%;
+	width: 500px;
 	height: 80%;
 	min-height: 590px;
 	display: flex;

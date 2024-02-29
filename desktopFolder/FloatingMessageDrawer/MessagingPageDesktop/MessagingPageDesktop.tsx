@@ -4,7 +4,7 @@
 import styles from "./styles.module.css";
 import { Paper } from "@mui/material";
 import { useSelector } from "react-redux";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import { ConversationListDefault } from "@/store/conversationListSlice";
 import _ from "lodash";
 import ConversationRowHelperDesktop from "./ConversationRowHelperDesktop";

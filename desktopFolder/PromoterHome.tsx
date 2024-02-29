@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import SplashPage from "@/SplashPage";
 import { WarningRounded } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import _ from "lodash";
 import { Auth } from "aws-amplify";
 import HomeBarV2 from "@desk/HomeBarV2";

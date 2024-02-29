@@ -11,7 +11,7 @@ import {
 import DividerH from "@/universalComponents/DividerH";
 import { CloseRounded, CheckCircle } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import { formatMMSS } from "@/generic_functions/time_formaters";
 import {
 	getPerformerProfileAudioKeys,

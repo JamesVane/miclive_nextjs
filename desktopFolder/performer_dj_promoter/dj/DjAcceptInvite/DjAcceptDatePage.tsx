@@ -7,7 +7,7 @@ import AvatarSimple from "@desk/AvatarSimple";
 import { Auth } from "aws-amplify";
 import SplashPage from "@/SplashPage";
 import { useSelector } from "react-redux";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import {
 	AccessTimeRounded,
 	CalendarMonthRounded,

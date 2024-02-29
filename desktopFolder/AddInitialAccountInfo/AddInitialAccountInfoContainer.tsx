@@ -13,10 +13,11 @@ import {
 } from "@/store/createAccountSlice";
 import { isDomSafeString } from "@/generic_functions/validationFunctions";
 import { useSelector } from "react-redux";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import { useRouter } from "next/navigation";
-import { postCreateAccountRoleInfo } from "@/api_functions/postCreateAccountRoleInfo";
 import { Auth } from "aws-amplify";
+import { postUserTagline } from "@/api_functions/postUserTagline";
+import { postUploadS3Image } from "@/api_functions/postUploadS3Image";
 
 export type State = {
 	src: string | ArrayBuffer | null;
@@ -25,29 +26,15 @@ export type State = {
 };
 
 interface AddInitialAccountInfoContainerProps {
-	isForPurchase?: boolean;
-	forDjEventInvite?: boolean;
-	forDjDateInvite?: boolean;
 	paramsType?: "dj" | "performer" | "promoter";
-	paramsKey?: string;
 }
 
 function AddInitialAccountInfoContainer({
-	isForPurchase,
-	forDjEventInvite,
-	forDjDateInvite,
 	paramsType,
-	paramsKey,
 }: AddInitialAccountInfoContainerProps) {
 	const router = useRouter();
 	const dispatch = useDispatch();
-	const userType = isForPurchase
-		? "performer"
-		: forDjEventInvite
-		? "dj"
-		: forDjDateInvite
-		? "dj"
-		: paramsType;
+	const userType = paramsType;
 
 	const [isUploadError, setIsUploadError] = useState(false);
 	const [notTouched, setNotTouched] = useState(true);
@@ -55,8 +42,8 @@ function AddInitialAccountInfoContainer({
 	const [taglineErrorText, setTaglineErrorText] = useState("");
 	const [isSubmitting, setIsSubmitting] = useState(false);
 
-	const { imageDisplayHelp, imageFile, tagline } = useSelector(
-		(state: RootState) => state.createAccount
+	const { imageDisplayHelp, imageFile, tagline, userRoldId } = useSelector(
+		(state: RootState) => state.createAccountSlice
 	);
 
 	const defaultCropSelectState = {
@@ -138,63 +125,29 @@ function AddInitialAccountInfoContainer({
 		);
 	}
 
-	function goToNextStep() {
+	function handleSubmit() {
 		if (!isDomSafeString(tagline)) {
+			console.log("uhoj");
 			setTaglineErrorText("Tagline can not contain '<>'");
 			return;
 		} else {
-			if (isForPurchase) {
-				router.push(`/buy_ticket/add_more_info/${paramsKey}`);
-			} else if (forDjEventInvite) {
-				router.push(`/dj_accept_event/${paramsKey}/add_more_info`);
-			} else if (forDjDateInvite) {
-				router.push(`/dj_accept_date/${paramsKey}/add_more_info`);
-			} else if (userType === "promoter") {
-				router.push("/add_banner");
-			} else {
-				router.push(`/add_more_info/${userType}`);
-			}
-		}
-	}
+			if (
+				userType === "performer" ||
+				userType === "promoter" ||
+				userType === "dj"
+			) {
+				setIsSubmitting(true);
+				postUserTagline(userType, tagline).then(async () => {
+					const imagePath = `${userType}_pictures/performer_${userRoldId}.jpg`;
+					postUploadS3Image(imageFile, imagePath);
 
-	async function handleSkip() {
-		const currentUser = await Auth.currentAuthenticatedUser();
-		const userSub = currentUser.attributes.sub;
-		if (
-			userType === "performer" ||
-			userType === "promoter" ||
-			userType === "dj"
-		) {
-			setIsSubmitting(true);
-			postCreateAccountRoleInfo({
-				has_no_image: true,
-				request_tagline: "",
-				request_sub: userSub,
-				request_user_type: userType!,
-				request_city: null,
-				request_phone: null,
-				request_email: null,
-				request_ig: null,
-				request_website: null,
-				request_performer_role_key: null,
-			}).then(async (res) => {
-				const user = await Auth.currentAuthenticatedUser();
-				await Auth.updateUserAttributes(user, {
-					"custom:RoleId": res.new_id.toString(),
-				});
-
-				setIsSubmitting(false);
-				dispatch(setCreateAccountDefault());
-				if (isForPurchase) {
-					router.push(`/buy_ticket/purchase/${paramsKey}`);
-				} else if (forDjEventInvite) {
-					router.push(`/dj_accept_event/${paramsKey}`);
-				} else if (forDjDateInvite) {
-					router.push(`/dj_accept_date/${paramsKey}`);
-				} else {
+					setIsSubmitting(false);
+					dispatch(setCreateAccountDefault());
 					router.push(`/${userType}`);
-				}
-			});
+				});
+			} else {
+				console.log("poop:", paramsType);
+			}
 		}
 	}
 
@@ -221,9 +174,8 @@ function AddInitialAccountInfoContainer({
 				imageFile={imageFile}
 				imageDisplayHelp={imageDisplayHelp}
 				taglineErrorText={taglineErrorText}
-				goToNextStep={goToNextStep}
+				handleSubmit={handleSubmit}
 				isSubmitting={isSubmitting}
-				handleSkip={handleSkip}
 				accountType={userType as "promoter" | "dj" | "performer"}
 			/>
 		</div>

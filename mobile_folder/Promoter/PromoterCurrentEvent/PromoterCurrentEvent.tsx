@@ -24,7 +24,7 @@ import PromoterCurrentEventInfo from "./PromoterCurrentEventInfo";
 import PromoterCurrentEventRoster from "./PromoterCurrentEventRoster";
 import PromoterCurrentEventStats from "./PromoterCurrentEventStats";
 import { useSelector } from "react-redux";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import MessagingButton from "@mobi/Messaging/MessagingButton";
 
 interface PromoterCurrentEventProps {

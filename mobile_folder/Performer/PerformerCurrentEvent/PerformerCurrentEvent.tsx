@@ -20,7 +20,7 @@ import PerformerCurrentEventInfo from "./PerformerCurrentEventInfo";
 import PerformerCurrentEventRoster from "./PerformerCurrentEventRoster/PerformerCurrentEventRoster";
 // import PerformerSubmittedAudio from "../PerformerSubmittedAudio";
 import { useSelector } from "react-redux";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import AvatarSimpleMobile from "@mobi/small_components/AvatarSimpleMobile";
 import DividerH from "@/universalComponents/DividerH";
 

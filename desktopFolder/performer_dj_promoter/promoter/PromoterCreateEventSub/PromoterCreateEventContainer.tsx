@@ -3,7 +3,7 @@
 
 import { useSelector } from "react-redux";
 import { useState } from "react";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import CreateBaseEvent from "./CreateBaseEvent";
 import CreateEventDesc from "./CreateEventDesc";
 import CreateSpecificEvent from "./CreateSpecificEvent";
@@ -11,7 +11,12 @@ import InviteDjPage from "./InviteDjPage";
 import { useDispatch } from "react-redux";
 import { createBaseAndSpecificEventContainer } from "@/api_functions/postCreateBaseAndSpecificEvent/postCreateBaseAndSpecificEventContainer";
 import { postUploadS3Image } from "@/api_functions/postUploadS3Image";
-import { switchPage, setToDefault } from "@/store/promoterCreateEventSlice";
+import {
+	switchPage,
+	setToDefault,
+	setDjDateKey,
+	setDjEventKey,
+} from "@/store/promoterCreateEventSlice";
 import CreateBaseEventDescription from "./CreateBaseEventDescription";
 import { useRouter } from "next/navigation";
 import { Auth } from "aws-amplify";
@@ -104,6 +109,10 @@ function PromoterCreateEventContainer() {
 				typeof roleId === "number" ? roleId.toString() : roleId;
 			createBaseAndSpecificEventContainer(stringPromoterId, EventData).then(
 				async (res) => {
+					const DjDateInviteUrlKey = res.DjDateInviteUrlKey;
+					const DjEventInviteUrlKey = res.DjEventInviteUrlKey;
+					dispatch(setDjDateKey(DjDateInviteUrlKey));
+					dispatch(setDjEventKey(DjEventInviteUrlKey));
 					if (res.baseEventId) {
 						await getDateReturnArray(res.specificEventId.toString());
 						await getEventReturnArray(res.baseEventId.toString());

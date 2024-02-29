@@ -4,7 +4,7 @@ import React from "react";
 import styles from "./styles.module.css";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import _ from "lodash";
 
 function CreateHeaderSpecific({ children }: { children: React.ReactNode }) {

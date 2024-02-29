@@ -13,9 +13,8 @@ import {
 } from "../../../store/createAccountSlice";
 import { isDomSafeString } from "../../../generic_functions/validationFunctions";
 import { useSelector } from "react-redux";
-import { RootState } from "../../../store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import { useRouter } from "next/navigation";
-import { postCreateAccountRoleInfo } from "../../../api_functions/postCreateAccountRoleInfo";
 import { Auth } from "aws-amplify";
 
 export type State = {
@@ -66,7 +65,7 @@ function AddInitialAccountInfoContainer({
 	const [isSubmitting, setIsSubmitting] = useState(false);
 
 	const { imageDisplayHelp, imageFile, tagline } = useSelector(
-		(state: RootState) => state.createAccount
+		(state: RootState) => state.createAccountSlice
 	);
 
 	const defaultCropSelectState = {
@@ -172,7 +171,7 @@ function AddInitialAccountInfoContainer({
 	}
 
 	async function handleSkip() {
-		const currentUser = await Auth.currentAuthenticatedUser();
+		/* const currentUser = await Auth.currentAuthenticatedUser();
 		const userSub = currentUser.attributes.sub;
 		if (
 			userType === "performer" ||
@@ -214,7 +213,7 @@ function AddInitialAccountInfoContainer({
 
 				router.push(skipRoute);
 			});
-		}
+		} */
 	}
 
 	return (

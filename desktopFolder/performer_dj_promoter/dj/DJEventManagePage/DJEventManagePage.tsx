@@ -7,7 +7,7 @@ import {
 	formatDateString,
 	formatTimeHour,
 } from "@/generic_functions/date_formaters";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import { useSelector, useDispatch } from "react-redux";
 import { putDjNextPerformer } from "@/api_functions/putDjNextPerformer";
 import { putSwitchPerformerCuePosition } from "@/api_functions/putSwitchPerformerCuePosition";

@@ -11,7 +11,7 @@ import {
 import AvatarSimpleMobile from "@mobi/small_components/AvatarSimpleMobile";
 import TextMessageGroup from "./TextMessageGroup";
 import { useSelector } from "react-redux";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import {
 	setAddConversationToList,
 	setUpdateTopMessage,

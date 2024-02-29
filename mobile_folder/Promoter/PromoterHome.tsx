@@ -11,7 +11,7 @@ import {
 import CalendarMonthRounded from "@mui/icons-material/CalendarMonthRounded";
 import AddBoxRounded from "@mui/icons-material/AddBoxRounded";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import { setMobileTab } from "@/store/mobileTabSlice";
 import PromoterEventListPage from "./PromoterEventListPage";
 import { useRouter } from "next/navigation";

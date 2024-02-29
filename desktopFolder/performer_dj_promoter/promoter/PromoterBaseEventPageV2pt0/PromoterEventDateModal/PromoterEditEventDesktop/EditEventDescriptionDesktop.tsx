@@ -8,7 +8,7 @@ import ReactQuill from "react-quill";
 import { useDispatch, useSelector } from "react-redux";
 import "quill/dist/quill.snow.css";
 import { setDescription } from "@/store/promoterEditEventSlice";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import _ from "lodash";
 import { formats, Pallate } from "@/textEditorSettings";
 import imageCompression from "browser-image-compression";

@@ -2,7 +2,7 @@
 
 import { useSelector } from "react-redux";
 import PerformerProfileAudioPaper from "./PerformerProfileAudioPaper";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 
 function PerformerProfileAudioHelper() {
 	const audioKeysObject = useSelector(

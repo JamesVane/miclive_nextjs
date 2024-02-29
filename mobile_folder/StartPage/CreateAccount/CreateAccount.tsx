@@ -26,11 +26,9 @@ interface CreateAccountProps {
 	phone: string;
 	email: string;
 	password: string;
-	confirmPassword: string;
 	username: string;
 	usernameError: string;
 	passwordError: string;
-	confirmPasswordError: string;
 	phoneError: string;
 	emailError: string;
 	handleSignUp: () => void;
@@ -38,7 +36,6 @@ interface CreateAccountProps {
 	setPhone: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	setEmail: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	setPassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
-	setConfirmPassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	snackMessage: string;
 	setSnackMessage: React.Dispatch<React.SetStateAction<string>>;
 	handleExit: () => void;
@@ -49,11 +46,9 @@ function CreateAccount({
 	phone,
 	email,
 	password,
-	confirmPassword,
 	username,
 	usernameError,
 	passwordError,
-	confirmPasswordError,
 	phoneError,
 	emailError,
 	handleSignUp,
@@ -61,7 +56,6 @@ function CreateAccount({
 	setPhone,
 	setEmail,
 	setPassword,
-	setConfirmPassword,
 	snackMessage,
 	setSnackMessage,
 	handleExit,
@@ -75,7 +69,6 @@ function CreateAccount({
 		confirmPassword: false,
 	});
 	const [isHidden, setIsHidden] = useState(true);
-	const [isConfirmHidden, setIsConfirmHidden] = useState(true);
 
 	function handleWhatIsFocused(key: string, value: boolean) {
 		setWhatIsFocused({ ...whatIsFocused, [key]: value });
@@ -236,43 +229,6 @@ function CreateAccount({
 						/>
 						{passwordError === "" ? null : (
 							<div className={styles.error_styles}>{passwordError}</div>
-						)}
-						<TextField
-							error={confirmPasswordError !== ""}
-							autoComplete="new-password"
-							onFocus={() => handleWhatIsFocused("confirmPassword", true)}
-							onBlur={() => handleWhatIsFocused("confirmPassword", false)}
-							sx={textFieldStyles}
-							placeholder="Confirm Password"
-							value={confirmPassword}
-							onChange={setConfirmPassword}
-							type={isConfirmHidden ? "password" : "text"}
-							InputProps={{
-								endAdornment: (
-									<InputAdornment position="start">
-										<IconButton
-											sx={{
-												marginRight: "-7.5px",
-												color:
-													confirmPasswordError !== ""
-														? "error.main"
-														: whatIsFocused.confirmPassword
-														? "primary.main"
-														: "action.disabled",
-											}}
-											onClick={() => setIsConfirmHidden(!isConfirmHidden)}>
-											{isConfirmHidden ? (
-												<VisibilityOffRounded />
-											) : (
-												<VisibilityRounded />
-											)}
-										</IconButton>
-									</InputAdornment>
-								),
-							}}
-						/>
-						{confirmPasswordError === "" ? null : (
-							<div className={styles.error_styles}>{confirmPasswordError}</div>
 						)}
 						<div className={styles.bottom_div}>
 							<div className={styles.divider_div}>

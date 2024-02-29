@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { Paper, Button } from "@mui/material";
 import { ClearRounded } from "@mui/icons-material";
 import { useSelector } from "react-redux";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import { ConversationListDefault } from "@/store/conversationListSlice";
 import _ from "lodash";
 import ConversationRowHelper from "./ConversationRowHelper";

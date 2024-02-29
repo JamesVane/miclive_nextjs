@@ -3,7 +3,7 @@
 
 import FloatingMessageDrawer from "./FloatingMessageDrawer";
 import { useSelector } from "react-redux";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import {
 	setOpenConversationDesktop,
 	setDrawerIsOpen,

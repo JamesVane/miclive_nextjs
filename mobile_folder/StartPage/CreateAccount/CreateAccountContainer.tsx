@@ -4,17 +4,15 @@
 import { useEffect, useState } from "react";
 import CreateAccount from "./CreateAccount";
 import { useSelector } from "react-redux";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import { useDispatch } from "react-redux";
 import {
 	setUsername as setUsernameSlice,
 	setPhone as setPhoneSlice,
 	setEmail as setEmailSlice,
 	setPassword as setPasswordSlice,
-	setConfirmPassword as setConfirmPasswordSlice,
 	setUsernameError as setUsernameErrorSlice,
 	setPasswordError as setPasswordErrorSlice,
-	setConfirmPasswordError as setConfirmPasswordErrorSlice,
 	setEmailError as setEmailErrorSlice,
 	setPhoneError as setPhoneErrorSlice,
 	setCreateAccountDefault,
@@ -38,27 +36,11 @@ import { getCheckIfExistingEmailOrUsername } from "@/api_functions/getCheckIfExi
 import { deleteAccountIfNotConfirmed } from "@/api_functions/deleteAccountIfNotConfirmed";
 
 interface CreateAccountContainerProps {
-	isForPurchase?: boolean;
-	forDjDateInvite?: boolean;
-	forDjEventInvite?: boolean;
-	forPerformerQr?: boolean;
-	forPerformerKeyCheckin?: boolean;
 	userTypeFromParams: "promoter" | "performer" | "dj";
-	keyFromParams?: string;
-	eventNameFromParams?: string;
-	uuidFromParams?: string;
 }
 
 function CreateAccountContainer({
-	isForPurchase,
-	forDjDateInvite,
-	forDjEventInvite,
-	forPerformerQr,
-	forPerformerKeyCheckin,
 	userTypeFromParams,
-	keyFromParams,
-	eventNameFromParams,
-	uuidFromParams,
 }: CreateAccountContainerProps) {
 	const dispatch = useDispatch();
 	const router = useRouter();
@@ -68,14 +50,12 @@ function CreateAccountContainer({
 		phone,
 		email,
 		password,
-		confirmPassword,
 		username,
 		usernameError,
 		passwordError,
-		confirmPasswordError,
 		phoneError,
 		emailError,
-	} = useSelector((state: RootState) => state.createAccount);
+	} = useSelector((state: RootState) => state.createAccountSlice);
 
 	const somethingIsempty = () => {
 		if (username === "") {
@@ -88,9 +68,6 @@ function CreateAccountContainer({
 			return true;
 		}
 		if (password === "") {
-			return true;
-		}
-		if (confirmPassword === "") {
 			return true;
 		}
 		return false;
@@ -108,11 +85,6 @@ function CreateAccountContainer({
 		}
 		if (password === "") {
 			dispatch(setPasswordErrorSlice("Password cannot be empty"));
-		}
-		if (confirmPassword === "") {
-			dispatch(
-				setConfirmPasswordErrorSlice("Confirm Password cannot be empty")
-			);
 		}
 	}
 
@@ -136,8 +108,7 @@ function CreateAccountContainer({
 			usernameError === "" &&
 			phoneError === "" &&
 			emailError === "" &&
-			passwordError === "" &&
-			confirmPasswordError === ""
+			passwordError === ""
 		) {
 			return true;
 		} else {
@@ -151,10 +122,7 @@ function CreateAccountContainer({
 			return;
 		} else {
 			await setSignUpErrors().then(async () => {
-				if (password !== confirmPassword) {
-					dispatch(setConfirmPasswordErrorSlice("Passwords do not match"));
-					return;
-				} else if (checkIfNoErrors()) {
+				if (checkIfNoErrors()) {
 					try {
 						getCheckIfExistingEmailOrUsername(email, username).then(
 							async (res) => {
@@ -172,32 +140,12 @@ function CreateAccountContainer({
 									attributes: {
 										phone_number: `+1${unformatPhoneNumber(phone)}`, // E.164 format
 										email: email,
-										"custom:RoleType": isForPurchase
-											? "performer"
-											: forPerformerKeyCheckin
-											? "performer"
-											: forPerformerQr
-											? "performer"
-											: forDjDateInvite
-											? "dj"
-											: forDjEventInvite
-											? "dj"
-											: userTypeFromParams,
+										"custom:RoleType": userTypeFromParams,
 										"custom:DisplayUsername": username,
 									},
 								})
 									.then(() => {
-										const navigatePath = isForPurchase
-											? `/buy_ticket/confirm/${keyFromParams}`
-											: forDjDateInvite
-											? `/dj_accept_date/${keyFromParams}/confirm`
-											: forDjEventInvite
-											? `/dj_accept_event/${keyFromParams}/confirm`
-											: forPerformerQr
-											? `/checkinqr/${uuidFromParams}/confirm`
-											: forPerformerKeyCheckin
-											? `/walkin_key/${keyFromParams}/confirm`
-											: `/confirm/${userTypeFromParams}`;
+										const navigatePath = `/confirm/${userTypeFromParams}`;
 
 										router.push(navigatePath);
 									})
@@ -259,10 +207,6 @@ function CreateAccountContainer({
 		dispatch(setPasswordSlice(removeWhitespace(event.target.value)));
 	}
 
-	function setConfirmPassword(event: React.ChangeEvent<HTMLInputElement>) {
-		dispatch(setConfirmPasswordSlice(removeWhitespace(event.target.value)));
-	}
-
 	useEffect(() => {
 		const debouncedValidation = debounce(() => {
 			dispatch(setUsernameErrorSlice(validateUsernameWithMessage(username)));
@@ -297,24 +241,8 @@ function CreateAccountContainer({
 		}
 	}, [phone]);
 
-	useEffect(() => {
-		if (confirmPasswordError !== "") {
-			dispatch(setConfirmPasswordErrorSlice(""));
-		}
-	}, [confirmPassword]);
-
 	function handleExit() {
-		const navigatePath = isForPurchase
-			? `/event/${eventNameFromParams}/${keyFromParams}`
-			: forDjDateInvite
-			? `/dj_accept_date/${keyFromParams}`
-			: forDjEventInvite
-			? `/dj_accept_event/${keyFromParams}`
-			: forPerformerKeyCheckin
-			? `/walkin_key/${keyFromParams}`
-			: forPerformerQr
-			? `/checkinqr/${uuidFromParams}`
-			: "/";
+		const navigatePath = "/";
 
 		router.push(navigatePath);
 		dispatch(setCreateAccountDefault());
@@ -326,11 +254,9 @@ function CreateAccountContainer({
 			phone={phone}
 			email={email}
 			password={password}
-			confirmPassword={confirmPassword}
 			username={username}
 			usernameError={usernameError}
 			passwordError={passwordError}
-			confirmPasswordError={confirmPasswordError}
 			phoneError={phoneError}
 			emailError={emailError}
 			handleSignUp={handleSignUp}
@@ -338,22 +264,9 @@ function CreateAccountContainer({
 			setPhone={setPhone}
 			setEmail={setEmail}
 			setPassword={setPassword}
-			setConfirmPassword={setConfirmPassword}
 			snackMessage={snackMessage}
 			setSnackMessage={setSnackMessage}
-			accountType={
-				isForPurchase
-					? "performer"
-					: forPerformerQr
-					? "performer"
-					: forPerformerKeyCheckin
-					? "performer"
-					: forDjEventInvite
-					? "dj"
-					: forDjDateInvite
-					? "dj"
-					: userTypeFromParams
-			}
+			accountType={userTypeFromParams}
 		/>
 	);
 }

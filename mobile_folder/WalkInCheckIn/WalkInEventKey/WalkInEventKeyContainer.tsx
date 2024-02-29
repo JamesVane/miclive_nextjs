@@ -7,7 +7,7 @@ import { Auth } from "aws-amplify";
 import { getCheckIfCheckInKeyIsvalid } from "@/api_functions/getCheckIfCheckInKeyIsvalid";
 import { useRouter } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import {
 	setAccountType,
 	setEventData,

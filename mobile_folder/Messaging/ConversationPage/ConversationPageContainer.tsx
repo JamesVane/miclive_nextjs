@@ -9,7 +9,7 @@ import {
 	setAllConversationMessagesType,
 } from "@/store/conversationMessagesSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import { useEffect } from "react";
 import _ from "lodash";
 import { conversationObject } from "./ConversationPage";

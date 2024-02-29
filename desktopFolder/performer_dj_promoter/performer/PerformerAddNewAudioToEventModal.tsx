@@ -4,7 +4,7 @@ import { MouseEvent } from "react";
 import { Paper } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { resetAddNewAudioToEvent } from "@/store/performerAddNewAudioToEventSlice";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import UploadAudio from "@/audioComponents/UploadAudio";
 
 interface PerformerSelectFromExistingModalProps {

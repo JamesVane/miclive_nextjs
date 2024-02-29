@@ -28,7 +28,8 @@ export const postCreateAccountBase = async (
 			throw new Error(result.message || "Unknown error");
 		}
 
-		return "Account created successfully!";
+		const returnData = await response.json();
+		return returnData.returned_id;
 	} catch (error) {
 		throw error;
 	}

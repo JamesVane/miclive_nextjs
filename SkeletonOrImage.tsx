@@ -6,7 +6,7 @@ import { Skeleton } from "@mui/material";
 import { getSignedUrl } from "./api_functions/getAnySignedUrl";
 import { useSelector, useDispatch } from "react-redux";
 import { setSrc } from "./store/imgStore";
-import { RootState } from "./store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import defaulprofile from "./images/defaultprofile.png";
 import Image from "next/image";
 

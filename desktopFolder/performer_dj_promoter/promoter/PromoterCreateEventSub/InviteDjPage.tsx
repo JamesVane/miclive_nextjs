@@ -10,22 +10,28 @@ import {
 } from "@mui/icons-material";
 import CreateHeader from "./CreateHeader";
 import { useRouter, usePathname } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
+import { setToDefault } from "@/store/promoterCreateEventSlice";
+import { RootState } from "@/app/LocalizationProviderHelper";
 
 function InviteDjPage() {
 	const router = useRouter();
+	const dispatch = useDispatch();
+
 	const location = usePathname();
 	const [dateSnack, setDateSnack] = useState(false);
 	const [eventSnack, setEventSnack] = useState(false);
 	const [notOffered, setNotOffered] = useState(false);
 
+	const { eventDjKey, dateDjKey } = useSelector(
+		(state: RootState) => state.promoterCreateEvent
+	);
+
 	const wlo = window.location.origin;
-	const dateKey = localStorage.getItem("inviteDateKey");
 
-	const dateURL = `${wlo}/dj_accept_date/${dateKey}`;
+	const dateURL = `${wlo}/dj_accept_date/${dateDjKey}`;
 
-	const eventKey = localStorage.getItem("inviteEventKey");
-
-	const eventURL = `${wlo}/dj_accept_event/${eventKey}`;
+	const eventURL = `${wlo}/dj_accept_event/${eventDjKey}`;
 
 	const dateShareData = {
 		title: "Date Dj Invite",
@@ -100,6 +106,11 @@ function InviteDjPage() {
 
 		setEventSnack(false);
 	};
+
+	function handleClickDone() {
+		dispatch(setToDefault());
+		router.push("/promoter");
+	}
 
 	return (
 		<>
@@ -187,7 +198,7 @@ function InviteDjPage() {
 					</Box>
 					<Button
 						sx={{ marginTop: "10px" }}
-						onClick={() => router.push("/promoter")}
+						onClick={handleClickDone}
 						size="large"
 						color="success"
 						variant="outlined"

@@ -2,7 +2,7 @@
 
 import { useDispatch, useSelector } from "react-redux";
 import { resetAddNewAudioToEvent } from "@/store/performerAddNewAudioToEventSlice";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import PerformerAddAudio from "@mobi/Performer/PerformerAddAudio";
 
 interface PerformerAddNewAudioToEventModalProps {

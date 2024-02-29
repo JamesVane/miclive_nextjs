@@ -18,7 +18,7 @@ import Image from "next/image";
 import horizLogo from "@/images/miclive_svg_horiz.svg";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import { letterToHexcodeObject, TwoLetterKey } from "@/lettersToHexcodesObject";
 import { useInterval } from "@/useInterval/useInterval";
 import { useDispatch } from "react-redux";

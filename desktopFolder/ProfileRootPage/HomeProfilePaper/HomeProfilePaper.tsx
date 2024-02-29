@@ -6,7 +6,7 @@ import ImageUploadCrop from "@desk/ImageComponents/ImageUploadCrop/ImageUploadCr
 import { setSrc } from "@/store/imgStore";
 import { useDispatch, useSelector } from "react-redux";
 import { getSignedUrl } from "@/api_functions/getAnySignedUrl";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import { postUploadS3Image } from "@/api_functions/postUploadS3Image";
 import { LinearProgress, Button, Tabs, Tab } from "@mui/material";
 import {

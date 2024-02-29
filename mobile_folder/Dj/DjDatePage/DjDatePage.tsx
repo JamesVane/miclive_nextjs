@@ -17,7 +17,7 @@ import {
 } from "@/generic_functions/date_formaters";
 import PersonRowMobile from "@mobi/PersonRowMobile";
 import { useSelector } from "react-redux";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import DescriptionComponent from "@mobi/DescriptionComponent";
 import DjDatePageRosterHelper from "./DjDatePageRosterHelper";
 import DividerH from "@/universalComponents/DividerH";

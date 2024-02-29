@@ -8,7 +8,7 @@ import { ArrowBackIosRounded, AddRounded } from "@mui/icons-material";
 import "quill/dist/quill.snow.css";
 import ReactQuill from "react-quill";
 import CreateDateCrumbsMobile from "./CreateDateCrumbsMobile";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import {
 	switchPageDate,
 	setDescriptionDate,

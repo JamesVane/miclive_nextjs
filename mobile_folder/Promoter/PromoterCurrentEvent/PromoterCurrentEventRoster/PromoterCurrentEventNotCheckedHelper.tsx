@@ -3,7 +3,7 @@
 import React from "react";
 import PromoterCurrentEventNotCheckedPaper from "./PromoterCurrentEventNotCheckedPaper";
 import { useSelector } from "react-redux";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 
 function PromoterCurrentEventNotCheckedHelper() {
 	const { roster } = useSelector(

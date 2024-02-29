@@ -12,7 +12,7 @@ import {
 	Alert,
 } from "@mui/material";
 import { useSelector } from "react-redux";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import AvatarSimpleMobile from "@mobi/small_components/AvatarSimpleMobile";
 import {
 	EditRounded,

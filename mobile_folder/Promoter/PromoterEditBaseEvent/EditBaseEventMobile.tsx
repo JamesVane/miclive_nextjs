@@ -10,7 +10,7 @@ import {
 	PriorityHighRounded,
 	ClearRounded,
 } from "@mui/icons-material";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import _ from "lodash";
 import {
 	setBaseEvent,

@@ -8,7 +8,7 @@ import {
 	setSelectFromExisting,
 	defaultPerformerSelectFromExistingModal,
 } from "@/store/performerSelectFromExistingModalSlice";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import { PerformerRoleAudioKeys } from "@/api_functions/getPerformerProfileAudioKeys";
 
 interface PerformerSelectFromExistingModalProps {

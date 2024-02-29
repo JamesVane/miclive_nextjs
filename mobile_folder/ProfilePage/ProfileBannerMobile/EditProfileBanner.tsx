@@ -14,7 +14,7 @@ import BothBannersSelectedMobile from "./BothBannersSelectedMobile";
 import { Crop } from "react-image-crop";
 import { CheckRounded } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import { postUploadS3Image } from "@/api_functions/postUploadS3Image";
 import { getSignedUrl } from "@/api_functions/getAnySignedUrl";
 import { setSrc } from "@/store/imgStore";

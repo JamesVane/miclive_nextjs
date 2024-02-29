@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import {
 	setBanner4X10DisplayHelp,
 	setBanner3X10DisplayHelp,

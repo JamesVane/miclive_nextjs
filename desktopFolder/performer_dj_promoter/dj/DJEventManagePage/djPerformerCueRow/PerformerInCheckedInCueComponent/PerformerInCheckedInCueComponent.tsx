@@ -11,7 +11,7 @@ import {
 } from "@mui/icons-material";
 import { useState } from "react";
 import { swapPerformerCuePositionReducer } from "@/store/djManageEventSlice";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import { putSwitchPerformerCuePosition } from "@/api_functions/putSwitchPerformerCuePosition";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "../styles.module.css";

@@ -8,7 +8,7 @@ import { getPromoterDateModalDataV2pt0 } from "@/api_functions/getPromoterDateMo
 import { setPromoterDateInfoV2pt0 } from "@/store/promoterDateInfoV2pt0Slice";
 import { useRouter } from "next/navigation";
 import SplashPage from "@/SplashPage";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import { getDjDateInviteLinkAgain } from "@/api_functions/getDjInviteLinkAgain";
 import { Snackbar, Alert } from "@mui/material";
 import QrInfoMobileModal from "./QrInfoMobileModal";

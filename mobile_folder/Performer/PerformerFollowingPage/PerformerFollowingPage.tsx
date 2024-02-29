@@ -4,7 +4,7 @@ import React from "react";
 import styles from "./styles.module.css";
 import NormalEventCard from "@mobi/NormalEventCard";
 import { useSelector } from "react-redux";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 
 function PerformerFollowingPage() {
 	const followingArray = useSelector(

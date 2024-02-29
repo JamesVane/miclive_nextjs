@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import DJEventManagePage from "./DJEventManagePage";
 import { getDjManageFullState } from "@/api_functions/getDjManageFullState";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import { setAllDjManageEventSlice } from "@/store/djManageEventSlice";
 import SplashPage from "@/SplashPage";
 import _ from "lodash";

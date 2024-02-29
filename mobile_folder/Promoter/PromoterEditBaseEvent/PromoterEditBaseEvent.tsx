@@ -17,7 +17,7 @@ import {
 	setExistingBaseDescription,
 	setExistingBanners,
 } from "@/store/promoterEditEventSlice";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import { editBaseEvent } from "@/api_functions/putEditBaseEvent";
 import { setSrc } from "@/store/imgStore";
 import { getSignedUrl } from "@/api_functions/getAnySignedUrl";

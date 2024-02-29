@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import styles from "./styles.module.css";
 import InQueuePaper from "./InQueuePaper";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import {
 	PromoterCueObjectType,
 	promoterManageAdjustQueuePositionFromDND,

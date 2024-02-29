@@ -4,7 +4,7 @@ import React from "react";
 import styles from "./styles.module.css";
 import PerformerDateCard from "./PerformerDateCard";
 import { useSelector } from "react-redux";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 
 function PerformerTicketPage() {
 	const { upcoming: upcomingArray, previous: previousArray } = useSelector(

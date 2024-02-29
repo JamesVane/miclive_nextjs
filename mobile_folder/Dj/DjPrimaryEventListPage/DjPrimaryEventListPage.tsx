@@ -4,7 +4,7 @@ import React from "react";
 import NormalEventCard from "@mobi/NormalEventCard";
 import styles from "./styles.module.css";
 import { useSelector } from "react-redux";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 
 function DjPrimaryEventListPage() {
 	const eventList = useSelector(

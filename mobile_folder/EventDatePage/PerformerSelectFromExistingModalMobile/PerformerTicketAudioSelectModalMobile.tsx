@@ -1,7 +1,7 @@
 /** @format */
 
 import React from "react";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { Auth } from "aws-amplify";

@@ -4,7 +4,7 @@
 import React from "react";
 import ConfirmPhone from "./ConfirmPhone";
 import { Auth } from "aws-amplify";
-import { RootState } from "../../../store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import { useSelector } from "react-redux";
 import { unformatPhoneNumber } from "../../../generic_functions/formatPhoneNumber";
 import { useRouter } from "next/navigation";
@@ -52,7 +52,7 @@ function ConfirmPhoneAndEmailContainer({
 		password: currentPassword,
 		username,
 		email,
-	} = useSelector((state: RootState) => state.createAccount);
+	} = useSelector((state: RootState) => state.createAccountSlice);
 
 	async function amplifySignIn(): Promise<boolean> {
 		try {

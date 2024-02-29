@@ -51,13 +51,17 @@ function PurchaseTicketContainer({
 	function handlePurchaseTicket() {
 		setIsPurchasing(true);
 		addToRoster().then(() => {
+			const eventNameSlug = pageData.name
+				.trim()
+				.replace(/\s+/g, "")
+				.toLowerCase();
 			if (forCheckin) {
 				router.push(`/m/checkinqr/${uuidFromParams}`);
 			} else if (forKeyCheckIn) {
 				router.push(`/m/walkin_key/${walkinKeyFromParams}`);
 			} else {
 				router.push(
-					`/m.event/${pageData.name}/${pageData.specific_event_id}/ticket`
+					`/m.event/${eventNameSlug}/${pageData.specific_event_id}/ticket`
 				);
 			}
 			setIsPurchasing(false);
@@ -65,7 +69,11 @@ function PurchaseTicketContainer({
 	}
 
 	function handleBack() {
-		router.push(`/m/event/${pageData.name}/${pageData.specific_event_id}`);
+		const eventNameSlug = pageData.name
+			.trim()
+			.replace(/\s+/g, "")
+			.toLowerCase();
+		router.push(`/m/event/${eventNameSlug}/${pageData.specific_event_id}`);
 	}
 
 	useEffect(() => {

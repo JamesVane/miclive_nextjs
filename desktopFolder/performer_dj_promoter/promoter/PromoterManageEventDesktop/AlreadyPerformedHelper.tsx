@@ -4,7 +4,7 @@ import React from "react";
 import styles from "./styles.module.css";
 import AlreadyPerformedPaper from "./AlreadyPerformedPaper";
 import { useSelector } from "react-redux";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 
 function AlreadyPerformedHelper() {
 	const { has_performed: hasPerformed } = useSelector(

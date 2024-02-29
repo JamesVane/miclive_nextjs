@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import ImageUploadCrop from "@desk/ImageComponents/ImageUploadCrop/ImageUploadCrop";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import {
 	setBanner3X10DisplayHelp,
 	setBaseEvent,

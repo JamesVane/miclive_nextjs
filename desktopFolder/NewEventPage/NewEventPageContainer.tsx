@@ -40,6 +40,10 @@ function NewEventPageContainer({
 					specificIdfromParams={specificIdfromParams}
 					isFromEventPage
 					eventPageTicketPurchasedDate={ticketIsOpen ? true : false}
+					eventName={eventPageData.pageState.data.event_name
+						.trim()
+						.replace(/\s+/g, "")
+						.toLowerCase()}
 				/>
 			) : null}
 			<NewEventPage

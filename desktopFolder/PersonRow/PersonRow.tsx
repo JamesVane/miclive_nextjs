@@ -8,7 +8,7 @@ import styles from "./styles.module.css";
 // import { setHoldNewConversationSlice } from "../../../store/holdNewConversationSlice";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import { setViewUserInfoModalSlice } from "@/store/viewUserInfoModalSlice";
 
 interface PersonRow {

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import styles from "./styles.module.css";
 import { PostPerformerChangeSubmittedAudioFromExisting } from "@/api_functions/PostPerformerChangeSubmittedAudioFromExisting";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import { useDispatch, useSelector } from "react-redux";
 import PerformerTicketAudioSelectRow from "./PerformerTicketAudioSelectRow";
 import { timeStringToSeconds } from "@/generic_functions/time_formaters";

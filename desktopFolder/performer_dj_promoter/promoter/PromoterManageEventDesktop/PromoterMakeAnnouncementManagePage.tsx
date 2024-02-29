@@ -13,7 +13,7 @@ import DividerH from "@/universalComponents/DividerH";
 import { cleanAnnouncementMessage } from "@/generic_functions/validationFunctionsForForms";
 import { postMakeAnnouncement } from "@/api_functions/postMakeAnnouncement";
 import { useSelector } from "react-redux";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import { Auth } from "aws-amplify";
 
 interface PromoterMakeAnnouncementManagePageProps {

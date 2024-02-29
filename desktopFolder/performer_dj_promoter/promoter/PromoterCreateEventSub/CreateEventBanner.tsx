@@ -11,7 +11,7 @@ import {
 import { switchPage } from "@/store/promoterCreateEventSlice";
 import CreateHeader from "./CreateHeader";
 import CreateEventCrumbs from "./CreateEventCrumbs";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import BannerThree from "./BannerThree";
 import BannerFour from "./BannerFour";
 import {

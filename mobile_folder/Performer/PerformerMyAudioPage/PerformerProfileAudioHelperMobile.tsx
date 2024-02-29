@@ -1,6 +1,6 @@
 /** @format */
 
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import { useSelector } from "react-redux";
 import PerformerProfileAudioPaperMobile from "./PerformerProfileAudioPaperMobile";
 import styles from "./styles.module.css";

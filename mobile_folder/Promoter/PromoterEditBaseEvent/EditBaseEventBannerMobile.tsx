@@ -5,7 +5,7 @@ import EditEventFourBannerMobile from "./EditEventFourBannerMobile";
 import EditEventThreeBannerMobile from "./EditEventThreeBannerMobile";
 import EditEventBothBannersSelectedMobile from "./EditEventBothBannersSelectedMobile";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import { Crop } from "react-image-crop";
 import {
 	setEditBanner4X10DisplayHelp,

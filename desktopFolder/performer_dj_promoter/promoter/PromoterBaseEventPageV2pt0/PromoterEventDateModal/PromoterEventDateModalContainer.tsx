@@ -5,7 +5,7 @@ import PromoterEventDateModal from "./PromoterEventDateModal";
 import { setSelectedSpecificEvent } from "@/store/PromoterEventPageV2pt0Slice";
 import { useDispatch, useSelector } from "react-redux";
 import { getPromoterDateModalDataV2pt0 } from "@/api_functions/getPromoterDateModalDataV2pt0";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import { setPromoterDateInfoV2pt0 } from "@/store/promoterDateInfoV2pt0Slice";
 import SplashPage from "@/SplashPage";
 import styles from "./styles.module.css";

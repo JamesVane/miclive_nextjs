@@ -1,7 +1,6 @@
 /** @format */
 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import storage from "redux-persist/lib/storage";
 
 type AudioUrlType = {
 	[key: string]: string;
@@ -25,9 +24,5 @@ const audioUrlSlice = createSlice({
 
 export const { setAudioUrl } = audioUrlSlice.actions;
 
-const persistConfig = {
-	key: "root",
-	storage,
-};
 
 export default audioUrlSlice.reducer;

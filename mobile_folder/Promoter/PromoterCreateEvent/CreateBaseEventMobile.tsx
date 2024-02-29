@@ -10,7 +10,7 @@ import {
 	ClearRounded,
 	CheckRounded,
 } from "@mui/icons-material";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import {
 	setBaseEvent,
 	switchPage,

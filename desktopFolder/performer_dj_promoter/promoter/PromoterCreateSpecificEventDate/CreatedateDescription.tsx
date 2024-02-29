@@ -9,7 +9,7 @@ import "quill/dist/quill.snow.css";
 import ReactQuill from "react-quill";
 import CreateDateCrumbs from "./CreateDateCrumbs";
 import CreateHeaderSpecific from "./CreateHeaderSpecific";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import {
 	switchPageDate,
 	setDescriptionDate,

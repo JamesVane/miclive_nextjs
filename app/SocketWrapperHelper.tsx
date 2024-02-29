@@ -11,7 +11,7 @@ import { setAllConversationListSlice } from "@/store/conversationListSlice";
 import { setConversationMessagesDefault } from "@/store/conversationMessagesSlice";
 import { setCurrentSub as setCurrentSubSlice } from "@/store/currentSubStore";
 import useWebSocket from "@/WebSocket/useWebSocket";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import { SocketContext } from "@/SocketContext";
 
 function SocketWrapperHelper({ children }: { children: React.ReactNode }) {

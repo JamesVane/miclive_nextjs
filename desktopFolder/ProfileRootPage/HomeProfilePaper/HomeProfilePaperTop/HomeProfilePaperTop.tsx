@@ -22,7 +22,7 @@ import { useDispatch } from "react-redux";
 import { setUsersStateProfile } from "@/store/usersStateStore";
 import { useSelector } from "react-redux";
 import AvatarSimple from "@desk/AvatarSimple";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import { UserProfileResponse } from "@/api_functions/getUserProfile";
 import styles from "./styles.module.css";
 

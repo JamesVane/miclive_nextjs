@@ -9,7 +9,7 @@ import {
 	setEditBanner3X10DisplayHelp,
 	setBanner3X10,
 } from "@/store/promoterEditEventSlice";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 
 interface EditEventBannerThreeProps {
 	holdSrc: any;

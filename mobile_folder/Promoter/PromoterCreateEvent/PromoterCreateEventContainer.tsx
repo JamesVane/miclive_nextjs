@@ -3,7 +3,7 @@
 
 import { useSelector } from "react-redux";
 import { useState } from "react";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import { useDispatch } from "react-redux";
 import { createBaseAndSpecificEventContainer } from "@/api_functions/postCreateBaseAndSpecificEvent/postCreateBaseAndSpecificEventContainer";
 import { postUploadS3Image } from "@/api_functions/postUploadS3Image";

@@ -2,7 +2,7 @@
 
 import React from "react";
 import PromoterEventDateRosterPapaer from "./PromoterEventDateRosterPapaer";
-import { RootState } from "@/store/rootStore";
+import { RootState } from "@/app/LocalizationProviderHelper";
 import { useSelector } from "react-redux";
 
 function PromoterEventDatePageRosterListHelper() {
