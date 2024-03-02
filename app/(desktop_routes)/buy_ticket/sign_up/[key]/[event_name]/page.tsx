@@ -2,14 +2,13 @@
 
 import React from "react";
 import CreateAccount from "@desk/CreateAccount";
+import PerformerTicketSignUpNamePhone from "@desk/performer_dj_promoter/performer/BuyTicket/PerformerTicketSignUpNamePhone";
 
 function page({ params }: { params: { key: string; event_name: string } }) {
 	return (
-		<CreateAccount
-			userType="performer"
-			eventNameParam={params.event_name}
-			keyParam={params.key}
-			isForPurchase
+		<PerformerTicketSignUpNamePhone
+			eventName={params.event_name}
+			eventKey={params.key}
 		/>
 	);
 }

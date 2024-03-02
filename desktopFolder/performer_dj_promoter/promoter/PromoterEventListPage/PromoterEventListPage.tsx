@@ -5,6 +5,9 @@ import { EventData } from "@/api_functions/getPromoterEventListV2pt0";
 import styles from "./styles.module.css";
 import EventGridSquare from "@desk/EventGridSquare";
 import { EmptyEventGridSquare } from "@desk/EventGridSquare/EventGridSquare";
+import { Button } from "@mui/material";
+import { AddBoxRounded } from "@mui/icons-material";
+import { useRouter } from "next/navigation";
 
 interface PromoterEventListPageProps {
 	viewportWidth: "three" | "two";
@@ -15,6 +18,7 @@ function PromoterEventListPage({
 	viewportWidth,
 	eventListArray,
 }: PromoterEventListPageProps) {
+	const router = useRouter();
 	function chunkArrayByThree(eventListArray: EventData[]) {
 		const chunkedArray = [] as (EventData | "empty_slot")[][];
 		let index = 0;
@@ -55,8 +59,28 @@ function PromoterEventListPage({
 			? chunkArrayByThree(eventListArray)
 			: chunkArrayByTwo(eventListArray);
 
+	function handleCreateEvent() {
+		router.push("/promoter/create");
+	}
+
 	return (
 		<div className={styles.main_div}>
+			{eventListArray.length === 0 ? (
+				<div className={styles.no_events_div}>
+					You have not created any events yet.
+					<Button
+						sx={{
+							marginTop: "10px",
+						}}
+						size="large"
+						onClick={handleCreateEvent}
+						startIcon={<AddBoxRounded />}
+						variant="outlined"
+						color="success">
+						create event
+					</Button>
+				</div>
+			) : null}
 			{chunkedArray.map((chunk, index) => {
 				return (
 					<div className={styles.row_div} key={index}>

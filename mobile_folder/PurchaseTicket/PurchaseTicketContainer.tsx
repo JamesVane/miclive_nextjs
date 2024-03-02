@@ -61,7 +61,7 @@ function PurchaseTicketContainer({
 				router.push(`/m/walkin_key/${walkinKeyFromParams}`);
 			} else {
 				router.push(
-					`/m.event/${eventNameSlug}/${pageData.specific_event_id}/ticket`
+					`/m/event/${eventNameSlug}/${pageData.specific_event_id}/ticket`
 				);
 			}
 			setIsPurchasing(false);

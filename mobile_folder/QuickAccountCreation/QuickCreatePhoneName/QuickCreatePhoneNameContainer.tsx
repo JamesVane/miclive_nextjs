@@ -2,24 +2,21 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import CreateAccount from "./CreateAccount";
+import QuickCreatePhoneNameView from "./QuickCreatePhoneNameView";
 import { useSelector } from "react-redux";
 import { RootState } from "@/app/LocalizationProviderHelper";
 import { useDispatch } from "react-redux";
 import {
 	setUsername as setUsernameSlice,
 	setPhone as setPhoneSlice,
-	setEmail as setEmailSlice,
 	setPassword as setPasswordSlice,
 	setUsernameError as setUsernameErrorSlice,
 	setPasswordError as setPasswordErrorSlice,
-	setEmailError as setEmailErrorSlice,
 	setPhoneError as setPhoneErrorSlice,
 	setCreateAccountDefault,
 } from "@/store/createAccountSlice";
 import { Auth } from "aws-amplify";
 import {
-	isValidEmail,
 	validatePassword,
 	validateUsername,
 	validateUsernameWithMessage,
@@ -31,30 +28,34 @@ import {
 	formatPhoneNumber,
 	unformatPhoneNumber,
 } from "@/generic_functions/formatPhoneNumber";
+import { useRouter } from "next/navigation";
 import { getCheckIfExistingEmailOrUsername } from "@/api_functions/getCheckIfExistingEmailOrUsername";
 import { deleteAccountIfNotConfirmed } from "@/api_functions/deleteAccountIfNotConfirmed";
-import { useRouter } from "next/navigation";
-import { cleanWhitespace } from "@/generic_functions/validationFunctionsForForms";
 
 interface CreateAccountContainerProps {
-	userType: "promoter" | "performer" | "dj";
+	userTypeFromParams: "promoter" | "performer" | "dj";
+	cancelPath: string;
+	continuePath: string;
 }
 
-function CreateAccountContainer({ userType }: CreateAccountContainerProps) {
+function QuickCreatePhoneNameContainer({
+	userTypeFromParams,
+	cancelPath,
+	continuePath,
+}: CreateAccountContainerProps) {
 	const dispatch = useDispatch();
 	const router = useRouter();
-
 	const [snackMessage, setSnackMessage] = useState("");
+
+	const email = "empty@empty.com";
 
 	const {
 		phone,
-		email,
 		password,
 		username,
 		usernameError,
 		passwordError,
 		phoneError,
-		emailError,
 	} = useSelector((state: RootState) => state.createAccountSlice);
 
 	const somethingIsempty = () => {
@@ -62,9 +63,6 @@ function CreateAccountContainer({ userType }: CreateAccountContainerProps) {
 			return true;
 		}
 		if (phone === "") {
-			return true;
-		}
-		if (email === "") {
 			return true;
 		}
 		if (password === "") {
@@ -80,9 +78,6 @@ function CreateAccountContainer({ userType }: CreateAccountContainerProps) {
 		if (phone === "") {
 			dispatch(setPhoneErrorSlice("Phone cannot be empty"));
 		}
-		if (email === "") {
-			dispatch(setEmailErrorSlice("Email cannot be empty"));
-		}
 		if (password === "") {
 			dispatch(setPasswordErrorSlice("Password cannot be empty"));
 		}
@@ -91,9 +86,6 @@ function CreateAccountContainer({ userType }: CreateAccountContainerProps) {
 	async function setSignUpErrors() {
 		if (!isValidPhoneNumber(phone)) {
 			dispatch(setPhoneErrorSlice("Invalid phone number"));
-		}
-		if (!isValidEmail(email)) {
-			dispatch(setEmailErrorSlice("Invalid email"));
 		}
 		if (!validatePassword(password)) {
 			dispatch(setPasswordErrorSlice("Invalid password"));
@@ -104,12 +96,7 @@ function CreateAccountContainer({ userType }: CreateAccountContainerProps) {
 	}
 
 	function checkIfNoErrors() {
-		if (
-			usernameError === "" &&
-			phoneError === "" &&
-			emailError === "" &&
-			passwordError === ""
-		) {
+		if (usernameError === "" && phoneError === "" && passwordError === "") {
 			return true;
 		} else {
 			return false;
@@ -124,13 +111,8 @@ function CreateAccountContainer({ userType }: CreateAccountContainerProps) {
 			await setSignUpErrors().then(async () => {
 				if (checkIfNoErrors()) {
 					try {
-						const trimmedUsername = username.trim();
-						getCheckIfExistingEmailOrUsername(email, trimmedUsername).then(
+						getCheckIfExistingEmailOrUsername(email, username).then(
 							async (res) => {
-								if (res.existingEmail) {
-									dispatch(setEmailErrorSlice("Email already exists"));
-									return;
-								}
 								if (res.existingUsername) {
 									dispatch(setUsernameErrorSlice("Username already exists"));
 									return;
@@ -141,12 +123,12 @@ function CreateAccountContainer({ userType }: CreateAccountContainerProps) {
 									attributes: {
 										phone_number: `+1${unformatPhoneNumber(phone)}`, // E.164 format
 										email: email,
-										"custom:RoleType": userType,
-										"custom:DisplayUsername": trimmedUsername,
+										"custom:RoleType": userTypeFromParams,
+										"custom:DisplayUsername": username,
 									},
 								})
-									.then((res) => {
-										router.push(`/confirm/${userType}`);
+									.then(() => {
+										router.push(continuePath);
 									})
 									.catch((err) => {
 										if (err.code === "UsernameExistsException") {
@@ -186,8 +168,7 @@ function CreateAccountContainer({ userType }: CreateAccountContainerProps) {
 
 	function setUsername(event: React.ChangeEvent<HTMLInputElement>) {
 		if (event.target.value.length <= 25) {
-			const whitespaceCleanedUsername = cleanWhitespace(event.target.value);
-			dispatch(setUsernameSlice(whitespaceCleanedUsername));
+			dispatch(setUsernameSlice(event.target.value));
 		}
 	}
 
@@ -196,11 +177,6 @@ function CreateAccountContainer({ userType }: CreateAccountContainerProps) {
 		if (adjustedValue !== null) {
 			dispatch(setPhoneSlice(adjustedValue));
 		}
-	}
-
-	function setEmail(event: React.ChangeEvent<HTMLInputElement>) {
-		const adjustedValue = removeWhitespace(event.target.value);
-		dispatch(setEmailSlice(adjustedValue));
 	}
 
 	function setPassword(event: React.ChangeEvent<HTMLInputElement>) {
@@ -230,66 +206,34 @@ function CreateAccountContainer({ userType }: CreateAccountContainerProps) {
 	}, [password]);
 
 	useEffect(() => {
-		if (emailError !== "") {
-			dispatch(setEmailErrorSlice(""));
-		}
-	}, [email]);
-
-	useEffect(() => {
 		if (phoneError !== "") {
 			dispatch(setPhoneErrorSlice(""));
 		}
 	}, [phone]);
 
 	function handleExit() {
-		router.push("/");
-	}
-
-	function clearUsername() {
-		dispatch(setUsernameSlice(""));
-		dispatch(setUsernameErrorSlice(""));
-	}
-
-	function clearPhone() {
-		dispatch(setPhoneSlice(""));
-		dispatch(setPhoneErrorSlice(""));
-	}
-
-	function clearEmail() {
-		dispatch(setEmailSlice(""));
-		dispatch(setEmailErrorSlice(""));
-	}
-
-	function clearPassword() {
-		dispatch(setPasswordSlice(""));
-		dispatch(setPasswordErrorSlice(""));
+		router.push(cancelPath);
+		dispatch(setCreateAccountDefault());
 	}
 
 	return (
-		<CreateAccount
+		<QuickCreatePhoneNameView
 			handleExit={handleExit}
 			phone={phone}
-			email={email}
 			password={password}
 			username={username}
 			usernameError={usernameError}
 			passwordError={passwordError}
 			phoneError={phoneError}
-			emailError={emailError}
 			handleSignUp={handleSignUp}
 			setUsername={setUsername}
 			setPhone={setPhone}
-			setEmail={setEmail}
 			setPassword={setPassword}
 			snackMessage={snackMessage}
 			setSnackMessage={setSnackMessage}
-			accountType={userType!}
-			clearUsername={clearUsername}
-			clearPhone={clearPhone}
-			clearEmail={clearEmail}
-			clearPassword={clearPassword}
+			accountType={userTypeFromParams}
 		/>
 	);
 }
 
-export default CreateAccountContainer;
+export default QuickCreatePhoneNameContainer;

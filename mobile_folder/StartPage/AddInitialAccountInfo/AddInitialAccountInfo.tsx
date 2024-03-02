@@ -5,11 +5,7 @@ import styles from "./styles.module.css";
 import ImageUploadCropCreateAccountMobile from "./ImageUploadCropCreateAccountMobile/ImageUploadCropCreateAccountMobile";
 import { Avatar, Button, TextField, LinearProgress } from "@mui/material";
 import { Crop } from "react-image-crop";
-import {
-	ClearRounded,
-	CheckRounded,
-	SkipNextRounded,
-} from "@mui/icons-material";
+import { ClearRounded, CheckRounded } from "@mui/icons-material";
 import DividerH from "@/universalComponents/DividerH";
 
 export type State = {
@@ -39,10 +35,8 @@ interface AddInitialAccountInfoProps {
 	imageFile: string | null;
 	imageDisplayHelp: any;
 	taglineErrorText: string;
-	goToNextStep: () => void;
 	isSubmitting: boolean;
-	handleSkip: () => void;
-	userType: "promoter" | "dj" | "performer";
+	handleContinue: () => void;
 }
 
 function AddInitialAccountInfo({
@@ -66,10 +60,8 @@ function AddInitialAccountInfo({
 	imageFile,
 	imageDisplayHelp,
 	taglineErrorText,
-	goToNextStep,
 	isSubmitting,
-	handleSkip,
-	userType,
+	handleContinue,
 }: AddInitialAccountInfoProps) {
 	const submitDisabled = imageFile === null && tagline === "";
 
@@ -218,27 +210,14 @@ function AddInitialAccountInfo({
 					<DividerH />
 				)}
 				<div className={styles.bottom_buttons}>
-					{userType === "promoter" ? (
-						<div></div>
-					) : (
-						<Button
-							onClick={handleSkip}
-							disabled={isSubmitting}
-							endIcon={<SkipNextRounded />}
-							size="large"
-							variant="outlined"
-							color="secondary">
-							Skip
-						</Button>
-					)}
 					<Button
 						disabled={isSubmitting || submitDisabled}
-						onClick={goToNextStep}
+						onClick={handleContinue}
 						startIcon={<CheckRounded />}
 						size="large"
 						variant="outlined"
 						color="success">
-						submit
+						finish
 					</Button>
 				</div>
 			</div>

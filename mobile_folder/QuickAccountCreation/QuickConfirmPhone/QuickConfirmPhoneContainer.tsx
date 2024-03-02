@@ -2,26 +2,24 @@
 "use client";
 
 import React from "react";
-import ConfirmPhone from "./ConfirmPhone";
+import QuickConfirmPhoneView from "./QuickConfirmPhoneView";
 import { Auth } from "aws-amplify";
 import { RootState } from "@/app/LocalizationProviderHelper";
 import { useSelector } from "react-redux";
-import { unformatPhoneNumber } from "@/generic_functions/formatPhoneNumber";
+import { unformatPhoneNumber } from "../../../generic_functions/formatPhoneNumber";
 import { useRouter } from "next/navigation";
-import { postCreateAccountBase } from "@/api_functions/postCreateAccountBase";
-import { setUserRoleId } from "@/store/createAccountSlice";
-import { useDispatch } from "react-redux";
+import { postCreateAccountBase } from "../../../api_functions/postCreateAccountBase";
 
-interface ConfirmPhoneAndEmailContainerProps {
-	paramsType: string;
+interface QuickConfirmPhoneContainerProps {
+	userTypeFromParams: "promoter" | "performer" | "dj";
+	continueUrl: string;
 }
 
-function ConfirmPhoneAndEmailContainer({
-	paramsType,
-}: ConfirmPhoneAndEmailContainerProps) {
+function QuickConfirmPhoneContainer({
+	userTypeFromParams,
+	continueUrl,
+}: QuickConfirmPhoneContainerProps) {
 	const router = useRouter();
-	const userType = paramsType;
-	const dispatch = useDispatch();
 
 	const [message, setMessage] = React.useState("");
 	const [isLoading, setIsLoading] = React.useState(false); // [1
@@ -30,8 +28,8 @@ function ConfirmPhoneAndEmailContainer({
 		phone: currentPhoneNumber,
 		password: currentPassword,
 		username,
-		email,
 	} = useSelector((state: RootState) => state.createAccountSlice);
+	const email = "empty@empty.com";
 
 	async function amplifySignIn(): Promise<boolean> {
 		try {
@@ -57,13 +55,16 @@ function ConfirmPhoneAndEmailContainer({
 					const user = await Auth.currentAuthenticatedUser();
 					const userSub = user.attributes.sub;
 					if (res) {
-						const trimmedUsername = username.trim();
 						postCreateAccountBase({
 							request_primary_key: userSub,
-							request_username: trimmedUsername,
+							request_username: username,
 							request_email: email,
 							request_role_name_number:
-								userType === "promoter" ? 1 : userType === "dj" ? 2 : 3,
+								userTypeFromParams === "promoter"
+									? 1
+									: userTypeFromParams === "dj"
+									? 2
+									: 3,
 							request_phone_number: `+1${unformatPhoneNumber(
 								currentPhoneNumber
 							)}`,
@@ -72,10 +73,9 @@ function ConfirmPhoneAndEmailContainer({
 								"custom:RoleId": userRoleId.toString(),
 							});
 							await Auth.updateUserAttributes(user, {
-								"custom:RoleType": userType,
+								"custom:RoleType": userTypeFromParams,
 							});
-							dispatch(setUserRoleId(Number(userRoleId)));
-							router.push(`/add_info/${userType}`);
+							router.push(continueUrl);
 							setMessage("");
 							setIsLoading(false);
 						});
@@ -115,7 +115,7 @@ function ConfirmPhoneAndEmailContainer({
 
 	return (
 		<div>
-			<ConfirmPhone
+			<QuickConfirmPhoneView
 				handleConfirmation={handleConfirmation}
 				validateChar={validateChar}
 				message={message}
@@ -129,4 +129,4 @@ function ConfirmPhoneAndEmailContainer({
 	);
 }
 
-export default ConfirmPhoneAndEmailContainer;
+export default QuickConfirmPhoneContainer;

@@ -1,10 +1,15 @@
 /** @format */
 
 import React from "react";
-import CreateAccount from "@mobi/StartPage/CreateAccount";
+import PerformerTicketQuickPhoneName from "@/mobile_folder/Performer/BuyTicket/PerformerTicketQuickPhoneName";
 
 function page({ params }: { params: { key: string; event_name: string } }) {
-	return <CreateAccount userTypeFromParams="performer" />;
+	return (
+		<PerformerTicketQuickPhoneName
+			eventName={params.event_name}
+			specificeventId={params.key}
+		/>
+	);
 }
 
 export default page;

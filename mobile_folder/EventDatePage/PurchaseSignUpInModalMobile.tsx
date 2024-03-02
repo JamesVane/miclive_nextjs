@@ -29,12 +29,18 @@ function PurchaseSignUpInModalMobile({
 		closeModal();
 	}
 
+	const slugifiedEventName = eventName.trim().replace(/\s+/g, "").toLowerCase();
+
 	function handleLogIn() {
-		router.push(`/m/buy_ticket/sign_in/${specificEventId}/${eventName}`);
+		router.push(
+			`/m/buy_ticket/sign_in/${specificEventId}/${slugifiedEventName}`
+		);
 	}
 
 	function handleSignUp() {
-		router.push(`/m/buy_ticket/sign_up/${specificEventId}/${eventName}`);
+		router.push(
+			`/m/buy_ticket/sign_up/${specificEventId}/${slugifiedEventName}`
+		);
 	}
 
 	return (

@@ -15,7 +15,6 @@ import { isDomSafeString } from "@/generic_functions/validationFunctions";
 import { useSelector } from "react-redux";
 import { RootState } from "@/app/LocalizationProviderHelper";
 import { useRouter } from "next/navigation";
-import { Auth } from "aws-amplify";
 import { postUserTagline } from "@/api_functions/postUserTagline";
 import { postUploadS3Image } from "@/api_functions/postUploadS3Image";
 
@@ -127,7 +126,6 @@ function AddInitialAccountInfoContainer({
 
 	function handleSubmit() {
 		if (!isDomSafeString(tagline)) {
-			console.log("uhoj");
 			setTaglineErrorText("Tagline can not contain '<>'");
 			return;
 		} else {
@@ -145,8 +143,6 @@ function AddInitialAccountInfoContainer({
 					dispatch(setCreateAccountDefault());
 					router.push(`/${userType}`);
 				});
-			} else {
-				console.log("poop:", paramsType);
 			}
 		}
 	}
@@ -176,7 +172,6 @@ function AddInitialAccountInfoContainer({
 				taglineErrorText={taglineErrorText}
 				handleSubmit={handleSubmit}
 				isSubmitting={isSubmitting}
-				accountType={userType as "promoter" | "dj" | "performer"}
 			/>
 		</div>
 	);

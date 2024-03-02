@@ -2,7 +2,7 @@
 "use client";
 
 import React from "react";
-import ConfirmPhone from "./ConfirmPhone";
+import QuickConfirmPhoneView from "./QuickConfirmPhoneView";
 import { Auth } from "aws-amplify";
 import { RootState } from "@/app/LocalizationProviderHelper";
 import { useSelector } from "react-redux";
@@ -14,13 +14,14 @@ import { useDispatch } from "react-redux";
 
 interface ConfirmPhoneAndEmailContainerProps {
 	paramsType: string;
+	continueUrl: string;
 }
 
-function ConfirmPhoneAndEmailContainer({
+function QuickConfirmPhoneContainer({
 	paramsType,
+	continueUrl,
 }: ConfirmPhoneAndEmailContainerProps) {
 	const router = useRouter();
-	const userType = paramsType;
 	const dispatch = useDispatch();
 
 	const [message, setMessage] = React.useState("");
@@ -30,8 +31,8 @@ function ConfirmPhoneAndEmailContainer({
 		phone: currentPhoneNumber,
 		password: currentPassword,
 		username,
-		email,
 	} = useSelector((state: RootState) => state.createAccountSlice);
+	const email = "empty@empty.com";
 
 	async function amplifySignIn(): Promise<boolean> {
 		try {
@@ -63,7 +64,7 @@ function ConfirmPhoneAndEmailContainer({
 							request_username: trimmedUsername,
 							request_email: email,
 							request_role_name_number:
-								userType === "promoter" ? 1 : userType === "dj" ? 2 : 3,
+								paramsType === "promoter" ? 1 : paramsType === "dj" ? 2 : 3,
 							request_phone_number: `+1${unformatPhoneNumber(
 								currentPhoneNumber
 							)}`,
@@ -72,10 +73,10 @@ function ConfirmPhoneAndEmailContainer({
 								"custom:RoleId": userRoleId.toString(),
 							});
 							await Auth.updateUserAttributes(user, {
-								"custom:RoleType": userType,
+								"custom:RoleType": paramsType,
 							});
 							dispatch(setUserRoleId(Number(userRoleId)));
-							router.push(`/add_info/${userType}`);
+							router.push(continueUrl);
 							setMessage("");
 							setIsLoading(false);
 						});
@@ -115,7 +116,7 @@ function ConfirmPhoneAndEmailContainer({
 
 	return (
 		<div>
-			<ConfirmPhone
+			<QuickConfirmPhoneView
 				handleConfirmation={handleConfirmation}
 				validateChar={validateChar}
 				message={message}
@@ -129,4 +130,4 @@ function ConfirmPhoneAndEmailContainer({
 	);
 }
 
-export default ConfirmPhoneAndEmailContainer;
+export default QuickConfirmPhoneContainer;

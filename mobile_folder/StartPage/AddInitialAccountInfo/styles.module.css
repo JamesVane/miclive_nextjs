@@ -55,7 +55,10 @@
 	margin-top: 10px;
 	margin-bottom: 20px;
 	width: 90%;
-	composes: row_between from "@styl/base_flexbox.module.css";
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-end;
 }
 .submit_linear {
 	width: 100%;
@@ -63,7 +66,7 @@
 	height: 4px;
 }
 .bottom_div {
-	background-color: #202d38ff;
+	background-color: var(--background-default);
 	width: 100%;
 	position: fixed;
 	composes: column from "@styl/base_flexbox.module.css";

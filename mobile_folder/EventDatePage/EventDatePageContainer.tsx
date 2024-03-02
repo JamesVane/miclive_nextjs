@@ -51,9 +51,11 @@ function EventDatePageContainer({
 			bypassCache: true,
 		});
 		const requestPerformerRoleId = currentUser.attributes["custom:RoleId"];
-		const followingArrayFromCog = JSON.parse(
-			currentUser.attributes["custom:PerformerFollowing"]
-		);
+		const followingArrayFromCog = currentUser.attributes[
+			"custom:PerformerFollowing"
+		]
+			? JSON.parse(currentUser.attributes["custom:PerformerFollowing"])
+			: [];
 
 		getSingleDateInfoWithPerformerId(
 			specificEventIdFromParams,

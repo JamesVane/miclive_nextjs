@@ -147,7 +147,6 @@ function PromoterCreateEventContainer() {
 							} catch (err) {
 								console.log("Error fetching user profile or perform er data");
 							}
-							dispatch(setToDefault());
 							dispatch(switchPage({ page: "DjInvite" }));
 						});
 					} else if (res.message === "An event already exists on this date.") {

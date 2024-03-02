@@ -5,44 +5,21 @@ import React from "react";
 import ConfirmPhone from "./ConfirmPhone";
 import { Auth } from "aws-amplify";
 import { RootState } from "@/app/LocalizationProviderHelper";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { unformatPhoneNumber } from "../../../generic_functions/formatPhoneNumber";
 import { useRouter } from "next/navigation";
 import { postCreateAccountBase } from "../../../api_functions/postCreateAccountBase";
+import { setUserRoleId } from "@/store/createAccountSlice";
 
 interface ConfirmPhoneAndEmailContainerProps {
-	isForPurchase?: boolean;
-	forDjEventInvite?: boolean;
-	forDjDateInvite?: boolean;
-	forPerformerQr?: boolean;
-	forPerformerKeyCheckin?: boolean;
 	userTypeFromParams: "promoter" | "performer" | "dj";
-	keyFromParams?: string;
-	uuidFromParams?: string;
 }
 
 function ConfirmPhoneAndEmailContainer({
-	isForPurchase,
-	forDjEventInvite,
-	forDjDateInvite,
-	forPerformerQr,
-	forPerformerKeyCheckin,
 	userTypeFromParams,
-	keyFromParams,
-	uuidFromParams,
 }: ConfirmPhoneAndEmailContainerProps) {
+	const dispatch = useDispatch();
 	const router = useRouter();
-	const userType = isForPurchase
-		? "performer"
-		: forPerformerKeyCheckin
-		? "performer"
-		: forPerformerQr
-		? "performer"
-		: forDjEventInvite
-		? "dj"
-		: forDjDateInvite
-		? "dj"
-		: userTypeFromParams;
 
 	const [message, setMessage] = React.useState("");
 	const [isLoading, setIsLoading] = React.useState(false); // [1
@@ -83,23 +60,24 @@ function ConfirmPhoneAndEmailContainer({
 							request_username: username,
 							request_email: email,
 							request_role_name_number:
-								userType === "promoter" ? 1 : userType === "dj" ? 2 : 3,
+								userTypeFromParams === "promoter"
+									? 1
+									: userTypeFromParams === "dj"
+									? 2
+									: 3,
 							request_phone_number: `+1${unformatPhoneNumber(
 								currentPhoneNumber
 							)}`,
-						}).then((res: any) => {
-							const navRoute = isForPurchase
-								? `/buy_ticket/add_info/${keyFromParams}`
-								: forPerformerKeyCheckin
-								? `/walkin_key/${keyFromParams}/add_info`
-								: forPerformerQr
-								? `/checkinqr/${uuidFromParams}/add_info`
-								: forDjDateInvite
-								? `/dj_accept_date/${keyFromParams}/add_info`
-								: forDjEventInvite
-								? `/dj_accept_event/${keyFromParams}/add_info`
-								: `/add_info/${userType}`;
+						}).then(async (userRoleId) => {
+							await Auth.updateUserAttributes(user, {
+								"custom:RoleId": userRoleId.toString(),
+							});
+							await Auth.updateUserAttributes(user, {
+								"custom:RoleType": userTypeFromParams,
+							});
+							dispatch(setUserRoleId(Number(userRoleId)));
 
+							const navRoute = `/m/add_info/${userTypeFromParams}`;
 							router.push(navRoute);
 							setMessage("");
 							setIsLoading(false);

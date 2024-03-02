@@ -13,6 +13,11 @@ function PerformerFollowingPage() {
 
 	return (
 		<div className={styles.main_div}>
+			{followingArray.length === 0 ? (
+				<div className={styles.no_events_div}>
+					You are not following any events yet
+				</div>
+			) : null}
 			{followingArray.map((event) => {
 				return (
 					<NormalEventCard

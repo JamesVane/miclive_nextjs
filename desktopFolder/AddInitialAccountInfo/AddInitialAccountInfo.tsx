@@ -48,7 +48,6 @@ interface AddInitialAccountInfoProps {
 	taglineErrorText: string;
 	handleSubmit: () => void;
 	isSubmitting: boolean;
-	accountType: "promoter" | "dj" | "performer";
 }
 
 function AddInitialAccountInfo({
@@ -74,7 +73,6 @@ function AddInitialAccountInfo({
 	taglineErrorText,
 	handleSubmit,
 	isSubmitting,
-	accountType,
 }: AddInitialAccountInfoProps) {
 	const submitDisabled = imageFile === null && tagline === "";
 

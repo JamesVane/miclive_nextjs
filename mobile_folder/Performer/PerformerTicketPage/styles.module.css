@@ -96,3 +96,10 @@
 	bottom: 0px;
 	left: 10px;
 }
+.no_events_div {
+	font-size: 22px;
+	color: var(--secondary-main);
+	text-align: center;
+	padding: 10px;
+	margin-top: 15px;
+}

@@ -13,7 +13,6 @@ import { useRouter } from "next/navigation";
 import { getPerformerProfileAudioKeys } from "@/api_functions/getPerformerProfileAudioKeys";
 import { setPerformerAudioKey } from "@/store/performerAudioKeysStore";
 import SplashPage from "@/SplashPage";
-import MessagingButton from "@mobi/Messaging/MessagingButton";
 import { Auth } from "aws-amplify";
 import styles from "./styles.module.css";
 import { getPerformerFollowingListV2point0 } from "@/api_functions/getPerformerFollowingListV2point0";
@@ -118,7 +117,6 @@ function PerformerHome() {
 								/>
 							</BottomNavigation>
 						</div>
-						<MessagingButton notAbsolute />
 					</div>
 				</>
 			)}

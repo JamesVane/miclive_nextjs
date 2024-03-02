@@ -1,16 +1,10 @@
 /** @format */
 
 import React from "react";
-import ConfirmPhoneAndEmail from "@mobi/StartPage/ConfirmPhoneAndEmail";
+import PerformerTickerQuickConfirm from "@mobi/Performer/BuyTicket/PerformerTickerQuickConfirm";
 
 function page({ params }: { params: { key: string } }) {
-	return (
-		<ConfirmPhoneAndEmail
-			userTypeFromParams="performer"
-			keyFromParams={params.key}
-			isForPurchase
-		/>
-	);
+	return <PerformerTickerQuickConfirm specificEventId={params.key} />;
 }
 
 export default page;

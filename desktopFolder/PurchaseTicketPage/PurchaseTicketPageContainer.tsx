@@ -36,18 +36,23 @@ function PurchaseTicketPageContainer({
 		});
 	}
 
+	const sluggifiedEventName = pageData.name
+		.trim()
+		.replace(/\s+/g, "")
+		.toLowerCase();
+
 	function handlePurchaseTicket() {
 		setIsPurchasing(true);
 		addToRoster().then(() => {
 			router.push(
-				`/event/${pageData.name}/${pageData.specific_event_id}/ticket`
+				`/event/${sluggifiedEventName}/${pageData.specific_event_id}/ticket`
 			);
 			setIsPurchasing(false);
 		});
 	}
 
 	function handleBack() {
-		router.push(`/event/${pageData.name}/${pageData.specific_event_id}`);
+		router.push(`/event/${sluggifiedEventName}/${pageData.specific_event_id}`);
 	}
 
 	useEffect(() => {

@@ -15,7 +15,8 @@ import { isDomSafeString } from "../../../generic_functions/validationFunctions"
 import { useSelector } from "react-redux";
 import { RootState } from "@/app/LocalizationProviderHelper";
 import { useRouter } from "next/navigation";
-import { Auth } from "aws-amplify";
+import { postUserTagline } from "@/api_functions/postUserTagline";
+import { postUploadS3Image } from "@/api_functions/postUploadS3Image";
 
 export type State = {
 	src: string | ArrayBuffer | null;
@@ -24,39 +25,14 @@ export type State = {
 };
 
 interface AddInitialAccountInfoContainerProps {
-	isForPurchase?: boolean;
-	forDjEventInvite?: boolean;
-	forDjDateInvite?: boolean;
-	forPerformerQr?: boolean;
-	forPerformerKeyCheckin?: boolean;
 	userTypeFromParams: "promoter" | "performer" | "dj";
-	keyFromParams?: string;
-	uuidFromParams?: string;
 }
 
 function AddInitialAccountInfoContainer({
-	isForPurchase,
-	forDjEventInvite,
-	forDjDateInvite,
-	forPerformerQr,
-	forPerformerKeyCheckin,
 	userTypeFromParams,
-	keyFromParams,
-	uuidFromParams,
 }: AddInitialAccountInfoContainerProps) {
 	const dispatch = useDispatch();
 	const router = useRouter();
-	const userType = isForPurchase
-		? "performer"
-		: forPerformerKeyCheckin
-		? "performer"
-		: forPerformerQr
-		? "performer"
-		: forDjEventInvite
-		? "dj"
-		: forDjDateInvite
-		? "dj"
-		: userTypeFromParams;
 
 	const [isUploadError, setIsUploadError] = useState(false);
 	const [notTouched, setNotTouched] = useState(true);
@@ -64,7 +40,7 @@ function AddInitialAccountInfoContainer({
 	const [taglineErrorText, setTaglineErrorText] = useState("");
 	const [isSubmitting, setIsSubmitting] = useState(false);
 
-	const { imageDisplayHelp, imageFile, tagline } = useSelector(
+	const { imageDisplayHelp, imageFile, tagline, userRoldId } = useSelector(
 		(state: RootState) => state.createAccountSlice
 	);
 
@@ -147,73 +123,21 @@ function AddInitialAccountInfoContainer({
 		);
 	}
 
-	function goToNextStep() {
+	async function handleContinue() {
 		if (!isDomSafeString(tagline)) {
 			setTaglineErrorText("Tagline can not contain '<>'");
 			return;
 		} else {
-			const navRoute = forPerformerKeyCheckin
-				? `/walkin_key/${keyFromParams}/add_more_info`
-				: forPerformerQr
-				? `/checkinqr/${uuidFromParams}/add_more_info`
-				: isForPurchase
-				? `/buy_ticket/add_more_info/${keyFromParams}`
-				: forDjEventInvite
-				? `/dj_accept_event/${keyFromParams}/add_more_info`
-				: forDjDateInvite
-				? `/dj_accept_date/${keyFromParams}/add_more_info`
-				: userType === "promoter"
-				? "/add_banner"
-				: `/add_more_info/${userType}`;
-
-			router.push(navRoute);
-		}
-	}
-
-	async function handleSkip() {
-		/* const currentUser = await Auth.currentAuthenticatedUser();
-		const userSub = currentUser.attributes.sub;
-		if (
-			userType === "performer" ||
-			userType === "promoter" ||
-			userType === "dj"
-		) {
 			setIsSubmitting(true);
-			postCreateAccountRoleInfo({
-				has_no_image: true,
-				request_tagline: "",
-				request_sub: userSub,
-				request_user_type: userType,
-				request_city: null,
-				request_phone: null,
-				request_email: null,
-				request_ig: null,
-				request_website: null,
-				request_performer_role_key: null,
-			}).then(async (res) => {
-				const user = await Auth.currentAuthenticatedUser();
-				await Auth.updateUserAttributes(user, {
-					"custom:RoleId": res.new_id.toString(),
-				});
+			postUserTagline(userTypeFromParams, tagline).then(async () => {
+				const imagePath = `${userTypeFromParams}_pictures/performer_${userRoldId}.jpg`;
+				postUploadS3Image(imageFile, imagePath);
 
 				setIsSubmitting(false);
 				dispatch(setCreateAccountDefault());
-
-				const skipRoute = isForPurchase
-					? `/buy_ticket/purchase/${keyFromParams}`
-					: forPerformerKeyCheckin
-					? `/walkin_key/${keyFromParams}`
-					: forPerformerQr
-					? `/checkinqr/${uuidFromParams}`
-					: forDjEventInvite
-					? `/dj_accept_event/${keyFromParams}`
-					: forDjDateInvite
-					? `/dj_accept_date/${keyFromParams}`
-					: `/${userType}`;
-
-				router.push(skipRoute);
+				router.push(`/m/${userTypeFromParams}`);
 			});
-		} */
+		}
 	}
 
 	return (
@@ -239,10 +163,8 @@ function AddInitialAccountInfoContainer({
 				imageFile={imageFile}
 				imageDisplayHelp={imageDisplayHelp}
 				taglineErrorText={taglineErrorText}
-				goToNextStep={goToNextStep}
 				isSubmitting={isSubmitting}
-				handleSkip={handleSkip}
-				userType={userType as "promoter" | "dj" | "performer"}
+				handleContinue={handleContinue}
 			/>
 		</div>
 	);
