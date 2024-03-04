@@ -1,10 +1,10 @@
 /** @format */
 
 import React from "react";
-import CreateAccount from "@desk/CreateAccount";
+import AcceptDateCreateAccountContainer from "@desk/performer_dj_promoter/dj/DjAcceptInvite/AcceptDateCreateAccountContainer";
 
 function page({ params }: { params: { key: string } }) {
-	return <CreateAccount userType="dj" />;
+	return <AcceptDateCreateAccountContainer paramsKey={params.key} />;
 }
 
 export default page;

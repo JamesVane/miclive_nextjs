@@ -1,10 +1,10 @@
 /** @format */
 
 import React from "react";
-import ConfirmPhoneAndEmail from "@mobi/StartPage/ConfirmPhoneAndEmail";
+import DjAcceptDateConfirmContainer from "@mobi/DjAcceptInvite/DjAcceptDateConfirmContainer";
 
 function page({ params }: { params: { key: string } }) {
-	return <ConfirmPhoneAndEmail userTypeFromParams="dj" />;
+	return <DjAcceptDateConfirmContainer paramsKey={params.key} />;
 }
 
 export default page;

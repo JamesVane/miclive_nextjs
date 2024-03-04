@@ -93,9 +93,9 @@ function DjAcceptInviteContainer({
 				});
 			} else {
 				getDjCheckDateKey(inviteUuidFromParams).then((res) => {
-					if (res.Value) {
+					if (res.data) {
 						dispatch(setUuid(inviteUuidFromParams));
-						dispatch(setDateObject(res.Value));
+						dispatch(setDateObject(res.data));
 						checkAuthAndType();
 					} else {
 						setBadUrlTrue();

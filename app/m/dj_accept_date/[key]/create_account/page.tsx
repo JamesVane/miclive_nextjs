@@ -1,10 +1,10 @@
 /** @format */
 
 import React from "react";
-import CreateAccount from "@mobi/StartPage/CreateAccount";
+import DjAcceptDateCreateAccountContainer from "@mobi/DjAcceptInvite/DjAcceptDateCreateAccountContainer";
 
 function page({ params }: { params: { key: string } }) {
-	return <CreateAccount userTypeFromParams="dj" />;
+	return <DjAcceptDateCreateAccountContainer paramsKey={params.key} />;
 }
 
 export default page;
