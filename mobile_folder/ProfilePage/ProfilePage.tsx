@@ -128,6 +128,7 @@ function ProfilePage({
 				<div className={styles.top_half}>
 					<div className={styles.picture_wrap}>
 						<AvatarSimpleMobile
+							username={usersState ? usersState.username : "ERROR"}
 							ninety
 							type={
 								performer

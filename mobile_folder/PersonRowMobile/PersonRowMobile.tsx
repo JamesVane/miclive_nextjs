@@ -20,7 +20,7 @@ function PersonRowMobile({
 	return (
 		<div className={styles.person_div} onClick={handleClick}>
 			<div className={styles.avatar_div}>
-				<AvatarSimpleMobile ninety id={roleId} type={type} />
+				<AvatarSimpleMobile username={name} ninety id={roleId} type={type} />
 				<Avatar
 					sx={{
 						border: "1px solid #888661ff",

@@ -10,6 +10,14 @@
       "StackName": "amplify-jsmusicappdev-jsmicdev-153737",
       "StackId": "arn:aws:cloudformation:us-east-2:037762818695:stack/amplify-jsmusicappdev-jsmicdev-153737/0e5119d0-c75f-11ed-9992-06ae1b01ac8c",
       "AmplifyAppId": "d2rexcc2qeon20"
+    },
+    "categories": {
+      "auth": {
+        "jsmusicappdev": {}
+      },
+      "storage": {
+        "ProfilePictures": {}
+      }
     }
   }
 }

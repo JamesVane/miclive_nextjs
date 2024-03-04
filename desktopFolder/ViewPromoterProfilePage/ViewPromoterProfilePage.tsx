@@ -74,7 +74,11 @@ function ViewPromoterProfilePage({
 							</div>
 							<div className={styles.below_banner}>
 								<div className={styles.promoter_pic}>
-									<AvatarSimple type="promoter" id={pageData.promoter_id} />
+									<AvatarSimple
+										username={pageData.promoter_name}
+										type="promoter"
+										id={pageData.promoter_id}
+									/>
 								</div>
 								<div className={styles.name_tagline}>
 									<div className={styles.event_name}>

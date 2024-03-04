@@ -22,6 +22,7 @@ function PromoterEventDateRosterPapaer({
 						ninety
 						type="performer"
 						id={performerObj.performer_id}
+						username={performerObj.performer_name}
 					/>
 				</div>
 				<div className={styles.roster_row_middle_div}>

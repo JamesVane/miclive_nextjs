@@ -28,7 +28,12 @@ function DatePagePreviousRosterPaper({
 			onMouseLeave={() => setIsHovering(false)}>
 			<div className={styles.roster_paper_content}>
 				<div className={styles.performer_pic_number_div}>
-					<AvatarSimple ninety type="performer" id={performerData.performer} />
+					<AvatarSimple
+						username={performerData.performer_name}
+						ninety
+						type="performer"
+						id={performerData.performer}
+					/>
 				</div>
 				<div
 					className={styles.roster_row_middle_div}

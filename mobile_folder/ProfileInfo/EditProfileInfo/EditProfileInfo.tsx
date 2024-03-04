@@ -301,7 +301,12 @@ function EditProfileInfo({
 				<div className={styles.pic_row}>
 					<div className={styles.pic_div}>
 						{picture === "None" ? (
-							<AvatarSimpleMobile ninety type={roleType} id={Number(roleKey)} />
+							<AvatarSimpleMobile
+								username={username}
+								ninety
+								type={roleType}
+								id={Number(roleKey)}
+							/>
 						) : (
 							<Avatar
 								sx={{

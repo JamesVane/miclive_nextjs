@@ -113,7 +113,7 @@ function ConversationRowDesktop({
 					{unOpened ? <PriorityHighRounded /> : null}
 				</div>
 				<div className={styles.pic_div}>
-					<AvatarSimple type={type} id={roleId} ninety />
+					<AvatarSimple username={name} type={type} id={roleId} ninety />
 					<Avatar
 						sx={{
 							zIndex: 2000,

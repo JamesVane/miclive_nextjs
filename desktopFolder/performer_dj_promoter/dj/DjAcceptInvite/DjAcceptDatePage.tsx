@@ -110,7 +110,12 @@ function DjAcceptDatePage() {
 							<>
 								<div className={styles.accept_date_event_top}>
 									<div className={styles.date_event_accept_dj_pic}>
-										<AvatarSimple ninety type="dj" id={roleId} />
+										<AvatarSimple
+											username={displayName}
+											ninety
+											type="dj"
+											id={roleId}
+										/>
 									</div>
 									{displayName}
 								</div>

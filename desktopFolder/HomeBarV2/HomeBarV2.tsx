@@ -72,7 +72,7 @@ function HomeBarV2({
 	return (
 		<>
 			<ViewUserInfoModalDesktop />
-			<FloatingMessageDrawer />
+			{/* <FloatingMessageDrawer /> */}
 			<Box
 				className={styles.main_paper}
 				sx={{ backgroundColor: "background.default" }}>
@@ -98,7 +98,7 @@ function HomeBarV2({
 									<AccountCircleRounded sx={{ height: "90%", width: "90%" }} />
 								</IconButton>
 							) : null}
-							{noMessage ? null : <MessageButton />}
+							{/* {noMessage ? null : <MessageButton />} */}
 						</div>
 					)}
 					<div className={styles.mic_live}>

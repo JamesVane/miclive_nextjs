@@ -80,7 +80,12 @@ function PerformerCurrentEvent({
 					) : (
 						<div className={styles.profile_header_info_div}>
 							<div className={styles.header_pic}>
-								<AvatarSimpleMobile ninety type="performer" id={myRoleId} />
+								<AvatarSimpleMobile
+									username={eventInfo.promoter.promoter_name}
+									ninety
+									type="performer"
+									id={myRoleId}
+								/>
 							</div>
 							<Button
 								startIcon={<SearchRounded />}

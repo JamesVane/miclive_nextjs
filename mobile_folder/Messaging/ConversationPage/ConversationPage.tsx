@@ -327,7 +327,11 @@ function ConversationPage({
 			</div>
 			<div className={styles.into_div}>
 				<div className={styles.intro_picture}>
-					<AvatarSimpleMobile type={personData.type} id={personData.roleId} />
+					<AvatarSimpleMobile
+						username={personData.name}
+						type={personData.type}
+						id={personData.roleId}
+					/>
 				</div>
 				{personData.name}
 				<Button
@@ -368,6 +372,7 @@ function ConversationPage({
 				</Button>
 				<div className={styles.pic_div}>
 					<AvatarSimpleMobile
+						username={personData.name}
 						type={personData.type}
 						id={personData.roleId}
 						ninety

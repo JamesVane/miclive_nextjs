@@ -110,7 +110,7 @@ function ConversationRow({
 					{unOpened ? <PriorityHighRounded /> : null}
 				</div>
 				<div className={styles.pic_div}>
-					<AvatarSimpleMobile type={type} id={roleId} ninety />
+					<AvatarSimpleMobile username={name} type={type} id={roleId} ninety />
 					<Avatar
 						sx={{
 							zIndex: 2000,

@@ -17,6 +17,8 @@ import { RootState } from "@/app/LocalizationProviderHelper";
 import { useRouter } from "next/navigation";
 import { postUserTagline } from "@/api_functions/postUserTagline";
 import { postUploadS3Image } from "@/api_functions/postUploadS3Image";
+import { putUserHasImage } from "@/api_functions/putUserHasImage";
+import { Auth } from "aws-amplify";
 
 export type State = {
 	src: string | ArrayBuffer | null;
@@ -33,7 +35,6 @@ function AddInitialAccountInfoContainer({
 }: AddInitialAccountInfoContainerProps) {
 	const router = useRouter();
 	const dispatch = useDispatch();
-	const userType = paramsType;
 
 	const [isUploadError, setIsUploadError] = useState(false);
 	const [notTouched, setNotTouched] = useState(true);
@@ -124,25 +125,58 @@ function AddInitialAccountInfoContainer({
 		);
 	}
 
-	function handleSubmit() {
+	async function uploadImage() {
+		try {
+			if (imageFile) {
+				const user = await Auth.currentAuthenticatedUser();
+				const userSub = user.attributes.sub;
+				const imagePath = `${paramsType}_pictures/${paramsType}_${userRoldId}.jpg`;
+				await postUploadS3Image(imageFile, imagePath);
+				await putUserHasImage(userSub);
+				return true;
+			} else {
+				return true;
+			}
+		} catch {
+			return false;
+		}
+	}
+	async function uploadTagline() {
+		try {
+			if (
+				paramsType === "performer" ||
+				paramsType === "promoter" ||
+				paramsType === "dj"
+			) {
+				if (tagline) {
+					await postUserTagline(paramsType, tagline);
+					return true;
+				} else {
+					return true;
+				}
+			} else {
+				return false;
+			}
+		} catch {
+			return false;
+		}
+	}
+
+	async function handleSubmit() {
 		if (!isDomSafeString(tagline)) {
 			setTaglineErrorText("Tagline can not contain '<>'");
 			return;
 		} else {
-			if (
-				userType === "performer" ||
-				userType === "promoter" ||
-				userType === "dj"
-			) {
-				setIsSubmitting(true);
-				postUserTagline(userType, tagline).then(async () => {
-					const imagePath = `${userType}_pictures/performer_${userRoldId}.jpg`;
-					postUploadS3Image(imageFile, imagePath);
-
-					setIsSubmitting(false);
-					dispatch(setCreateAccountDefault());
-					router.push(`/${userType}`);
-				});
+			const [imageResponse, taglineResponse] = await Promise.all([
+				uploadImage(),
+				uploadTagline(),
+			]);
+			if (imageResponse && taglineResponse) {
+				setIsSubmitting(false);
+				dispatch(setCreateAccountDefault());
+				router.push(`/${paramsType}`);
+			} else {
+				setIsSubmitting(false);
 			}
 		}
 	}

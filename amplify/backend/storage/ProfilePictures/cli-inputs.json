@@ -1,0 +1,12 @@
+{
+  "resourceName": "ProfilePictures",
+  "policyUUID": "09d0ebd5",
+  "bucketName": "micliveprofilepictures",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "READ"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}

@@ -126,7 +126,12 @@ function EventDjCard({
 										width: small ? "70px" : "90px",
 										height: small ? "70px" : "90px",
 									}}>
-									<AvatarSimple type="dj" id={djObj.dj_id} ninety />
+									<AvatarSimple
+										username={djObj.dj_name}
+										type="dj"
+										id={djObj.dj_id}
+										ninety
+									/>
 									<div
 										className={styles.dj_icon_avatar}
 										style={{

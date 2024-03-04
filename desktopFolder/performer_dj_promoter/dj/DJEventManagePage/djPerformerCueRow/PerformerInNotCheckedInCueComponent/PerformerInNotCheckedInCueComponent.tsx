@@ -35,6 +35,7 @@ function PerformerInNotCheckedInCueComponent({ arrayPosition }: Props) {
 					<div className={styles.roster_person_div}>
 						<div className={styles.person_pic_div}>
 							<AvatarSimple
+								username={performerObject.performer_name}
 								ninety
 								type="performer"
 								id={performerObject.performer_id}

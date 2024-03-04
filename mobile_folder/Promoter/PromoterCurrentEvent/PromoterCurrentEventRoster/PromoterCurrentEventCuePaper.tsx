@@ -33,6 +33,7 @@ function PromoterCurrentEventCuePaper({
 						ninety
 						type="performer"
 						id={performerObject.performer_id}
+						username={performerObject.performer_name}
 					/>
 				</div>
 

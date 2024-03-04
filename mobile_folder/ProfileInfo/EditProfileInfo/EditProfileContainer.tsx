@@ -19,6 +19,7 @@ import { postUserInfoObj } from "@/api_functions/postUserInfoObj";
 import { getUserProfile } from "@/api_functions/getUserProfile";
 import { setUsersStateProfile } from "@/store/usersStateStore";
 import { postUserTagline } from "@/api_functions/postUserTagline";
+import { putUserHasImage } from "@/api_functions/putUserHasImage";
 import { Auth } from "aws-amplify";
 
 interface EditProfileContainerProps {
@@ -159,6 +160,9 @@ function EditProfileContainer({
 					.then(async (res) => {
 						if (res.data.message == "Image uploaded successfully") {
 							try {
+								const user = await Auth.currentAuthenticatedUser();
+								const userSub = user.attributes.sub;
+								await putUserHasImage(userSub);
 								const signedUrl = await getSignedUrl(
 									performer
 										? "performer"

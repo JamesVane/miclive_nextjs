@@ -10,7 +10,7 @@ function PromoterEventDateRosterPaper() {
 		<div className={styles.roster_paper}>
 			<div className={styles.roster_paper_top}>
 				<div className={styles.roster_pic_div}>
-					<AvatarSimple ninety type="performer" id={14} />
+					<AvatarSimple username={"test"} ninety type="performer" id={14} />
 				</div>
 			</div>
 			<div className={styles.divider_div}>

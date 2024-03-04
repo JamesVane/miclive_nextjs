@@ -17,6 +17,8 @@ import { RootState } from "@/app/LocalizationProviderHelper";
 import { useRouter } from "next/navigation";
 import { postUserTagline } from "@/api_functions/postUserTagline";
 import { postUploadS3Image } from "@/api_functions/postUploadS3Image";
+import { putUserHasImage } from "@/api_functions/putUserHasImage";
+import { Auth } from "aws-amplify";
 
 export type State = {
 	src: string | ArrayBuffer | null;
@@ -123,20 +125,52 @@ function AddInitialAccountInfoContainer({
 		);
 	}
 
+	async function uploadImage() {
+		try {
+			if (imageFile) {
+				const user = await Auth.currentAuthenticatedUser();
+				const userSub = user.attributes.sub;
+				const imagePath = `${userTypeFromParams}_pictures/${userTypeFromParams}_${userRoldId}.jpg`;
+				await postUploadS3Image(imageFile, imagePath);
+				await putUserHasImage(userSub);
+				return true;
+			} else {
+				return true;
+			}
+		} catch {
+			return false;
+		}
+	}
+	async function uploadTagline() {
+		try {
+			if (tagline) {
+				await postUserTagline(userTypeFromParams, tagline);
+				return true;
+			} else {
+				return true;
+			}
+		} catch {
+			return false;
+		}
+	}
+
 	async function handleContinue() {
 		if (!isDomSafeString(tagline)) {
 			setTaglineErrorText("Tagline can not contain '<>'");
 			return;
 		} else {
 			setIsSubmitting(true);
-			postUserTagline(userTypeFromParams, tagline).then(async () => {
-				const imagePath = `${userTypeFromParams}_pictures/performer_${userRoldId}.jpg`;
-				postUploadS3Image(imageFile, imagePath);
-
+			const [imageResponse, taglineResponse] = await Promise.all([
+				uploadImage(),
+				uploadTagline(),
+			]);
+			if (imageResponse && taglineResponse) {
 				setIsSubmitting(false);
 				dispatch(setCreateAccountDefault());
 				router.push(`/m/${userTypeFromParams}`);
-			});
+			} else {
+				setIsSubmitting(false);
+			}
 		}
 	}
 

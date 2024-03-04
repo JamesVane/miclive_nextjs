@@ -22,6 +22,8 @@ import ProfileLink from "./ProfileLink";
 import HomeBarV2 from "@desk/HomeBarV2";
 import { useRouter } from "next/navigation";
 import ProfileBannerComponent from "./ProfileBannerComponent";
+import { putUserHasImage } from "@/api_functions/putUserHasImage";
+import { Auth } from "aws-amplify";
 
 interface HomeProfilePaperProps {
 	performer?: boolean;
@@ -65,6 +67,9 @@ function HomeProfilePaper({ performer, dj, promoter }: HomeProfilePaperProps) {
 					if (res.data.message == "Image uploaded successfully") {
 						try {
 							const userRoleId = usersStateFromStore.primary_key;
+							const user = await Auth.currentAuthenticatedUser();
+							const userSub = user.attributes.sub;
+							await putUserHasImage(userSub);
 							const signedUrl = await getSignedUrl(
 								performer
 									? "performer"
@@ -279,7 +284,7 @@ function HomeProfilePaper({ performer, dj, promoter }: HomeProfilePaperProps) {
 						isEmpty={usersStateFromStore?.info?.Phone === null}
 					/>
 				</div>
-				{promoter ? <ProfileBannerComponent /> : null}
+				{/* {promoter ? <ProfileBannerComponent /> : null} */}
 			</div>
 		</>
 	);

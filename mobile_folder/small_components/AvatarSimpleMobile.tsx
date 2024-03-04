@@ -1,15 +1,43 @@
 /** @format */
-
+"use client";
+import { useState } from "react";
 import { Box, Avatar } from "@mui/material";
+import { letterToHexcodeObject, TwoLetterKey } from "@/lettersToHexcodesObject";
 
 interface AvatarSimple {
 	ninety?: boolean;
 	messageCount?: number;
 	id: number;
 	type: "promoter" | "dj" | "performer";
+	doNotCache?: boolean;
+	username: string;
 }
 
-function AvatarSimple({ ninety, messageCount, id, type }: AvatarSimple) {
+function AvatarSimpleMobile({
+	ninety,
+	id,
+	type,
+	doNotCache,
+	username,
+}: AvatarSimple) {
+	const [hasS3Image, setHasS3Image] = useState(true);
+
+	const firstTwoLettersOfPerformerNameCapitolized = username[0]
+		? ((username[0].toUpperCase() + username[1].toUpperCase()) as TwoLetterKey)
+		: ("" as TwoLetterKey);
+
+	const noPicColor =
+		letterToHexcodeObject[firstTwoLettersOfPerformerNameCapitolized];
+
+	function generateRandomFourDigitNumber() {
+		return Math.floor(1000 + Math.random() * 9000);
+	}
+	const imageSource = doNotCache
+		? `https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/${type}_pictures/${type}_${id}.jpg?ver=${generateRandomFourDigitNumber()}`
+		: `https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/${type}_pictures/${type}_${id}.jpg`;
+	function handleImageError() {
+		setHasS3Image(false);
+	}
 	return (
 		<Box
 			sx={{
@@ -18,36 +46,26 @@ function AvatarSimple({ ninety, messageCount, id, type }: AvatarSimple) {
 				width: ninety ? "85%" : "100%",
 				position: "relative",
 			}}>
-			{messageCount && (
-				<Avatar
-					sx={{
-						top: 0,
-						right: 0,
-						position: "absolute",
-						zIndex: "25",
-						height: "20px",
-						width: "20px",
-						backgroundColor: "error.dark",
-						fontSize: "15px",
-						color: "secondary.main",
-					}}>
-					{messageCount}
-				</Avatar>
-			)}
 			<Avatar
 				sx={{
 					border: 1,
 					borderColor: "primary.main",
 					height: "100%",
 					width: "100%",
+					backgroundColor: noPicColor,
 				}}>
-				<img
-					src={`https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/${type}_pictures/${type}_${id}.jpg`}
-					style={{ height: "100%", width: "100%" }}
-				/>
+				{hasS3Image ? (
+					<img
+						onError={handleImageError}
+						src={imageSource}
+						style={{ height: "100%", width: "100%" }}
+					/>
+				) : (
+					firstTwoLettersOfPerformerNameCapitolized
+				)}
 			</Avatar>
 		</Box>
 	);
 }
 
-export default AvatarSimple;
+export default AvatarSimpleMobile;

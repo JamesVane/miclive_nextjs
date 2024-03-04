@@ -228,6 +228,10 @@ function HomeProfilePaperTop({
 					<div className={styles.pic_square}>
 						<AvatarButton buttonOut={() => setEditingPicture(true)} />
 						<AvatarSimple
+							doNotCache
+							username={
+								usersStateFromStore ? usersStateFromStore.username : "error"
+							}
 							type={performer ? "performer" : dj ? "dj" : "promoter"}
 							id={Number(usersStateFromStore?.primary_key)}
 						/>

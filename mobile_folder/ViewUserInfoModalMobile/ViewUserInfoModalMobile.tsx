@@ -46,7 +46,12 @@ function ViewUserInfoModalMobile({
 			<div onClick={(e) => e.stopPropagation()} className={styles.main_paper}>
 				<div className={styles.top_div}>
 					<div className={styles.avatar_div}>
-						<AvatarSimpleMobile type={userType} id={roleId} ninety />
+						<AvatarSimpleMobile
+							username={name}
+							type={userType}
+							id={roleId}
+							ninety
+						/>
 						<Avatar
 							sx={{
 								border: "1px solid #888661ff",

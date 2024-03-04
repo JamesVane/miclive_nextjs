@@ -3,8 +3,6 @@
 import React from "react";
 import styles from "./styles.module.css";
 import AvatarSimple from "@/desktopFolder/AvatarSimple";
-import { Avatar } from "@mui/material";
-import { letterToHexcodeObject, TwoLetterKey } from "@/lettersToHexcodesObject";
 
 interface PaperWrapperProps {
 	children: React.ReactNode;
@@ -25,38 +23,18 @@ function PaperWrapper({
 	queuePosition,
 	setIsHovering,
 }: PaperWrapperProps) {
-	const firstTwoLettersOfPerformerNameCapitolized = performerName[0]
-		? ((performerName[0].toUpperCase() +
-				performerName[1].toUpperCase()) as TwoLetterKey)
-		: ("" as TwoLetterKey);
-
-	const noPicColor =
-		letterToHexcodeObject[firstTwoLettersOfPerformerNameCapitolized];
-
 	return (
 		<div
 			className={styles.roster_paper}
 			onMouseEnter={() => setIsHovering(true)}
 			onMouseLeave={() => setIsHovering(false)}>
 			<div className={styles.avatar_div}>
-				<Avatar
-					sx={{
-						height: "85%",
-						width: "85%",
-						backgroundColor: noPicColor,
-					}}>
-					{isTempAccount ? (
-						firstTwoLettersOfPerformerNameCapitolized
-					) : (
-						<img
-							src={`https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/performer_pictures/performer_${performerId}.jpg`}
-							style={{
-								width: "100%",
-								height: "100%",
-							}}
-						/>
-					)}
-				</Avatar>
+				<AvatarSimple
+					id={performerId}
+					type="performer"
+					username={performerName}
+					ninety
+				/>
 			</div>
 			<div
 				className={styles.middle_div}

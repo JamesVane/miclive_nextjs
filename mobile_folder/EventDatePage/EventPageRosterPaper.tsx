@@ -21,6 +21,7 @@ function EventPageRosterPaper({
 			<div className={styles.roster_paper_content}>
 				<div className={styles.performer_pic_number_div}>
 					<AvatarSimpleMobile
+						username={performerData.performer_name}
 						ninety
 						type="performer"
 						id={performerData.performer}

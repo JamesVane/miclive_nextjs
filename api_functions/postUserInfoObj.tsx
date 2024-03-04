@@ -12,13 +12,13 @@ export async function postUserInfoObj(
 ) {
 	try {
 		const user = await Auth.currentAuthenticatedUser();
-		const userId = user.attributes.sub;
+		const userSub = user.attributes.sub;
 
 		const apiUrl =
 			"https://lxhk6cienf.execute-api.us-east-2.amazonaws.com/Dev/currentuserresources/updatelinks";
 		const queryParams = new URLSearchParams({
 			query_type: request_type,
-			query_id: userId,
+			query_id: userSub,
 			payload: JSON.stringify(request_payload),
 		});
 

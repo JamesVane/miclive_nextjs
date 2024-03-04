@@ -273,7 +273,12 @@ function ConversationPageDesktop({
 					back
 				</Button>
 				<div className={styles.pic_div}>
-					<AvatarSimple type={personData.type} id={personData.roleId} ninety />
+					<AvatarSimple
+						username={personData.name}
+						type={personData.type}
+						id={personData.roleId}
+						ninety
+					/>
 				</div>
 				{personData.name}
 			</Paper>
@@ -309,7 +314,11 @@ function ConversationPageDesktop({
 				</div>
 				<div className={styles.into_div}>
 					<div className={styles.intro_picture}>
-						<AvatarSimple type={personData.type} id={personData.roleId} />
+						<AvatarSimple
+							username={personData.name}
+							type={personData.type}
+							id={personData.roleId}
+						/>
 					</div>
 					{personData.name}
 					<Button

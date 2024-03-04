@@ -126,6 +126,7 @@ function DJEventManagePage() {
 				<div className={styles.current_performer_div}>
 					<div className={styles.current_performer_pic}>
 						<AvatarSimple
+							username={currentPerformer.performer_name}
 							ninety
 							type="performer"
 							id={currentPerformer.performer_id}

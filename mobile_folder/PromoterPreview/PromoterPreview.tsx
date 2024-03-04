@@ -65,7 +65,11 @@ function PromoterPreview({
 						<div className={styles.fade_out_div} />
 						<div className={styles.pic_name_tagline_div}>
 							<div className={styles.pic_div}>
-								<AvatarSimpleMobile type="promoter" id={pageData.promoter_id} />
+								<AvatarSimpleMobile
+									type="promoter"
+									id={pageData.promoter_id}
+									username={pageData.promoter_name}
+								/>
 							</div>
 							<div className={styles.name_tagline}>
 								<div className={styles.name_div}>{pageData.promoter_name}</div>

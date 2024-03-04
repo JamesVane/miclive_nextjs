@@ -123,7 +123,12 @@ function EventDjCard({
 										width: "70px",
 										height: "70px",
 									}}>
-									<AvatarSimpleMobile type="dj" id={djObj.dj_id} ninety />
+									<AvatarSimpleMobile
+										username={djObj.dj_name}
+										type="dj"
+										id={djObj.dj_id}
+										ninety
+									/>
 									<div
 										className={styles.dj_icon_avatar}
 										style={{
