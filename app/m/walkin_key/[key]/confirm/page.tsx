@@ -1,10 +1,10 @@
 /** @format */
 
 import React from "react";
-import ConfirmPhoneAndEmail from "@mobi/StartPage/ConfirmPhoneAndEmail";
+import CodeWalkinConfirmPhone from "@mobi/Performer/CodeWalkin/CodeWalkinConfirmPhone";
 
 function page({ params }: { params: { key: string } }) {
-	return <ConfirmPhoneAndEmail userTypeFromParams="performer" />;
+	return <CodeWalkinConfirmPhone key={params.key} />;
 }
 
 export default page;

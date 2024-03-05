@@ -1,10 +1,10 @@
 /** @format */
 
 import React from "react";
-import CreateAccount from "@mobi/StartPage/CreateAccount";
+import CodeWalkinCreateAccount from "@mobi/Performer/CodeWalkin/CodeWalkinCreateAccount";
 
 function page({ params }: { params: { key: string } }) {
-	return <CreateAccount userTypeFromParams="performer" />;
+	return <CodeWalkinCreateAccount key={params.key} />;
 }
 
 export default page;

@@ -27,7 +27,7 @@ function SignedInAsPerformerKeyCheckin({
 	);
 
 	function handleGoToEvent() {
-		router.push(`/m/performer/event/${eventData!.specificEventId}`);
+		router.push(`/m/event/${eventData?.name}/${eventData!.specificEventId}`);
 	}
 
 	useEffect(() => {
