@@ -20,8 +20,14 @@ function SignedInQrCheckin({ eventData, uuid }: SignedInQrCheckinProps) {
 
 	const [isCheckedIn, setIsCheckedIn] = useState(false);
 
+	const sluggifiedEventName = eventData.name
+		.trim()
+		.replace(/\s+/g, "")
+		.toLowerCase();
 	function handleGoToEvent() {
-		router.push(`/m/performer/event/${eventData.specificEventId}`);
+		router.push(
+			`/m/event/${sluggifiedEventName}/${eventData.specificEventId}/ticket`
+		);
 	}
 
 	useEffect(() => {

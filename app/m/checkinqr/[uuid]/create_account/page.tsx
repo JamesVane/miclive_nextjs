@@ -1,10 +1,10 @@
 /** @format */
 
 import React from "react";
-import CreateAccount from "@mobi/StartPage/CreateAccount";
+import QRWalkinCreateAccountPerformer from "@mobi/Performer/CheckInQr/QRWalkinCreateAccountPerformer";
 
 function page({ params }: { params: { uuid: string } }) {
-	return <CreateAccount userTypeFromParams="performer" />;
+	return <QRWalkinCreateAccountPerformer uuid={params.uuid} />;
 }
 
 export default page;
