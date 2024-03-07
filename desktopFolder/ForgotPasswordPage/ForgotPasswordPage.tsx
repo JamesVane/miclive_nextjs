@@ -42,49 +42,35 @@ function ForgotPasswordPage({
 
 	return (
 		<div className={styles.main_div}>
-			<div className={styles.header_div}>
-				<Button
-					onClick={handleExit}
-					startIcon={<ArrowBackIosNewRounded />}
-					color="secondary"
-					size="small"
-					sx={{ position: "absolute", top: "0px", left: "0px" }}>
-					back
-				</Button>
-				Reset Password
-			</div>
-			<TextField
-				onFocus={() => handleWhatIsFocused("phone", true)}
-				onBlur={() => handleWhatIsFocused("phone", false)}
-				disabled={isSubmitting}
-				error={forgotPasswordError !== ""}
-				value={phone}
-				onChange={(e: any) => handleSetPhone(e.target.value)}
-				placeholder="Phone Number"
-				label="Phone Number"
-				sx={{
-					width: "90%",
-					marginBottom: "20px",
-				}}
-				InputProps={{
-					startAdornment: (
-						<InputAdornment position="start">
-							<LocalPhoneRounded
-								sx={{
-									color:
-										forgotPasswordError !== ""
-											? "error.main"
-											: whatIsFocused.phone
-											? "primary.main"
-											: "action.disabled",
-								}}
-							/>
-						</InputAdornment>
-					),
-					endAdornment: (
-						<InputAdornment sx={{ width: "30px" }} position="end">
-							<IconButton disabled={isSubmitting} onClick={clearPhone}>
-								<ClearRounded
+			<div className={styles.paper_div}>
+				<div className={styles.header_div}>
+					<Button
+						onClick={handleExit}
+						startIcon={<ArrowBackIosNewRounded />}
+						color="secondary"
+						size="small"
+						sx={{ position: "absolute", top: "0px", left: "0px" }}>
+						back
+					</Button>
+					Reset Password
+				</div>
+				<TextField
+					onFocus={() => handleWhatIsFocused("phone", true)}
+					onBlur={() => handleWhatIsFocused("phone", false)}
+					disabled={isSubmitting}
+					error={forgotPasswordError !== ""}
+					value={phone}
+					onChange={(e: any) => handleSetPhone(e.target.value)}
+					placeholder="Phone Number"
+					label="Phone Number"
+					sx={{
+						width: "90%",
+						marginBottom: "20px",
+					}}
+					InputProps={{
+						startAdornment: (
+							<InputAdornment position="start">
+								<LocalPhoneRounded
 									sx={{
 										color:
 											forgotPasswordError !== ""
@@ -94,15 +80,31 @@ function ForgotPasswordPage({
 												: "action.disabled",
 									}}
 								/>
-							</IconButton>
-						</InputAdornment>
-					),
-				}}
-			/>
-			<div className={styles.error_div}>{forgotPasswordError}</div>
-			<Button onClick={handleSendResetCode} disabled={!phoneIsValid}>
-				send reset code
-			</Button>
+							</InputAdornment>
+						),
+						endAdornment: (
+							<InputAdornment sx={{ width: "30px" }} position="end">
+								<IconButton disabled={isSubmitting} onClick={clearPhone}>
+									<ClearRounded
+										sx={{
+											color:
+												forgotPasswordError !== ""
+													? "error.main"
+													: whatIsFocused.phone
+													? "primary.main"
+													: "action.disabled",
+										}}
+									/>
+								</IconButton>
+							</InputAdornment>
+						),
+					}}
+				/>
+				<div className={styles.error_div}>{forgotPasswordError}</div>
+				<Button onClick={handleSendResetCode} disabled={!phoneIsValid}>
+					send reset code
+				</Button>
+			</div>
 		</div>
 	);
 }

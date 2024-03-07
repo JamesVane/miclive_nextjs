@@ -70,128 +70,130 @@ function ForgotPasswordConfirm({
 				<Alert severity="success">{snackMessage}</Alert>
 			</Snackbar>
 			<div className={styles.main_div}>
-				<div className={styles.header_div}>
+				<div className={styles.paper_div}>
+					<div className={styles.header_div}>
+						<Button
+							onClick={handleBack}
+							startIcon={<ArrowBackIosNewRounded />}
+							color="secondary"
+							size="small"
+							sx={{ position: "absolute", top: "0px", left: "0px" }}>
+							back
+						</Button>
+						Confirm Password div
+					</div>
+					<div className={styles.confirm_input_div}>
+						<MuiOtpInput
+							length={6}
+							autoFocus
+							value={resetCode}
+							onChange={(value) => handleSetPhoneCode(value)}
+							validateChar={validateChar}
+							onComplete={() => {
+								if (passwordRef.current) {
+									passwordRef.current.focus(); // Step 2: Use the ref to change focus
+								}
+							}}
+						/>
+					</div>
 					<Button
-						onClick={handleBack}
-						startIcon={<ArrowBackIosNewRounded />}
+						onClick={resendResetCode}
+						sx={{ marginTop: "10px" }}
 						color="secondary"
-						size="small"
-						sx={{ position: "absolute", top: "0px", left: "0px" }}>
-						back
+						endIcon={<RefreshRounded />}>
+						re-send code
 					</Button>
-					Confirm Password
-				</div>
-				<div className={styles.confirm_input_div}>
-					<MuiOtpInput
-						length={6}
-						autoFocus
-						value={resetCode}
-						onChange={(value) => handleSetPhoneCode(value)}
-						validateChar={validateChar}
-						onComplete={() => {
-							if (passwordRef.current) {
-								passwordRef.current.focus(); // Step 2: Use the ref to change focus
-							}
-						}}
-					/>
-				</div>
-				<Button
-					onClick={resendResetCode}
-					sx={{ marginTop: "10px" }}
-					color="secondary"
-					endIcon={<RefreshRounded />}>
-					re-send code
-				</Button>
-				<div className={styles.divider_div}>
-					<Divider variant="middle" flexItem />
-				</div>
-				<div className={styles.new_password_div}>
-					<TextField
-						inputRef={passwordRef}
-						onFocus={() => setPasswordIsFocused(true)}
-						onBlur={() => setPasswordIsFocused(false)}
-						disabled={isSubmitting}
-						error={forgotPasswordError !== ""}
-						value={newPassword}
-						onChange={(e: any) => handleSetNewPassword(e.target.value)}
-						placeholder="Password"
-						label="Password"
-						type={passwordVisible ? "text" : "password"}
-						sx={{
-							width: "90%",
-						}}
-						InputProps={{
-							startAdornment: (
-								<InputAdornment position="start">
-									<IconButton
-										onClick={() => setPasswordVisible((prev) => !prev)}>
-										{!passwordVisible ? (
-											<VisibilityOffRounded
-												sx={{
-													color:
-														forgotPasswordError !== ""
-															? "error.main"
-															: passwordIsFocused
-															? "primary.main"
-															: "action.disabled",
-												}}
-											/>
-										) : (
-											<RemoveRedEyeRounded
-												sx={{
-													color:
-														forgotPasswordError !== ""
-															? "error.main"
-															: passwordIsFocused
-															? "primary.main"
-															: "action.disabled",
-												}}
-											/>
-										)}
-									</IconButton>
-								</InputAdornment>
-							),
-							endAdornment: (
-								<InputAdornment sx={{ width: "30px" }} position="end">
-									<IconButton disabled={isSubmitting} onClick={clearPassword}>
-										<ClearRounded
-											sx={{
-												color:
-													forgotPasswordError !== ""
-														? "error.main"
-														: passwordIsFocused
-														? "primary.main"
-														: "action.disabled",
-											}}
-										/>
-									</IconButton>
-								</InputAdornment>
-							),
-						}}
-					/>
-				</div>
-				<div className={styles.error_div}>{forgotPasswordError}</div>
-			</div>
-			<div className={styles.bottom_div}>
-				<div
-					className={styles.divider_div}
-					style={{ height: isSubmitting ? "4px" : "2px" }}>
-					{isSubmitting ? (
-						<LinearProgress color="primary" sx={{ width: "100%" }} />
-					) : (
+					<div className={styles.divider_div}>
 						<Divider variant="middle" flexItem />
-					)}
-				</div>
-				<div className={styles.bottom_buttons}>
-					<Button
-						disabled={submitDisabled}
-						onClick={confirmReset}
-						startIcon={<CheckRounded />}
-						size="large"
-						variant="outlined"
-						color="success">
-						submit
-					</Button>
+					</div>
+					<div className={styles.new_password_div}>
+						<TextField
+							inputRef={passwordRef}
+							onFocus={() => setPasswordIsFocused(true)}
+							onBlur={() => setPasswordIsFocused(false)}
+							disabled={isSubmitting}
+							error={forgotPasswordError !== ""}
+							value={newPassword}
+							onChange={(e: any) => handleSetNewPassword(e.target.value)}
+							placeholder="Password"
+							label="Password"
+							type={passwordVisible ? "text" : "password"}
+							sx={{
+								width: "90%",
+							}}
+							InputProps={{
+								startAdornment: (
+									<InputAdornment position="start">
+										<IconButton
+											onClick={() => setPasswordVisible((prev) => !prev)}>
+											{!passwordVisible ? (
+												<VisibilityOffRounded
+													sx={{
+														color:
+															forgotPasswordError !== ""
+																? "error.main"
+																: passwordIsFocused
+																? "primary.main"
+																: "action.disabled",
+													}}
+												/>
+											) : (
+												<RemoveRedEyeRounded
+													sx={{
+														color:
+															forgotPasswordError !== ""
+																? "error.main"
+																: passwordIsFocused
+																? "primary.main"
+																: "action.disabled",
+													}}
+												/>
+											)}
+										</IconButton>
+									</InputAdornment>
+								),
+								endAdornment: (
+									<InputAdornment sx={{ width: "30px" }} position="end">
+										<IconButton disabled={isSubmitting} onClick={clearPassword}>
+											<ClearRounded
+												sx={{
+													color:
+														forgotPasswordError !== ""
+															? "error.main"
+															: passwordIsFocused
+															? "primary.main"
+															: "action.disabled",
+												}}
+											/>
+										</IconButton>
+									</InputAdornment>
+								),
+							}}
+						/>
+						<div className={styles.bottom_div}>
+							<div
+								className={styles.divider_div}
+								style={{ height: isSubmitting ? "4px" : "2px" }}>
+								{isSubmitting ? (
+									<LinearProgress color="primary" sx={{ width: "100%" }} />
+								) : (
+									<Divider variant="middle" flexItem />
+								)}
+							</div>
+							<div className={styles.error_div}>{forgotPasswordError}</div>
+							<div className={styles.bottom_buttons}>
+								<Button
+									disabled={submitDisabled}
+									onClick={confirmReset}
+									startIcon={<CheckRounded />}
+									size="large"
+									variant="outlined"
+									color="success">
+									submit
+								</Button>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</>

@@ -148,40 +148,6 @@ const useWebSocket = (user_sub: string | null) => {
 							})
 						);
 					}
-
-					if (eventData.intermission_has_started) {
-						const intermissionStamp = eventData.intermission_has_started;
-						dispatch(setImtermissionTimestamp(intermissionStamp));
-					}
-
-					if (eventData.intermission_has_been_edited) {
-						const recivedData = eventData.intermission_has_been_edited;
-						const newTimestamp = recivedData.request_timestamp;
-						dispatch(setImtermissionTimestamp(newTimestamp));
-					}
-
-					if (eventData.dj_ended_intermission) {
-						dispatch(setImtermissionTimestamp(null));
-						dispatch(setCuePositionPlusOnePromoter());
-					}
-
-					if (eventData.queue_has_been_dragged_and_dropped_for_promoter) {
-						const returnArray =
-							eventData.queue_has_been_dragged_and_dropped_for_promoter;
-						dispatch(setUpdateDNDFromSocketPromoter(returnArray));
-					}
-
-					if (eventData.event_mived_to_next_performer) {
-						const newQueuePosition = eventData.event_mived_to_next_performer;
-						dispatch(setNextPerformer(newQueuePosition));
-					}
-					if (eventData.event_started_for_promoter) {
-						dispatch(setEventhasStartedPromoter(true));
-					}
-					if (eventData.event_ended_promoter) {
-						const specificEventId = eventData.event_ended_promoter;
-						dispatch(setEventHasEndedPromoter(true));
-					}
 				}
 			});
 

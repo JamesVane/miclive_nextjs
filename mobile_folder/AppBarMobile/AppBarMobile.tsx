@@ -12,6 +12,9 @@ import {
 import vertLogo from "@/images/miclive_svg_vert.svg";
 import ViewUserInfoModalMobile from "@mobi/ViewUserInfoModalMobile";
 import Image from "next/image";
+import { Auth } from "aws-amplify";
+import { useDispatch } from "react-redux";
+import { setCurrentSub as setCurrentSubSlice } from "@/store/currentSubStore";
 
 interface AppBarMobileProps {
 	children: React.ReactNode;
@@ -26,6 +29,7 @@ const AppBarMobile: React.FC<AppBarMobileProps> = ({
 	profilePage,
 	hasLogo,
 }) => {
+	const dispatch = useDispatch();
 	const router = useRouter();
 
 	function handleNavigateProfile() {
@@ -36,7 +40,9 @@ const AppBarMobile: React.FC<AppBarMobileProps> = ({
 		router.back();
 	}
 
-	function handleLogOut() {
+	async function handleLogOut() {
+		await Auth.signOut();
+		dispatch(setCurrentSubSlice(null));
 		localStorage.clear();
 		sessionStorage.clear();
 		router.push("/m");

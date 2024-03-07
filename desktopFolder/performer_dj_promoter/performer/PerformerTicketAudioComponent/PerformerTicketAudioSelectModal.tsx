@@ -25,7 +25,7 @@ interface PerformerTicketAudioSelectModal {
 	specificEventId: number;
 	performerIdFromInput?: number;
 	audioKeysFromInput?: PerformerRoleAudioKeys;
-	djSubForPromotersocket?: string;
+	djRoleIdForPerformerSocket?: string;
 }
 
 function PerformerTicketAudioSelectModal({
@@ -37,7 +37,7 @@ function PerformerTicketAudioSelectModal({
 	specificEventId,
 	performerIdFromInput,
 	audioKeysFromInput,
-	djSubForPromotersocket,
+	djRoleIdForPerformerSocket,
 }: PerformerTicketAudioSelectModal) {
 	const dispatch = useDispatch();
 
@@ -81,9 +81,9 @@ function PerformerTicketAudioSelectModal({
 			}
 		)
 			.then((res) => {
-				if (djSubForPromotersocket) {
+				if (djRoleIdForPerformerSocket) {
 					postSocketPerformerChangedAudioForCurrentEventToDj({
-						request_dj_sub: djSubForPromotersocket,
+						request_dj_role_id: djRoleIdForPerformerSocket,
 						request_performer_id: performerIdToBeUsed.toString(),
 						request_specific_event_id: specificEventId.toString(),
 						request_audio_key: selectFromSongOpen.toString(),

@@ -17,6 +17,7 @@ import horizLogo from "@/images/miclive_svg_horiz.svg";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Auth } from "aws-amplify";
+import { setCurrentSub as setCurrentSubSlice } from "@/store/currentSubStore";
 
 interface HomeBarV2Props {
 	children: JSX.Element | React.ReactNode;
@@ -44,6 +45,7 @@ function HomeBarV2({
 	async function handleLogOut() {
 		try {
 			await Auth.signOut();
+			dispatch(setCurrentSubSlice(null));
 			localStorage.clear();
 			sessionStorage.clear();
 			router.push("/");

@@ -8,14 +8,18 @@ import { Auth } from "aws-amplify";
 import { useDispatch } from "react-redux";
 import { getConversationList } from "@/api_functions/getConversationList";
 import { setAllConversationListSlice } from "@/store/conversationListSlice";
+import { setCurrentEventSpecificEventId } from "@/store/currentEventSpecificEventIdSlice";
 import { setConversationMessagesDefault } from "@/store/conversationMessagesSlice";
 import { setCurrentSub as setCurrentSubSlice } from "@/store/currentSubStore";
-import useWebSocket from "@/WebSocket/useWebSocket";
+// import useWebSocket from "@/WebSocket/useWebSocket";
 import { RootState } from "@/app/LocalizationProviderHelper";
-import { SocketContext } from "@/SocketContext";
+// import { SocketContext } from "@/SocketContext";
+import PusherLogic from "./PusherLogic";
+import { usePathname } from "next/navigation";
 
 function SocketWrapperHelper({ children }: { children: React.ReactNode }) {
 	const dispatch = useDispatch();
+	const pathname = usePathname();
 
 	const { userSub: currentSub } = useSelector(
 		(state: RootState) => state.CurrentSubStore
@@ -25,13 +29,11 @@ function SocketWrapperHelper({ children }: { children: React.ReactNode }) {
 		dispatch(setCurrentSubSlice(value));
 	}
 
-	const { createConversation, tickFunction } = useWebSocket(currentSub);
+	/* const { createConversation, tickFunction } = useWebSocket(currentSub); */
 
 	function handleVisibilityChange() {
 		if (currentSub === null) {
 			checkUser();
-		} else {
-			tickFunction();
 		}
 	}
 
@@ -46,19 +48,21 @@ function SocketWrapperHelper({ children }: { children: React.ReactNode }) {
 	async function checkUser() {
 		try {
 			const currentUser = await Auth.currentAuthenticatedUser();
-			if (currentUser.attributes) {
-				handleSetCurrentSub(currentUser.attributes.sub);
+			if (!currentSub) {
+				if (currentUser.attributes) {
+					handleSetCurrentSub(currentUser.attributes.sub);
+				}
 			}
 		} catch {
-			handleSetCurrentSub(null);
+			if (currentSub) {
+				handleSetCurrentSub(null);
+			}
 		}
 	}
 
 	useEffect(() => {
-		if (currentSub === null) {
-			checkUser();
-		}
-	}, [currentSub]);
+		checkUser();
+	}, [currentSub, pathname]);
 
 	async function handleSetConversations() {
 		dispatch(setConversationMessagesDefault());
@@ -78,11 +82,37 @@ function SocketWrapperHelper({ children }: { children: React.ReactNode }) {
 		handleSetConversations();
 	}, [currentSub]);
 
+	function extractSegment(inputString: string) {
+		const segments = inputString.split("/");
+
+		const manageEventIndex = segments.findIndex(
+			(segment) => segment === "manage_event"
+		);
+
+		if (manageEventIndex >= 0 && manageEventIndex < segments.length - 1) {
+			return segments[manageEventIndex + 1];
+		}
+		return null;
+	}
+
+	useEffect(() => {
+		if (pathname.startsWith("/promoter/manage_event/")) {
+			const specificeventIdString = extractSegment(pathname);
+			if (specificeventIdString) {
+				const specificEventIdNumber = Number(specificeventIdString);
+				dispatch(setCurrentEventSpecificEventId(specificEventIdNumber));
+			} else {
+				dispatch(setCurrentEventSpecificEventId(null));
+			}
+		} else {
+			dispatch(setCurrentEventSpecificEventId(null));
+		}
+	}, [pathname]);
+
 	return (
 		<>
-			<SocketContext.Provider value={{ createConversation }}>
-				{children}
-			</SocketContext.Provider>
+			{currentSub ? <PusherLogic /> : null}
+			{children}
 		</>
 	);
 }

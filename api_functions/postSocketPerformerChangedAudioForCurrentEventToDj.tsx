@@ -1,7 +1,7 @@
 /** @format */
 
 interface PostData {
-	request_dj_sub: string;
+	request_dj_role_id: string;
 	request_performer_id: string;
 	request_specific_event_id: string;
 	request_audio_key: string;

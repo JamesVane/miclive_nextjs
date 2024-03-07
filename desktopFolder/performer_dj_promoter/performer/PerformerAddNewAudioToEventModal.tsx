@@ -10,13 +10,13 @@ import UploadAudio from "@/audioComponents/UploadAudio";
 interface PerformerSelectFromExistingModalProps {
 	refreshAudio: () => void;
 	performerIdFromProps?: number;
-	djSubForPromotersocket?: string;
+	djRoleIdForPerformerSocket?: string;
 }
 
 function PerformerAddNewAudioToEventModal({
 	refreshAudio,
 	performerIdFromProps,
-	djSubForPromotersocket,
+	djRoleIdForPerformerSocket,
 }: PerformerSelectFromExistingModalProps) {
 	const dispatch = useDispatch();
 	const { addNewOpen, specificEventId } = useSelector(
@@ -69,7 +69,7 @@ function PerformerAddNewAudioToEventModal({
 							specificEventId={specificEventId}
 							addNewOpen={addNewOpen}
 							performerIdFromProps={performerIdFromProps}
-							djSubForPromotersocket={djSubForPromotersocket}
+							djRoleIdForPerformerSocket={djRoleIdForPerformerSocket}
 						/>
 					</Paper>
 				</div>

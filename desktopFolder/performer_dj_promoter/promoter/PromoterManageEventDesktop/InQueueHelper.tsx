@@ -1,14 +1,11 @@
 /** @format */
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styles from "./styles.module.css";
 import InQueuePaper from "./InQueuePaper";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/app/LocalizationProviderHelper";
-import {
-	PromoterCueObjectType,
-	promoterManageAdjustQueuePositionFromDND,
-} from "@/store/PromoterManageEventState";
+import { PromoterCueObjectType } from "@/store/PromoterManageEventState";
 import { putChangePerformerQueuePositionForDND } from "@/api_functions/putChangePerformerQueuePositionForDND";
 import { DragDropContext, Draggable } from "react-beautiful-dnd";
 import { CircularProgress } from "@mui/material";
@@ -82,9 +79,6 @@ function InQueueHelper({ setChangeAudioModal }: InQueueHelperProps) {
 			requestSpecificEventId: specificEventId.toString(),
 			performerQueuePositions: postArray,
 		});
-		if (postSuccessBool) {
-			dispatch(promoterManageAdjustQueuePositionFromDND(returnObject));
-		}
 		setIsLoading(false);
 	};
 

@@ -2,7 +2,22 @@
 
 .main_div {
 	width: 100vw;
-	composes: column from "@styl/base_flexbox.module.css";
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.paper_div {
+	height: 80%;
+	width: 450px;
+	background-color: black;
+	border-radius: 5px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	overflow: hidden;
+	position: relative;
 }
 .header_div {
 	width: 100%;
@@ -33,13 +48,10 @@
 	height: 2px;
 }
 .bottom_div {
-	background-color: #202d38ff;
 	width: 100%;
-	position: fixed;
 	composes: column from "@styl/base_flexbox.module.css";
-	bottom: 0;
-	left: 0;
-	right: 0;
+	position: absolute;
+	bottom: 0px;
 }
 .bottom_buttons {
 	margin-top: 10px;

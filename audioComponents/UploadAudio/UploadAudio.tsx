@@ -21,7 +21,7 @@ interface UploadAudioProps {
 	specificEventId?: number;
 	addNewOpen?: number;
 	performerIdFromProps?: number;
-	djSubForPromotersocket?: string;
+	djRoleIdForPerformerSocket?: string;
 }
 
 function UploadAudio({
@@ -30,7 +30,7 @@ function UploadAudio({
 	specificEventId,
 	addNewOpen,
 	performerIdFromProps,
-	djSubForPromotersocket,
+	djRoleIdForPerformerSocket,
 }: UploadAudioProps) {
 	const [audioFile, setAudioFile] = useState<File | null>(null);
 	const [uploadedSuccess, setUploadedSuccess] = useState<boolean>(false);
@@ -83,9 +83,9 @@ function UploadAudio({
 							[addNewOpen]: bodyForAudio,
 						}
 					).then((res) => {
-						if (djSubForPromotersocket) {
+						if (djRoleIdForPerformerSocket) {
 							postSocketPerformerChangedAudioForCurrentEventToDj({
-								request_dj_sub: djSubForPromotersocket,
+								request_dj_role_id: djRoleIdForPerformerSocket,
 								request_performer_id: performerIdToBeUsed.toString(),
 								request_specific_event_id: specificEventId.toString(),
 								request_audio_key: addNewOpen.toString(),

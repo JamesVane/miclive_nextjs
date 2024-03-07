@@ -41,8 +41,8 @@ function ChangeAudioModal({
 }: ChangeAudioModalProps) {
 	const dispatch = useDispatch();
 
-	const eventDjSub = useSelector(
-		(state: RootState) => state.PromoterManageEventState.event.dj.dj_sub
+	const djRoleId = useSelector(
+		(state: RootState) => state.PromoterManageEventState.event.dj.dj_id
 	);
 
 	const [performersExistingAudioKeys, setPerformersExistingAudioKeys] =
@@ -137,7 +137,7 @@ function ChangeAudioModal({
 	return (
 		<>
 			<PerformerAddNewAudioToEventModal
-				djSubForPromotersocket={eventDjSub}
+				djRoleIdForPerformerSocket={djRoleId.toString()}
 				performerIdFromProps={performerId}
 				refreshAudio={() => init()}
 			/>
@@ -145,7 +145,7 @@ function ChangeAudioModal({
 				performerIdFromInput={performerId}
 				refreshAudio={() => init()}
 				audioKeysFromInput={performersExistingAudioKeys}
-				djSubForPromotersocket={eventDjSub}
+				djRoleIdForPerformerSocket={djRoleId.toString()}
 			/>
 			<div className={styles.modal_main_div} onClick={close}>
 				<div
