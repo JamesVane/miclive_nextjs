@@ -6,7 +6,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Auth } from "aws-amplify";
 import { useDispatch } from "react-redux";
-import { getConversationList } from "@/api_functions/getConversationList";
+// import { getConversationList } from "@/api_functions/getConversationList";
 import { setAllConversationListSlice } from "@/store/conversationListSlice";
 import { setCurrentEventSpecificEventId } from "@/store/currentEventSpecificEventIdSlice";
 import { setConversationMessagesDefault } from "@/store/conversationMessagesSlice";
@@ -68,13 +68,11 @@ function SocketWrapperHelper({ children }: { children: React.ReactNode }) {
 		dispatch(setConversationMessagesDefault());
 
 		if (currentSub) {
-			const fetchedConversationList = await getConversationList(currentSub);
-
-			console.log("fetchedConversationList", fetchedConversationList);
-
-			if (fetchedConversationList !== false) {
+			// const fetchedConversationList = await getConversationList(currentSub);
+			// console.log("fetchedConversationList", fetchedConversationList);
+			/* if (fetchedConversationList !== false) {
 				dispatch(setAllConversationListSlice(fetchedConversationList));
-			}
+			} */
 		}
 	}
 

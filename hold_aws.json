@@ -1,0 +1,43 @@
+{
+    "auth": {
+        "jsmusicappdev": {
+            "customAuth": false,
+            "dependsOn": [],
+            "frontendAuthConfig": {
+                "mfaConfiguration": "OFF",
+                "mfaTypes": [
+                    "SMS"
+                ],
+                "passwordProtectionSettings": {
+                    "passwordPolicyCharacters": [
+                        "REQUIRES_LOWERCASE",
+                        "REQUIRES_NUMBERS",
+                        "REQUIRES_SYMBOLS",
+                        "REQUIRES_UPPERCASE"
+                    ],
+                    "passwordPolicyMinLength": 8
+                },
+                "signupAttributes": [
+                    "EMAIL",
+                    "PHONE_NUMBER"
+                ],
+                "socialProviders": [],
+                "usernameAttributes": [
+                    "PHONE_NUMBER"
+                ],
+                "verificationMechanisms": [
+                    "PHONE_NUMBER"
+                ]
+            },
+            "providerPlugin": "awscloudformation",
+            "service": "Cognito"
+        }
+    },
+    "storage": {
+        "ProfilePictures": {
+            "dependsOn": [],
+            "providerPlugin": "awscloudformation",
+            "service": "S3"
+        }
+    }
+}

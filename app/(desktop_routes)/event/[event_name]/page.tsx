@@ -68,9 +68,11 @@ async function page({ params }: { params: { event_name: string } }) {
 			});
 			const roleType = currentUser.attributes["custom:RoleType"];
 			const requestPerformerRoleId = currentUser.attributes["custom:RoleId"];
-			const followingArrayFromCog = JSON.parse(
-				currentUser.attributes["custom:PerformerFollowing"]
-			);
+			const followingArrayNotParsed =
+				currentUser.attributes["custom:PerformerFollowing"];
+			const followingArrayFromCog = followingArrayNotParsed
+				? JSON.parse(followingArrayNotParsed)
+				: [];
 
 			let data;
 			if (roleType === "performer" && eventName) {

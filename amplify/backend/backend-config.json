@@ -2,7 +2,44 @@
   "auth": {
     "jsmusicappdev": {
       "customAuth": false,
-      "dependsOn": [],
+      "dependsOn": [
+        {
+          "attributes": [
+            "Arn",
+            "Name"
+          ],
+          "category": "function",
+          "resourceName": "jsmusicappdevCreateAuthChallenge",
+          "triggerProvider": "Cognito"
+        },
+        {
+          "attributes": [
+            "Arn",
+            "Name"
+          ],
+          "category": "function",
+          "resourceName": "jsmusicappdevDefineAuthChallenge",
+          "triggerProvider": "Cognito"
+        },
+        {
+          "attributes": [
+            "Arn",
+            "Name"
+          ],
+          "category": "function",
+          "resourceName": "jsmusicappdevPreSignup",
+          "triggerProvider": "Cognito"
+        },
+        {
+          "attributes": [
+            "Arn",
+            "Name"
+          ],
+          "category": "function",
+          "resourceName": "jsmusicappdevVerifyAuthChallengeResponse",
+          "triggerProvider": "Cognito"
+        }
+      ],
       "frontendAuthConfig": {
         "mfaConfiguration": "OFF",
         "mfaTypes": [
@@ -31,6 +68,94 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "Cognito"
+    }
+  },
+  "function": {
+    "jsmusicappdevCreateAuthChallenge": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "jsmusicappdevDefineAuthChallenge": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "jsmusicappdevPreSignup": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "jsmusicappdevVerifyAuthChallengeResponse": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_jsmusicappdevCreateAuthChallenge_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "jsmusicappdevCreateAuthChallenge"
+        }
+      ]
+    },
+    "AMPLIFY_function_jsmusicappdevCreateAuthChallenge_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "jsmusicappdevCreateAuthChallenge"
+        }
+      ]
+    },
+    "AMPLIFY_function_jsmusicappdevDefineAuthChallenge_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "jsmusicappdevDefineAuthChallenge"
+        }
+      ]
+    },
+    "AMPLIFY_function_jsmusicappdevDefineAuthChallenge_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "jsmusicappdevDefineAuthChallenge"
+        }
+      ]
+    },
+    "AMPLIFY_function_jsmusicappdevPreSignup_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "jsmusicappdevPreSignup"
+        }
+      ]
+    },
+    "AMPLIFY_function_jsmusicappdevPreSignup_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "jsmusicappdevPreSignup"
+        }
+      ]
+    },
+    "AMPLIFY_function_jsmusicappdevVerifyAuthChallengeResponse_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "jsmusicappdevVerifyAuthChallengeResponse"
+        }
+      ]
+    },
+    "AMPLIFY_function_jsmusicappdevVerifyAuthChallengeResponse_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "jsmusicappdevVerifyAuthChallengeResponse"
+        }
+      ]
     }
   },
   "storage": {

@@ -1,3 +1,2 @@
-UPDATE specific_event
-SET event_has_started = FALSE
-where specific_event_id = 157;
+DELETE FROM base_user
+WHERE primary_key = '2be5f492-5ac3-4ca6-a631-de63daa482a5';

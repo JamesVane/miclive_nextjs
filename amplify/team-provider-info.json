@@ -9,7 +9,8 @@
       "UnauthRoleName": "amplify-jsmusicappdev-jsmicdev-153737-unauthRole",
       "StackName": "amplify-jsmusicappdev-jsmicdev-153737",
       "StackId": "arn:aws:cloudformation:us-east-2:037762818695:stack/amplify-jsmusicappdev-jsmicdev-153737/0e5119d0-c75f-11ed-9992-06ae1b01ac8c",
-      "AmplifyAppId": "d2rexcc2qeon20"
+      "AmplifyAppId": "d2rexcc2qeon20",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-jsmusicappdev-jsmicdev-153737-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
     },
     "categories": {
       "auth": {
@@ -17,6 +18,24 @@
       },
       "storage": {
         "ProfilePictures": {}
+      },
+      "function": {
+        "jsmusicappdevCreateAuthChallenge": {
+          "deploymentBucketName": "amplify-jsmusicappdev-jsmicdev-153737-deployment",
+          "s3Key": "amplify-builds/jsmusicappdevCreateAuthChallenge-366e6a2b584b73434248-build.zip"
+        },
+        "jsmusicappdevDefineAuthChallenge": {
+          "deploymentBucketName": "amplify-jsmusicappdev-jsmicdev-153737-deployment",
+          "s3Key": "amplify-builds/jsmusicappdevDefineAuthChallenge-6e563368336a4d556672-build.zip"
+        },
+        "jsmusicappdevVerifyAuthChallengeResponse": {
+          "deploymentBucketName": "amplify-jsmusicappdev-jsmicdev-153737-deployment",
+          "s3Key": "amplify-builds/jsmusicappdevVerifyAuthChallengeResponse-3571305371304b61346b-build.zip"
+        },
+        "jsmusicappdevPreSignup": {
+          "deploymentBucketName": "amplify-jsmusicappdev-jsmicdev-153737-deployment",
+          "s3Key": "amplify-builds/jsmusicappdevPreSignup-5470554a6f387871486c-build.zip"
+        }
       }
     }
   }

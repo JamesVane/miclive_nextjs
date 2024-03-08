@@ -1,8 +1,6 @@
 {
   "version": "1",
   "cognitoConfig": {
-    "identityPoolName": "testAuthIdentityPool",
-    "allowUnauthenticatedIdentities": false,
     "resourceNameTruncated": "jsmusi276c0d4e",
     "userPoolName": "jsmusicappdev",
     "autoVerifiedAttributes": [
@@ -31,13 +29,21 @@
     "aliasAttributes": [],
     "userpoolClientGenerateSecret": false,
     "userpoolClientRefreshTokenValidity": 30,
-    "userpoolClientWriteAttributes": [],
-    "userpoolClientReadAttributes": [],
+    "userpoolClientWriteAttributes": [
+      "email",
+      "phone_number"
+    ],
+    "userpoolClientReadAttributes": [
+      "email",
+      "phone_number",
+      "email_verified",
+      "phone_number_verified"
+    ],
     "userpoolClientLambdaRole": "jsmusi276c0d4e_userpoolclient_lambda_role",
-    "userpoolClientSetAttributes": false,
+    "userpoolClientSetAttributes": true,
     "sharedId": "276c0d4e",
     "resourceName": "jsmusicappdev",
-    "authSelections": "identityPoolAndUserPool",
+    "authSelections": "userPoolOnly",
     "serviceName": "Cognito",
     "usernameAttributes": [
       "phone_number"
@@ -46,8 +52,6 @@
     "userPoolGroups": false,
     "userPoolGroupList": [],
     "adminQueries": false,
-    "thirdPartyAuth": false,
-    "authProviders": [],
     "usernameCaseSensitive": false,
     "useEnabledMfas": true,
     "authRoleArn": {
@@ -63,7 +67,64 @@
       ]
     },
     "breakCircularDependency": true,
-    "dependsOn": [],
-    "hostedUI": false
+    "dependsOn": [
+      {
+        "category": "function",
+        "resourceName": "jsmusicappdevCreateAuthChallenge",
+        "triggerProvider": "Cognito",
+        "attributes": [
+          "Arn",
+          "Name"
+        ]
+      },
+      {
+        "category": "function",
+        "resourceName": "jsmusicappdevDefineAuthChallenge",
+        "triggerProvider": "Cognito",
+        "attributes": [
+          "Arn",
+          "Name"
+        ]
+      },
+      {
+        "category": "function",
+        "resourceName": "jsmusicappdevPreSignup",
+        "triggerProvider": "Cognito",
+        "attributes": [
+          "Arn",
+          "Name"
+        ]
+      },
+      {
+        "category": "function",
+        "resourceName": "jsmusicappdevVerifyAuthChallengeResponse",
+        "triggerProvider": "Cognito",
+        "attributes": [
+          "Arn",
+          "Name"
+        ]
+      }
+    ],
+    "hostedUI": false,
+    "triggers": {
+      "CreateAuthChallenge": [
+        "boilerplate-create-challenge"
+      ],
+      "DefineAuthChallenge": [
+        "boilerplate-define-challenge"
+      ],
+      "PreSignup": [
+        "custom"
+      ],
+      "VerifyAuthChallengeResponse": [
+        "boilerplate-verify"
+      ]
+    },
+    "authProviders": [],
+    "parentStack": {
+      "Ref": "AWS::StackId"
+    },
+    "authTriggerConnections": "[\n  {\n    \"triggerType\": \"CreateAuthChallenge\",\n    \"lambdaFunctionName\": \"jsmusicappdevCreateAuthChallenge\"\n  },\n  {\n    \"triggerType\": \"DefineAuthChallenge\",\n    \"lambdaFunctionName\": \"jsmusicappdevDefineAuthChallenge\"\n  },\n  {\n    \"triggerType\": \"PreSignUp\",\n    \"lambdaFunctionName\": \"jsmusicappdevPreSignup\"\n  },\n  {\n    \"triggerType\": \"VerifyAuthChallengeResponse\",\n    \"lambdaFunctionName\": \"jsmusicappdevVerifyAuthChallengeResponse\"\n  }\n]",
+    "permissions": []
   }
 }

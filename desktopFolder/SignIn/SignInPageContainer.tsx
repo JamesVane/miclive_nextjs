@@ -47,7 +47,7 @@ function SignInPageContainer({
 		(state: RootState) => state.signInState
 	);
 
-	const submitDisabled = password === "" || phone === "";
+	const submitDisabled = password === "" || phone === "" || signInError !== "";
 
 	function removeWhitespace(str: string) {
 		const adjusted = str.replace(/\s+/g, "");
@@ -208,6 +208,13 @@ function SignInPageContainer({
 			submitDisabled={submitDisabled}
 			handleForgotPassword={handleForgotPassword}
 			handleExit={handleExit}
+			setSignInError={setSignInError}
+			isForPurchase={isForPurchase ? isForPurchase : false}
+			isFromDjInvite={isFromDjInvite ? true : false}
+			navigateToPurchase={navigateToPurchase}
+			navigateToDjAccept={navigateToDjAccept}
+			handleCreateRole={handleCreateRole}
+			fromUrl={fromUrl}
 		/>
 	);
 }
