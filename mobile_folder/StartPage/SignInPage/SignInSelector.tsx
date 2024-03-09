@@ -1,13 +1,13 @@
 /** @format */
 
 import React from "react";
-import styles from "./styles.module.css";
 import { Button, Divider } from "@mui/material";
 import {
 	ArrowBackIosNewRounded,
 	PasswordRounded,
 	NumbersRounded,
 } from "@mui/icons-material";
+import styles from "./styles.module.css";
 
 interface SignInSelectorProps {
 	handleExit: () => void;
@@ -21,7 +21,7 @@ function SignInSelector({
 	codeLogin,
 }: SignInSelectorProps) {
 	return (
-		<>
+		<div className={styles.selector_div}>
 			<div className={styles.header_div}>
 				<Button
 					onClick={handleExit}
@@ -79,7 +79,7 @@ function SignInSelector({
 				onClick={codeLogin}>
 				Sign-in with a text message code
 			</Button>
-		</>
+		</div>
 	);
 }
 

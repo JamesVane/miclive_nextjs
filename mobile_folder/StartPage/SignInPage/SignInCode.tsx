@@ -13,6 +13,7 @@ import {
 	Alert,
 	Snackbar,
 } from "@mui/material";
+import { MuiOtpInput } from "mui-one-time-password-input";
 import {
 	ClearRounded,
 	LocalPhoneRounded,
@@ -21,10 +22,9 @@ import {
 	RefreshRounded,
 } from "@mui/icons-material";
 import { Auth } from "aws-amplify";
-import { unformatPhoneNumber } from "../../generic_functions/formatPhoneNumber";
-import { MuiOtpInput } from "mui-one-time-password-input";
+import { unformatPhoneNumber } from "@/generic_functions/formatPhoneNumber";
 import { useDispatch } from "react-redux";
-import { setCurrentSub } from "../../store/currentSubStore";
+import { setCurrentSub } from "@/store/currentSubStore";
 import { useRouter } from "next/navigation";
 
 interface SignInCodeProps {
@@ -34,15 +34,18 @@ interface SignInCodeProps {
 	handleSetPhone: (phone: string) => void;
 	clearPhone: () => void;
 	setSignInError: React.Dispatch<React.SetStateAction<string>>;
-	isFromDjInvite: boolean;
+	isFromDjInvite?: string;
 	navigateToPurchase: () => void;
 	isForPurchase: boolean;
 	navigateToDjAccept: () => void;
-	handleCreateRole: (
-		userType: "dj" | "performer" | "promoter",
-		user: any
+	handleSignInSplitterSection: (
+		roleType: "dj" | "performer",
+		user: any,
+		navigateTo: () => void
 	) => Promise<void>;
-	fromUrl: any;
+	isForPerformerQr?: string;
+	isForKeyCheckIn?: string;
+	navigateToPerformerQrOrKey: () => void;
 }
 
 function SignInCode({
@@ -56,8 +59,10 @@ function SignInCode({
 	navigateToPurchase,
 	isForPurchase,
 	navigateToDjAccept,
-	handleCreateRole,
-	fromUrl,
+	handleSignInSplitterSection,
+	isForPerformerQr,
+	isForKeyCheckIn,
+	navigateToPerformerQrOrKey,
 }: SignInCodeProps) {
 	const dispatch = useDispatch();
 	const router = useRouter();
@@ -102,55 +107,33 @@ function SignInCode({
 					const userSub = user.attributes.sub;
 					const roleType = user.attributes["custom:RoleType"];
 					if (isFromDjInvite) {
-						if (roleType !== "dj") {
-							await Auth.signOut().then(() => {
-								setIsSubmitting(false);
-								setSignInError("Must sign in with DJ account");
-								setCodeSession(null);
-							});
-						} else {
-							if (user.attributes["custom:RoleId"]) {
-								dispatch(setCurrentSub(userSub));
-								navigateToDjAccept();
-							} else {
-								handleCreateRole("dj", user).then(() => {
-									dispatch(setCurrentSub(userSub));
-									navigateToDjAccept();
-								});
-							}
-						}
+						handleSignInSplitterSection("dj", user, navigateToDjAccept);
+					} else if (isForKeyCheckIn) {
+						handleSignInSplitterSection(
+							"performer",
+							user,
+							navigateToPerformerQrOrKey
+						);
+					} else if (isForPerformerQr) {
+						handleSignInSplitterSection(
+							"performer",
+							user,
+							navigateToPerformerQrOrKey
+						);
 					} else if (isForPurchase) {
-						if (roleType !== "performer") {
-							await Auth.signOut().then(() => {
-								setIsSubmitting(false);
-								setSignInError("Must sign in with Performer account");
-								setCodeSession(null);
-							});
-						} else {
-							if (user.attributes["custom:RoleId"]) {
-								dispatch(setCurrentSub(userSub));
-								navigateToPurchase();
-							} else {
-								handleCreateRole("performer", user).then(() => {
-									dispatch(setCurrentSub(userSub));
-									navigateToPurchase();
-								});
-							}
-						}
+						handleSignInSplitterSection("performer", user, navigateToPurchase);
 					} else {
 						if (user.attributes["custom:RoleId"]) {
 							dispatch(setCurrentSub(userSub));
-							if (fromUrl) {
-								await new Promise(() => router.push(fromUrl));
-								localStorage.removeItem("fromUrl");
-							} else {
-								router.push(`/${roleType}`);
-							}
+							router.push(`/m/${roleType}`);
 							setIsSubmitting(false);
 							setSignInError("");
 						} else {
 							dispatch(setCurrentSub(userSub));
-							router.push(`/add_info/${roleType}`);
+							setSignInError(
+								"Your account has incomplete information. Please email support@mic.live and we will get the issue fixed as ASAP"
+							);
+							setIsSubmitting(false);
 							setSignInError("");
 						}
 					}
@@ -225,27 +208,31 @@ function SignInCode({
 						Check In Code
 					</div>
 					<div className={styles.confirm_input_div}>
-						<MuiOtpInput
-							length={6}
-							autoFocus
-							value={phoneCode}
-							onChange={(value) => {
-								setSignInError("");
-								setPhoneCode(value);
-							}}
-							validateChar={validateChar}
-							onComplete={verifyOtpCode}
-						/>
+						<div className={styles.confirm_input_div_ninety}>
+							<MuiOtpInput
+								length={6}
+								autoFocus
+								value={phoneCode}
+								onChange={(value) => {
+									setSignInError("");
+									setPhoneCode(value);
+								}}
+								validateChar={validateChar}
+								onComplete={verifyOtpCode}
+							/>
+						</div>
 					</div>
 					<div className={styles.phone_number_display}>{phone}</div>
-					<Button
-						onClick={reSendCode}
-						color="secondary"
-						sx={{ marginTop: "10px" }}
-						startIcon={<RefreshRounded />}
-						size="large">
-						Re-send code
-					</Button>
+					<div className={styles.re_send_code_div}>
+						<Button
+							onClick={reSendCode}
+							color="secondary"
+							sx={{ marginTop: "10px" }}
+							startIcon={<RefreshRounded />}
+							size="large">
+							Re-send code
+						</Button>
+					</div>
 				</>
 			) : (
 				<>
@@ -260,39 +247,25 @@ function SignInCode({
 						</Button>
 						Sign-In With Code
 					</div>
-					<TextField
-						onFocus={() => setPhoneIsFocused(true)}
-						onBlur={() => setPhoneIsFocused(false)}
-						disabled={isSubmitting}
-						error={signInError !== ""}
-						value={phone}
-						helperText={signInError}
-						onChange={(e: any) => handleSetPhone(e.target.value)}
-						placeholder="Phone Number"
-						label="Phone Number"
-						sx={{
-							width: "90%",
-							marginBottom: "20px",
-						}}
-						InputProps={{
-							startAdornment: (
-								<InputAdornment position="start">
-									<LocalPhoneRounded
-										sx={{
-											color:
-												signInError !== ""
-													? "error.main"
-													: phoneIsFocused
-													? "primary.main"
-													: "action.disabled",
-										}}
-									/>
-								</InputAdornment>
-							),
-							endAdornment: (
-								<InputAdornment sx={{ width: "30px" }} position="end">
-									<IconButton disabled={isSubmitting} onClick={clearPhone}>
-										<ClearRounded
+					<div className={styles.code_div}>
+						<TextField
+							onFocus={() => setPhoneIsFocused(true)}
+							onBlur={() => setPhoneIsFocused(false)}
+							disabled={isSubmitting}
+							error={signInError !== ""}
+							value={phone}
+							helperText={signInError}
+							onChange={(e: any) => handleSetPhone(e.target.value)}
+							placeholder="Phone Number"
+							label="Phone Number"
+							sx={{
+								width: "90%",
+								marginBottom: "20px",
+							}}
+							InputProps={{
+								startAdornment: (
+									<InputAdornment position="start">
+										<LocalPhoneRounded
 											sx={{
 												color:
 													signInError !== ""
@@ -302,11 +275,27 @@ function SignInCode({
 														: "action.disabled",
 											}}
 										/>
-									</IconButton>
-								</InputAdornment>
-							),
-						}}
-					/>
+									</InputAdornment>
+								),
+								endAdornment: (
+									<InputAdornment sx={{ width: "30px" }} position="end">
+										<IconButton disabled={isSubmitting} onClick={clearPhone}>
+											<ClearRounded
+												sx={{
+													color:
+														signInError !== ""
+															? "error.main"
+															: phoneIsFocused
+															? "primary.main"
+															: "action.disabled",
+												}}
+											/>
+										</IconButton>
+									</InputAdornment>
+								),
+							}}
+						/>
+					</div>
 					<div className={styles.bottom_div}>
 						<div
 							className={styles.divider_div}

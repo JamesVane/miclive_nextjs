@@ -219,6 +219,15 @@ function SignInPageContainer({
 			submitDisabled={submitDisabled}
 			handleForgotPassword={handleForgotPassword}
 			handleExit={handleExit}
+			setSignInError={setSignInError}
+			isFromDjInvite={isFromDjInvite ? isFromDjInvite : ""}
+			isForPurchase={isForPurchase ? isForPurchase : false}
+			navigateToPurchase={navigateToPurchase}
+			navigateToDjAccept={navigateToDjAccept}
+			handleSignInSplitterSection={handleSignInSplitterSection}
+			isForPerformerQr={isForPerformerQr}
+			isForKeyCheckIn={isForKeyCheckIn}
+			navigateToPerformerQrOrKey={navigateToPerformerQrOrKey}
 		/>
 	);
 }

@@ -168,7 +168,6 @@ function SignInPageContainer({
 				} else {
 					dispatch(setCurrentSub(userSub));
 					router.push(`/add_info/${roleType}`);
-					setIsSubmitting(false);
 					setSignInError("");
 				}
 			}

@@ -37,3 +37,62 @@
 	color: #ff0000ff;
 	margin-top: 5px;
 }
+.selector_div {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.code_div {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 10px;
+}
+.confirm_input_div {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.confirm_input_div_ninety {
+	width: 90%;
+	composes: row_center from "@styl/base_flexbox.module.css";
+}
+.phone_number_display {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	font-size: 20px;
+	color: var(--primary-main);
+	margin-top: 10px;
+}
+.loading_div {
+	width: 100%;
+	height: 100%;
+	composes: column_center from "@styl/base_flexbox.module.css";
+	position: fixed;
+	top: 0px;
+	z-index: 300;
+	background-color: rgba(0, 0, 0, 0.4);
+	z-index: 5000;
+	color: var(--primary-main);
+	font-size: 30px;
+}
+.re_send_code_div {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.selector_divider {
+	width: 100%;
+	height: 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
