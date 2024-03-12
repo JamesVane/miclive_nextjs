@@ -7,12 +7,25 @@ import {
 	CloseRounded,
 	EmailRounded,
 	PasswordRounded,
+	CheckRounded,
 } from "@mui/icons-material";
 import { ClickAwayListener } from "@mui/base/ClickAwayListener";
 import styles from "./styles.module.css";
 import { useRouter } from "next/navigation";
 
-function AlertsButton() {
+interface AlertsButtonProps {
+	passwordIsSet: boolean;
+	emailIsConfirmed: boolean;
+	hasEmail: boolean;
+	onProfilePage: boolean;
+}
+
+function AlertsButton({
+	passwordIsSet,
+	emailIsConfirmed,
+	hasEmail,
+	onProfilePage,
+}: AlertsButtonProps) {
 	const router = useRouter();
 	const [isOpened, setIsOpened] = useState(false);
 
@@ -28,11 +41,34 @@ function AlertsButton() {
 		router.push("/change_email");
 	}
 
+	function handleVerifyEmail() {
+		router.push("/confirm_email");
+	}
+
+	function handleSetPassword() {
+		router.push("/set_password");
+	}
+
+	function calculateAlertsNumber() {
+		let currentAlrtNumber = 0;
+		if (!passwordIsSet) {
+			currentAlrtNumber++;
+		}
+		if (!emailIsConfirmed || !hasEmail) {
+			currentAlrtNumber++;
+		}
+		return currentAlrtNumber;
+	}
+
 	return (
 		<>
 			{isOpened ? (
 				<ClickAwayListener onClickAway={handleClose}>
-					<div className={styles.alerts_opened_main_div}>
+					<div
+						className={styles.alerts_opened_main_div}
+						style={{
+							right: onProfilePage ? "160px" : "80px",
+						}}>
 						<div className={styles.innter_div_alerts}>
 							<IconButton
 								onClick={handleClose}
@@ -64,34 +100,54 @@ function AlertsButton() {
 							<div className={styles.divider_div}>
 								<Divider flexItem />
 							</div>
-							<div className={styles.alert_action_row}>
-								<Button
-									onClick={handleAddEmail}
-									sx={{
-										marginLeft: "5px",
-									}}
-									size="small"
-									startIcon={<EmailRounded />}
-									color="info">
-									Add and verify email
-								</Button>
-							</div>
-							<div className={styles.alert_action_row}>
-								<Button
-									sx={{
-										marginLeft: "5px",
-									}}
-									size="small"
-									startIcon={<PasswordRounded />}
-									color="info">
-									Create password
-								</Button>
-							</div>
+							{hasEmail ? null : (
+								<div className={styles.alert_action_row}>
+									<Button
+										onClick={handleAddEmail}
+										sx={{
+											marginLeft: "5px",
+										}}
+										size="small"
+										startIcon={<EmailRounded />}
+										color="info">
+										Add and verify email
+									</Button>
+								</div>
+							)}
+							{emailIsConfirmed ? null : (
+								<div className={styles.alert_action_row}>
+									<Button
+										onClick={handleVerifyEmail}
+										sx={{
+											marginLeft: "5px",
+										}}
+										size="small"
+										startIcon={<CheckRounded />}
+										color="info">
+										verify email
+									</Button>
+								</div>
+							)}
+							{passwordIsSet ? null : (
+								<div className={styles.alert_action_row}>
+									<Button
+										onClick={handleSetPassword}
+										sx={{
+											marginLeft: "5px",
+										}}
+										size="small"
+										startIcon={<PasswordRounded />}
+										color="info">
+										Create password
+									</Button>
+								</div>
+							)}
 						</div>
 					</div>
 				</ClickAwayListener>
 			) : (
 				<Button
+					disabled={calculateAlertsNumber() === 0}
 					onClick={handleOpen}
 					sx={{
 						height: "45px",
@@ -110,7 +166,7 @@ function AlertsButton() {
 							}}
 						/>
 					}>
-					1
+					{calculateAlertsNumber()}
 				</Button>
 			)}
 		</>

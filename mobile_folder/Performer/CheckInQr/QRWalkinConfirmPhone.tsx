@@ -12,6 +12,7 @@ function QRWalkinConfirmPhone({ uuid }: QRWalkinConfirmPhoneProps) {
 		<QuickConfirmPhoneContainer
 			userTypeFromParams="performer"
 			continueUrl={`/m/checkinqr/${uuid}`}
+			doesNotHavePassword={true}
 		/>
 	);
 }

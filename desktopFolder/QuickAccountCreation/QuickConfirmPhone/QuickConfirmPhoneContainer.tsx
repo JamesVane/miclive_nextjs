@@ -75,6 +75,9 @@ function QuickConfirmPhoneContainer({
 							await Auth.updateUserAttributes(user, {
 								"custom:RoleType": paramsType,
 							});
+							await Auth.updateUserAttributes(user, {
+								"custom:hasPasswordSet": "true",
+							});
 							dispatch(setUserRoleId(Number(userRoleId)));
 							router.push(continueUrl);
 							setMessage("");

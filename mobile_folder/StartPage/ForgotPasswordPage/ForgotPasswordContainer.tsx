@@ -27,7 +27,13 @@ import { debounce } from "lodash";
 import { useRouter } from "next/navigation";
 import PasswordResetSuccessPage from "./PasswordResetSuccessPage";
 
-function ForgotPasswordContainer() {
+interface ForgotPasswordContainerProps {
+	settingFromNoPassword?: boolean;
+}
+
+function ForgotPasswordContainer({
+	settingFromNoPassword,
+}: ForgotPasswordContainerProps) {
 	const router = useRouter();
 	const dispatch = useDispatch();
 
@@ -87,13 +93,22 @@ function ForgotPasswordContainer() {
 	const confirmReset = async () => {
 		setIsSubmitting(true);
 		try {
-			await Auth.forgotPasswordSubmit(
+			const returnObj = await Auth.forgotPasswordSubmit(
 				`+1${unformatPhoneNumber(phone)}`,
 				resetCode,
 				newPassword
 			);
-			setIsSubmitting(false);
-			dispatch(setForgotPasswordStep(3));
+			if (returnObj === "SUCCESS") {
+				const user = await Auth.signIn(
+					`+1${unformatPhoneNumber(phone)}`,
+					newPassword
+				);
+				await Auth.updateUserAttributes(user, {
+					"custom:hasPasswordSet": "true",
+				});
+				setIsSubmitting(false);
+				dispatch(setForgotPasswordStep(3));
+			}
 		} catch (error: any) {
 			dispatch(setForgotPasswordError(error.message));
 			setIsSubmitting(false);
@@ -145,11 +160,18 @@ function ForgotPasswordContainer() {
 	function handleBack() {
 		dispatch(setForgotPasswordStep(1));
 	}
-	function handleExit() {
-		router.push("/m/sign_in");
-	}
-	function handleLogInRedirect() {
-		router.push("/m/sign_in");
+	async function handleExit() {
+		if (settingFromNoPassword) {
+			try {
+				const currentUser = await Auth.currentAuthenticatedUser();
+				const roleType = currentUser.attributes["custom:RoleType"];
+				router.push(`/m/${roleType}`);
+			} catch {
+				router.push("/m/sign_in");
+			}
+		} else {
+			router.push("/m/sign_in");
+		}
 	}
 
 	return (
@@ -164,6 +186,7 @@ function ForgotPasswordContainer() {
 					phoneIsValid={phoneIsValid}
 					handleSendResetCode={handleSendResetCode}
 					handleExit={handleExit}
+					settingFromNoPassword={settingFromNoPassword}
 				/>
 			) : step === 2 ? (
 				<ForgotPasswordConfirm
@@ -183,7 +206,10 @@ function ForgotPasswordContainer() {
 					handleBack={handleBack}
 				/>
 			) : step === 3 ? (
-				<PasswordResetSuccessPage handleLogInRedirect={handleLogInRedirect} />
+				<PasswordResetSuccessPage
+					settingFromNoPassword={settingFromNoPassword}
+					handleLogInRedirect={handleExit}
+				/>
 			) : null}
 		</div>
 	);

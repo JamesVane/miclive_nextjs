@@ -33,7 +33,6 @@
 	height: 2px;
 }
 .bottom_div {
-	background-color: #202d38ff;
 	width: 100%;
 	position: fixed;
 	composes: column from "@styl/base_flexbox.module.css";

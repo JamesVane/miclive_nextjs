@@ -14,6 +14,7 @@ function PerformerTickerQuickConfirm({
 		<QuickConfirmPhoneContainer
 			userTypeFromParams="performer"
 			continueUrl={`/m/buy_ticket/purchase/${specificEventId}`}
+			doesNotHavePassword={false}
 		/>
 	);
 }

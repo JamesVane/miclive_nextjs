@@ -19,6 +19,7 @@ interface ForgotPasswordPageProps {
 	phoneIsValid: boolean;
 	handleSendResetCode: () => void;
 	handleExit: () => void;
+	settingFromNoPassword?: boolean;
 }
 
 function ForgotPasswordPage({
@@ -30,6 +31,7 @@ function ForgotPasswordPage({
 	phoneIsValid,
 	handleSendResetCode,
 	handleExit,
+	settingFromNoPassword,
 }: ForgotPasswordPageProps) {
 	const [whatIsFocused, setWhatIsFocused] = useState({
 		password: false,
@@ -52,7 +54,7 @@ function ForgotPasswordPage({
 						sx={{ position: "absolute", top: "0px", left: "0px" }}>
 						back
 					</Button>
-					Reset Password
+					{`${settingFromNoPassword ? "Set" : "Reset"} Password`}
 				</div>
 				<TextField
 					onFocus={() => handleWhatIsFocused("phone", true)}

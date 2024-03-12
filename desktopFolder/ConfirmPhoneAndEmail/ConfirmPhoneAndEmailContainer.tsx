@@ -74,6 +74,9 @@ function ConfirmPhoneAndEmailContainer({
 							await Auth.updateUserAttributes(user, {
 								"custom:RoleType": userType,
 							});
+							await Auth.updateUserAttributes(user, {
+								"custom:hasPasswordSet": "true",
+							});
 							dispatch(setUserRoleId(Number(userRoleId)));
 							router.push(`/add_info/${userType}`);
 							setMessage("");

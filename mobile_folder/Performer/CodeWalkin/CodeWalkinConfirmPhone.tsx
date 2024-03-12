@@ -12,6 +12,7 @@ function CodeWalkinConfirmPhone({ key }: CodeWalkinConfirmPhoneProps) {
 		<QuickConfirmPhoneContainer
 			continueUrl={`/m/walkin_key/${key}`}
 			userTypeFromParams="performer"
+			doesNotHavePassword={true}
 		/>
 	);
 }

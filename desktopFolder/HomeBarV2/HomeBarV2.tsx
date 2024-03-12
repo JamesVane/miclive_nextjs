@@ -105,7 +105,9 @@ function HomeBarV2({
 								<AccountCircleRounded sx={{ height: "90%", width: "90%" }} />
 							</IconButton>
 						) : null}
-						{hasAccountAlertsSection ? <AlertsButton /> : null}
+						{hasAccountAlertsSection ? (
+							<AlertsButton onProfilePage={profileOpen ? profileOpen : false} />
+						) : null}
 					</div>
 
 					<div className={styles.mic_live}>

@@ -75,6 +75,9 @@ function ConfirmPhoneAndEmailContainer({
 							await Auth.updateUserAttributes(user, {
 								"custom:RoleType": userTypeFromParams,
 							});
+							await Auth.updateUserAttributes(user, {
+								"custom:hasPasswordSet": "true",
+							});
 							dispatch(setUserRoleId(Number(userRoleId)));
 
 							const navRoute = `/m/add_info/${userTypeFromParams}`;

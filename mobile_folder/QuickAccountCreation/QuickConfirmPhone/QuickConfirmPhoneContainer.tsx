@@ -13,11 +13,13 @@ import { postCreateAccountBase } from "../../../api_functions/postCreateAccountB
 interface QuickConfirmPhoneContainerProps {
 	userTypeFromParams: "promoter" | "performer" | "dj";
 	continueUrl: string;
+	doesNotHavePassword: boolean;
 }
 
 function QuickConfirmPhoneContainer({
 	userTypeFromParams,
 	continueUrl,
+	doesNotHavePassword,
 }: QuickConfirmPhoneContainerProps) {
 	const router = useRouter();
 
@@ -74,6 +76,9 @@ function QuickConfirmPhoneContainer({
 							});
 							await Auth.updateUserAttributes(user, {
 								"custom:RoleType": userTypeFromParams,
+							});
+							await Auth.updateUserAttributes(user, {
+								"custom:hasPasswordSet": doesNotHavePassword ? "false" : "true",
 							});
 							router.push(continueUrl);
 							setMessage("");

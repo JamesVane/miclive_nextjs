@@ -25,6 +25,8 @@ interface ChangeEmailProps {
 	removeWhitespace: (value: string) => string;
 	email: string;
 	setEmail: (email: string) => void;
+	currentEmailIsVerified: boolean;
+	handleSetCurrentEmailIsVerified: () => void;
 }
 
 function ChangeEmail({
@@ -32,6 +34,8 @@ function ChangeEmail({
 	removeWhitespace,
 	email,
 	setEmail,
+	currentEmailIsVerified,
+	handleSetCurrentEmailIsVerified,
 }: ChangeEmailProps) {
 	const router = useRouter();
 
@@ -71,7 +75,10 @@ function ChangeEmail({
 					router.push("/sign_in");
 				}
 				const user = await Auth.currentAuthenticatedUser();
-				if (user.attributes) {
+				const emailIsVerified = user.attributes.email_verified;
+				if (emailIsVerified) {
+					handleSetCurrentEmailIsVerified();
+				} else if (user.attributes) {
 					try {
 						await Auth.updateUserAttributes(user, { email: email });
 					} catch {
@@ -190,7 +197,7 @@ function ChangeEmail({
 						),
 					}}
 				/>
-				{doesNotHaveEmail ? null : (
+				{currentEmailIsVerified || doesNotHaveEmail ? null : (
 					<Button
 						disabled={saveLoading}
 						onClick={handleVerifyCurrentEmail}

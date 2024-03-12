@@ -80,7 +80,7 @@ function ForgotPasswordConfirm({
 							sx={{ position: "absolute", top: "0px", left: "0px" }}>
 							back
 						</Button>
-						Confirm Password div
+						Confirm Password
 					</div>
 					<div className={styles.confirm_input_div}>
 						<MuiOtpInput

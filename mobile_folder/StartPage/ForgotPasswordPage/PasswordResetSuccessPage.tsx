@@ -3,24 +3,28 @@
 import React from "react";
 import styles from "./styles.module.css";
 import { Button } from "@mui/material";
-import { LoginRounded } from "@mui/icons-material";
+import { LoginRounded, HomeRounded } from "@mui/icons-material";
 interface PasswordResetSuccessPageProps {
 	handleLogInRedirect: () => void;
+	settingFromNoPassword?: boolean;
 }
 
 function PasswordResetSuccessPage({
 	handleLogInRedirect,
+	settingFromNoPassword,
 }: PasswordResetSuccessPageProps) {
 	return (
 		<div className={styles.success_page}>
-			Password Reset Successful!
+			{settingFromNoPassword
+				? "Password set successfully!"
+				: "Password reset successful!"}
 			<Button
 				onClick={handleLogInRedirect}
-				startIcon={<LoginRounded />}
+				startIcon={settingFromNoPassword ? <HomeRounded /> : <LoginRounded />}
 				sx={{ marginTop: "10px" }}
 				size="large"
 				variant="outlined">
-				log-in
+				{settingFromNoPassword ? "go home" : "continue"}
 			</Button>
 		</div>
 	);
