@@ -37,9 +37,8 @@ function PurchaseTicketPageContainer({
 	}
 
 	const sluggifiedEventName = pageData.name
-		.trim()
-		.replace(/\s+/g, "")
-		.toLowerCase();
+		? pageData.name.trim().replace(/\s+/g, "").toLowerCase()
+		: "";
 
 	function handlePurchaseTicket() {
 		setIsPurchasing(true);

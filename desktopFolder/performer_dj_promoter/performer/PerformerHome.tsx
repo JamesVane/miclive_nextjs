@@ -73,7 +73,7 @@ function PerformerHome({
 				<SplashPage />
 			) : (
 				<>
-					<HomeBarV2 hasProfile>
+					<HomeBarV2 hasProfile hasAccountAlertsSection>
 						<div
 							style={{
 								height: "100%",

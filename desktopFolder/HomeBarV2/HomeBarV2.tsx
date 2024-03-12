@@ -18,18 +18,21 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Auth } from "aws-amplify";
 import { setCurrentSub as setCurrentSubSlice } from "@/store/currentSubStore";
+import AlertsButton from "./AlertsButton";
 
 interface HomeBarV2Props {
 	children: JSX.Element | React.ReactNode;
 	hasProfile?: boolean;
 	noMessage?: boolean;
 	profileOpen?: boolean;
+	hasAccountAlertsSection?: boolean;
 }
 function HomeBarV2({
 	children,
 	hasProfile,
 	noMessage,
 	profileOpen,
+	hasAccountAlertsSection,
 }: HomeBarV2Props) {
 	const dispatch = useDispatch();
 	const router = useRouter();
@@ -79,30 +82,32 @@ function HomeBarV2({
 				className={styles.main_paper}
 				sx={{ backgroundColor: "background.default" }}>
 				<div className={styles.inner_div}>
-					{profileOpen ? (
-						<div className={styles.message_right_div}>
-							<MessageButton />{" "}
+					<div className={styles.profile_messages_div}>
+						{profileOpen ? (
 							<Button
 								onClick={handleLogOut}
 								startIcon={<LogoutRounded />}
 								variant="outlined"
-								sx={{ height: "45px", width: "140px", fontSize: "18px" }}>
+								sx={{
+									height: "45px",
+									width: "140px",
+									fontSize: "18px",
+									marginRight: "10px",
+								}}>
 								Log-Out
 							</Button>
-						</div>
-					) : (
-						<div className={styles.profile_messages_div}>
-							{hasProfile ? (
-								<IconButton
-									onClick={openProfile}
-									color="primary"
-									sx={{ height: "70px", width: "70px" }}>
-									<AccountCircleRounded sx={{ height: "90%", width: "90%" }} />
-								</IconButton>
-							) : null}
-							{/* {noMessage ? null : <MessageButton />} */}
-						</div>
-					)}
+						) : null}
+						{hasProfile && !profileOpen ? (
+							<IconButton
+								onClick={openProfile}
+								color="primary"
+								sx={{ height: "70px", width: "70px" }}>
+								<AccountCircleRounded sx={{ height: "90%", width: "90%" }} />
+							</IconButton>
+						) : null}
+						{hasAccountAlertsSection ? <AlertsButton /> : null}
+					</div>
+
 					<div className={styles.mic_live}>
 						<Image style={{ width: "88%" }} alt="logo" src={horizLogo} />
 					</div>

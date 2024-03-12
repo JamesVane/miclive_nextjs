@@ -129,7 +129,7 @@ function HomeProfilePaper({ performer, dj, promoter }: HomeProfilePaperProps) {
 
 	return (
 		<>
-			<HomeBarV2 profileOpen>
+			<HomeBarV2 profileOpen hasAccountAlertsSection>
 				<Button
 					onClick={handleGoBack}
 					startIcon={<ArrowBackIosNewRounded />}

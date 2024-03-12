@@ -82,20 +82,13 @@ function EventDateModalAudioSubmit({
 				</div>
 			</div>
 			<div className={styles.audio_scroll}>
-				{Array.from({ length: tracksPerPerformer }, (_, index) => (
-					<>
-						{" "}
-						{index === 0 ? null : (
-							<PerformerTicketSubmitAudioPaper
-								setSelectFromSongOpen={() => handleSetSelectFromSongOpen(index)}
-								setAddNewOpen={() => handleAddNewOpen(index)}
-								key={index}
-								trackNumber={String(index)}
-								payload={submittedAudio ? submittedAudio[index] : null}
-							/>
-						)}
-					</>
-				))}
+				<PerformerTicketSubmitAudioPaper
+					setSelectFromSongOpen={() => handleSetSelectFromSongOpen(1)}
+					setAddNewOpen={() => handleAddNewOpen(1)}
+					key={1}
+					trackNumber={String(1)}
+					payload={submittedAudio ? submittedAudio[1] : null}
+				/>
 			</div>
 		</>
 	);
