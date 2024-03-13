@@ -3,14 +3,14 @@
 .main_div {
 	width: 100%;
 	height: 100%;
-	position: absolute;
+	position: fixed;
 	composes: column_center from "@styl/base_flexbox.module.css";
 	background-color: rgba(0, 0, 0, 0.6);
 	z-index: 10000;
 	top: 0;
 }
 .inner_div {
-	height: 90%;
+	height: 95%;
 	composes: column from "@styl/base_flexbox.module.css";
 	background-color: var(--background-default);
 	border-radius: 5px;
@@ -18,27 +18,30 @@
 }
 .meat_div {
 	width: 100%;
-	height: calc(100% - 35px);
-	min-height: calc(100% - 35px);
+	height: calc(100% - 40px);
+	min-height: calc(100% - 40px);
 	composes: row from "@styl/base_flexbox.module.css";
 }
 .close_div {
 	width: 100%;
-	height: 35px;
+	height: 40px;
 	position: relative;
-	composes: row_center from "@styl/base_flexbox.module.css";
 	font-size: 20px;
 	color: var(--background-default);
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
 }
 .pic_header {
 	width: 100%;
-	height: 120px;
-	min-height: 120px;
+	height: 100px;
+	min-height: 100px;
 	composes: row from "@styl/base_flexbox.module.css";
 }
 .pic_container {
-	width: 120px;
-	height: 120px;
+	width: 100px;
+	height: 100px;
 	composes: column_center from "@styl/base_flexbox.module.css";
 }
 .pic_deco {
@@ -50,36 +53,30 @@
 }
 .pic_header_right {
 	height: 100%;
-	width: calc(100% - 120px);
+	width: calc(100% - 100px);
 	composes: column from "@styl/base_flexbox.module.css";
 }
 .event_name {
 	width: 100%;
 	font-size: 30px;
 	margin-left: 5px;
-	height: 34%;
+	height: 36%;
 }
 .date_loc_div {
 	width: 100%;
 	margin-left: 5px;
 	composes: row from "@styl/base_flexbox.module.css";
-	height: 33%;
-	font-size: 19px;
+	font-size: 17px;
 	color: var(--primary-main);
 	font-weight: 100;
 	overflow: hidden;
 	padding-right: 2.5px;
+	margin-top: 2.5px;
 }
 .elipse_text {
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
-}
-.date_time_split {
-	height: 100%;
-	width: 50%;
-	composes: row from "@styl/base_flexbox.module.css";
-	font-weight: 100;
 }
 .buttons_div {
 	width: 100%;
@@ -90,10 +87,11 @@
 	padding-left: 5px;
 }
 .promoter_dj_div {
-	width: calc(100% - 10px);
-	height: 100px;
-	min-height: 100px;
+	width: calc(50% - 10px);
+	height: 70px;
+	min-height: 70px;
 	composes: row from "@styl/base_flexbox.module.css";
+	margin-top: 5px;
 }
 .divider_div {
 	width: 100%;
@@ -101,7 +99,7 @@
 	composes: column_center from "@styl/base_flexbox.module.css";
 }
 .scroll_div {
-	width: 575px;
+	width: 600px;
 	composes: column from "@styl/base_flexbox.module.css";
 	overflow-x: hidden;
 	overflow-y: auto;
@@ -195,32 +193,6 @@
 .primary_color {
 	color: var(--primary-main);
 }
-.submitted_audio_header {
-	width: 100%;
-	height: 60px;
-	min-height: 60px;
-	position: relative;
-	overflow: visible;
-	composes: column from "@styl/base_flexbox.module.css";
-}
-.submitted_title {
-	position: absolute;
-	font-size: 20px;
-	top: -15px;
-}
-.audio_time_div {
-	width: 100%;
-	height: 50px;
-	position: absolute;
-	bottom: 2px;
-	composes: row_center from "@styl/base_flexbox.module.css";
-}
-.audio_scroll {
-	height: calc(100% - 60px);
-	width: 100%;
-	overflow-x: hidden;
-	overflow-y: auto;
-}
 .sign_up_in_buy_modal_back {
 	width: 100%;
 	height: 100%;
@@ -242,4 +214,59 @@
 	color: var(--secondary-main);
 	margin: 5px;
 	font-size: 30px;
+}
+.promoter_dj_row_container_div {
+	width: 100%;
+	height: 70px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-evenly;
+	margin-bottom: 10px;
+}
+.divider_absolute {
+	width: 100%;
+	position: absolute;
+	height: 2px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	bottom: 0px;
+}
+.upload_audio_header {
+	width: 100%;
+	height: 40px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+}
+.allowed_time {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: 23px;
+	margin-bottom: 15px;
+}
+.roster_container {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+}
+.roster_scroll {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: calc(100% - 40px);
+	overflow-x: hidden;
+	overflow-y: scroll;
 }

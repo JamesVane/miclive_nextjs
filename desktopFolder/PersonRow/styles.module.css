@@ -4,17 +4,16 @@
 	composes: row_center from "@styl/base_flexbox.module.css";
 	align-items: flex-start;
 	width: 100%;
-	height: 100px;
 }
 .paper_div {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
-	height: calc(100% - 10px);
+	height: 100%;
 	width: 100%;
 	overflow: hidden;
-	background-color: var(--background-paper);
+	background-color: black;
 	border-radius: 10px;
 }
 .button_base_style {
@@ -28,23 +27,28 @@
 .person_left_side {
 	position: relative;
 	height: 100%;
-	width: calc(100% - 100px);
-	composes: column from "@styl/base_flexbox.module.css";
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
 .person_type_div {
-	position: absolute;
-	bottom: 8px;
-	left: 12px;
+	padding-left: 8px;
 	width: 100%;
 	composes: row from "@styl/base_flexbox.module.css";
 	color: var(--primary-main);
 	font-weight: bold;
-	font-size: 22px;
+	font-size: 16px;
 }
 .person_name_div {
-	font-size: 30px;
+	font-size: 20px;
 	width: 100%;
 	composes: row from "@styl/base_flexbox.module.css";
-	height: 75%;
 	padding-left: 10px;
+}
+.pic_div {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }

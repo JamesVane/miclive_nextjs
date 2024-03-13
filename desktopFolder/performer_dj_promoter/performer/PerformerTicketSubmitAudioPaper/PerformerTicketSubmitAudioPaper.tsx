@@ -42,17 +42,18 @@ function PerformerTicketSubmitAudioPaper({
 							? "rgba(100, 100, 100, .1)"
 							: "transparent",
 					}}>
-					<div className={styles.number_50px}>
-						<div className={styles.number_deco}>{trackNumber}</div>
-					</div>
-					<div className={styles.name_button_div}>
-						<div className={styles.name_container}>
-							<div className={styles.elipse_text}>
-								{forkOpen ? "Change Audio File" : audioName}
-							</div>
-						</div>
-						<div className={styles.change_button}>
+					<div
+						className={styles.name_button_div}
+						style={{
+							justifyContent: forkOpen ? "center" : "flex-start",
+						}}>
+						<div className={styles.elipse_text}>
+							{forkOpen ? "Change Audio File" : audioName}
 							<Button
+								sx={{
+									position: "absolute",
+									right: "5px",
+								}}
 								disabled={disabled}
 								onClick={() => setForkOpen(forkOpen ? false : true)}
 								variant="outlined">
@@ -66,6 +67,7 @@ function PerformerTicketSubmitAudioPaper({
 					{forkOpen ? (
 						<>
 							<Button
+								size="large"
 								disabled={hasNoAudioToPickFrom || disabled}
 								startIcon={<QueueMusicRounded />}
 								onClick={() => setSelectFromSongOpen(Number(trackNumber))}
@@ -73,6 +75,7 @@ function PerformerTicketSubmitAudioPaper({
 								{"Select From my songs"}
 							</Button>
 							<Button
+								size="large"
 								disabled={disabled}
 								onClick={() => setAddNewOpen(Number(trackNumber))}
 								startIcon={<AddRounded />}
@@ -93,26 +96,22 @@ function PerformerTicketSubmitAudioPaper({
 		return (
 			<>
 				<div className={styles.top_div}>
-					<div className={styles.number_50px}>
-						<div className={styles.number_deco}>{trackNumber}</div>
-					</div>
-					<div className={styles.upload_audio_div}>
-						<div className={styles.name_container}>
-							<div className={styles.elipse_text}>Upload Audio File</div>
-						</div>
-						<div className={styles.change_button}></div>
+					<div className={styles.name_button_div}>
+						<div className={styles.elipse_text}>Upload Audio File</div>
 					</div>
 				</div>
 				<DividerH />
 				<div className={styles.player_wrapper}>
 					<Button
+						size="large"
 						disabled={hasNoAudioToPickFrom || disabled}
 						startIcon={<QueueMusicRounded />}
 						onClick={() => setSelectFromSongOpen(Number(trackNumber))}
 						variant="outlined">
-						{"Select From my songs"}
+						Select From my songs
 					</Button>
 					<Button
+						size="large"
 						disabled={disabled}
 						onClick={() => setAddNewOpen(Number(trackNumber))}
 						startIcon={<AddRounded />}

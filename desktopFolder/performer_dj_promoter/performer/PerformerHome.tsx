@@ -73,6 +73,12 @@ function PerformerHome({
 				<SplashPage />
 			) : (
 				<>
+					{dateOpened && openSpecificEventId ? (
+						<PerformerEventDateModalV2
+							specificIdfromParams={openSpecificEventId}
+							isFromTicketsPage
+						/>
+					) : null}
 					<HomeBarV2 hasProfile hasAccountAlertsSection>
 						<div
 							style={{
@@ -100,12 +106,6 @@ function PerformerHome({
 							maxHeight: "calc(100vh - 70px)",
 							position: "relative",
 						}}>
-						{dateOpened && openSpecificEventId ? (
-							<PerformerEventDateModalV2
-								specificIdfromParams={openSpecificEventId}
-								isFromTicketsPage
-							/>
-						) : null}
 						{performerPage === 0 ? (
 							<PerformerFollowingPage />
 						) : performerPage === 1 ? (

@@ -10,6 +10,8 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { RootState } from "@/app/LocalizationProviderHelper";
 import { setViewUserInfoModalSlice } from "@/store/viewUserInfoModalSlice";
+import AvatarSimple from "../AvatarSimple";
+import { CampaignRounded, AlbumRounded } from "@mui/icons-material";
 
 interface PersonRow {
 	name: string;
@@ -27,6 +29,7 @@ interface PersonRow {
 		IG?: string;
 		Link?: string;
 	} | null;
+	inputHeight: string;
 }
 
 function PersonRow({
@@ -38,8 +41,11 @@ function PersonRow({
 	cameFrom,
 	userSub,
 	userInfo,
+	inputHeight,
 }: PersonRow) {
 	const dispatch = useDispatch();
+
+	const typeToString = promoter ? "promoter" : "dj";
 
 	const [onHover, setOnHover] = useState(false);
 
@@ -60,7 +66,11 @@ function PersonRow({
 		);
 	}
 	return (
-		<div className={styles.main_wrap}>
+		<div
+			className={styles.main_wrap}
+			style={{
+				height: inputHeight,
+			}}>
 			<div
 				className={styles.paper_div}
 				onMouseEnter={() => setOnHover(true)}
@@ -71,10 +81,32 @@ function PersonRow({
 					style={{
 						backgroundColor: onHover ? "rgba(0, 0, 0, .2)" : "transparent",
 					}}>
-					<AvatarAspectBadge promoter={promoter} dj={dj} id={id} />
-					<div className={styles.person_left_side}>
+					<div
+						className={styles.pic_div}
+						style={{
+							height: inputHeight,
+							width: inputHeight,
+						}}>
+						<AvatarSimple type={typeToString} id={id} username={name} ninety />
+					</div>
+
+					<div
+						className={styles.person_left_side}
+						style={{
+							width: `calc(100% - ${inputHeight})`,
+						}}>
 						<div className={styles.person_name_div}>{name}</div>
 						<div className={styles.person_type_div}>
+							{dj ? (
+								<AlbumRounded
+									sx={{ marginRight: "3px", height: "20px", width: "20px" }}
+								/>
+							) : null}{" "}
+							{promoter ? (
+								<CampaignRounded
+									sx={{ marginRight: "3px", height: "20px", width: "20px" }}
+								/>
+							) : null}{" "}
 							{promoter ? "Promoter" : "DJ"}
 						</div>
 					</div>

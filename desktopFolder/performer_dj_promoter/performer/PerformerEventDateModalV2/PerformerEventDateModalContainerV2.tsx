@@ -40,7 +40,7 @@ function PerformerEventDateModalContainerV2({
 
 	function handleClose() {
 		if (isFromTicketsPage) {
-			router.push("/performer/my_events");
+			router.push("/performer");
 		} else {
 			router.push(`/event/${eventName}`);
 		}

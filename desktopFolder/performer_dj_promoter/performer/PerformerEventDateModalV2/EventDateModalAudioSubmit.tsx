@@ -2,7 +2,7 @@
 
 import React from "react";
 import styles from "./styles.module.css";
-import { Divider } from "@mui/material";
+import { Divider, IconButton, Button } from "@mui/material";
 import PerformerTicketSubmitAudioPaper from "../PerformerTicketSubmitAudioPaper";
 import { setSelectFromExisting } from "@/store/performerSelectFromExistingModalSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,12 +12,19 @@ import {
 	formatMMSS,
 	timeStringToSeconds,
 } from "@/generic_functions/time_formaters";
+import {
+	CloseRounded,
+	ArrowBackIosRounded,
+	CheckRounded,
+} from "@mui/icons-material";
 
 interface EventDateModalAudioSubmitProps {
 	specificEventId: number;
 	submittedAudio: DateModalStateType["submitted_audio"];
 	allowedLength: string;
 	tracksPerPerformer: number;
+	handleClose: () => void;
+	handleBack: () => void;
 }
 
 function EventDateModalAudioSubmit({
@@ -25,6 +32,8 @@ function EventDateModalAudioSubmit({
 	submittedAudio,
 	allowedLength,
 	tracksPerPerformer,
+	handleClose,
+	handleBack,
 }: EventDateModalAudioSubmitProps) {
 	const dispatch = useDispatch();
 
@@ -68,28 +77,46 @@ function EventDateModalAudioSubmit({
 		);
 	}
 
+	const audioIsSubmitted = submittedAudio ? submittedAudio[1] : null;
+
 	return (
 		<>
-			<div className={styles.submitted_audio_header}>
-				<div className={styles.submitted_title}>Submitted Audio Files</div>
-				<div className={styles.audio_time_div}>
-					{`Allowed Time: ${parsedAllowedTime} / Time Used: ${usedTime}`}
-				</div>
-				<div
-					className={styles.divider_div}
-					style={{ position: "absolute", bottom: "0px" }}>
-					<Divider variant="middle" flexItem />
-				</div>
+			<div className={styles.upload_audio_header}>
+				<IconButton
+					onClick={handleClose}
+					color="secondary"
+					sx={{
+						height: "35px",
+						width: "35px",
+						marginRight: "5px",
+						position: "absolute",
+						right: "5px",
+					}}>
+					<CloseRounded sx={{ height: "35px", width: "35px" }} />
+				</IconButton>
 			</div>
-			<div className={styles.audio_scroll}>
-				<PerformerTicketSubmitAudioPaper
-					setSelectFromSongOpen={() => handleSetSelectFromSongOpen(1)}
-					setAddNewOpen={() => handleAddNewOpen(1)}
-					key={1}
-					trackNumber={String(1)}
-					payload={submittedAudio ? submittedAudio[1] : null}
-				/>
-			</div>
+			<div
+				className={
+					styles.allowed_time
+				}>{`Allowed Time: ${parsedAllowedTime}`}</div>
+			<PerformerTicketSubmitAudioPaper
+				setSelectFromSongOpen={() => handleSetSelectFromSongOpen(1)}
+				setAddNewOpen={() => handleAddNewOpen(1)}
+				key={1}
+				trackNumber={String(1)}
+				payload={submittedAudio ? submittedAudio[1] : null}
+			/>
+			<Button
+				sx={{
+					marginTop: "10px",
+				}}
+				size="large"
+				color={audioIsSubmitted ? "success" : "error"}
+				variant="outlined"
+				onClick={handleBack}
+				startIcon={audioIsSubmitted ? <CheckRounded /> : <CloseRounded />}>
+				{audioIsSubmitted ? "done" : "cancel"}
+			</Button>
 		</>
 	);
 }
