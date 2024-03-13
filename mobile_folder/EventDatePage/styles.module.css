@@ -59,7 +59,7 @@
 }
 .buttons_div {
 	width: 100%;
-	height: 35px;
+	height: 45px;
 	composes: row from "@styl/base_flexbox.module.css";
 }
 .desc_div {
@@ -70,9 +70,12 @@
 .promoter_dj_row {
 	margin-top: 7.5px;
 	width: 100%;
-	height: 70px;
-	min-height: 70px;
-	composes: row_center from "@styl/base_flexbox.module.css";
+	height: 50px;
+	min-height: 50px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-evenly;
 }
 .roster_paper {
 	width: 100%;
@@ -150,15 +153,6 @@
 	border-radius: 10px;
 	overflow: hidden;
 }
-.audio_row_number_50px {
-	height: 45px;
-	width: 45px;
-	min-width: 45px;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: flex-end;
-}
 .audio_row_number_deco {
 	height: 90%;
 	width: 90%;
@@ -169,7 +163,7 @@
 	font-size: 27px;
 }
 .upload_audio_div {
-	width: calc(100% - 45px);
+	width: 100%;
 	height: 100%;
 	composes: row from "@styl/base_flexbox.module.css";
 }
@@ -178,6 +172,7 @@
 	composes: row_center from "@styl/base_flexbox.module.css";
 	width: calc(100% - 95px);
 	overflow: hidden;
+	font-size: 18px;
 }
 .change_button {
 	height: 100%;
@@ -200,10 +195,11 @@
 	margin-bottom: 5px;
 	border-radius: 5px;
 	overflow: hidden;
+	margin-top: 15px;
 }
 .audio_name_button_div {
 	height: 100%;
-	width: calc(100% - 45px);
+	width: 100%;
 	composes: row from "@styl/base_flexbox.module.css";
 }
 .sign_up_in_buy_modal_back {
@@ -217,7 +213,7 @@
 }
 .but_ticket_modal_body {
 	width: 350px;
-	height: 400px;
+	height: 550px;
 	composes: column_center from "@styl/base_flexbox.module.css";
 	border-radius: 5px;
 	background-color: var(--background-default);
@@ -227,4 +223,62 @@
 	color: var(--secondary-main);
 	margin: 5px;
 	font-size: 30px;
+}
+.app_bar_absolute {
+	position: absolute;
+	right: 0px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.bottom_drawer_div {
+	width: 100%;
+	height: 500px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: var(--background-default);
+	position: relative;
+	overflow: visible;
+}
+.bottom_drawer_tab {
+	background-color: var(--background-default);
+	border-radius: 20px 20px 0px 0px;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	right: 0px;
+	height: 20px;
+	top: -20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.select_from_existing_header {
+	z-index: 1000;
+	width: 100%;
+	height: 40px;
+	composes: row_center from "@styl/base_flexbox.module.css";
+	position: relative;
+	font-size: 20px;
+}
+.roster_header {
+	width: 100%;
+	height: 25px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	font-size: 18px;
+}
+.roster_scroll {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: calc(100% - 25px);
+	overflow-x: hidden;
+	overflow-y: scroll;
 }

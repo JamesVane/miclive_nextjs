@@ -7,10 +7,12 @@ import PerformerAddAudio from "@mobi/Performer/PerformerAddAudio";
 
 interface PerformerAddNewAudioToEventModalProps {
 	refreshAudio: () => void;
+	notAModal?: boolean;
 }
 
 function PerformerAddNewAudioToEventModal({
 	refreshAudio,
+	notAModal,
 }: PerformerAddNewAudioToEventModalProps) {
 	const dispatch = useDispatch();
 	const { addNewOpen, specificEventId } = useSelector(
@@ -31,6 +33,7 @@ function PerformerAddNewAudioToEventModal({
 					forTicket
 					specificEventId={specificEventId}
 					addNewOpen={addNewOpen}
+					notAModal={notAModal}
 				/>
 			) : null}
 		</>

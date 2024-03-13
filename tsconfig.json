@@ -30,7 +30,9 @@
 		"**/*.ts",
 		"**/*.tsx",
 		".next/types/**/*.ts",
-		"app/muiprovider.ts"
+		"app/muiprovider.ts",
+		"useWatchableEffect/propWatcher.js",
+		"useWatchableEffect/utils.js"
 	],
 	"exclude": ["node_modules"]
 }

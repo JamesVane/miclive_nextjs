@@ -112,7 +112,6 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
 				flexDirection: "row",
 				alignItems: "center",
 				justifyContent: "center",
-				zIndex: "25",
 			}}>
 			<Box
 				sx={{

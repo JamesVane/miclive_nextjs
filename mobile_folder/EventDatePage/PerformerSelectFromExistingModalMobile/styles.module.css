@@ -17,25 +17,33 @@
 }
 .audio_rows_scroll {
 	width: 100%;
-	height: calc(100% - 50px);
+	height: calc(100%);
+	min-height: calc(100%);
+	max-height: calc(100%);
 	composes: column from "@styl/base_flexbox.module.css";
 	overflow-x: hidden;
-	overflow-y: auto;
+	overflow-y: scroll;
 }
 .audio_row_main {
 	margin-top: 10px;
 	width: calc(100% - 10px);
 	height: 102px;
 	min-height: 102px;
-	composes: column from "@styl/base_flexbox.module.css";
-	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	background-color: black;
 	border-radius: 10px;
+	z-index: 550;
 }
 .audio_top {
+	position: relative;
 	width: 100%;
 	height: 50%;
-	composes: row from "@styl/base_flexbox.module.css";
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	z-index: 300;
 }
 .audio_bottom {
 	width: 100%;
@@ -50,15 +58,25 @@
 .audio_name {
 	width: calc(100% - 100px);
 	height: 100%;
-	composes: row_center from "@styl/base_flexbox.module.css";
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
 	font-size: 18px;
-	overflow: hidden;
+	z-index: 300;
+	position: relative;
 }
 .select_button {
 	height: 100%;
 	width: 100px;
-	composes: row_center from "@styl/base_flexbox.module.css";
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	z-index: 300;
+	position: relative;
 }
+
 .elipse_text {
 	white-space: nowrap;
 	overflow: hidden;
@@ -66,9 +84,20 @@
 }
 .audio_paper_div {
 	width: 100%;
-	height: 75%;
+	height: 100%;
+	max-height: 100%;
 	background-color: var(--background-default);
-	border-radius: 5px 5px 0px 0px;
 	overflow: hidden;
-	composes: column from "@styl/base_flexbox.module.css";
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	position: absolute;
+}
+.loader_div {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }

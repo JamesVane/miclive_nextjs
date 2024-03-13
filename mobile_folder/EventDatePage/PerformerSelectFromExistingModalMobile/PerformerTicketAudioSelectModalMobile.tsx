@@ -9,10 +9,10 @@ import { getPerformerProfileAudioKeys } from "@/api_functions/getPerformerProfil
 import { setPerformerAudioKey } from "@/store/performerAudioKeysStore";
 import { PostPerformerChangeSubmittedAudioFromExisting } from "@/api_functions/PostPerformerChangeSubmittedAudioFromExisting";
 import { timeStringToSeconds } from "@/generic_functions/time_formaters";
-import { IconButton, Divider } from "@mui/material";
-import { CloseRounded } from "@mui/icons-material";
+import { Button, Divider } from "@mui/material";
+import { ArrowBackIosNewRounded } from "@mui/icons-material";
 import styles from "./styles.module.css";
-import SplashPage from "@/SplashPage";
+import { Triangle } from "react-loader-spinner";
 import PerformerTicketAudioSelectRowMobile from "./PerformerTicketAudioSelectRowMobile";
 
 interface PerformerTicketAudioSelectModalMobileProps {
@@ -73,65 +73,68 @@ function PerformerTicketAudioSelectModalMobile({
 	}
 
 	async function initAudioKeys() {
+		setIsLoading(true);
 		const currentUser = await Auth.currentAuthenticatedUser();
 		const requestPerformerRoleId = currentUser.attributes["custom:RoleId"];
 		const roleIdAsString: string =
 			typeof requestPerformerRoleId === "string"
 				? requestPerformerRoleId
 				: requestPerformerRoleId.toString();
-		getPerformerProfileAudioKeys(roleIdAsString).then((res) => {
-			dispatch(setPerformerAudioKey(res));
-		});
+		const performerAudioKeys = await getPerformerProfileAudioKeys(
+			roleIdAsString
+		);
+		dispatch(setPerformerAudioKey(performerAudioKeys));
+		setIsLoading(false);
 	}
 
 	useEffect(() => {
-		initAudioKeys().then(() => setIsLoading(false));
+		initAudioKeys();
 	}, []);
 
 	return (
 		<div className={styles.modal_wrap}>
+			<div className={styles.select_from_existing_header}>
+				Select Song
+				<Button
+					startIcon={<ArrowBackIosNewRounded />}
+					size="large"
+					sx={{
+						position: "absolute",
+						left: "0px",
+					}}
+					color="secondary"
+					onClick={() => setSelectFromSongOpen()}>
+					back
+				</Button>
+			</div>
+			<div className={styles.divider_div}>
+				<Divider variant="middle" flexItem />
+			</div>
 			{isLoading ? (
-				<SplashPage />
+				<div className={styles.loader_div}>
+					<Triangle color="#888661" height={100} width={100} />
+				</div>
 			) : (
-				<>
-					<div className={styles.select_from_existing_header}>
-						Select Song
-						<IconButton
-							onClick={() => setSelectFromSongOpen()}
-							sx={{
-								position: "absolute",
-								right: "0px",
-								top: "0px",
-								height: "40px",
-								width: "40px",
-							}}>
-							<CloseRounded sx={{ height: "35px", width: "35px" }} />
-						</IconButton>
-					</div>
-					<div className={styles.divider_div}>
-						<Divider variant="middle" flexItem />
-					</div>
-					<div className={styles.audio_rows_scroll}>
-						{audioKeysObject &&
-							audioKeysObject.map((audioKey) => {
-								return (
-									<PerformerTicketAudioSelectRowMobile
-										isTooLong={
-											allowedLength <
-											totalAudioLength -
-												currentSongLength +
-												timeStringToSeconds(audioKey.audio_length)
-												? true
-												: false
-										}
-										selectExistingAudio={selectExistingAudio}
-										key={audioKey.audio_id}
-										audioKey={audioKey}
-									/>
-								);
-							})}
-					</div>
-				</>
+				<div className={styles.audio_rows_scroll}>
+					{audioKeysObject &&
+						audioKeysObject.map((audioKey) => {
+							return (
+								<PerformerTicketAudioSelectRowMobile
+									isTooLong={
+										allowedLength <
+										totalAudioLength -
+											currentSongLength +
+											timeStringToSeconds(audioKey.audio_length)
+											? true
+											: false
+									}
+									selectExistingAudio={selectExistingAudio}
+									key={audioKey.audio_id}
+									audioKey={audioKey}
+								/>
+							);
+						})}
+				</div>
 			)}
 		</div>
 	);

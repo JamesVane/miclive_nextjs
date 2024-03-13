@@ -29,6 +29,7 @@ interface UploadAudioProps {
 	specificEventId?: number;
 	addNewOpen?: number;
 	refreshTickets?: () => void;
+	notAModal?: boolean;
 }
 
 function PerformerAddAudio({
@@ -37,6 +38,7 @@ function PerformerAddAudio({
 	specificEventId,
 	addNewOpen,
 	refreshTickets,
+	notAModal,
 }: UploadAudioProps) {
 	const dispatch = useDispatch();
 	const [audioFile, setAudioFile] = useState<File | null>(null);
@@ -172,7 +174,9 @@ function PerformerAddAudio({
 
 	return (
 		<div
-			className={styles.main_wrapper}
+			className={
+				notAModal ? styles.main_wrapper_for_drawer : styles.main_wrapper
+			}
 			onClick={(event) => {
 				handleClickOff(event);
 			}}>

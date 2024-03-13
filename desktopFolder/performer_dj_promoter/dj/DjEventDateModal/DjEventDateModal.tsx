@@ -126,6 +126,7 @@ function DjEventDateModal({
 						tagline={dateDataObj.promoter.promoter_tagline}
 						userSub={dateDataObj.promoter.promoter_sub}
 						promoter
+						inputHeight="100px"
 					/>
 				</div>
 				{!isDjForDate && dateDataObj.dj?.dj_id ? (
@@ -137,6 +138,7 @@ function DjEventDateModal({
 							tagline={dateDataObj.dj.dj_tagline}
 							userSub={dateDataObj.dj.dj_sub}
 							dj
+							inputHeight="100px"
 						/>
 					</div>
 				) : null}

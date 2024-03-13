@@ -1,3 +1,3 @@
 UPDATE specific_event
-SET event_has_started = TRUE
+SET has_ended = TRUE
 WHERE specific_event_id = 156;

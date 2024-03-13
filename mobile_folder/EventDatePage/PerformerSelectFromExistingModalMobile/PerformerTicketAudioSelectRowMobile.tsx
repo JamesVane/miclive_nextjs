@@ -2,7 +2,7 @@
 
 import S3PlaybackWrapper from "@/audioComponents/S3PlaybackWrapper";
 import React from "react";
-import { Button, Divider } from "@mui/material";
+import { Button, Box } from "@mui/material";
 import styles from "./styles.module.css";
 
 interface PerformerTicketAudioSelectRowMobileProps {
@@ -27,7 +27,7 @@ function PerformerTicketAudioSelectRowMobile({
 	isTooLong,
 }: PerformerTicketAudioSelectRowMobileProps) {
 	return (
-		<div className={styles.audio_row_main}>
+		<Box className={styles.audio_row_main}>
 			<div className={styles.audio_top}>
 				<div className={styles.audio_name}>
 					<div className={styles.elipse_text}>{audioKey.name}</div>
@@ -50,7 +50,7 @@ function PerformerTicketAudioSelectRowMobile({
 					performerId={audioKey.performer_id.toString()}
 				/>
 			</div>
-		</div>
+		</Box>
 	);
 }
 

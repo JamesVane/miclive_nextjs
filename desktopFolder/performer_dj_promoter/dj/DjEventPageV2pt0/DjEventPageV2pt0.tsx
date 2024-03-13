@@ -95,6 +95,7 @@ function DjEventPageV2pt0({
 										tagline={pageData.promoter.promoter_tagline}
 										userSub={pageData.promoter.promoter_sub}
 										promoter
+										inputHeight="120px"
 									/>
 								</div>
 							</div>

@@ -183,6 +183,7 @@ function NewEventPage({
 											tagline={promoterData.promoter_tagline}
 											userSub={promoterData.promoter_sub}
 											promoter
+											inputHeight="120px"
 										/>
 									) : null}
 								</div>
@@ -195,6 +196,7 @@ function NewEventPage({
 											tagline={djData.dj_tagline}
 											userSub={djData.dj_sub}
 											dj
+											inputHeight="120px"
 										/>
 									) : null}
 								</div>

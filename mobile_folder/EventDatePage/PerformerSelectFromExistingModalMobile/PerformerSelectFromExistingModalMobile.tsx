@@ -9,6 +9,7 @@ import {
 } from "@/store/performerSelectFromExistingModalSlice";
 import PerformerTicketAudioSelectModalMobile from "./PerformerTicketAudioSelectModalMobile";
 import styles from "./styles.module.css";
+import { Box } from "@mui/material";
 
 interface PerformerSelectFromExistingModalMobileProps {
 	refreshAudio: () => void;
@@ -47,30 +48,16 @@ function PerformerSelectFromExistingModalMobile({
 	return (
 		<>
 			{selectFromSongOpen !== 0 ? (
-				<div
-					onClick={handleClickOutside}
-					style={{
-						width: "100%",
-						height: "100%",
-						display: "flex",
-						flexDirection: "column",
-						justifyContent: "flex-end",
-						alignItems: "center",
-						position: "fixed",
-						zIndex: "5000",
-						backgroundColor: "rgba(0,0,0,0.5)",
-					}}>
-					<div className={styles.audio_paper_div} onClick={handleClickInside}>
-						<PerformerTicketAudioSelectModalMobile
-							specificEventId={specificEventId}
-							currentSongLength={currentSongLength}
-							totalAudioLength={totalAudioLength}
-							setSelectFromSongOpen={handleClose}
-							selectFromSongOpen={selectFromSongOpen}
-							allowedLength={allowedLength}
-						/>
-					</div>
-				</div>
+				<Box className={styles.audio_paper_div} onClick={handleClickInside}>
+					<PerformerTicketAudioSelectModalMobile
+						specificEventId={specificEventId}
+						currentSongLength={currentSongLength}
+						totalAudioLength={totalAudioLength}
+						setSelectFromSongOpen={handleClose}
+						selectFromSongOpen={selectFromSongOpen}
+						allowedLength={allowedLength}
+					/>
+				</Box>
 			) : null}
 		</>
 	);

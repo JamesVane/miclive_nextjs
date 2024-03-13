@@ -4,7 +4,7 @@ import React from "react";
 import styles from "./styles.module.css";
 import EventDateSubmittedAudioPaper from "./EventDateSubmittedAudioPaper";
 import { DateModalStateType } from "./EventDateReducer";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
 	formatMMSS,
 	timeStringToSeconds,
@@ -12,12 +12,16 @@ import {
 import { setSelectFromExisting } from "@/store/performerSelectFromExistingModalSlice";
 import { setAddNewAudioToEvent } from "@/store/performerAddNewAudioToEventSlice";
 import DividerH from "@/universalComponents/DividerH";
+import PerformerSelectFromExistingModalMobile from "./PerformerSelectFromExistingModalMobile";
+import PerformerAddNewAudioToEventModal from "./PerformerAddNewAudioToEventModal";
+import { RootState } from "@/app/LocalizationProviderHelper";
 
 interface EventDateAudioSubmitProps {
 	specificEventId: number;
 	submittedAudio: DateModalStateType["submitted_audio"];
 	allowedLength: string;
 	tracksPerPerformer: number;
+	refreshAudio: () => void;
 }
 
 function EventDateAudioSubmit({
@@ -25,8 +29,17 @@ function EventDateAudioSubmit({
 	submittedAudio,
 	allowedLength,
 	tracksPerPerformer,
+	refreshAudio,
 }: EventDateAudioSubmitProps) {
 	const dispatch = useDispatch();
+
+	const { selectFromSongOpen } = useSelector(
+		(state: RootState) => state.performerSelectFromExistingModal
+	);
+
+	const { addNewOpen } = useSelector(
+		(state: RootState) => state.performerAddNewAudioToEvent
+	);
 
 	function computeTotalSubmittedAudioTimeFromSubmittedAudio(): number {
 		if (submittedAudio) {
@@ -69,27 +82,34 @@ function EventDateAudioSubmit({
 	}
 
 	return (
-		<div className={styles.audio_main_div}>
-			<div className={styles.audio_time}>
-				Time Used:
-				<div className={styles.time_used_deco}>
-					<div className={styles.primary_color}>{usedTime}</div>/
-					<div className={styles.secondary_color}>{parsedAllowedTime}</div>
-				</div>
-			</div>
-			<DividerH />
-			{Array.from({ length: tracksPerPerformer }, (_, index) => (
-				<>
+		<>
+			<PerformerSelectFromExistingModalMobile
+				refreshAudio={() => refreshAudio()}
+			/>
+			<PerformerAddNewAudioToEventModal
+				notAModal
+				refreshAudio={() => refreshAudio()}
+			/>
+			{selectFromSongOpen === 0 && !addNewOpen ? (
+				<div className={styles.audio_main_div}>
+					<div className={styles.audio_time}>
+						Time Used:
+						<div className={styles.time_used_deco}>
+							<div className={styles.primary_color}>{usedTime}</div>/
+							<div className={styles.secondary_color}>{parsedAllowedTime}</div>
+						</div>
+					</div>
+					<DividerH />
 					<EventDateSubmittedAudioPaper
-						setSelectFromSongOpen={() => handleSetSelectFromSongOpen(index)}
-						setAddNewOpen={() => handleAddNewOpen(index)}
-						key={index}
-						trackNumber={String(index)}
-						payload={submittedAudio ? submittedAudio[index] : null}
+						setSelectFromSongOpen={() => handleSetSelectFromSongOpen(1)}
+						setAddNewOpen={() => handleAddNewOpen(1)}
+						key={1}
+						trackNumber={String(1)}
+						payload={submittedAudio ? submittedAudio[1] : null}
 					/>
-				</>
-			))}
-		</div>
+				</div>
+			) : null}
+		</>
 	);
 }
 

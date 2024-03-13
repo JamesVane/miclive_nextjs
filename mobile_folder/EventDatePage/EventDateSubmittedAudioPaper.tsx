@@ -37,9 +37,6 @@ function EventDateSubmittedAudioPaper({
 							? "rgba(100, 100, 100, .1)"
 							: "transparent",
 					}}>
-					<div className={styles.audio_row_number_50px}>
-						<div className={styles.audio_row_number_deco}>{trackNumber}</div>
-					</div>
 					<div className={styles.audio_name_button_div}>
 						<div className={styles.audio_name_container}>
 							<div className={styles.elipse_text}>
@@ -91,9 +88,6 @@ function EventDateSubmittedAudioPaper({
 		return (
 			<>
 				<div className={styles.audio_row_top_div}>
-					<div className={styles.audio_row_number_50px}>
-						<div className={styles.audio_row_number_deco}>{trackNumber}</div>
-					</div>
 					<div className={styles.upload_audio_div}>
 						<div className={styles.audio_name_container}>
 							<div className={styles.elipse_text}>Upload Audio File</div>
