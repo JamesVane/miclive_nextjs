@@ -18,16 +18,20 @@ function EmailIsNowVerified({ currentEmail }: EmailIsNowVerifiedProps) {
 		try {
 			const user = await Auth.currentAuthenticatedUser({ bypassCache: true });
 			const userType = user.attributes["custom:RoleType"];
-			router.push(`/${userType}`);
+			router.push(`/m/${userType}`);
 		} catch {
-			router.push("/sign_in");
+			router.push("/m/sign_in");
 			return;
 		}
 	}
 
 	return (
 		<div className={styles.main_div}>
-			<div className={styles.verified_page_text}>
+			<div
+				className={styles.verified_page_text}
+				style={{
+					marginTop: "100px",
+				}}>
 				<Box
 					sx={{
 						color: "secondary.main",
@@ -42,19 +46,21 @@ function EmailIsNowVerified({ currentEmail }: EmailIsNowVerifiedProps) {
 					}}>
 					{currentEmail}
 				</Box>
-				<Box
-					sx={{
-						color: "secondary.main",
-					}}>
-					is
-				</Box>
-				<Box
-					sx={{
-						color: "success.main",
-						marginLeft: "5px",
-					}}>
-					verified!
-				</Box>
+				<div className={styles.row_div}>
+					<Box
+						sx={{
+							color: "secondary.main",
+						}}>
+						is
+					</Box>
+					<Box
+						sx={{
+							color: "success.main",
+							marginLeft: "5px",
+						}}>
+						verified!
+					</Box>
+				</div>
 			</div>
 			<div className={styles.verified_page_sub_text}>
 				you can now use your email to change your account phone number.

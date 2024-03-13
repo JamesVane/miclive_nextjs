@@ -2,7 +2,7 @@
 
 import React from "react";
 import styles from "./styles.module.css";
-import { Button, Box } from "@mui/material";
+import { Button, Box, Divider } from "@mui/material";
 import { HomeRounded } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
 import { Auth } from "aws-amplify";
@@ -23,12 +23,11 @@ function EmailIsVerified({
 			const roleType = currentUser.attributes["custom:RoleType"];
 			router.push(`/${roleType}`);
 		} catch {
-			router.push("/sign_in");
+			router.push("/m/sign_in");
 		}
 	}
 
 	const emailLink = `mailto:support@mic.live?subject=Change Account Email&body=Account Phone Number: ${accountPhoneNumber}, Account email: ${currentEmail}`;
-
 	return (
 		<div className={styles.main_div}>
 			<div
@@ -36,7 +35,8 @@ function EmailIsVerified({
 				style={{
 					marginBottom: "10px",
 					fontWeight: "bold",
-					fontSize: "23px",
+					fontSize: "20px",
+					marginTop: "150px",
 				}}>
 				<Box
 					sx={{
@@ -61,9 +61,16 @@ function EmailIsVerified({
 			</div>
 			<div className={styles.already_verified_deco}>
 				<div className={styles.to_change_email}>
-					To change your account email:
+					To change your account email
 				</div>
-				<div className={styles.already_verified_row}>
+				<div className={styles.divider_div}>
+					<Divider variant="middle" flexItem />
+				</div>
+				<div
+					className={styles.already_verified_row}
+					style={{
+						flexDirection: "row",
+					}}>
 					<Box
 						sx={{
 							color: "secondary.main",
@@ -78,15 +85,12 @@ function EmailIsVerified({
 						}}>
 						<a href={emailLink}>support@mic.live</a>
 					</Box>
-					<Box
-						sx={{
-							color: "secondary.main",
-						}}>
-						to send a support ticket
-					</Box>
+					<Box>to</Box>
 				</div>
 				<div className={styles.already_verified_row}>
-					<Box>and we will get back to you within 12 hours</Box>
+					<Box>
+						send a suport ticket and we will get back to you within 12 hours
+					</Box>
 				</div>
 			</div>
 

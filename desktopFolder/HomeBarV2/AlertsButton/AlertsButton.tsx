@@ -88,13 +88,12 @@ function AlertsButton({
 								/>
 							</IconButton>
 							<div className={styles.alert_open_title}>
-								{" "}
 								<NotificationImportantRounded
 									sx={{
 										height: "26px",
 										width: "26px",
 									}}
-								/>{" "}
+								/>
 								Account Actions
 							</div>
 							<div className={styles.divider_div}>
@@ -114,7 +113,7 @@ function AlertsButton({
 									</Button>
 								</div>
 							)}
-							{emailIsConfirmed ? null : (
+							{!hasEmail || emailIsConfirmed ? null : (
 								<div className={styles.alert_action_row}>
 									<Button
 										onClick={handleVerifyEmail}
