@@ -2,19 +2,19 @@
 
 import { useState, useEffect } from "react";
 import SettingsModal from "./SettingsModal";
-import styles from "./styles.module.css";
 import { setCurrentSub as setCurrentSubSlice } from "@/store/currentSubStore";
 import { Auth } from "aws-amplify";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { unformatPhoneNumber } from "@/generic_functions/formatPhoneNumber";
+import styles from "./styles.module.css";
 import { Triangle } from "react-loader-spinner";
 
 interface SettingsModalContainerProps {
-	close: () => void;
+	closeModal: () => void;
 }
 
-function SettingsModalContainer({ close }: SettingsModalContainerProps) {
+function SettingsModalContainer({ closeModal }: SettingsModalContainerProps) {
 	function prettifyPhone(phoneNumber: string): string {
 		if (phoneNumber.length !== 11 || !phoneNumber.startsWith("1")) {
 			throw new Error("Invalid phone number format");
@@ -40,30 +40,30 @@ function SettingsModalContainer({ close }: SettingsModalContainerProps) {
 			dispatch(setCurrentSubSlice(null));
 			localStorage.clear();
 			sessionStorage.clear();
-			router.push("/");
+			router.push("/m");
 		} catch (error) {
 			console.log("error signing out: ", error);
 		}
 	}
 
 	function handleVerifyEmail() {
-		router.push("/confirm_email");
+		router.push("/m/confirm_email");
 	}
 
 	function handleChangeEmail() {
-		router.push("/change_email");
+		router.push("/m/change_email");
 	}
 
 	function handleChangePhone() {
-		router.push("/change_phone");
+		router.push("/m/change_phone");
 	}
 
 	function handleChangePassword() {
-		router.push("/forgot_password?frompath=profile");
+		router.push("/m/forgot_password?frompath=profile");
 	}
 
 	function handleSetPassword() {
-		router.push("/set_password?frompath=profile");
+		router.push("/m/set_password?frompath=profile");
 	}
 
 	useEffect(() => {
@@ -72,7 +72,7 @@ function SettingsModalContainer({ close }: SettingsModalContainerProps) {
 			try {
 				const user = await Auth.currentAuthenticatedUser({ bypassCache: true });
 			} catch {
-				router.push("/sign_in");
+				router.push("/m/sign_in");
 				return;
 			}
 			const user = await Auth.currentAuthenticatedUser({ bypassCache: true });
@@ -107,21 +107,19 @@ function SettingsModalContainer({ close }: SettingsModalContainerProps) {
 			: "";
 
 	return (
-		<div className={styles.main_div} onClick={close}>
+		<div onClick={closeModal} className={styles.settings_overlay_modal}>
 			<div
-				className={styles.settings_modal_paper}
-				onClick={(e) => e.stopPropagation()}>
+				className={styles.settings_paper}
+				onClick={(e) => {
+					e.stopPropagation();
+				}}>
 				{isLoading ? (
 					<div className={styles.loading_div}>
 						<Triangle color="#888661" height={200} width={200} />
 					</div>
 				) : (
 					<SettingsModal
-						close={close}
-						prettyPhoneNumber={prettyPhoneNumber}
-						accountHasemailSet={accountHasemailSet}
-						currentEmail={currentEmail}
-						currentEmailIsVerified={currentEmailIsVerified}
+						closeModal={closeModal}
 						handleLogOut={handleLogOut}
 						handleChangeEmail={handleChangeEmail}
 						handleChangePhone={handleChangePhone}
@@ -129,6 +127,10 @@ function SettingsModalContainer({ close }: SettingsModalContainerProps) {
 						handleVerifyEmail={handleVerifyEmail}
 						passwordIsSet={passwordIsSet}
 						handleSetPassword={handleSetPassword}
+						prettyPhoneNumber={prettyPhoneNumber}
+						accountHasemailSet={accountHasemailSet}
+						currentEmail={currentEmail}
+						currentEmailIsVerified={currentEmailIsVerified}
 					/>
 				)}
 			</div>
