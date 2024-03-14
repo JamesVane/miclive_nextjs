@@ -1,7 +1,7 @@
 /** @format */
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import ForgotPasswordPage from "./ForgotPasswordPage";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/app/LocalizationProviderHelper";
@@ -24,7 +24,7 @@ import {
 import { Auth } from "aws-amplify";
 import ForgotPasswordConfirm from "./ForgotPasswordConfirm";
 import { debounce } from "lodash";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import PasswordResetSuccessPage from "./PasswordResetSuccessPage";
 
 interface ForgotPasswordContainerProps {
@@ -36,6 +36,11 @@ function ForgotPasswordContainer({
 }: ForgotPasswordContainerProps) {
 	const router = useRouter();
 	const dispatch = useDispatch();
+	const searchParams = useSearchParams();
+	const pathname = usePathname();
+
+	const fromPathRaw = searchParams.get("frompath");
+	const fromPathString = fromPathRaw ? fromPathRaw : "";
 
 	const [isSubmitting, setIsSubmitting] = React.useState(false);
 	const [snackMessage, setSnackMessage] = React.useState("");
@@ -161,7 +166,9 @@ function ForgotPasswordContainer({
 		dispatch(setForgotPasswordStep(1));
 	}
 	async function handleExit() {
-		if (settingFromNoPassword) {
+		if (fromPathString !== "") {
+			router.push(`/${fromPathString}`);
+		} else if (settingFromNoPassword) {
 			try {
 				const currentUser = await Auth.currentAuthenticatedUser();
 				const roleType = currentUser.attributes["custom:RoleType"];

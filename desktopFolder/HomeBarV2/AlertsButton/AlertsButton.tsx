@@ -17,14 +17,12 @@ interface AlertsButtonProps {
 	passwordIsSet: boolean;
 	emailIsConfirmed: boolean;
 	hasEmail: boolean;
-	onProfilePage: boolean;
 }
 
 function AlertsButton({
 	passwordIsSet,
 	emailIsConfirmed,
 	hasEmail,
-	onProfilePage,
 }: AlertsButtonProps) {
 	const router = useRouter();
 	const [isOpened, setIsOpened] = useState(false);
@@ -67,7 +65,7 @@ function AlertsButton({
 					<div
 						className={styles.alerts_opened_main_div}
 						style={{
-							right: onProfilePage ? "160px" : "80px",
+							right: "80px",
 						}}>
 						<div className={styles.innter_div_alerts}>
 							<IconButton

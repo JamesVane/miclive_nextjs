@@ -7,11 +7,7 @@ import { useRouter } from "next/navigation";
 import { Button, LinearProgress } from "@mui/material";
 import { NotificationImportantRounded } from "@mui/icons-material";
 
-interface AlertsButtonContainerProps {
-	onProfilePage: boolean;
-}
-
-function AlertsButtonContainer({ onProfilePage }: AlertsButtonContainerProps) {
+function AlertsButtonContainer() {
 	const router = useRouter();
 
 	const [hasEmail, setHasEmail] = useState(false);
@@ -89,7 +85,6 @@ function AlertsButtonContainer({ onProfilePage }: AlertsButtonContainerProps) {
 					passwordIsSet={passwordIsSet}
 					emailIsConfirmed={emailIsConfirmed}
 					hasEmail={hasEmail}
-					onProfilePage={onProfilePage}
 				/>
 			)}
 		</>

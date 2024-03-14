@@ -1,0 +1,82 @@
+/** @format */
+
+.main_div {
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.8);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	position: fixed;
+	z-index: 5000;
+	top: 0px;
+	left: 0px;
+}
+.settings_modal_paper {
+	width: 475px;
+	height: 550px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	border-radius: 5px;
+	overflow: hidden;
+	background-color: var(--background-default);
+	position: relative;
+}
+.modal_header {
+	width: 100%;
+	height: 50px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	font-size: 20px;
+}
+.settings_row {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding-left: 10px;
+	min-height: 40px;
+}
+.setgings_row_left {
+	width: 37%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	color: var(--primary-main);
+}
+.settings_row_right {
+	width: 63%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	color: var(--secondary-main);
+}
+.divider_vert {
+	width: 4px;
+	height: 40px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	margin-right: 10px;
+}
+.loading_div {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.divider_horiz {
+	width: 100%;
+	height: 2px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
