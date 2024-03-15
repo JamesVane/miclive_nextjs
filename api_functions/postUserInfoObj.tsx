@@ -28,7 +28,7 @@ export async function postUserInfoObj(
 		});
 
 		// Return the response data
-		return response.data;
+		return response;
 	} catch (error) {
 		console.error("Error updating links:", error);
 		throw error;

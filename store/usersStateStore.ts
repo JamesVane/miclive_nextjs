@@ -27,8 +27,14 @@ const usersStateSlice = createSlice({
 		setUsersStateProfile: (state, action: PayloadAction<UsersState>) => {
 			return action.payload;
 		},
+		setUsername: (state, action: PayloadAction<string>) => {
+			if (state) {
+				state.username = action.payload;
+			}
+		}
 	},
 });
 
-export const { setUsersStateProfile } = usersStateSlice.actions;
+export const { setUsersStateProfile, setUsername } = usersStateSlice.actions;
 export default usersStateSlice.reducer;
+ 

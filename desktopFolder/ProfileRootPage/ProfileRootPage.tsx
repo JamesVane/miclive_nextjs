@@ -1,7 +1,7 @@
 /** @format */
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import SplashPage from "@/SplashPage";
 import { Auth } from "aws-amplify";
 import { getUserProfile } from "@/api_functions/getUserProfile";
@@ -10,15 +10,46 @@ import { setUsersStateProfile } from "@/store/usersStateStore";
 import HomeProfilePaper from "./HomeProfilePaper";
 import NotAuthProfilePage from "./NotAuthProfilePage";
 import styles from "./styles.module.css";
+import ProfileEditing from "./ProfileEditing";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 
 function ProfileRootPage() {
 	const dispatch = useDispatch();
+	const router = useRouter();
+	const searchParams = useSearchParams();
+	const pathname = usePathname();
+
+	const editingIsOpen = searchParams.get("editing")
+		? searchParams.get("editing") === "true"
+			? true
+			: searchParams.get("editing") === "false"
+			? false
+			: false
+		: false;
+
+	function openEditing() {
+		router.push(pathname + "?" + createQueryString("editing", "true"));
+	}
+
+	function closeEditing() {
+		router.push(pathname + "?" + createQueryString("editing", "false"));
+	}
 
 	const [isLoading, setIsLoading] = useState(true);
 	const [notAuthenticated, setNotAuthenticated] = useState(false);
 	const [userType, setUserType] = useState<
 		"" | "performer" | "promoter" | "dj"
 	>("");
+
+	const createQueryString = useCallback(
+		(name: string, value: string) => {
+			const params = new URLSearchParams(searchParams.toString());
+			params.set(name, value);
+
+			return params.toString();
+		},
+		[searchParams]
+	);
 
 	async function loadProfileInfo() {
 		try {
@@ -49,11 +80,23 @@ function ProfileRootPage() {
 					{notAuthenticated ? (
 						<NotAuthProfilePage />
 					) : (
-						<HomeProfilePaper
-							promoter={userType === "promoter"}
-							performer={userType === "performer"}
-							dj={userType === "dj"}
-						/>
+						<>
+							{editingIsOpen ? (
+								<ProfileEditing
+									promoter={userType === "promoter"}
+									performer={userType === "performer"}
+									dj={userType === "dj"}
+									handleGoBack={closeEditing}
+								/>
+							) : (
+								<HomeProfilePaper
+									handleEdit={openEditing}
+									promoter={userType === "promoter"}
+									performer={userType === "performer"}
+									dj={userType === "dj"}
+								/>
+							)}
+						</>
 					)}
 				</>
 			)}

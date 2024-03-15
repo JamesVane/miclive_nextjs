@@ -221,7 +221,7 @@ function EditProfileContainer({
 		)
 			.then(async (res) => {
 				if (
-					res.message ===
+					res.data.message ===
 					`Updated ${
 						performer ? "performer" : promoter ? "promoter" : "dj"
 					} with id ${userRoleKey}`
@@ -270,7 +270,7 @@ function EditProfileContainer({
 
 		postUserTagline(userType, currentTagline)
 			.then(async (res) => {
-				if (res === 200) {
+				if (res === "Tagline updated successfully") {
 					try {
 						const fetchedUserProfile = await getUserProfile(
 							userType,

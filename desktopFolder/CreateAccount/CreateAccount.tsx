@@ -79,7 +79,9 @@ function CreateAccount({
 	const [isHidden, setIsHidden] = useState(true);
 
 	function handleWhatIsFocused(key: string, value: boolean) {
-		setWhatIsFocused({ ...whatIsFocused, [key]: value });
+		setWhatIsFocused((prev) => {
+			return { ...prev, [key]: value };
+		});
 	}
 
 	const textFieldStyles = {

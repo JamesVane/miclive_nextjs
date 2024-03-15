@@ -124,50 +124,52 @@ function CreateAccountContainer({
 			await setSignUpErrors().then(async () => {
 				if (checkIfNoErrors()) {
 					try {
-						getCheckIfExistingEmailOrUsername(email, username).then(
-							async (res) => {
-								if (res.existingEmail) {
-									dispatch(setEmailErrorSlice("Email already exists"));
-									return;
-								}
-								if (res.existingUsername) {
-									dispatch(setUsernameErrorSlice("Username already exists"));
-									return;
-								}
-								await Auth.signUp({
-									username: `+1${unformatPhoneNumber(phone)}`,
-									password: password,
-									attributes: {
-										phone_number: `+1${unformatPhoneNumber(phone)}`, // E.164 format
-										email: email,
-										"custom:RoleType": userTypeFromParams,
-										"custom:DisplayUsername": username,
-									},
-								})
-									.then(() => {
-										const navigatePath = `/m/confirm/${userTypeFromParams}`;
-
-										router.push(navigatePath);
-									})
-									.catch((err) => {
-										if (err.code === "UsernameExistsException") {
-											deleteAccountIfNotConfirmed(
-												`+1${unformatPhoneNumber(phone)}`
-											).then((res) => {
-												if (res === "yes") {
-													handleSignUp();
-												} else {
-													setSnackMessage(
-														"Account with this phone number already exists"
-													);
-												}
-											});
-										} else {
-											console.error("Error signing up:", err.message);
-										}
-									});
+						const trimmedUsername = username.trim();
+						getCheckIfExistingEmailOrUsername(
+							email,
+							trimmedUsername.toLocaleLowerCase()
+						).then(async (res) => {
+							if (res.existingEmail) {
+								dispatch(setEmailErrorSlice("Email already exists"));
+								return;
 							}
-						);
+							if (res.existingUsername) {
+								dispatch(setUsernameErrorSlice("Username already exists"));
+								return;
+							}
+							await Auth.signUp({
+								username: `+1${unformatPhoneNumber(phone)}`,
+								password: password,
+								attributes: {
+									phone_number: `+1${unformatPhoneNumber(phone)}`, // E.164 format
+									email: email,
+									"custom:RoleType": userTypeFromParams,
+									"custom:DisplayUsername": trimmedUsername,
+								},
+							})
+								.then(() => {
+									const navigatePath = `/m/confirm/${userTypeFromParams}`;
+
+									router.push(navigatePath);
+								})
+								.catch((err) => {
+									if (err.code === "UsernameExistsException") {
+										deleteAccountIfNotConfirmed(
+											`+1${unformatPhoneNumber(phone)}`
+										).then((res) => {
+											if (res === "yes") {
+												handleSignUp();
+											} else {
+												setSnackMessage(
+													"Account with this phone number already exists"
+												);
+											}
+										});
+									} else {
+										console.error("Error signing up:", err.message);
+									}
+								});
+						});
 					} catch (err: any) {
 						if (err.code === "UsernameExistsException") {
 							setSnackMessage("Account with this phone number already exists");

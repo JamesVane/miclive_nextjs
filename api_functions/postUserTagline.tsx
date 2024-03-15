@@ -25,7 +25,7 @@ function validateTagline(tagline: string): [boolean, string] {
 export async function postUserTagline(
 	queryRole: "performer" | "dj" | "promoter",
 	queryPayload: string
-): Promise<number> {
+): Promise<string> {
 	// changed the return type to Promise<number>
 	const [isValid, errorMessage] = validateTagline(queryPayload);
 	if (!isValid) {
