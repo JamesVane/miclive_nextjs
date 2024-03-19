@@ -28,3 +28,19 @@
 	height: 100px;
 	background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), #0f0f0fff);
 }
+.title_box {
+	position: relative;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	color: var(--primary-main);
+}
+.title_underline {
+	width: 100%;
+	position: absolute;
+	bottom: 0px;
+	height: 2px;
+	background-color: var(--primary-main);
+}

@@ -38,7 +38,7 @@ function EventDateListCard({ dateInfo, isUpcoming }: EventDateListCardProps) {
 				isUpcoming ? styles.date_card_div_upcoming : styles.date_card_div_prev
 			}
 			style={{
-				marginTop: dateInfo.performer_has_ticket ? "15px" : "5px",
+				marginTop: "5px",
 			}}
 			onClick={handleClick}>
 			{dateInfo.performer_has_ticket ? (
@@ -57,7 +57,7 @@ function EventDateListCard({ dateInfo, isUpcoming }: EventDateListCardProps) {
 				<div className={styles.date_time_split} style={{ marginLeft: "-15px" }}>
 					<AccessTimeRounded sx={{ marginRight: "5px" }} />
 					{`${formatTimeHour(dateInfo.start_time)} - ${formatTimeHour(
-						dateInfo.start_time
+						dateInfo.end_time
 					)}`}
 				</div>
 			</div>

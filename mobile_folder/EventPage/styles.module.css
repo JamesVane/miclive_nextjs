@@ -151,7 +151,6 @@
 	font-weight: 400;
 }
 .upcoming_prev_divider {
-	margin-top: 10px;
 	height: 45px;
 	min-height: 45px;
 	composes: row from "@styl/base_flexbox.module.css";
@@ -191,7 +190,7 @@
 	height: 20px;
 	width: 30px;
 	position: absolute;
-	top: -10px;
+	top: 0px;
 	right: 0px;
 	background-color: var(--background-paper);
 	composes: row_center from "@styl/base_flexbox.module.css";

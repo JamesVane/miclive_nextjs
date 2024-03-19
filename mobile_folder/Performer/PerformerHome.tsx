@@ -72,15 +72,16 @@ function PerformerHome() {
 				<>
 					{" "}
 					<AppBarMobile profileButton>
-						<>
+						<div className={styles.title_box}>
 							{selectedTab === "following"
-								? "Followed Events"
+								? "FOLLOWED EVENTS"
 								: selectedTab === "my_events"
-								? "My Events"
+								? "MY EVENTS"
 								: selectedTab === "my_audio"
-								? "My Audio"
+								? "MY AUDIO"
 								: null}
-						</>
+							<div className={styles.title_underline} />
+						</div>
 					</AppBarMobile>
 					<>
 						{selectedTab === "following" ? (

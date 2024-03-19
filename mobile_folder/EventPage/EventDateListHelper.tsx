@@ -14,6 +14,8 @@ function EventDateListHelper({
 	previousArray,
 	upcomingArray,
 }: EventDateListHelperProps) {
+	const reversedUpcomingArray = [...upcomingArray].reverse();
+	const reversedPreviousArray = [...previousArray].reverse();
 	return (
 		<div className={styles.date_scroll_div}>
 			{upcomingArray.length === 0 ? null : (
@@ -23,7 +25,7 @@ function EventDateListHelper({
 						<div className={styles.upcming_line} />
 					</div>
 
-					{upcomingArray.map((date) => {
+					{reversedUpcomingArray.map((date) => {
 						return (
 							<EventDateListCard
 								key={date.specific_event_id}
@@ -40,7 +42,7 @@ function EventDateListHelper({
 						<div className={styles.previous_divider_text}>Previous Dates</div>
 						<div className={styles.previous_line} />
 					</div>
-					{previousArray.map((date) => {
+					{reversedPreviousArray.map((date) => {
 						return (
 							<EventDateListCard
 								key={date.specific_event_id}
