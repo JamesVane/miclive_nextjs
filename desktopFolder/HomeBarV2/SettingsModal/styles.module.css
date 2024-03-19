@@ -12,6 +12,7 @@
 	z-index: 5000;
 	top: 0px;
 	left: 0px;
+	backdrop-filter: blur(10px);
 }
 .settings_modal_paper {
 	width: 475px;

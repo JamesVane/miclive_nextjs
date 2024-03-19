@@ -150,7 +150,7 @@ function PromoterBaseEventPageV2pt0({
 								</Button>
 							</div>
 
-							{eventData.primary_dj ? (
+							{/* {eventData.primary_dj ? (
 								<div className={styles.dj_container}>
 									<EventDjCard
 										djObj={eventData.primary_dj}
@@ -224,7 +224,7 @@ function PromoterBaseEventPageV2pt0({
 										</div>
 									)}
 								</div>
-							)}
+							)} */}
 
 							<div className={styles.divider_div}>
 								<Divider variant="middle" flexItem />

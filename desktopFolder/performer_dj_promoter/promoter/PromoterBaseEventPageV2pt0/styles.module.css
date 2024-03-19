@@ -74,7 +74,7 @@
 		width: 400px;
 	}
 }
-.dj_container {
+/* .dj_container {
 	width: 600px;
 	height: 100px;
 	display: flex;
@@ -82,7 +82,7 @@
 	justify-content: center;
 	align-self: flex-start;
 	align-items: center;
-}
+} */
 .main_below_banner {
 	width: 1080px;
 	composes: column from "@styl/base_flexbox.module.css";
@@ -219,7 +219,7 @@
 	transform: scale(1.8); /* Increase the size by 50% */
 	transform-origin: top left; /* Adjust as needed */
 }
-.add_house_dj {
+/* .add_house_dj {
 	width: 400px;
 	height: 60px;
 	display: flex;
@@ -227,20 +227,20 @@
 	align-items: center;
 	justify-content: center;
 	align-self: flex-start;
-}
-.add_house_dj_loaded_div {
+} */
+/* .add_house_dj_loaded_div {
 	width: 100%;
 	background-color: var(--background-paper);
 	border-radius: 5px;
 	overflow: hidden;
 	height: 100%;
 	composes: row_center from "@styl/base_flexbox.module.css";
-}
-.warning_div {
+} */
+/* .warning_div {
 	font-size: 15px;
 	margin-left: 5px;
 	height: 100%;
 	display: flex;
 	align-items: center;
 	flex-direction: column;
-}
+} */

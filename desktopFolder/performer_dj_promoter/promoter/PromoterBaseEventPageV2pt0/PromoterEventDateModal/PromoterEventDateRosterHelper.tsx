@@ -14,7 +14,14 @@ function PromoterEventDateRosterHelper({
 	return (
 		<>
 			{rosterArray.map((performer) => {
-				return <PromoterEventDateRosterPaper key={performer.performer_id} />;
+				return (
+					<PromoterEventDateRosterPaper
+						performerName={performer.performer_name}
+						performerRoleId={performer.performer_id}
+						hasAudio={performer.has_submitted_audio}
+						key={performer.performer_id}
+					/>
+				);
 			})}
 		</>
 	);

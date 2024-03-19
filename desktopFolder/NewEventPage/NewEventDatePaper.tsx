@@ -12,7 +12,7 @@ import {
 import { useRouter } from "next/navigation";
 import { DateType } from "../NewEventPage/NewEventPageReducer";
 import {
-	formatDateString,
+	formatDateStringShort,
 	formatTimeHour,
 } from "@/generic_functions/date_formaters";
 import DividerH from "@/universalComponents/DividerH";
@@ -101,7 +101,7 @@ function NewEventDatePaper({ dateInfo, eventName }: NewEventDatePaperProps) {
 				<div className={styles.date_row_long}>
 					<div className={styles.date_time_split}>
 						<CalendarMonthRounded sx={iconStyles} />
-						{formatDateString(dateInfo.start_time)}
+						{formatDateStringShort(dateInfo.start_time)}
 					</div>
 					<div
 						className={styles.date_time_split}
@@ -116,7 +116,7 @@ function NewEventDatePaper({ dateInfo, eventName }: NewEventDatePaperProps) {
 				<>
 					<div className={styles.date_row_long}>
 						<CalendarMonthRounded sx={iconStyles} />
-						{formatDateString(dateInfo.start_time)}
+						{formatDateStringShort(dateInfo.start_time)}
 					</div>
 					<div className={styles.date_row_long}>
 						<AccessTimeRounded sx={iconStyles} />

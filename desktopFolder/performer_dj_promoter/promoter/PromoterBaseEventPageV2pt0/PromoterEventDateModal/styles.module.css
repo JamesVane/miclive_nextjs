@@ -8,6 +8,7 @@
 	background-color: rgba(0, 0, 0, 0.7);
 	z-index: 500;
 	composes: column_center from "@styl/base_flexbox.module.css";
+	backdrop-filter: blur(10px);
 }
 .paper_div {
 	width: 902px;
@@ -154,6 +155,15 @@
 	width: 80px;
 	height: 80px;
 	composes: column_center from "@styl/base_flexbox.module.css";
+}
+.roster_paper_right {
+	height: 100%;
+	width: calc(100% - 80px);
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	position: relative;
+	font-size: 18px;
 }
 .invite_dj_div {
 	width: 100%;
