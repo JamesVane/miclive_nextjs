@@ -28,23 +28,19 @@ export async function generateMetadata(
 ): Promise<Metadata> {
 	const eventMetadata = await getEventMetadata(params.event_name);
 	console.log("eventMetadata:", {
+		metadataBase: new URL("https://mic.live"),
 		title: eventMetadata.event_name,
 		description: eventMetadata.event_tagline,
 		openGraph: {
 			description: eventMetadata.event_tagline,
 			title: eventMetadata.event_name,
 			url: `https://mic.live/event/${params.event_name}`,
-			images: [
-				{
-					url: `https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/event_banner_4X1/banner_${eventMetadata.base_event_id}`,
-					width: 1600,
-					height: 400,
-				},
-			],
+			imagee: `https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/event_banner_4X1/banner_${eventMetadata.base_event_id}`,
 		},
 	});
 
 	return {
+		metadataBase: new URL("https://mic.live"),
 		title: eventMetadata.event_name,
 		description: eventMetadata.event_tagline,
 		openGraph: {
