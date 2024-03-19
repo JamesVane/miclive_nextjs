@@ -27,7 +27,27 @@ export async function generateMetadata(
 	parent: ResolvingMetadata
 ): Promise<Metadata> {
 	const eventMetadata = await getEventMetadata(params.event_name);
-	console.log("eventMetadata:", eventMetadata);
+	console.log("eventMetadata:", {
+		title: eventMetadata.event_name,
+		description: eventMetadata.event_tagline,
+		openGraph: {
+			description: eventMetadata.event_tagline,
+			title: eventMetadata.event_name,
+			url: `https://www.mic.live/event/${params.event_name}`,
+			images: [
+				/* {
+					url: `https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/event_pictures/event_${eventMetadata.base_event_id}.jpg`,
+					width: 1200,
+					height: 1200,
+				}, */
+				{
+					url: `https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/event_banner_3X1/banner_${eventMetadata.base_event_id}`,
+					width: 1200,
+					height: 400,
+				},
+			],
+		},
+	});
 
 	return {
 		title: eventMetadata.event_name,
@@ -35,7 +55,7 @@ export async function generateMetadata(
 		openGraph: {
 			description: eventMetadata.event_tagline,
 			title: eventMetadata.event_name,
-			url: `https://www.mic.live/event/${params.event_name}`,
+			url: `https://mic.live/event/${params.event_name}`,
 			images: [
 				/* {
 					url: `https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/event_pictures/event_${eventMetadata.base_event_id}.jpg`,
