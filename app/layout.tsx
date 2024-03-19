@@ -20,7 +20,7 @@ export const dynamic = "force-dynamic";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: any = {
-	metadataBase: new URL("https://mic.live"),
+	metadataBase: new URL("https://www.mic.live"),
 };
 
 export default function RootLayout({
