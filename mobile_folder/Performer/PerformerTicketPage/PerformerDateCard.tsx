@@ -26,9 +26,14 @@ interface PerformerDateCardProps {
 function PerformerDateCard({ cardInfo, isUpcoming }: PerformerDateCardProps) {
 	const router = useRouter();
 
+	const eventNameSlug = cardInfo.event_name
+		.trim()
+		.replace(/\s+/g, "")
+		.toLowerCase();
+
 	function handleClick() {
 		router.push(
-			`/m/event/${cardInfo.event_name}/${cardInfo.specific_event_id}/ticket`
+			`/m/event/${eventNameSlug}/${cardInfo.specific_event_id}/ticket`
 		);
 	}
 

@@ -20,7 +20,7 @@ import {
 import PersonRowMobile from "@mobi/PersonRowMobile";
 import { DateModalStateType } from "./EventDateReducer";
 import {
-	formatDateString,
+	formatDateStringShort,
 	formatTimeHour,
 } from "@/generic_functions/date_formaters";
 import EventDatePageRosterHelper from "./EventDatePageRosterHelper";
@@ -255,7 +255,7 @@ function EventDatePage({
 						<CalendarMonthRounded
 							sx={{ marginLeft: "5px", marginRight: "5px" }}
 						/>
-						{formatDateString(stateFromReducer.start_time)}
+						{formatDateStringShort(stateFromReducer.start_time)}
 					</div>
 					<div className={styles.date_time_split}>
 						<AccessTimeRounded sx={{ marginRight: "5px" }} />

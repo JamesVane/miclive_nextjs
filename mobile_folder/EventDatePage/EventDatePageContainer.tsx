@@ -43,7 +43,7 @@ function EventDatePageContainer({
 		.join("/");
 
 	function handleBackButton() {
-		router.back;
+		router.back();
 	}
 
 	async function initForTicketPage() {
