@@ -29,7 +29,6 @@ import ImageUploadCrop from "@desk/ImageComponents/ImageUploadCrop/ImageUploadCr
 
 interface ProfileEditingProps {
 	handleGoBack: () => void;
-	promoter: boolean;
 	performer: boolean;
 	dj: boolean;
 	editingPicture: boolean;
@@ -68,7 +67,6 @@ interface ProfileEditingProps {
 
 function ProfileEditing({
 	handleGoBack,
-	promoter,
 	performer,
 	dj,
 	editingPicture,

@@ -1,13 +1,13 @@
 /** @format */
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import ProfilePage from "./ProfilePage";
 import { Auth } from "aws-amplify";
 import { setUsersStateProfile } from "@/store/usersStateStore";
 import { useDispatch } from "react-redux";
 import { getUserProfile } from "@/api_functions/getUserProfile";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import SplashPage from "@/SplashPage";
 import EditProfileInfo from "@mobi/ProfileInfo/EditProfileInfo";
 import { Snackbar, Alert } from "@mui/material";
@@ -16,7 +16,35 @@ import styles from "./styles.module.css";
 function ProfilePageContainer() {
 	const dispatch = useDispatch();
 	const router = useRouter();
-	const [editingOpen, setEditingOpen] = useState(false);
+	const searchParams = useSearchParams();
+	const pathname = usePathname();
+
+	const editingIsOpen = searchParams.get("editing")
+		? searchParams.get("editing") === "true"
+			? true
+			: searchParams.get("editing") === "false"
+			? false
+			: false
+		: false;
+
+	const createQueryString = useCallback(
+		(name: string, value: string) => {
+			const params = new URLSearchParams(searchParams.toString());
+			params.set(name, value);
+
+			return params.toString();
+		},
+		[searchParams]
+	);
+
+	function openEditing() {
+		router.push(pathname + "?" + createQueryString("editing", "true"));
+	}
+
+	function closeEditing() {
+		router.push(pathname + "?" + createQueryString("editing", "false"));
+	}
+
 	const [isLoading, setIsLoading] = useState(true);
 	const [successfullUpload, setSuccessfullUpload] = useState(false);
 	const [userType, setUserType] = useState<
@@ -65,19 +93,19 @@ function ProfilePageContainer() {
 							Sucessfully Updated Profile!
 						</Alert>
 					</Snackbar>
-					{editingOpen ? (
+					{editingIsOpen ? (
 						<EditProfileInfo
 							performer={userType === "performer"}
 							promoter={userType === "promoter"}
 							dj={userType === "dj"}
-							handleBack={() => setEditingOpen(false)}
+							handleBack={closeEditing}
 							setSuccessfullUpload={() => {
 								setSuccessfullUpload(true);
 							}}
 						/>
 					) : (
 						<ProfilePage
-							setEditingOpen={setEditingOpen}
+							setEditingOpen={openEditing}
 							performer={userType === "performer"}
 							promoter={userType === "promoter"}
 							dj={userType === "dj"}

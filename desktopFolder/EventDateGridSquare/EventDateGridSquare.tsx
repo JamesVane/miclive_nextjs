@@ -62,6 +62,9 @@ function EventDateGridSquare({
 		}
 	}
 
+	const dontDhowDj = forDj && !isPrimaryDj;
+	const dontShowPerformer = !forDj && !IsUpcoming;
+
 	return (
 		<Paper
 			onMouseEnter={() => setIsHovering(true)}
@@ -72,23 +75,18 @@ function EventDateGridSquare({
 			<div className={styles.hover_div}>
 				<VisibilityRounded sx={{ height: "45px", width: "45px" }} />
 			</div>
-			{forDj && !isPrimaryDj ? null : (
+			{dontDhowDj || dontShowPerformer ? null : (
 				<div
 					className={styles.icon_absolute}
 					style={{
+						paddingLeft: isHovering ? "2.5px" : "0px",
 						color: hasAudio
 							? "#66bb69ff"
 							: isPrimaryDj
 							? "#66bb69ff"
 							: "#ff0000ff",
 						backgroundColor: isHovering ? "#0f0f0fff" : "transparent",
-						width: isHovering
-							? hasAudio
-								? "145px"
-								: isPrimaryDj
-								? "110px"
-								: "95px"
-							: "25px",
+						width: isHovering ? "auto" : "25px",
 					}}>
 					{forDj ? (
 						<>

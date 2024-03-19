@@ -24,7 +24,6 @@ import promoterEditEventSliceReducer from "@/store/promoterEditEventSlice";
 import performerSelectFromExistingModalReducer from "@/store/performerSelectFromExistingModalSlice";
 import performerAddNewAudioToEventReducer from "@/store/performerAddNewAudioToEventSlice";
 import mobileTabReducer from "@/store/mobileTabSlice";
-import EditProfileInfoMobileSlice from "@/store/editProfileInfoMobileSlice";
 import ConversationMessageSlice from "@/store/conversationMessagesSlice";
 import ConversationListSlice from "@/store/conversationListSlice";
 import HoldNewConversationSlice from "@/store/holdNewConversationSlice";
@@ -100,7 +99,6 @@ const rootReducer = combineReducers({
 	performerSelectFromExistingModal: performerSelectFromExistingModalReducer,
 	performerAddNewAudioToEvent: performerAddNewAudioToEventReducer,
 	mobileTab: mobileTabReducer,
-	editProfileInfoMobile: EditProfileInfoMobileSlice,
 	conversationMessages: ConversationMessageSlice,
 	conversationList: ConversationListSlice,
 	holdNewConversation: HoldNewConversationSlice,

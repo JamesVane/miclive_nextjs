@@ -25,7 +25,10 @@
 .name_button_div {
 	height: 100%;
 	width: 100%;
-	composes: row from "@styl/base_flexbox.module.css";
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
 	position: relative;
 	overflow: hidden;
 	color: var(--secondary-main);

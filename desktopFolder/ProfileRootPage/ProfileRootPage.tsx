@@ -27,6 +27,16 @@ function ProfileRootPage() {
 			: false
 		: false;
 
+	const createQueryString = useCallback(
+		(name: string, value: string) => {
+			const params = new URLSearchParams(searchParams.toString());
+			params.set(name, value);
+
+			return params.toString();
+		},
+		[searchParams]
+	);
+
 	function openEditing() {
 		router.push(pathname + "?" + createQueryString("editing", "true"));
 	}
@@ -40,16 +50,6 @@ function ProfileRootPage() {
 	const [userType, setUserType] = useState<
 		"" | "performer" | "promoter" | "dj"
 	>("");
-
-	const createQueryString = useCallback(
-		(name: string, value: string) => {
-			const params = new URLSearchParams(searchParams.toString());
-			params.set(name, value);
-
-			return params.toString();
-		},
-		[searchParams]
-	);
 
 	async function loadProfileInfo() {
 		try {

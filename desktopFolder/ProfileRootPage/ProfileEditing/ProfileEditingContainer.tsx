@@ -18,6 +18,12 @@ import { postUserTagline } from "@/api_functions/postUserTagline";
 import { putUpdateUsername } from "@/api_functions/putUpdateUsername";
 import { useRouter } from "next/navigation";
 import { setUsername } from "@/store/usersStateStore";
+import {
+	isLettersAndSpacesOnly,
+	normalizeWhitespace,
+	isValidInstagramLink,
+	removeWhitespace,
+} from "@/validationFunctions";
 
 interface ProfileEditingContainerProps {
 	promoter: boolean;
@@ -61,26 +67,6 @@ function ProfileEditingContainer({
 		tagline: false,
 		instagram: false,
 	});
-
-	function isLettersAndSpacesOnly(str: string): boolean {
-		const regex = /^[A-Za-z\s]+$/;
-		return regex.test(str);
-	}
-
-	function normalizeWhitespace(str: string): string {
-		const regex = /\s+/g;
-		return str.replace(regex, " ");
-	}
-
-	function isValidInstagramLink(url: string): boolean {
-		const regex = /^(https?:\/\/)?(www\.)?instagram\.com\/[a-zA-Z0-9_.]+\/?$/;
-		return url !== "" ? regex.test(url) : true;
-	}
-
-	function removeWhitespace(str: string): string {
-		const regex = /\s+/g;
-		return str.replace(regex, "");
-	}
 
 	async function handleUpdateInstagram() {
 		let theresAnError = false;
@@ -410,7 +396,6 @@ function ProfileEditingContainer({
 					handleGoBack={handleGoBack}
 					dj={dj}
 					performer={performer}
-					promoter={promoter}
 					editingPicture={editingPicture}
 					isUploadError={isUploadError}
 					isUploading={isUploading}

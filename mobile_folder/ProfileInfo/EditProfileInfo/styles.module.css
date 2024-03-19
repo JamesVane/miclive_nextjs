@@ -17,11 +17,6 @@
 	composes: row_center from "@styl/base_flexbox.module.css";
 	position: relative;
 }
-.linear_prog_div {
-	width: 100%;
-	height: 2px;
-	composes: column_center from "@styl/base_flexbox.module.css";
-}
 .divider_div_vert {
 	height: 70%;
 	width: 2px;
@@ -42,48 +37,24 @@
 	height: 100%;
 	composes: row_center from "@styl/base_flexbox.module.css";
 }
-.tagline_row {
+.pic_edit_wrap {
+	composes: column from "@styl/base_flexbox.module.css";
 	width: 100%;
-	height: 100px;
-	composes: row from "@styl/base_flexbox.module.css";
-	position: relative;
+	max-width: 100%;
+	max-height: calc(100% - 75px);
+	flex: 1;
 }
-.tagline_left {
-	height: 100%;
-	width: 85px;
-	padding-left: 10px;
-	color: var(--primary-main);
-	composes: row from "@styl/base_flexbox.module.css";
-	font-weight: bold;
-	font-size: 20px;
-}
-.tagline_right {
-	position: relative;
-	height: 100%;
-	width: calc(100% - 87px);
-	composes: row_center from "@styl/base_flexbox.module.css";
-}
-.info_row {
-	margin-top: 5px;
-	width: 100%;
-	height: 60px;
-	composes: row from "@styl/base_flexbox.module.css";
-}
-.info_row_left {
-	height: 100%;
-	width: 120px;
-	composes: row from "@styl/base_flexbox.module.css";
-}
-.info_row_icon {
-	width: 60px;
-	height: 60px;
-	composes: column_center from "@styl/base_flexbox.module.css";
-}
-.info_row_right {
-	position: relative;
-	height: 100%;
-	width: calc(100% - 122px);
-	composes: row_center from "@styl/base_flexbox.module.css";
+.pic_edit_wrap_selected {
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	z-index: 1000;
+	padding-bottom: 70px;
+	background-color: var(--background-default);
+	composes: column from "@styl/base_flexbox.module.css";
 }
 .bottom_row {
 	width: 100%;
@@ -106,29 +77,12 @@
 	height: 75px;
 	margin-bottom: 10px;
 }
-.pic_edit_wrap {
-	composes: column from "@styl/base_flexbox.module.css";
+.edit_info_row {
 	width: 100%;
-	max-width: 100%;
-	max-height: calc(100% - 75px);
-	flex: 1;
-}
-.pic_edit_wrap_selected {
-	width: 100vw;
-	height: 100vh;
-	position: fixed;
-	top: 0;
-	right: 0;
-	left: 0;
-	z-index: 1000;
-	padding-bottom: 70px;
-	background-color: var(--background-default);
-	composes: column from "@styl/base_flexbox.module.css";
-}
-.error_text {
-	color: #ed0304ff;
-	font-size: 15px;
-	position: absolute;
-	right: 15px;
-	bottom: -10px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	height: 100px;
+	padding-left: 10px;
+	padding-right: 10px;
 }

@@ -7,32 +7,28 @@ import {
 	Button,
 	Divider,
 	Link,
-	Typography,
 	Snackbar,
 	Alert,
+	Box,
 } from "@mui/material";
 import { useSelector } from "react-redux";
 import { RootState } from "@/app/LocalizationProviderHelper";
 import AvatarSimpleMobile from "@mobi/small_components/AvatarSimpleMobile";
 import {
-	EditRounded,
-	LocationCityRounded,
-	EmailRounded,
 	Instagram,
-	ContentCopyRounded,
-	InsertLinkRounded,
-	LocalPhoneRounded,
+	EditRounded,
+	LocalOfferRounded,
+	AccountBoxRounded,
+	CameraAltRounded,
 } from "@mui/icons-material";
-import { truncateLink } from "@/generic_functions/truncateLink";
 import AppBarMobile from "@mobi/AppBarMobile";
-import DividerH from "@/universalComponents/DividerH";
 import ProfileBannerMobile from "./ProfileBannerMobile";
 
 interface ProfileInfoProps {
 	performer?: boolean;
 	dj?: boolean;
 	promoter?: boolean;
-	setEditingOpen: React.Dispatch<React.SetStateAction<boolean>>;
+	setEditingOpen: () => void;
 }
 
 interface InfoValuesProps {
@@ -63,50 +59,17 @@ function ProfilePage({
 		}
 	}
 
-	const avatarSx = {
-		width: "30px",
-		height: "30px",
-		color: "#f4daa1ff",
-		backgroundColor: "transparent",
-		border: "1px solid #f4daa1ff",
-		marginRight: "10px",
-	};
+	const InstagramLink =
+		usersState && usersState.info && usersState.info.IG
+			? usersState.info.IG
+			: null;
 
-	function InfoValues({ isLink, text }: InfoValuesProps) {
-		const truncatedLink = isLink ? truncateLink(text as string, 20) : text;
-		return (
-			<>
-				{isLink ? (
-					<Link href={text as string} target="_blank" rel="noopener noreferrer">
-						<Typography
-							sx={{
-								marginLeft: "5px",
-								fontWeight: "normal",
-								maxWidth: "250px",
-								textOverflow: "ellipsis",
-								overflow: "hidden",
-								whiteSpace: "nowrap",
-							}}>
-							{truncatedLink}
-						</Typography>
-					</Link>
-				) : (
-					<Typography
-						sx={{
-							marginLeft: "5px",
-							fontWeight: "normal",
-							maxWidth: "250px",
-							textOverflow: "ellipsis",
-							overflow: "hidden",
-							whiteSpace: "nowrap",
-						}}>
-						{truncatedLink}
-					</Typography>
-				)}
-			</>
-		);
+	function handleEditButton() {
+		setEditingOpen();
 	}
-	console.log("usersState?.primary_key", usersState?.primary_key);
+
+	const taglineCheckIfEmpty =
+		usersState?.tagline === "EMPTY" ? "No Tagline" : usersState?.tagline;
 
 	return (
 		<>
@@ -121,128 +84,125 @@ function ProfilePage({
 					Date Dj Link Copied!
 				</Alert>
 			</Snackbar>
-			<div className={styles.main_div}>
-				<AppBarMobile profilePage>
-					<div>My Profile</div>
-				</AppBarMobile>
-				<div className={styles.top_half}>
-					<div className={styles.picture_wrap}>
-						<AvatarSimpleMobile
-							username={usersState ? usersState.username : "ERROR"}
-							ninety
-							type={
-								performer
-									? "performer"
-									: dj
-									? "dj"
-									: promoter
-									? "promoter"
-									: "performer"
-							}
-							id={Number(usersState?.primary_key)}
-						/>
-					</div>
-					<div className={styles.name_tagline_wrap}>
-						<div className={styles.name_wrap}>{usersState!.username}</div>
-						<div className={styles.tagline_wrap}>
-							<div>{usersState!.tagline}</div>
-						</div>
-					</div>
+			<AppBarMobile profilePage>
+				<div className={styles.title_box}>
+					PROFILE
+					<div className={styles.title_underline} />
 				</div>
-				<div className={styles.info_row}>
-					<div className={styles.info_row_left}>
-						<Avatar sx={{ ...avatarSx }}>
-							<LocationCityRounded />
-						</Avatar>
-						City
-					</div>
-					<Divider orientation="vertical" variant="middle" flexItem />
-					<InfoValues
-						isLink={false}
-						text={usersState!.info?.City ? usersState!.info!.City! : "No City"}
-					/>
-				</div>
-				<DividerH />
-				<div className={styles.info_row}>
-					<div className={styles.info_row_left}>
-						<Avatar sx={{ ...avatarSx }}>
-							<EmailRounded />
-						</Avatar>
-						Email
-					</div>
-					<Divider orientation="vertical" variant="middle" flexItem />
-					<InfoValues
-						isLink={false}
-						text={
-							usersState!.info?.Email ? usersState!.info!.Email! : "No Email"
-						}
-					/>
-				</div>
-				<DividerH />
-				<div className={styles.info_row}>
-					<div className={styles.info_row_left}>
-						<Avatar sx={{ ...avatarSx }}>
-							<Instagram />
-						</Avatar>
-						Instagram
-					</div>
-					<Divider orientation="vertical" variant="middle" flexItem />
-					<InfoValues
-						isLink={true}
-						text={usersState!.info?.IG ? usersState!.info!.IG! : "No Instagram"}
-					/>
-				</div>
-				<DividerH />
-				<div className={styles.info_row}>
-					<div className={styles.info_row_left}>
-						<Avatar sx={{ ...avatarSx }}>
-							<InsertLinkRounded />
-						</Avatar>
-						Link
-					</div>
-					<Divider orientation="vertical" variant="middle" flexItem />
-					<InfoValues
-						isLink={true}
-						text={usersState!.info?.Link ? usersState!.info!.Link! : "No Link"}
-					/>
-				</div>
-				<DividerH />
-				<div className={styles.info_row}>
-					<div className={styles.info_row_left}>
-						<Avatar sx={{ ...avatarSx }}>
-							<LocalPhoneRounded />
-						</Avatar>
-						Phone
-					</div>
-					<Divider orientation="vertical" variant="middle" flexItem />
-					<InfoValues
-						isLink={false}
-						text={
-							usersState!.info?.Phone ? usersState!.info!.Phone! : "No Phone"
-						}
-					/>
-				</div>
-				<DividerH />
-				<div className={styles.edit_row}>
-					<Button
-						size="small"
-						variant="outlined"
-						startIcon={<EditRounded />}
-						onClick={() => setEditingOpen(true)}>
-						Edit Profile Info
-					</Button>
-					{promoter ? (
+			</AppBarMobile>
+			{usersState ? (
+				<div className={styles.main_div}>
+					<div className={styles.edit_div}>
 						<Button
 							size="small"
-							sx={{}}
-							startIcon={<ContentCopyRounded />}
-							onClick={copyPublicProfileLink}>
-							Copy page link
+							onClick={handleEditButton}
+							startIcon={<EditRounded />}
+							variant="outlined">
+							edit profile
 						</Button>
-					) : null}
+					</div>
+
+					<div className={styles.pfofile_picture_div}>
+						<div className={styles.profile_pic_box}>
+							<AvatarSimpleMobile
+								ninety
+								username={usersState.username}
+								doNotCache
+								type={
+									performer
+										? "performer"
+										: promoter
+										? "promoter"
+										: dj
+										? "dj"
+										: "performer"
+								}
+								id={Number(usersState.primary_key)}
+							/>
+						</div>
+						<div className={styles.profile_avatar_text}>
+							<CameraAltRounded
+								sx={{
+									marginRight: "5px",
+									marginBottom: "6px",
+									height: "25px",
+									width: "25px",
+								}}
+							/>
+							Profile Avatar
+						</div>
+					</div>
+					<div className={styles.divider_div}>
+						<Divider variant="middle" flexItem />
+					</div>
+					<div className={styles.profile_row_top}>Username</div>
+					<div className={styles.profile_row}>
+						<div className={styles.profile_icon}>
+							<AccountBoxRounded
+								color="primary"
+								sx={{
+									height: "30px",
+									width: "30px",
+								}}
+							/>
+						</div>
+						<div className={styles.profile_text}>
+							<div className={styles.elipses_text}>{usersState.username}</div>
+						</div>
+					</div>
+					<div className={styles.divider_div}>
+						<Divider variant="middle" flexItem />
+					</div>
+					<div className={styles.profile_row_top}>Tagline</div>
+					<div className={styles.profile_row}>
+						<div className={styles.profile_icon}>
+							<LocalOfferRounded
+								color="primary"
+								sx={{
+									height: "30px",
+									width: "30px",
+								}}
+							/>
+						</div>
+						<div className={styles.profile_text}>
+							<div className={styles.elipses_text}>{taglineCheckIfEmpty}</div>
+						</div>
+					</div>
+					<div className={styles.divider_div}>
+						<Divider variant="middle" flexItem />
+					</div>
+					<div className={styles.profile_row_top}>Instagram</div>
+					<div className={styles.profile_row}>
+						<div className={styles.profile_icon}>
+							<Instagram
+								color="primary"
+								sx={{
+									height: "30px",
+									width: "30px",
+								}}
+							/>
+						</div>
+						<div className={styles.profile_text}>
+							{InstagramLink ? (
+								<Link
+									href={InstagramLink}
+									target="_blank"
+									rel="noopener noreferrer">
+									<Box className={styles.elipses_text}>{InstagramLink}</Box>
+								</Link>
+							) : (
+								"No instagram link"
+							)}
+						</div>
+					</div>
+					<div className={styles.divider_div}>
+						<Divider variant="middle" flexItem />
+					</div>
+
+					{/* {promoter ? <ProfileBannerComponent /> : null} */}
 				</div>
-			</div>
-			{promoter ? <ProfileBannerMobile /> : null}
+			) : null}
+			{/* {promoter ? <ProfileBannerMobile /> : null} */}
 		</>
 	);
 }

@@ -4,11 +4,6 @@ import { useState, useEffect } from "react";
 import EditProfileInfo from "./EditProfileInfo";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/app/LocalizationProviderHelper";
-import {
-	setInitInfo,
-	setPicNameTagline,
-	setLinks,
-} from "@/store/editProfileInfoMobileSlice";
 import _ from "lodash";
 import SplashPage from "@/SplashPage";
 import { postUploadS3Image } from "@/api_functions/postUploadS3Image";
@@ -21,6 +16,15 @@ import { setUsersStateProfile } from "@/store/usersStateStore";
 import { postUserTagline } from "@/api_functions/postUserTagline";
 import { putUserHasImage } from "@/api_functions/putUserHasImage";
 import { Auth } from "aws-amplify";
+import {
+	isLettersAndSpacesOnly,
+	normalizeWhitespace,
+	isValidInstagramLink,
+	removeWhitespace,
+} from "@/validationFunctions";
+import { putUpdateUsername } from "@/api_functions/putUpdateUsername";
+import { setUsername } from "@/store/usersStateStore";
+import { useRouter } from "next/navigation";
 
 interface EditProfileContainerProps {
 	performer?: boolean;
@@ -38,117 +42,178 @@ function EditProfileContainer({
 	handleBack,
 }: EditProfileContainerProps) {
 	const dispatch = useDispatch();
+	const router = useRouter();
 
-	const [invalidTagline, setInvalidTagline] = useState("");
+	const userState = useSelector((state: RootState) => state.usersState);
+
+	const initUsername = userState?.username || "";
+	const initTagline =
+		userState && userState.tagline
+			? userState.tagline === "EMPTY"
+				? ""
+				: userState.tagline
+			: "";
+	const initInstagram = userState?.info?.IG || "";
+
 	const [pictureError, setPictureError] = useState(false);
 	const [croppedImage, setCroppedImage] = useState<string | null>(null);
 	const [imageSelected, setImageSelected] = useState(false);
 	const [isUploadingImage, setIsUploadingImage] = useState(false);
-	const [isUploadingInfo, setIsUploadingInfo] = useState(false);
-	const [isUploadingTagline, setIsUploadingTagline] = useState(false);
-	const [taglineError, setTaglineError] = useState(false);
-	const [infoError, setInfoError] = useState(false);
+	const [displayName, setDisplayName] = useState("");
+	const [displayUrlvalue, setDisplayURLValue] = useState("");
+	const [pictureState, setPictureState] = useState("None");
+	const [usernameError, setUsernameError] = useState("");
+	const [taglineError, setTaglineError] = useState("");
+	const [instagramError, setInstagramError] = useState("");
+	const [somethingUploading, setSomethingUploading] = useState(false);
+	const [taglineValue, setTaglineValue] = useState(initTagline);
+	const [instagramValue, setInstagramValue] = useState(initInstagram);
+	const [usernameValue, setUsernameValue] = useState(initUsername);
 
-	const somethingUploading =
-		isUploadingImage || isUploadingInfo || isUploadingTagline;
+	const [whatIsFocused, setWhatIsFocused] = useState({
+		username: false,
+		tagline: false,
+		instagram: false,
+	});
 
-	function setTagline(tagline: string) {
-		dispatch(setPicNameTagline({ key: "tagline", value: tagline }));
+	function handleWhatIsFocused(key: string, value: boolean) {
+		setWhatIsFocused((prev) => {
+			return { ...prev, [key]: value };
+		});
 	}
-	function setCity(City: string) {
-		dispatch(setLinks({ key: "City", value: City }));
-	}
-	function setEmail(Email: string) {
-		dispatch(setLinks({ key: "Email", value: Email }));
-	}
-	function setIG(IG: string) {
-		dispatch(setLinks({ key: "IG", value: IG }));
-	}
-	function setLink(Link: string) {
-		dispatch(setLinks({ key: "Link", value: Link }));
-	}
-	function setPhone(Phone: string) {
-		dispatch(setLinks({ key: "Phone", value: Phone }));
-	}
-	function setPicture(picture: string) {
-		console.log("setPicture", picture);
-		dispatch(setPicNameTagline({ key: "picture", value: picture }));
-	}
-	function setDisplayName(pictureDisplayName: string) {
-		dispatch(
-			setPicNameTagline({
-				key: "pictureDisplayName",
-				value: pictureDisplayName,
-			})
-		);
+
+	function handleSetDisplayName(pictureDisplayName: string) {
+		setDisplayName(pictureDisplayName);
 	}
 	function setDisplayURL(pictureDisplayURL: string) {
-		dispatch(
-			setPicNameTagline({ key: "pictureDisplayURL", value: pictureDisplayURL })
-		);
+		setDisplayURLValue(pictureDisplayURL);
 	}
 
-	const [isInitializing, setIsInitializing] = useState<boolean>(true);
+	function setPicture(picture: string) {
+		setPictureState(picture);
+	}
 
-	const userState = useSelector((state: RootState) => state.usersState);
-	const editProfileInfoMobile = useSelector(
-		(state: RootState) => state.editProfileInfoMobile
-	);
-
-	const currentUsername = userState?.username ? userState.username : "";
-	const currentTagline = userState?.tagline ? userState.tagline : "";
-	const currentInfo = {
-		City: userState?.info?.City ? userState.info.City : "",
-		Email: userState?.info?.Email ? userState.info.Email : "",
-		Phone: userState?.info?.Phone ? userState.info.Phone : "",
-		IG: userState?.info?.IG ? userState.info.IG : "",
-		Link: userState?.info?.Link ? userState.info.Link : "",
-	};
-
-	useEffect(() => {
-		dispatch(
-			setInitInfo({
-				picture: "None",
-				pictureDisplayURL: "None",
-				pictureDisplayName: "None",
-				name: currentUsername,
-				tagline: currentTagline,
-				links: currentInfo,
-			})
+	async function handleUpdateInstagram() {
+		let theresAnError = false;
+		const payload = { IG: instagramValue } as Partial<UserProfileResponse>;
+		const postIgResponse = await postUserInfoObj(
+			performer ? "performer" : promoter ? "promoter" : "dj",
+			payload
 		);
-		setIsInitializing(false);
-	}, []);
-
-	function validateTagline(inputTagline: string) {
-		const validCharactersRegex = /^[\w\s\.,!?]+$/;
-		const linkRegex = /https?:\/\/[\w.]+/;
-		const maxLength = 35;
-
-		if (linkRegex.test(inputTagline)) {
-			setInvalidTagline("Links are not allowed in the tagline.");
-		} else if (
-			validCharactersRegex.test(inputTagline) &&
-			inputTagline.length <= maxLength
-		) {
-			setInvalidTagline("");
-		} else if (!validCharactersRegex.test(inputTagline)) {
-			setInvalidTagline("Invalid tagline. Only standard characters allowed.");
+		if (postIgResponse.status === 200) {
+			try {
+				const user = await Auth.currentAuthenticatedUser();
+				const userId = user.attributes.sub;
+				const fetchedUserProfile = await getUserProfile(
+					performer ? "performer" : promoter ? "promoter" : "dj",
+					userId
+				);
+				const updatedProfile = {
+					...fetchedUserProfile,
+					info: {
+						...fetchedUserProfile?.info,
+						...payload,
+					},
+				} as UserProfileResponse | null;
+				dispatch(setUsersStateProfile(updatedProfile));
+				theresAnError = false;
+				setInstagramError("");
+			} catch (err) {
+				theresAnError = true;
+				setInstagramError("Error updating Instagram");
+			}
 		} else {
-			setInvalidTagline(
-				"Tagline is too long. Maximum length is 35 characters."
-			);
+			theresAnError = true;
+			setInstagramError("Invalid Instagram link");
 		}
+		return theresAnError;
+	}
+
+	async function updateUserTagline(user: any) {
+		let theresAnError = false;
+		const userSub = user.attributes.sub;
+		const userType = performer ? "performer" : promoter ? "promoter" : "dj";
+		const postTaglineResponse = await postUserTagline(userType, taglineValue);
+		if (postTaglineResponse === "Tagline updated successfully") {
+			try {
+				const fetchedUserProfile = await getUserProfile(userType, userSub);
+				const updatedProfile = {
+					...fetchedUserProfile,
+					tagline: taglineValue,
+				} as UserProfileResponse | null;
+				dispatch(setUsersStateProfile(updatedProfile));
+				theresAnError = false;
+				setTaglineError("");
+			} catch (err) {
+				theresAnError = true;
+				setTaglineError(
+					"Error uploading tagline. Refresh your page and see if it changed"
+				);
+			}
+		} else {
+			theresAnError = true;
+			setTaglineError("Error updating tagline");
+		}
+		return theresAnError;
+	}
+
+	async function updateUsername(user: any) {
+		let theresAnError = false;
+		try {
+			const userSub = user.attributes.sub;
+			const updateUsernameResponse = await putUpdateUsername(
+				usernameValue,
+				userSub
+			);
+			if (updateUsernameResponse === "Successfully changed username") {
+				try {
+					await Auth.updateUserAttributes(user, {
+						"custom:DisplayUsername": usernameValue,
+					});
+					theresAnError = false;
+					dispatch(setUsername(usernameValue));
+					setUsernameError("");
+				} catch {
+					theresAnError = true;
+					setUsernameError("An Error occured while setting username");
+				}
+			} else if (updateUsernameResponse === "Invalid Username") {
+				theresAnError = true;
+				setUsernameError("Username is invalid.");
+			} else if (updateUsernameResponse === "Username exists") {
+				theresAnError = true;
+				setUsernameError("This username is already in use.");
+			} else if (updateUsernameResponse === "An error occurred") {
+				theresAnError = true;
+				setUsernameError("An error occured while updating username.");
+			} else if (updateUsernameResponse === "Unexpected response code") {
+				theresAnError = true;
+				setUsernameError(
+					"An unexpected error occured while updating username."
+				);
+			} else {
+				theresAnError = true;
+				setUsernameError(
+					"An unexpected error occured while updating username."
+				);
+			}
+		} catch {
+			theresAnError = true;
+			setUsernameError("An unexpected error occured while updating username.");
+			return;
+		}
+		return theresAnError;
 	}
 
 	function handleImageUpload() {
-		const selectedPicture = editProfileInfoMobile.picture;
 		const userRoleKey = userState?.primary_key;
+		let theresAnError = false;
 
-		if (selectedPicture !== "None" && userRoleKey) {
+		if (pictureState !== "None" && userRoleKey) {
 			setIsUploadingImage(true);
 			try {
 				postUploadS3Image(
-					selectedPicture,
+					pictureState,
 					performer
 						? `performer_pictures/performer_${userRoleKey}.jpg`
 						: promoter
@@ -191,156 +256,174 @@ function EditProfileContainer({
 								setIsUploadingImage(false);
 								setImageSelected(false);
 								setCroppedImage(null);
-							} catch (error) {
-								console.error("Error fetching signed URL:", error);
+								theresAnError = false;
+							} catch {
 								setPictureError(true);
 								setIsUploadingImage(false);
+								theresAnError = true;
 							}
 						} else {
 							setPictureError(true);
 							setIsUploadingImage(false);
+							theresAnError = true;
 						}
 					})
-					.catch((err) => {
+					.catch(() => {
 						setPictureError(true);
 						setIsUploadingImage(false);
+						theresAnError = true;
 					});
-			} catch (error) {
+			} catch {
 				setPictureError(true);
 				setIsUploadingImage(false);
+				theresAnError = true;
 			}
 		}
+		return theresAnError;
 	}
 
-	async function updateUserInfoObj(payload: Partial<UserProfileResponse>) {
-		const user = await Auth.currentAuthenticatedUser();
-		const userRoleKey = user.attributes.sub;
-		postUserInfoObj(
-			performer ? "performer" : promoter ? "promoter" : "dj",
-			payload
-		)
-			.then(async (res) => {
-				if (
-					res.data.message ===
-					`Updated ${
-						performer ? "performer" : promoter ? "promoter" : "dj"
-					} with id ${userRoleKey}`
-				) {
-					try {
-						const fetchedUserProfile = await getUserProfile(
-							performer ? "performer" : promoter ? "promoter" : "dj",
-							userRoleKey
-						);
-						const updatedProfile = {
-							...fetchedUserProfile,
-							info: {
-								...fetchedUserProfile?.info,
-								...payload,
-							},
-						} as UserProfileResponse | null;
-						dispatch(setUsersStateProfile(updatedProfile));
-					} catch (err) {
-						setInfoError(true);
-					}
-				} else {
-					setInfoError(true);
-				}
-			})
-			.catch((err) => {
-				setInfoError(true);
-			});
-	}
+	function validateTagline(inputTagline: string) {
+		if (inputTagline !== "") {
+			const validCharactersRegex = /^[\w\s\.,!?]+$/;
+			const linkRegex = /https?:\/\/[\w.]+/;
+			const maxLength = 35;
 
-	async function handleInfoSubmit(
-		type: "City" | "Email" | "IG" | "Phone" | "Link",
-		value: string
-	) {
-		if (value !== "") {
-			await updateUserInfoObj({ [type]: value });
-		}
-	}
-
-	async function updateUserTagline() {
-		const currentTagline = editProfileInfoMobile.tagline;
-		const user = await Auth.currentAuthenticatedUser();
-		const userId = user.attributes.sub;
-		const userRoleKey = userId;
-		const userType = performer ? "performer" : promoter ? "promoter" : "dj";
-		setIsUploadingTagline(true);
-
-		postUserTagline(userType, currentTagline)
-			.then(async (res) => {
-				if (res === "Tagline updated successfully") {
-					try {
-						const fetchedUserProfile = await getUserProfile(
-							userType,
-							userRoleKey
-						);
-						const updatedProfile = {
-							...fetchedUserProfile,
-							tagline: currentTagline,
-						} as UserProfileResponse | null;
-						dispatch(setUsersStateProfile(updatedProfile));
-						setIsUploadingTagline(false);
-					} catch (err) {
-						setIsUploadingTagline(true);
-						setTaglineError(true);
-					}
-				} else {
-					setTaglineError(true);
-					setIsUploadingTagline(true);
-				}
-			})
-			.catch((err) => {
-				setIsUploadingTagline(true);
-				setTaglineError(true);
-			});
-	}
-
-	async function handleSubmitUpdates() {
-		if (editProfileInfoMobile.picture !== "None") {
-			console.log(
-				"editProfileInfoMobile.picture",
-				editProfileInfoMobile.picture
-			);
-			handleImageUpload();
-		}
-		if (editProfileInfoMobile.tagline !== "None") {
-			updateUserTagline();
-		}
-		setIsUploadingInfo(true);
-		await handleInfoSubmit("City", editProfileInfoMobile.links.City).then(
-			async () => {
-				await handleInfoSubmit("Email", editProfileInfoMobile.links.Email).then(
-					async () => {
-						await handleInfoSubmit("IG", editProfileInfoMobile.links.IG).then(
-							async () => {
-								await handleInfoSubmit(
-									"Phone",
-									editProfileInfoMobile.links.Phone
-								).then(async () => {
-									await handleInfoSubmit(
-										"Link",
-										editProfileInfoMobile.links.Link
-									).then(async () => {
-										setIsUploadingInfo(false);
-										if (!taglineError && !pictureError && !infoError) {
-											setSuccessfullUpload(true);
-											handleBack();
-										}
-									});
-								});
-							}
-						);
-					}
+			if (linkRegex.test(inputTagline)) {
+				setTaglineError("Links are not allowed in the tagline.");
+			} else if (
+				validCharactersRegex.test(inputTagline) &&
+				inputTagline.length <= maxLength
+			) {
+				setTaglineError("");
+			} else if (!validCharactersRegex.test(inputTagline)) {
+				setTaglineError("Invalid tagline. Only standard characters allowed.");
+			} else {
+				setTaglineError(
+					"Tagline is too long. Maximum length is 35 characters."
 				);
 			}
-		);
+		} else {
+			setTaglineError("");
+		}
+	}
+
+	function validateUsername(inputUsername: string) {
+		if (inputUsername !== "") {
+			const isValidTagline = isLettersAndSpacesOnly(inputUsername);
+			if (isValidTagline) {
+				setUsernameError("");
+			} else {
+				setUsernameError("Invalid username. Only letters and spaces.");
+			}
+		} else {
+			setUsernameError("");
+		}
+	}
+
+	function validateInstagram(inputInstagram: string) {
+		const isValidInstagram = isValidInstagramLink(inputInstagram);
+		if (isValidInstagram) {
+			setInstagramError("");
+		} else {
+			setInstagramError("Invalid Instagram link.");
+		}
+	}
+
+	function clearUsername() {
+		setUsernameValue("");
+		setUsernameError("");
+	}
+
+	function clearTagline() {
+		setTaglineValue("");
+		setTaglineError("");
+	}
+
+	function clearInstagram() {
+		setInstagramValue("");
+		setInstagramError("");
+	}
+
+	function handleSetTagline(tagline: string) {
+		const trimmedtagline = normalizeWhitespace(tagline);
+		setTaglineValue(trimmedtagline);
+		validateTagline(trimmedtagline);
+	}
+
+	function handleSetInstagram(instagram: string) {
+		const noWhitespaceInstagram = removeWhitespace(instagram);
+		setInstagramValue(noWhitespaceInstagram);
+		validateInstagram(noWhitespaceInstagram);
+	}
+
+	function handleSetUsername(username: string) {
+		const trimmedUsername = normalizeWhitespace(username);
+		setUsernameValue(trimmedUsername);
+		validateUsername(trimmedUsername);
+	}
+
+	const pictureChanged = pictureState !== "None";
+	const instagramChanged = instagramValue !== initInstagram;
+	const usernameChanged = usernameValue !== initUsername;
+	const taglineChanged = taglineValue !== initTagline;
+
+	const noErrors =
+		usernameError === "" && taglineError === "" && instagramError === "";
+
+	const somethingHasChanged =
+		instagramChanged || usernameChanged || taglineChanged || pictureChanged;
+
+	const canSaveForm = noErrors && somethingHasChanged;
+
+	async function handleSave() {
+		let somethingReturnedAnError = false;
+		try {
+			const user = await Auth.currentAuthenticatedUser();
+		} catch {
+			router.push("/sign_in");
+			return;
+		}
+		const user = await Auth.currentAuthenticatedUser();
+		if (!somethingUploading) {
+			setSomethingUploading(true);
+			if (taglineChanged) {
+				const taglineResponseStatus = await updateUserTagline(user);
+				console.log("taglineResponseStatus:", taglineResponseStatus);
+				if (taglineResponseStatus === true) {
+					somethingReturnedAnError = true;
+				}
+			}
+			if (usernameChanged) {
+				const usernameResponseStatus = await updateUsername(user);
+				console.log("usernameResponseStatus:", usernameResponseStatus);
+				if (usernameResponseStatus === true) {
+					somethingReturnedAnError = true;
+				}
+			}
+			if (instagramChanged) {
+				const instagramresponseStatus = await handleUpdateInstagram();
+				console.log("instagramresponseStatus:", instagramresponseStatus);
+				if (instagramresponseStatus === true) {
+					somethingReturnedAnError = true;
+				}
+			}
+			if (pictureChanged) {
+				const imageUploadedReturned = await handleImageUpload();
+				if (imageUploadedReturned === true) {
+					somethingReturnedAnError = true;
+				}
+			}
+			setSomethingUploading(false);
+			console.log("somethingReturnedAnError:", somethingReturnedAnError);
+			if (!somethingReturnedAnError) {
+				handleBack();
+			}
+		}
 	}
 
 	return (
 		<>
-			{isInitializing ? (
+			{!userState ? (
 				<SplashPage />
 			) : (
 				<EditProfileInfo
@@ -353,30 +436,14 @@ function EditProfileContainer({
 							? "dj"
 							: "performer"
 					}
-					handleSubmitUpdates={handleSubmitUpdates}
-					setDisplayName={setDisplayName}
+					setDisplayName={handleSetDisplayName}
 					setDisplayURL={setDisplayURL}
 					roleKey={userState!.primary_key}
 					handleBack={handleBack}
-					username={editProfileInfoMobile.name}
-					tagline={editProfileInfoMobile.tagline}
-					picture={editProfileInfoMobile.picture}
-					pictureDisplayURL={editProfileInfoMobile.pictureDisplayURL}
-					pictureDisplayName={editProfileInfoMobile.pictureDisplayName}
-					City={editProfileInfoMobile.links.City}
-					Email={editProfileInfoMobile.links.Email}
-					IG={editProfileInfoMobile.links.IG}
-					Link={editProfileInfoMobile.links.Link}
-					Phone={editProfileInfoMobile.links.Phone}
-					setTagline={setTagline}
-					setCity={setCity}
-					setEmail={setEmail}
-					setIG={setIG}
-					setLink={setLink}
-					setPhone={setPhone}
+					picture={pictureState}
+					pictureDisplayURL={displayUrlvalue}
+					pictureDisplayName={displayName}
 					setPicture={setPicture}
-					invalidTagline={invalidTagline}
-					validateTagline={validateTagline}
 					pictureError={pictureError}
 					setPictureError={setPictureError}
 					croppedImage={croppedImage}
@@ -384,10 +451,22 @@ function EditProfileContainer({
 					imageSelected={imageSelected}
 					setImageSelected={setImageSelected}
 					taglineError={taglineError}
-					setTaglineError={setTaglineError}
-					infoError={infoError}
-					setInfoError={setInfoError}
+					instagramError={instagramError}
+					usernameError={usernameError}
 					somethingUploading={somethingUploading}
+					whatIsFocused={whatIsFocused}
+					handleWhatIsFocused={handleWhatIsFocused}
+					usernameValue={usernameValue}
+					instagramValue={instagramValue}
+					taglineValue={taglineValue}
+					clearUsername={clearUsername}
+					clearTagline={clearTagline}
+					clearInstagram={clearInstagram}
+					handleSetInstagram={handleSetInstagram}
+					handleSetTagline={handleSetTagline}
+					handleSetUsername={handleSetUsername}
+					canSaveForm={canSaveForm}
+					handleSave={handleSave}
 				/>
 			)}
 		</>

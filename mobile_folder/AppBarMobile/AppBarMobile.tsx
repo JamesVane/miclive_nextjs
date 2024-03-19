@@ -15,6 +15,7 @@ import Image from "next/image";
 import AlertButton from "./AlertButton";
 import SettingsModal from "./SettingsModal";
 import AlertModal from "./AlertButton/AlertModal";
+import { Auth } from "aws-amplify";
 
 interface AppBarMobileProps {
 	children: React.ReactNode;
@@ -40,7 +41,7 @@ const AppBarMobile: React.FC<AppBarMobileProps> = ({
 	}
 
 	function handleNavigateBackFromProfile() {
-		router.back();
+		navigateToHome();
 	}
 
 	function handleAlertModal(value: boolean) {
@@ -52,6 +53,12 @@ const AppBarMobile: React.FC<AppBarMobileProps> = ({
 		location === "/m/performer" ||
 		location === "/m/dj" ||
 		location === "/m/profile";
+
+	async function navigateToHome() {
+		const user = await Auth.currentAuthenticatedUser();
+		const roleType = user.attributes["custom:RoleType"];
+		router.push(`/m/${roleType}`);
+	}
 
 	return (
 		<>
