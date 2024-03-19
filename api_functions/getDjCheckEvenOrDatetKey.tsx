@@ -32,7 +32,7 @@ export async function getDjCheckEventKey(
 
 type getDjCheckDateKeyResponse = {
 	DjDateInviteUrlKey: string;
-	data: {
+	Value: {
 		specificEventId: number;
 		baseEventId: number;
 		baseEventTagline: string;

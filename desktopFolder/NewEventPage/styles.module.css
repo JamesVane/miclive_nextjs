@@ -186,16 +186,18 @@
 }
 .promoter_and_dj {
 	width: 100%;
-	height: 120px;
+	height: 70px;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
+	margin-bottom: 5px;
+	margin-top: 5px;
 }
 .promoter_or_div {
 	height: 100%;
 	composes: row_center from "@styl/base_flexbox.module.css";
-	width: 49%;
+	width: 370px;
 }
 .share_follow {
 	position: absolute;

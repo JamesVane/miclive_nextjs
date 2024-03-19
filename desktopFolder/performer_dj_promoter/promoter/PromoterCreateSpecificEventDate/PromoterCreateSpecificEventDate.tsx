@@ -48,28 +48,29 @@ function PromoterCreateSpecificEventDate({
 	async function handleCreateEvent() {
 		try {
 			const user = await Auth.currentAuthenticatedUser();
-			const roleId = user.attributes["custom:RoleId"];
-			const stringPromoterId: string =
-				typeof roleId === "number" ? roleId.toString() : roleId;
-
-			createSpecificEventContainer(
-				stringPromoterId,
-				EventData,
-				baseEventId,
-				EventFromRedux.event_name,
-				EventFromRedux.event_tagline
-			).then(async (res: any) => {
-				if (res.specificEventId) {
-					setDateUuid(res.DjDateInviteUrlKey);
-					dispatch(switchPageDate({ page: "DjInvite" }));
-				} else if (res.message === "An event already exists on this date.") {
-					dispatch(switchPageDate({ page: "specificEvent" }));
-					setErrorMessage("An event already exists on this date");
-				}
-			});
 		} catch {
 			console.log("error creating event");
 		}
+		const user = await Auth.currentAuthenticatedUser();
+		const roleId = user.attributes["custom:RoleId"];
+		const stringPromoterId: string =
+			typeof roleId === "number" ? roleId.toString() : roleId;
+
+		createSpecificEventContainer(
+			stringPromoterId,
+			EventData,
+			baseEventId,
+			EventFromRedux.event_name,
+			EventFromRedux.event_tagline
+		).then(async (res: any) => {
+			if (res.specificEventId) {
+				setDateUuid(res.DjDateInviteUrlKey);
+				dispatch(switchPageDate({ page: "DjInvite" }));
+			} else if (res.message === "An event already exists on this date.") {
+				dispatch(switchPageDate({ page: "specificEvent" }));
+				setErrorMessage("An event already exists on this date");
+			}
+		});
 	}
 
 	return (

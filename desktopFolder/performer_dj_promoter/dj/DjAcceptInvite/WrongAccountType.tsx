@@ -4,6 +4,9 @@ import { Button, Divider } from "@mui/material";
 import { LogoutRounded, HomeRounded } from "@mui/icons-material";
 import styles from "./styles.module.css";
 import { useRouter } from "next/navigation";
+import { Auth } from "aws-amplify";
+import { setCurrentSub as setCurrentSubSlice } from "@/store/currentSubStore";
+import { useDispatch } from "react-redux";
 
 interface WrongAccountTypeProps {
 	accountType: "promoter" | "performer";
@@ -11,15 +14,22 @@ interface WrongAccountTypeProps {
 
 function WrongAccountType({ accountType }: WrongAccountTypeProps) {
 	const router = useRouter();
+	const dispatch = useDispatch();
 
 	function handleGoHome() {
 		router.push(`/${accountType}`);
 	}
 
-	function handleLogOut() {
-		localStorage.clear();
-		sessionStorage.clear();
-		window.location.reload();
+	async function handleLogOut() {
+		try {
+			await Auth.signOut();
+			dispatch(setCurrentSubSlice(null));
+			localStorage.clear();
+			sessionStorage.clear();
+			window.location.reload();
+		} catch (error) {
+			console.log("error signing out: ", error);
+		}
 	}
 
 	function capitalizeFirstLetter(input: string): string {

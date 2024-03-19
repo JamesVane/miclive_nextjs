@@ -29,8 +29,8 @@ function PromoterDatePaper({ dateInfo }: PromoterDatePaperProps) {
 	const iconStyles = {
 		marginLeft: "4px",
 		marginRight: "4px",
-		height: "30px",
-		width: "30px",
+		height: "23px",
+		width: "23px",
 	};
 
 	useEffect(() => {

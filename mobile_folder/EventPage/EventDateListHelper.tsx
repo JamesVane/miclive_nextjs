@@ -15,7 +15,7 @@ function EventDateListHelper({
 	upcomingArray,
 }: EventDateListHelperProps) {
 	return (
-		<>
+		<div className={styles.date_scroll_div}>
 			{upcomingArray.length === 0 ? null : (
 				<>
 					<div className={styles.upcoming_prev_divider}>
@@ -51,7 +51,7 @@ function EventDateListHelper({
 					})}
 				</>
 			)}
-		</>
+		</div>
 	);
 }
 

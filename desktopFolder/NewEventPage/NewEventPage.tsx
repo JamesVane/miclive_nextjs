@@ -183,7 +183,7 @@ function NewEventPage({
 											tagline={promoterData.promoter_tagline}
 											userSub={promoterData.promoter_sub}
 											promoter
-											inputHeight="120px"
+											inputHeight="70px"
 										/>
 									) : null}
 								</div>

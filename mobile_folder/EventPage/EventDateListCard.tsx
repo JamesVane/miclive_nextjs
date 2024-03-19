@@ -11,7 +11,7 @@ import {
 import { useRouter, usePathname } from "next/navigation";
 import { DateType } from "./EventPageReducer";
 import {
-	formatDateString,
+	formatDateStringShort,
 	formatTimeHour,
 } from "../../generic_functions/date_formaters";
 
@@ -52,7 +52,7 @@ function EventDateListCard({ dateInfo, isUpcoming }: EventDateListCardProps) {
 					<CalendarMonthRounded
 						sx={{ marginLeft: "5px", marginRight: "5px" }}
 					/>
-					{formatDateString(dateInfo.start_time)}
+					{formatDateStringShort(dateInfo.start_time)}
 				</div>
 				<div className={styles.date_time_split} style={{ marginLeft: "-15px" }}>
 					<AccessTimeRounded sx={{ marginRight: "5px" }} />

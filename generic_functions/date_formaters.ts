@@ -14,6 +14,19 @@ export const formatDateString = (timestamp : number) => {
     return `${dayOfWeek}, ${month}. ${day}${ordinalIndicator}`;
   };
 
+  export const formatDateStringShort = (timestamp : number) => {
+    const daysOfWeek = ['Sun,', 'Mon.', 'Tue.', 'Wed.', 'Thu.', 'Fri.', 'Sat.'];
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+    const date = new Date(timestamp * 1000);
+    const dayOfWeek = daysOfWeek[date.getDay()];
+    const month = months[date.getMonth()];
+    const day = date.getDate();
+    const ordinalIndicator = day % 10 === 1 && day !== 11 ? 'st' : day % 10 === 2 && day !== 12 ? 'nd' : day % 10 === 3 && day !== 13 ? 'rd' : 'th';
+
+    return `${dayOfWeek}, ${month}. ${day}${ordinalIndicator}`;
+  };
+
 export const formatTimeHour = (timestamp : number) => {
     const date = new Date(timestamp * 1000);
     const hours = date.getHours();

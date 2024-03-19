@@ -156,7 +156,7 @@
 	height: calc(50% - 1px);
 	composes: row from "@styl/base_flexbox.module.css";
 	overflow: hidden;
-	font-size: 15px;
+	font-size: 14px;
 }
 .date_time_split {
 	height: 100%;
