@@ -3,17 +3,13 @@
 
 import { useEffect } from "react";
 import DjAcceptInviteLanding from "./DjAcceptInviteLanding";
-import {
-	getDjCheckEventKey,
-	getDjCheckDateKey,
-} from "@/api_functions/getDjCheckEvenOrDatetKey";
+import { getDjCheckDateKey } from "@/api_functions/getDjCheckEvenOrDatetKey";
 import WrongAccountType from "./WrongAccountType";
 import { useSelector, useDispatch } from "react-redux";
 import {
 	setUuid,
 	setBadUrl,
 	setDateObject,
-	setEventObject,
 	setAccountType,
 } from "@/store/DjInviteState";
 import { RootState } from "@/app/LocalizationProviderHelper";
@@ -22,17 +18,14 @@ import SplashPage from "@/SplashPage";
 import { Auth } from "aws-amplify";
 import SignInPage from "@desk/SignIn";
 import DjAcceptDatePage from "./DjAcceptDatePage";
-import DjAcceptEventPage from "./DjAcceptEventPage";
 import { useRouter } from "next/navigation";
 
 interface DjAcceptInviteContainerProps {
-	house?: boolean;
 	isSigningIn?: boolean;
 	inviteUuid: string;
 }
 
 function DjAcceptInviteContainer({
-	house,
 	isSigningIn,
 	inviteUuid,
 }: DjAcceptInviteContainerProps) {
@@ -63,46 +56,28 @@ function DjAcceptInviteContainer({
 		}
 	}
 
-	const returnToUrl = house
-		? `/dj_accept_event/${inviteUuid}`
-		: `/dj_accept_date/${inviteUuid}`;
+	const returnToUrl = `/dj_accept_date/${inviteUuid}`;
 
 	function navigateToSignIn() {
 		router.push(`${returnToUrl}/sign_in`);
 	}
 
 	function navigateToCreateAccount() {
-		if (house) {
-			router.push(`/dj_accept_event/${inviteUuid}/create_account`);
-		} else {
-			router.push(`/dj_accept_date/${inviteUuid}/create_account`);
-		}
+		router.push(`/dj_accept_date/${inviteUuid}/create_account`);
 	}
 
 	useEffect(() => {
 		if (!isSigningIn) {
-			if (house) {
-				getDjCheckEventKey(inviteUuid!).then((res) => {
-					if (res.Value) {
-						dispatch(setUuid(inviteUuid!));
-						dispatch(setEventObject(res.Value));
-						checkAuthAndType();
-					} else {
-						setBadUrlTrue();
-					}
-				});
-			} else {
-				getDjCheckDateKey(inviteUuid!).then((res) => {
-					console.log("res:", res);
-					if (res.Value) {
-						dispatch(setUuid(inviteUuid!));
-						dispatch(setDateObject(res.Value));
-						checkAuthAndType();
-					} else {
-						setBadUrlTrue();
-					}
-				});
-			}
+			getDjCheckDateKey(inviteUuid!).then((res) => {
+				console.log("res:", res);
+				if (res.Value) {
+					dispatch(setUuid(inviteUuid!));
+					dispatch(setDateObject(res.Value));
+					checkAuthAndType();
+				} else {
+					setBadUrlTrue();
+				}
+			});
 		}
 	}, []);
 
@@ -121,7 +96,7 @@ function DjAcceptInviteContainer({
 					) : isLoading ? (
 						<SplashPage />
 					) : accountType === "dj" ? (
-						<>{house ? <DjAcceptEventPage /> : <DjAcceptDatePage />}</>
+						<DjAcceptDatePage />
 					) : (
 						<DjAcceptInviteLanding
 							navigateToCreateAccount={navigateToCreateAccount}

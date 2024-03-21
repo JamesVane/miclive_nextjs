@@ -15,17 +15,10 @@ import SplashPage from "@/SplashPage";
 import { Snackbar, Alert } from "@mui/material";
 import { Auth } from "aws-amplify";
 import MessagingButton from "@mobi/Messaging/MessagingButton";
-import {
-	CalendarMonthRounded,
-	HomeRounded,
-	PriorityHighRounded,
-} from "@mui/icons-material";
-import DjPrimaryEventListPage from "./DjPrimaryEventListPage";
+import { CalendarMonthRounded, PriorityHighRounded } from "@mui/icons-material";
 import DjEventDateListPage from "./DjEventDateListPage";
 import { setDjEventDateList } from "@/store/DjEventDateListV2pt0Slice";
 import { getDjEventDateList } from "@/api_functions/getDjEventDateList";
-import { setPrimaryDjEventList } from "@/store/DjPrimaryEventsListV2pt0Slice";
-import { getDjPrimaryEventsV2pt0 } from "@/api_functions/getDjPrimaryEventsV2pt0";
 import AppBarMobile from "@mobi/AppBarMobile";
 
 interface DjHomeProps {
@@ -45,14 +38,7 @@ function DjHome({ house }: DjHomeProps) {
 			const user = await Auth.currentAuthenticatedUser();
 			const roleId = user.attributes["custom:RoleId"];
 
-			const [PrimayEventList, EventDateList] = await Promise.all([
-				getDjPrimaryEventsV2pt0(roleId),
-				getDjEventDateList(roleId),
-			]);
-
-			if (PrimayEventList) {
-				dispatch(setPrimaryDjEventList(PrimayEventList));
-			}
+			const EventDateList = await getDjEventDateList(roleId);
 
 			if (EventDateList) {
 				dispatch(setDjEventDateList(EventDateList));
@@ -101,11 +87,7 @@ function DjHome({ house }: DjHomeProps) {
 							open current event
 						</Button>
 					</AppBarMobile>
-					{selectedTab === 1 ? (
-						<DjPrimaryEventListPage />
-					) : selectedTab === 2 ? (
-						<DjEventDateListPage />
-					) : null}
+					<DjEventDateListPage />
 					<Box
 						sx={{
 							position: "fixed",
@@ -135,11 +117,6 @@ function DjHome({ house }: DjHomeProps) {
 								onChange={handleSetTab}>
 								<BottomNavigationAction
 									value={1}
-									label="events"
-									icon={<HomeRounded />}
-								/>
-								<BottomNavigationAction
-									value={2}
 									label="gigs"
 									icon={<CalendarMonthRounded />}
 								/>

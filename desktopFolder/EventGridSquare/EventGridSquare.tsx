@@ -9,7 +9,6 @@ interface EventGridSquareProps {
 	eventTagline: string;
 	baseEventId: number;
 	isForPromoter?: boolean;
-	isForDj?: boolean;
 }
 
 function EventGridSquare({
@@ -17,7 +16,6 @@ function EventGridSquare({
 	eventTagline,
 	baseEventId,
 	isForPromoter,
-	isForDj,
 }: EventGridSquareProps) {
 	const router = useRouter();
 
@@ -28,8 +26,6 @@ function EventGridSquare({
 	function handleClick() {
 		if (isForPromoter) {
 			router.push(`/promoter/event/${adjustEventName(eventName)}`);
-		} else if (isForDj) {
-			router.push(`/dj/event/${baseEventId}`);
 		} else {
 			router.push(`/event/${adjustEventName(eventName)}`);
 		}

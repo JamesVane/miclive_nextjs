@@ -14,11 +14,6 @@ type djInviteStateType = {
 		location: string;
 		endTime: string;
 	};
-	eventObject: {
-		baseEventName: string;
-		baseEventId: number;
-		baseEventTagline: string;
-	};
 };
 
 const djInviteStateDefault = {
@@ -33,11 +28,6 @@ const djInviteStateDefault = {
 		startTime: "",
 		location: "",
 		endTime: "",
-	},
-	eventObject: {
-		baseEventName: "",
-		baseEventId: 0,
-		baseEventTagline: "",
 	},
 };
 
@@ -57,12 +47,6 @@ const djInviteState = createSlice({
 		) => {
 			state.dateObject = action.payload;
 		},
-		setEventObject: (
-			state,
-			action: PayloadAction<djInviteStateType["eventObject"]>
-		) => {
-			state.eventObject = action.payload;
-		},
 		setAccountType: (
 			state,
 			action: PayloadAction<djInviteStateType["accountType"]>
@@ -72,11 +56,6 @@ const djInviteState = createSlice({
 	},
 });
 
-export const {
-	setUuid,
-	setBadUrl,
-	setDateObject,
-	setEventObject,
-	setAccountType,
-} = djInviteState.actions;
+export const { setUuid, setBadUrl, setDateObject, setAccountType } =
+	djInviteState.actions;
 export default djInviteState.reducer;

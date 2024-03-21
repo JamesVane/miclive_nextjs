@@ -46,7 +46,6 @@ import promoterEventListV2pt0Slice from "@/store/promoterEventListV2pt0Slice";
 import PromoterEventPageV2pt0Slice from "@/store/PromoterEventPageV2pt0Slice";
 import promoterDateInfoV2pt0Slice from "@/store/promoterDateInfoV2pt0Slice";
 import DjEventDateListV2pt0Slice from "@/store/DjEventDateListV2pt0Slice";
-import DjPrimaryEventsListV2pt0Slice from "@/store/DjPrimaryEventsListV2pt0Slice";
 import djEventDateModalDataV2pt0 from "@/store/djEventDateModalDataV2pt0";
 import shouldReFetchFromSocketSlice from "@/store/shouldReFetchFromSocketSlice";
 import currentEventSpecificEventIdSlice from "@/store/currentEventSpecificEventIdSlice";
@@ -121,7 +120,6 @@ const rootReducer = combineReducers({
 	PromoterEventPageV2pt0Slice: PromoterEventPageV2pt0Slice,
 	promoterDateInfoV2pt0Slice: promoterDateInfoV2pt0Slice,
 	DjEventDateListV2pt0Slice: DjEventDateListV2pt0Slice,
-	DjPrimaryEventsListV2pt0Slice: DjPrimaryEventsListV2pt0Slice,
 	djEventDateModalDataV2pt0: djEventDateModalDataV2pt0,
 	shouldReFetchFromSocketSlice: shouldReFetchFromSocketSlice,
 	currentEventSpecificEventIdSlice: currentEventSpecificEventIdSlice,

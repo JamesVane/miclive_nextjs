@@ -8,12 +8,9 @@ import SplashPage from "@/SplashPage";
 import HomeBarV2 from "@desk/HomeBarV2";
 import styles from "./styles.module.css";
 import DjEventDateList from "./DjEventDateList";
-import DjBaseEventList from "./DjBaseEventList";
 import { Tabs, Tab, Button } from "@mui/material";
 import { setDjEventDateList } from "@/store/DjEventDateListV2pt0Slice";
 import { getDjEventDateList } from "@/api_functions/getDjEventDateList";
-import { setPrimaryDjEventList } from "@/store/DjPrimaryEventsListV2pt0Slice";
-import { getDjPrimaryEventsV2pt0 } from "@/api_functions/getDjPrimaryEventsV2pt0";
 import { PriorityHighRounded } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
 
@@ -33,14 +30,7 @@ function DJHome() {
 			const user = await Auth.currentAuthenticatedUser();
 			const roleId = user.attributes["custom:RoleId"];
 
-			const [PrimayEventList, EventDateList] = await Promise.all([
-				getDjPrimaryEventsV2pt0(roleId),
-				getDjEventDateList(roleId),
-			]);
-
-			if (PrimayEventList) {
-				dispatch(setPrimaryDjEventList(PrimayEventList));
-			}
+			const EventDateList = await getDjEventDateList(roleId);
 
 			if (EventDateList) {
 				dispatch(setDjEventDateList(EventDateList));
@@ -75,8 +65,7 @@ function DJHome() {
 								alignItems: "flex-end",
 							}}>
 							<Tabs value={selectedTab} onChange={onTabChange}>
-								<Tab sx={{ fontSize: "25px" }} label="Events" value={1} />
-								<Tab sx={{ fontSize: "25px" }} label="Event Dates" value={2} />
+								<Tab sx={{ fontSize: "25px" }} label="Event Dates" value={1} />
 							</Tabs>
 							<Button
 								onClick={goToCurrent}
@@ -89,11 +78,7 @@ function DJHome() {
 						</div>
 					</HomeBarV2>
 					<div className={styles.container_div}>
-						{selectedTab === 1 ? (
-							<DjBaseEventList />
-						) : selectedTab === 2 ? (
-							<DjEventDateList />
-						) : null}
+						<DjEventDateList />
 					</div>
 				</div>
 			)}
