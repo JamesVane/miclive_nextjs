@@ -15,6 +15,8 @@ import DividerH from "@/universalComponents/DividerH";
 import PerformerSelectFromExistingModalMobile from "./PerformerSelectFromExistingModalMobile";
 import PerformerAddNewAudioToEventModal from "./PerformerAddNewAudioToEventModal";
 import { RootState } from "@/app/LocalizationProviderHelper";
+import { Button } from "@mui/material";
+import { CheckRounded } from "@mui/icons-material";
 
 interface EventDateAudioSubmitProps {
 	specificEventId: number;
@@ -22,6 +24,8 @@ interface EventDateAudioSubmitProps {
 	allowedLength: string;
 	tracksPerPerformer: number;
 	refreshAudio: () => void;
+	hasDoneButton?: boolean;
+	handleDone?: () => void;
 }
 
 function EventDateAudioSubmit({
@@ -30,6 +34,8 @@ function EventDateAudioSubmit({
 	allowedLength,
 	tracksPerPerformer,
 	refreshAudio,
+	hasDoneButton,
+	handleDone,
 }: EventDateAudioSubmitProps) {
 	const dispatch = useDispatch();
 
@@ -107,6 +113,16 @@ function EventDateAudioSubmit({
 						trackNumber={String(1)}
 						payload={submittedAudio ? submittedAudio[1] : null}
 					/>
+					{hasDoneButton && submittedAudio && submittedAudio[1] ? (
+						<Button
+							startIcon={<CheckRounded />}
+							size="large"
+							color="success"
+							variant="outlined"
+							onClick={handleDone}>
+							Done
+						</Button>
+					) : null}
 				</div>
 			) : null}
 		</>

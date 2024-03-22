@@ -59,8 +59,17 @@ import {
 	REGISTER,
 } from "redux-persist";
 import CreateWebStorage from "redux-persist/es/storage/createWebStorage";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 Amplify.configure({ ...awsExports, ssr: true });
+
+const queryClient = new QueryClient({
+	defaultOptions: {
+		queries: {
+			refetchOnWindowFocus: false, // default: true
+		},
+	},
+});
 
 const createNoopStorage = () => {
 	return {
@@ -165,11 +174,13 @@ function LocalizationProviderHelper({
 	}, [isMobile, pathname]);
 
 	return (
-		<Provider store={store}>
-			<LocalizationProvider dateAdapter={AdapterLuxon}>
-				{children}
-			</LocalizationProvider>
-		</Provider>
+		<QueryClientProvider client={queryClient}>
+			<Provider store={store}>
+				<LocalizationProvider dateAdapter={AdapterLuxon}>
+					{children}
+				</LocalizationProvider>
+			</Provider>
+		</QueryClientProvider>
 	);
 }
 

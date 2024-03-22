@@ -25,9 +25,9 @@ function PerformerCurrentEventContainer({
 }: PerformerCurrentEventContainerProps) {
 	const dispatch = useDispatch();
 
-	/* const { upcoming: upcomingEventsArray } = useSelector(
-		(state: RootState) => state.performerTicket
-	); */
+	const { event } = useSelector(
+		(state: RootState) => state.performerCurrentEventSlice
+	);
 	const [checkedIn, setCheckedIn] = useState(false);
 	const [isLoading, setIsLoading] = useState(true);
 	const [myRoleId, setMyRoleId] = useState(0);
@@ -93,8 +93,7 @@ function PerformerCurrentEventContainer({
 					) : (
 						<CheckInPage
 							setCheckedIn={handleCheckedInFromCheckInPage}
-							eventName={eventNameFromParams}
-							baseEventId={88}
+							specificEventId={Number(specificEventIdFromParams)}
 						/>
 					)}
 				</>

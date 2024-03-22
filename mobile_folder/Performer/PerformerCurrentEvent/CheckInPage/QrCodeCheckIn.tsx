@@ -41,6 +41,7 @@ function QrCodeCheckIn({ handleToStart, setCheckedIn }: QrCodeCheckInProps) {
 					putPerformerQrCheckin(extractedId).then((res) => {
 						if (res) {
 							setCheckedIn();
+							handleToStart();
 							setIsLoading(false);
 						} else {
 							setIsLoading(false);

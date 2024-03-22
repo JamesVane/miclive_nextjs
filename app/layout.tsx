@@ -12,6 +12,7 @@ import "./global.css";
 import awsExports from "../aws-exports";
 import { Amplify } from "aws-amplify";
 import Metadata from "next/head";
+
 Amplify.configure({ ...awsExports, ssr: true });
 
 export const revalidate = 0;

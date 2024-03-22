@@ -31,6 +31,7 @@ function KeyCheckIn({ handleToStart, setCheckedIn }: KeyCheckInProps) {
 				putPerformerCheckInWithKey(value).then((res) => {
 					if (res.success) {
 						setCheckedIn();
+						handleToStart();
 						setIsLoading(false);
 					} else {
 						setIsLoading(false);

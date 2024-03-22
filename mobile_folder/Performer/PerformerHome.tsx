@@ -2,11 +2,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { BottomNavigation, BottomNavigationAction } from "@mui/material";
+import {
+	BottomNavigation,
+	BottomNavigationAction,
+	Button,
+} from "@mui/material";
 import {
 	AudioFileRounded,
 	BookmarksRounded,
 	ConfirmationNumberRounded,
+	EventAvailableRounded,
 } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
@@ -23,11 +28,17 @@ import PerformerFollowingPage from "../Performer/PerformerFollowingPage";
 import PerformerTicketPage from "../Performer/PerformerTicketPage";
 import AppBarMobile from "@mobi/AppBarMobile";
 import PerformerMyAudioPage from "./PerformerMyAudioPage";
+import { useSelector } from "react-redux";
+import { RootState } from "@/app/LocalizationProviderHelper";
 // import { useSessionState } from "@/custom_hooks/useSessionState";
 
 function PerformerHome() {
 	const router = useRouter();
 	const dispatch = useDispatch();
+
+	const { upcoming: upcomingArray } = useSelector(
+		(state: RootState) => state.performerTicketsV2pt0
+	);
 
 	const [isLoading, setIsLoading] = useState(true);
 	const [selectedTab, setSelectedTab] = useState<
@@ -64,6 +75,22 @@ function PerformerHome() {
 		initPerformerData().then(() => setIsLoading(false));
 	}, []);
 
+	const currentEvent =
+		upcomingArray && upcomingArray.length > 0 ? upcomingArray[0] : null;
+
+	function adjustEventName(eventNameInput: string): string {
+		return eventNameInput.replace(/\s/g, "").toLowerCase();
+	}
+
+	function handleGoToCurrentEvent() {
+		if (currentEvent) {
+			const nameSlug = adjustEventName(currentEvent.event_name);
+			router.push(
+				`/m/performer/event/${currentEvent.specific_event_id}/${nameSlug}`
+			);
+		}
+	}
+
 	return (
 		<>
 			{isLoading ? (
@@ -92,7 +119,18 @@ function PerformerHome() {
 							<PerformerMyAudioPage />
 						) : null}
 					</>
+					<div className={styles.bottom_bumper} />
 					<div className={styles.fade_div} />
+					<div className={styles.current_event_div}>
+						<Button
+							onClick={handleGoToCurrentEvent}
+							size="large"
+							color="success"
+							variant="contained"
+							startIcon={<EventAvailableRounded />}>
+							go to current event
+						</Button>
+					</div>
 					<div className={styles.bottom_div}>
 						<div className={styles.nav_paper}>
 							<BottomNavigation
