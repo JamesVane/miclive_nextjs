@@ -12,6 +12,17 @@
 	height: 70px;
 	composes: row_center from "@styl/base_flexbox.module.css";
 }
+.roster_paper_main_div_sticky {
+	width: 100%;
+	height: 70px;
+	composes: row_center from "@styl/base_flexbox.module.css";
+	position: sticky;
+	top: 38px;
+	bottom: 48px;
+	max-height: 70px;
+	background-color: var(--background-default);
+	z-index: 100;
+}
 .roster_pic_numberc_wrapper {
 	height: 70px;
 	width: 70px;

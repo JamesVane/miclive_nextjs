@@ -4,13 +4,10 @@
 import { useEffect, useState } from "react";
 import PerformerCurrentEvent from "./PerformerCurrentEvent";
 import { checkIfCheckedIn } from "@/api_functions/getCheckIfCheckedIn";
-import { useSelector } from "react-redux";
-import { RootState } from "@/app/LocalizationProviderHelper";
 import { Auth } from "aws-amplify";
 import SplashPage from "@/SplashPage";
 import CheckInPage from "./CheckInPage";
 import { getPerformerCurrentEventState } from "@/api_functions/getPerformerCurrentEventState";
-import { setPerformerCurrentEventState } from "@/store/performerCurrentEventSlice";
 import { useDispatch } from "react-redux";
 import ExitModal from "./ExitModal";
 
@@ -25,9 +22,6 @@ function PerformerCurrentEventContainer({
 }: PerformerCurrentEventContainerProps) {
 	const dispatch = useDispatch();
 
-	const { event } = useSelector(
-		(state: RootState) => state.performerCurrentEventSlice
-	);
 	const [checkedIn, setCheckedIn] = useState(false);
 	const [isLoading, setIsLoading] = useState(true);
 	const [myRoleId, setMyRoleId] = useState(0);
@@ -50,6 +44,7 @@ function PerformerCurrentEventContainer({
 			checkIfCheckedIn(numberRoleId, Number(specificEventIdFromParams)).then(
 				(res) => {
 					setCheckedIn(res);
+					setIsLoading(false);
 					if (!res) {
 						setIsLoading(false);
 					}
@@ -59,17 +54,6 @@ function PerformerCurrentEventContainer({
 
 		checkIfChecked();
 	}, []);
-
-	useEffect(() => {
-		if (checkedIn) {
-			getPerformerCurrentEventState(Number(specificEventIdFromParams)).then(
-				(res) => {
-					dispatch(setPerformerCurrentEventState(res));
-					setIsLoading(false);
-				}
-			);
-		}
-	}, [checkedIn]);
 
 	function handleCheckedInFromCheckInPage() {
 		setIsLoading(true);
@@ -87,6 +71,7 @@ function PerformerCurrentEventContainer({
 				<>
 					{checkedIn ? (
 						<PerformerCurrentEvent
+							specificEventIdFromParams={Number(specificEventIdFromParams)}
 							myRoleId={myRoleId}
 							handleExitModal={() => setExitModalOpen(true)}
 						/>

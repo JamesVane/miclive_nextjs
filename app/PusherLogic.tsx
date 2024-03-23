@@ -15,6 +15,9 @@ import {
 } from "@/store/PromoterManageEventState";
 import { RootState } from "@/app/LocalizationProviderHelper";
 import { useSelector } from "react-redux";
+import { useQuery } from "@tanstack/react-query";
+import { getPerformerCurrentEventState } from "@/api_functions/getPerformerCurrentEventState";
+import { getIntermissionStampFromSpecificId } from "@/api_functions/getIntermissionStampFromSpecificId";
 
 function PusherLogic() {
 	const [userType, setUserType] = useState("");
@@ -35,6 +38,27 @@ function PusherLogic() {
 		getUserTypeAndRoleId();
 	}, []);
 
+	const { data: eventInfo, refetch: refetchPerformerCurrentEvent } = useQuery({
+		queryKey: [
+			"performerCurrentEventState",
+			{
+				request_specific_event_id: Number(specificEventId),
+			},
+		],
+		queryFn: getPerformerCurrentEventState,
+	});
+
+	const { data: imtermissionTimestampFromQuery, refetch: timestampRefetch } =
+		useQuery({
+			queryKey: [
+				"performerCurrentEventTimestamp",
+				{
+					request_specific_event_id: specificEventId,
+				},
+			],
+			queryFn: getIntermissionStampFromSpecificId,
+		});
+
 	function PusherInner() {
 		const dispatch = useDispatch();
 		useEffect(() => {
@@ -48,6 +72,26 @@ function PusherLogic() {
 			});
 			var userChannel = pusher.subscribe(userChannelId);
 			var eventChannel = pusher.subscribe(eventChannelId);
+
+			if (userType === "performer") {
+				if (specificEventId) {
+					eventChannel.bind("event_has_started", function (data: any) {
+						refetchPerformerCurrentEvent();
+					});
+
+					eventChannel.bind("event_intermission_started", function (data: any) {
+						timestampRefetch();
+					});
+
+					eventChannel.bind(
+						"event_adjust_intermission_time",
+						function (data: any) {
+							console.log("THIS SHOULD RUN");
+							timestampRefetch();
+						}
+					);
+				}
+			}
 
 			if (userType === "promoter") {
 				if (specificEventId) {

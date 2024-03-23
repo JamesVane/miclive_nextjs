@@ -37,7 +37,6 @@ import viewUserInfoModalSlice from "@/store/viewUserInfoModalSlice";
 import desktopSelectedBaseEventSlice from "@/store/desktopSelectedBaseEventSlice";
 import promoterCreateDate from "@/store/CreateEventDateSlice";
 import djInviteState from "@/store/DjInviteState";
-import performerCurrentEventSlice from "@/store/performerCurrentEventSlice";
 import walkinKeyCheckInStateSlice from "@/store/walkinKeyCheckInStateSlice";
 import PromoterManageEventState from "@/store/PromoterManageEventState";
 import performerFollowingArrayV2Slice from "@/store/performerFollowingArrayV2Slice";
@@ -120,7 +119,6 @@ const rootReducer = combineReducers({
 	desktopSelectedBaseEventSlice: desktopSelectedBaseEventSlice,
 	promoterCreateDate: promoterCreateDate,
 	djInviteState: djInviteState,
-	performerCurrentEventSlice: performerCurrentEventSlice,
 	walkinKeyCheckInStateSlice: walkinKeyCheckInStateSlice,
 	PromoterManageEventState: PromoterManageEventState,
 	performerFollowingArrayV2Slice: performerFollowingArrayV2Slice,

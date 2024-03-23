@@ -2,74 +2,94 @@
 
 .main_div {
 	width: 100%;
-	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 40px;
 }
-.header_paper {
-	position: relative;
+.top_div {
 	width: 100%;
-	height: 130px;
-	composes: row from "@styl/base_flexbox.module.css";
-	align-items: end;
-	font-size: 17px;
-	z-index: 300;
+	height: 85px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 }
 .pic_div {
-	position: absolute;
-	left: 0;
-	bottom: 0;
-	width: 100px;
-	height: 100px;
-	composes: column_center from "@styl/base_flexbox.module.css";
+	width: 85px;
+	height: 85px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
-.right_head_div {
-	position: absolute;
-	right: 0;
-	height: 100%;
-	width: calc(100% - 100px);
-	composes: column from "@styl/base_flexbox.module.css";
-}
-.name {
-	font-size: 20px;
-	width: 100%;
-	height: 35%;
-	composes: row from "@styl/base_flexbox.module.css";
-	padding-left: 10px;
-	align-items: end !important;
-}
-.tagline {
-	font-size: 14px;
-	width: 100%;
-	height: 40%;
-	composes: row from "@styl/base_flexbox.module.css";
-	padding-left: 10px;
-}
-.buttons {
-	width: 100%;
-	height: 25%;
-	composes: row_around from "@styl/base_flexbox.module.css";
-}
-.pic_wrapper {
+.pic_deco {
 	width: 90%;
 	height: 90%;
-	composes: column_center from "@styl/base_flexbox.module.css";
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 	overflow: hidden;
+	border: hidden;
 	border-radius: 5px;
 }
-.time_location_row {
-	width: 100%;
-	height: 50px;
-	composes: row from "@styl/base_flexbox.module.css";
-	padding-left: 10px;
+.top_right {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	width: calc(100% - 85px);
 }
-.info_text_helper {
-	margin-left: 10px;
-	font-size: 14px;
-}
-.divider_div {
+.event_name_div {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 	width: 100%;
+	font-size: 22px;
+	padding-left: 5px;
+}
+.tagline_div {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	font-size: 17px;
+	text-align: left;
+	padding-left: 5px;
+}
+.dicider_div {
+	width: 100%;
+	height: 2px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.date_loc_div {
+	width: 100%;
+	color: var(--primary-main);
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	overflow: hidden;
+	padding-left: 5px;
 	margin-top: 5px;
-	margin-bottom: 5px;
 }
-.description_div {
+.elipses_text {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.promoter_dj_div {
+	width: 100vw;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-evenly;
+	margin-top: 5px;
+}
+.bumper_bottom {
 	width: 100%;
+	min-height: 50px;
 }

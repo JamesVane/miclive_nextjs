@@ -2,27 +2,58 @@
 
 import React from "react";
 import styles from "./styles.module.css";
-import { Avatar, Button, Divider } from "@mui/material";
+import { Avatar, Box, Divider } from "@mui/material";
+import AvatarSimpleMobile from "@/mobile_folder/small_components/AvatarSimpleMobile";
 
-function PerformerCurrentEventRosterPaper() {
+interface PerformerCurrentEventRosterPaperProps {
+	isSticky?: boolean;
+	performerName: string;
+	queuePosition: number;
+	realQueuePosition: number;
+	performerRoleId: number;
+}
+
+function PerformerCurrentEventRosterPaper({
+	isSticky,
+	performerName,
+	queuePosition,
+	realQueuePosition,
+	performerRoleId,
+}: PerformerCurrentEventRosterPaperProps) {
 	return (
 		<>
-			<div className={styles.roster_paper_main_div}>
+			<div
+				className={
+					isSticky
+						? styles.roster_paper_main_div_sticky
+						: styles.roster_paper_main_div
+				}>
 				<div className={styles.roster_pic_numberc_wrapper}>
-					<Avatar sx={{ width: "80%", height: "80%" }}></Avatar>
+					<AvatarSimpleMobile
+						ninety
+						id={performerRoleId}
+						username={performerName}
+						type="performer"
+					/>
 				</div>
-				<div className={styles.roster_middle}>PerformerName</div>
+				<Box
+					className={styles.roster_middle}
+					sx={{
+						color: isSticky ? "success.main" : "secondary.main",
+					}}>
+					{performerName}
+				</Box>
 				<div className={styles.roster_pic_numberc_wrapper}>
 					<Avatar
 						sx={{
 							width: "80%",
 							height: "80%",
 							backgroundColor: "transparent",
-							border: "1px solid #f8dca1ff",
-							color: "#f8dca1ff",
+							border: isSticky ? "1px solid #66bb69" : "1px solid #f8dca1ff",
+							color: isSticky ? "success.main" : "#f8dca1ff",
 							fontSize: "30px",
 						}}>
-						1
+						{queuePosition}
 					</Avatar>
 				</div>
 			</div>

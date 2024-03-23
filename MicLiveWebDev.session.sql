@@ -1,4 +1,4 @@
 UPDATE roster
-SET submitted_audio = '{}'
+SET cue_position = 5
 WHERE specific_event = 159
     AND performer = 208;

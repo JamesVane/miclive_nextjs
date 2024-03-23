@@ -13,19 +13,13 @@
 	width: 100%;
 	z-index: 200;
 	font-size: 20px;
-	background-color: var(--background-paper);
+	background-color: var(--background-default);
 }
 .back_name_div {
 	width: 100%;
 	height: 40px;
 	composes: row_center from "@styl/base_flexbox.module.css";
 	position: relative;
-}
-.profile_header_info_div {
-	position: relative;
-	width: 100%;
-	height: 40px;
-	composes: row_center from "@styl/base_flexbox.module.css";
 }
 .submitted_audio_header_div {
 	position: relative;
@@ -63,42 +57,9 @@
 	font-size: 35px;
 	composes: column_center from "@styl/base_flexbox.module.css";
 }
-.header_pic {
-	height: 40px;
-	width: 40px;
-	margin-right: 5px;
-	composes: column_center from "@styl/base_flexbox.module.css";
-}
-.header_number {
-	margin-left: 5px;
-	composes: column_center from "@styl/base_flexbox.module.css";
-	height: 40px;
-	width: 40px;
-}
-.timer_div {
-	margin-right: 5px;
-	position: absolute;
-	right: 0px;
-	top: 0px;
-	width: 100px;
-	height: 40px;
-	composes: row_center from "@styl/base_flexbox.module.css";
-}
-.timer_decoration {
-	width: 100%;
-	height: 70%;
-	border: 1px solid var(--secondary-main);
-	border-radius: 15px;
-	composes: row_center from "@styl/base_flexbox.module.css";
-	color: var(--primary-main);
-}
 .header_bumper {
 	width: 100%;
 	height: 45px;
-}
-.header_performer_bumper {
-	width: 100%;
-	height: 40px;
 }
 .exit_modal_div {
 	width: 100%;
@@ -123,20 +84,22 @@
 	composes: row_center from "@styl/base_flexbox.module.css";
 	height: 80px;
 }
-.current_event_bottom_box {
+.bottom_tabs {
+	width: 100%;
+	height: 50px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 	position: fixed;
 	bottom: 0px;
-	left: 0px;
-	right: 0px;
 	z-index: 200;
-	composes: row_center from "@styl/base_flexbox.module.css";
-	height: 70px;
 }
-.bottom_nav_paper {
-	opacity: 0.7;
-	width: 70%;
-	height: 55px;
-	border-radius: 10px;
-	overflow: hidden;
-	background-color: var(--background-paper);
+.header_buttons {
+	height: 100%;
+	position: absolute;
+	right: 45px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 }
