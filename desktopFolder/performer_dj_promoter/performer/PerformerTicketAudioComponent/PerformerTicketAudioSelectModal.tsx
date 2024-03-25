@@ -13,7 +13,6 @@ import { Auth } from "aws-amplify";
 import SplashPage from "@/SplashPage";
 import { getPerformerProfileAudioKeys } from "@/api_functions/getPerformerProfileAudioKeys";
 import { setPerformerAudioKey } from "@/store/performerAudioKeysStore";
-import { postSocketPerformerChangedAudioForCurrentEventToDj } from "@/api_functions/postSocketPerformerChangedAudioForCurrentEventToDj";
 import { PerformerRoleAudioKeys } from "@/api_functions/getPerformerProfileAudioKeys";
 
 interface PerformerTicketAudioSelectModal {
@@ -81,15 +80,6 @@ function PerformerTicketAudioSelectModal({
 			}
 		)
 			.then((res) => {
-				if (djRoleIdForPerformerSocket) {
-					postSocketPerformerChangedAudioForCurrentEventToDj({
-						request_dj_role_id: djRoleIdForPerformerSocket,
-						request_performer_id: performerIdToBeUsed.toString(),
-						request_specific_event_id: specificEventId.toString(),
-						request_audio_key: selectFromSongOpen.toString(),
-						request_audio_value: bodyForAudio,
-					});
-				}
 				setSelectFromSongOpen();
 			})
 			.catch((err) => {

@@ -13,7 +13,6 @@ import {
 import { postAudio } from "../../api_functions/postAudio";
 import { PostPerformerChangeSubmittedAudioFromExisting } from "../../api_functions/PostPerformerChangeSubmittedAudioFromExisting";
 import { Auth } from "aws-amplify";
-import { postSocketPerformerChangedAudioForCurrentEventToDj } from "@/api_functions/postSocketPerformerChangedAudioForCurrentEventToDj";
 
 interface UploadAudioProps {
 	close: () => void;
@@ -82,17 +81,7 @@ function UploadAudio({
 						{
 							[addNewOpen]: bodyForAudio,
 						}
-					).then((res) => {
-						if (djRoleIdForPerformerSocket) {
-							postSocketPerformerChangedAudioForCurrentEventToDj({
-								request_dj_role_id: djRoleIdForPerformerSocket,
-								request_performer_id: performerIdToBeUsed.toString(),
-								request_specific_event_id: specificEventId.toString(),
-								request_audio_key: addNewOpen.toString(),
-								request_audio_value: bodyForAudio,
-							});
-						}
-					});
+					).then((res) => {});
 				}
 				setUploadedSuccess(true);
 				setUploadInProgress(false);

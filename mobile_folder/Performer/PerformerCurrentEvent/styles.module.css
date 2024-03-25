@@ -103,3 +103,11 @@
 	flex-direction: row;
 	align-items: center;
 }
+.audio_select_div {
+	width: 100%;
+	height: calc(100vh - 230px);
+	max-height: calc(100vh - 230px);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}

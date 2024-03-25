@@ -17,9 +17,9 @@
 }
 .audio_rows_scroll {
 	width: 100%;
-	height: calc(100%);
-	min-height: calc(100%);
-	max-height: calc(100%);
+	height: calc(100% - 40px);
+	min-height: calc(100% - 40px);
+	max-height: calc(100% - 40px);
 	composes: column from "@styl/base_flexbox.module.css";
 	overflow-x: hidden;
 	overflow-y: scroll;
@@ -92,6 +92,7 @@
 	flex-direction: column;
 	align-items: center;
 	position: absolute;
+	overflow-x: hidden;
 }
 .loader_div {
 	width: 100%;

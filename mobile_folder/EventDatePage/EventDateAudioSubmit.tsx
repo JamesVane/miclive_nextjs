@@ -89,6 +89,14 @@ function EventDateAudioSubmit({
 
 	return (
 		<>
+			{selectFromSongOpen !== 0 ? (
+				<div
+					style={{
+						height: "200px",
+						width: "100%",
+					}}
+				/>
+			) : null}
 			<PerformerSelectFromExistingModalMobile
 				refreshAudio={() => refreshAudio()}
 			/>

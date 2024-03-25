@@ -86,10 +86,44 @@ function PusherLogic() {
 					eventChannel.bind(
 						"event_adjust_intermission_time",
 						function (data: any) {
-							console.log("THIS SHOULD RUN");
 							timestampRefetch();
 						}
 					);
+
+					eventChannel.bind("event_end_intermission", function (data: any) {
+						console.log("intermission ended socket");
+						timestampRefetch();
+						refetchPerformerCurrentEvent();
+					});
+
+					eventChannel.bind("event_next_performer", function (data: any) {
+						console.log("next performer socket");
+						refetchPerformerCurrentEvent();
+					});
+
+					eventChannel.bind(
+						"event_queue_position_dragged_and_dropped",
+						function (data: any) {
+							console.log("drag and drop socket");
+							refetchPerformerCurrentEvent();
+						}
+					);
+
+					eventChannel.bind("event_ended", function (data: any) {
+						console.log("event ended ");
+						refetchPerformerCurrentEvent();
+					});
+
+					eventChannel.bind("performer_added_to_roster", function (data: any) {
+						console.log("performer added socket");
+						refetchPerformerCurrentEvent();
+					});
+
+					eventChannel.bind("intermission_timer_ended", function (data: any) {
+						console.log("intermission timer ended socket");
+						timestampRefetch();
+						refetchPerformerCurrentEvent();
+					});
 				}
 			}
 

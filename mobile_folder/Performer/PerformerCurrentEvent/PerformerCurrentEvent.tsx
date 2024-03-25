@@ -22,6 +22,8 @@ import {
 	AccountCircleRounded,
 	IosShareRounded,
 	CheckRounded,
+	CoffeeRounded,
+	MusicNoteRounded,
 } from "@mui/icons-material";
 import PerformerCurrentEventInfo from "./PerformerCurrentEventInfo";
 import PerformerCurrentEventRoster from "./PerformerCurrentEventRoster/PerformerCurrentEventRoster";
@@ -38,6 +40,7 @@ import { getIntermissionStampFromSpecificId } from "@/api_functions/getIntermiss
 import { setCurrentEventSpecificEventId } from "@/store/currentEventSpecificEventIdSlice";
 import { useDispatch } from "react-redux";
 import { intermissionTimestampToMMSS } from "@/generic_functions/time_formaters";
+import { Bars } from "react-loader-spinner";
 
 interface PerformerCurrentEventProps {
 	myRoleId: number;
@@ -54,6 +57,8 @@ function PerformerCurrentEvent({
 
 	const [tab, setTab] = useState("roster");
 	const [intermissionTime, setIntermissionTime] = useState(0);
+	const [intermissionEndedLoading, setIntermissionEndedLoading] =
+		useState(false);
 
 	const {
 		status: timestampStatus,
@@ -104,19 +109,12 @@ function PerformerCurrentEvent({
 		}
 	}, [IntermissionTimestamp]);
 
-	function handleRefetch() {
-		refetch();
-		console.log("run 1");
-		timestampRefetch();
-		console.log("run 2");
-	}
-
 	useInterval(
 		() => {
 			if (intermissionTime > 0) {
 				setIntermissionTime((prevTime) => {
 					if (prevTime <= 1) {
-						handleRefetch();
+						setIntermissionEndedLoading(true);
 						return 0; // reset time
 					}
 					return prevTime - 1;
@@ -135,6 +133,12 @@ function PerformerCurrentEvent({
 			dispatch(setCurrentEventSpecificEventId(null));
 		}
 	}, [eventInfo]);
+
+	useEffect(() => {
+		setIntermissionEndedLoading(false);
+	}, [imtermissionTimestampFromQuery]);
+
+	const displayIntermission = intermissionTime && intermissionTime !== 0;
 
 	return (
 		<>
@@ -178,13 +182,39 @@ function PerformerCurrentEvent({
 							) : (
 								<>
 									{eventInfo ? (
-										intermissionTime && intermissionTime !== 0 ? (
+										intermissionEndedLoading || displayIntermission !== 0 ? (
 											<Box
 												sx={{
 													color: "warning.main",
+													display: "flex",
+													alignItems: "center",
+													justifyContent: "center",
+													flexDirection: "row",
 												}}>
-												Intermission{" "}
-												{intermissionTimestampToMMSS(intermissionTime)}
+												<CoffeeRounded
+													sx={{
+														marginRight: "5px",
+														marginBottom: "-5px",
+													}}
+												/>
+												{intermissionEndedLoading ? (
+													<div
+														style={{
+															display: "flex",
+															alignItems: "center",
+															justifyContent: "center",
+															flexDirection: "row",
+														}}>
+														<div style={{ marginRight: "5px" }}>
+															Intermission
+														</div>
+														<Bars height={17} width={17} color="#fea726" />
+													</div>
+												) : (
+													`Intermission ${intermissionTimestampToMMSS(
+														intermissionTime
+													)}`
+												)}
 											</Box>
 										) : (
 											<Box
@@ -193,9 +223,18 @@ function PerformerCurrentEvent({
 														? "success.main"
 														: "warning.main",
 												}}>
-												{eventInfo.event.event_has_started
-													? "Event in progress"
-													: "Waiting to start"}
+												{eventInfo.event.event_has_started ? (
+													<>
+														<MusicNoteRounded
+															sx={{
+																marginBottom: "-5px",
+															}}
+														/>{" "}
+														Event in progress
+													</>
+												) : (
+													"Waiting to start"
+												)}
 											</Box>
 										)
 									) : null}
@@ -218,16 +257,16 @@ function PerformerCurrentEvent({
 								}}
 								icon={<InfoRounded />}
 								value="event info"
-								label="event info"
+								label="Event info"
 							/>
 							<BottomNavigationAction
 								icon={<FormatListNumberedRtlRounded />}
-								label="roster"
+								label="Roster"
 								value="roster"
 							/>
 							<BottomNavigationAction
 								icon={<AudioFileRounded />}
-								label="my audio"
+								label="My audio"
 								value="my audio"
 							/>
 						</BottomNavigation>
@@ -255,13 +294,17 @@ function PerformerCurrentEvent({
 					) : tab === "my audio" ? (
 						<>
 							{eventInfo ? (
-								<EventDateAudioSubmit
-									refreshAudio={() => {}}
-									specificEventId={specificEventIdFromParams}
-									submittedAudio={eventInfo.submitted_audio}
-									allowedLength={eventInfo.event.time_per_performer.toString()}
-									tracksPerPerformer={1}
-								/>
+								<div className={styles.audio_select_div}>
+									<EventDateAudioSubmit
+										refreshAudio={() => {
+											refetch();
+										}}
+										specificEventId={specificEventIdFromParams}
+										submittedAudio={eventInfo.submitted_audio}
+										allowedLength={eventInfo.event.time_per_performer.toString()}
+										tracksPerPerformer={1}
+									/>
+								</div>
 							) : null}
 						</>
 					) : null}
