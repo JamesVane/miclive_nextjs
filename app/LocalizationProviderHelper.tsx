@@ -6,7 +6,6 @@
 import { useEffect } from "react";
 import { AdapterLuxon } from "@mui/x-date-pickers/AdapterLuxon";
 import { LocalizationProvider } from "@mui/x-date-pickers";
-import { isMobile } from "react-device-detect";
 import { usePathname, useRouter } from "next/navigation";
 import { Provider } from "react-redux";
 import awsExports from "@/aws-exports";
@@ -155,21 +154,6 @@ function LocalizationProviderHelper({
 	const router = useRouter();
 
 	const persistor = persistStore(store);
-
-	useEffect(() => {
-		if (isMobile && !pathname.startsWith("/m")) {
-			console.log("redirecting to mobile");
-			router.replace("/m" + pathname);
-		}
-		if (!isMobile && pathname.startsWith("/m")) {
-			console.log("redirecting to desktop");
-			if (pathname.length === 2) {
-				router.replace("/");
-			} else {
-				router.replace(pathname.slice(2));
-			}
-		}
-	}, [isMobile, pathname]);
 
 	return (
 		<QueryClientProvider client={queryClient}>

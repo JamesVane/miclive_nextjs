@@ -32,7 +32,8 @@
 		".next/types/**/*.ts",
 		"app/muiprovider.ts",
 		"useWatchableEffect/propWatcher.js",
-		"useWatchableEffect/utils.js"
+		"useWatchableEffect/utils.js",
+		"desktopFolder/PublicProfilePage"
 	],
 	"exclude": ["node_modules"]
 }

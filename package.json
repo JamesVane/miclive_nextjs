@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@dhaiwat10/react-link-preview": "^1.15.0",
     "@emotion/react": "^11.10.8",
     "@emotion/styled": "^11.10.8",
     "@fontsource/roboto": "^5.0.8",
@@ -49,7 +50,7 @@
     "react-image-crop": "^10.1.8",
     "react-loader-spinner": "^6.1.6",
     "react-number-format": "^5.3.1",
-    "react-player": "^2.13.0",
+    "react-player": "^2.15.1",
     "react-qr-scanner": "^1.0.0-alpha.11",
     "react-quill": "^2.0.0",
     "react-redux": "^8.1.3",

@@ -3119,6 +3119,13 @@
   resolved "https://registry.yarnpkg.com/@csstools/selector-specificity/-/selector-specificity-2.2.0.tgz#2cbcf822bf3764c9658c4d2e568bd0c0cb748016"
   integrity sha512-+OJ9konv95ClSTOJCmMZqpd5+YGsB2S+x6w3E1oaM8UuR5j8nTNHYSz8c9BEPGDOCMQYIEEGlVPj/VY64iTbGw==
 
+"@dhaiwat10/react-link-preview@^1.15.0":
+  version "1.15.0"
+  resolved "https://registry.yarnpkg.com/@dhaiwat10/react-link-preview/-/react-link-preview-1.15.0.tgz#44590036751283e494b80df9a982f16b83937561"
+  integrity sha512-q7wlSBDAHPPEtu6XXcj/OlisKoqBU7XdUHHEGsPBZYFE4Xeais3ATo2XH6xowf/9zi09UlMpcLmKRxsf+bTDXw==
+  dependencies:
+    react-loading-skeleton "^3.1.0"
+
 "@emotion/babel-plugin@^11.11.0":
   version "11.11.0"
   resolved "https://registry.yarnpkg.com/@emotion/babel-plugin/-/babel-plugin-11.11.0.tgz#c2d872b6a7767a9d176d007f5b31f7d504bb5d6c"
@@ -10793,6 +10800,11 @@ react-loader-spinner@^6.1.6:
     react-is "^18.2.0"
     styled-components "^6.1.2"
 
+react-loading-skeleton@^3.1.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/react-loading-skeleton/-/react-loading-skeleton-3.4.0.tgz#c71a3a17259d08e4064974aa0b07f150a09dfd57"
+  integrity sha512-1oJEBc9+wn7BbkQQk7YodlYEIjgeR+GrRjD+QXkVjwZN7LGIcAFHrx4NhT7UHGBxNY1+zax3c+Fo6XQM4R7CgA==
+
 react-native-get-random-values@^1.4.0:
   version "1.10.0"
   resolved "https://registry.yarnpkg.com/react-native-get-random-values/-/react-native-get-random-values-1.10.0.tgz#c2c5f12a4ef8b1175145347b4a4b9f9a40d9ffc8"
@@ -10814,10 +10826,10 @@ react-number-format@^5.3.1:
   dependencies:
     prop-types "^15.7.2"
 
-react-player@^2.13.0:
-  version "2.13.0"
-  resolved "https://registry.yarnpkg.com/react-player/-/react-player-2.13.0.tgz#b6fb252bf70574608ac711f6c83d7057c8fb0c14"
-  integrity sha512-gkY7ZdbVFztlKFFhCPcnDrFQm+L399b8fhWsKatZ+b2wpKJwfUHBXQFMRxqYQGT0ic1/wQ7D7EZEWy7ZBqk2pw==
+react-player@^2.15.1:
+  version "2.15.1"
+  resolved "https://registry.yarnpkg.com/react-player/-/react-player-2.15.1.tgz#a5905126a6c5ba2667391a0d72da9f3a1ab57d54"
+  integrity sha512-ni1XFuYZuhIKKdeFII+KRLmIPcvCYlyXvtSMhNOgssdfnSovmakBtBTW2bxowPvmpKy5BTR4jC4CF79ucgHT+g==
   dependencies:
     deepmerge "^4.0.0"
     load-script "^1.0.0"
