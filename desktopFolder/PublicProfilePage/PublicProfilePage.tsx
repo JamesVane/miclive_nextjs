@@ -11,6 +11,7 @@ import EmailWidget from "./EmailWidget";
 import YoutubePlayer from "./YoutubePlayer";
 import EventDateProfileCard from "./EventDateProfileCard";
 import ProfilePageLinkComponent from "./ProfilePageLinkComponent";
+import SpotifyComponent from "./SpotifyComponent";
 // 850 / 340
 
 function PublicProfilePage() {
@@ -87,10 +88,14 @@ function PublicProfilePage() {
 						</div>
 					</div>
 					<YoutubePlayer />
-					<ProfilePageLinkComponent
+					{/* <ProfilePageLinkComponent
 						// url={"https://www.youtube.com/watch?v=iFIvpsNpWLk"}
 						url={"https://mui.com/material-ui/react-drawer/"}
+					/> */}
+					<SpotifyComponent
+						url={"https://open.spotify.com/artist/4FlG0V0jhLO4qGpayFOphj"}
 					/>
+					<ProfilePageLinkComponent url="https://mui.com" />
 				</div>
 			</div>
 			<div className={styles.font_fade_container}>
