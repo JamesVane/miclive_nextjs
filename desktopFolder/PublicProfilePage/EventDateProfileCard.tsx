@@ -58,7 +58,7 @@ function EventDateProfileCard() {
 				<Button
 					startIcon={<AttachMoneyRounded />}
 					color="success"
-					variant="outlined">
+					variant="contained">
 					buy ticket with affiliate link
 				</Button>
 			</div>
