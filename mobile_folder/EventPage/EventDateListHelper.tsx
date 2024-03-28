@@ -2,7 +2,7 @@
 
 import React from "react";
 import EventDateListCard from "./EventDateListCard";
-import { DateType } from "./EventPageReducer";
+import { DateType } from "@desk/NewEventPage/NewEventPageReducer";
 import styles from "./styles.module.css";
 
 interface EventDateListHelperProps {

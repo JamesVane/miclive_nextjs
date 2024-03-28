@@ -9,7 +9,7 @@ import {
 	ConfirmationNumberRounded,
 } from "@mui/icons-material";
 import { useRouter, usePathname } from "next/navigation";
-import { DateType } from "./EventPageReducer";
+import { DateType } from "@desk/NewEventPage/NewEventPageReducer";
 import {
 	formatDateStringShort,
 	formatTimeHour,
