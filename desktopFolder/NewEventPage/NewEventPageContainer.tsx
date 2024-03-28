@@ -1,18 +1,8 @@
 /** @format */
 
-import { useEffect, useReducer, useState } from "react";
 import NewEventPage from "./NewEventPage";
 import PerformerEventDateModalV2 from "@desk/performer_dj_promoter/performer/PerformerEventDateModalV2";
-import { useRouter } from "next/navigation";
-import { getEventPageDataForAuthPerformer } from "@/api_functions/getEventPageDataForAuthPerformer";
-import { getEventPageDataForUnauthenticatedUser } from "@/api_functions/getEventPageDataForUnauthenticatedUser";
-import { Auth } from "aws-amplify";
-import {
-	defaultEventPageData,
-	eventPageReducer,
-	EventPageDataType,
-} from "./NewEventPageReducer";
-import SplashPage from "@/SplashPage";
+import { EventPageDataType } from "./NewEventPageReducer";
 
 interface NewEventPageContainerProps {
 	dateOpen?: boolean;
@@ -29,10 +19,6 @@ function NewEventPageContainer({
 }: NewEventPageContainerProps) {
 	const dataForPage = eventPageData.pageState;
 
-	/* const [isAlreadyFollowing, setIsAlreadyFollowing] = useState(false);
-	const [followingInProgress, setFollowingInProgress] = useState(false); */
-	const isLoading = dataForPage.pageState === "loading";
-
 	return (
 		<>
 			{dateOpen && specificIdfromParams ? (
@@ -48,7 +34,6 @@ function NewEventPageContainer({
 			) : null}
 			<NewEventPage
 				followingInProgress={false}
-				/* handleFollowButton={handleFollowButton} */
 				isAlreadyFollowing={eventPageData.alreadyFollowing}
 				hasFromState={true}
 				AuthEventPageData={dataForPage.data}

@@ -66,7 +66,7 @@ function ProfilePageContainer() {
 			const fetchedUserProfile = await getUserProfile(roleType, userId);
 			dispatch(setUsersStateProfile(fetchedUserProfile));
 		} catch {
-			router.push("/m/sign_in");
+			router.push("/sign_in");
 		}
 	}
 

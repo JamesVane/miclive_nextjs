@@ -37,7 +37,7 @@ const AppBarMobile: React.FC<AppBarMobileProps> = ({
 	const [alertModalOpen, setAlertModalOpen] = useState(false);
 
 	function handleNavigateProfile() {
-		router.push(`/m/profile`);
+		router.push(`/profile`);
 	}
 
 	function handleNavigateBackFromProfile() {
@@ -49,15 +49,15 @@ const AppBarMobile: React.FC<AppBarMobileProps> = ({
 	}
 
 	const alertButtonVisivle =
-		location === "/m/promoter" ||
-		location === "/m/performer" ||
-		location === "/m/dj" ||
-		location === "/m/profile";
+		location === "/promoter" ||
+		location === "/performer" ||
+		location === "/dj" ||
+		location === "/profile";
 
 	async function navigateToHome() {
 		const user = await Auth.currentAuthenticatedUser();
 		const roleType = user.attributes["custom:RoleType"];
-		router.push(`/m/${roleType}`);
+		router.push(`/${roleType}`);
 	}
 
 	return (

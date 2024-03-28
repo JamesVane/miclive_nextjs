@@ -27,11 +27,11 @@ function NormalEventCard({
 
 	function handleClick() {
 		if (isForPromoter) {
-			router.push(`/m/promoter/event/${adjustEventName(eventName)}`);
+			router.push(`/promoter/event/${adjustEventName(eventName)}`);
 		} else if (isForDj) {
-			router.push(`/m/dj/event_page/${baseEventId}`);
+			router.push(`/dj/event_page/${baseEventId}`);
 		} else {
-			router.push(`/m/event/${adjustEventName(eventName)}`);
+			router.push(`/event/${adjustEventName(eventName)}`);
 		}
 	}
 

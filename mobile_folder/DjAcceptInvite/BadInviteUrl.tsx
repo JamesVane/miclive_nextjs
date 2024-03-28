@@ -10,7 +10,7 @@ function BadInviteUrl() {
 	const router = useRouter();
 
 	function handleGoToHome() {
-		router.push("/m");
+		router.push("/");
 	}
 
 	return (

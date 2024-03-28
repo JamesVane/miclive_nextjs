@@ -13,7 +13,7 @@ function DjAcceptDateConfirmContainer({
 	return (
 		<QuickConfirmPhoneContainer
 			userTypeFromParams="dj"
-			continueUrl={`/m/dj_accept_date/${paramsKey}`}
+			continueUrl={`/dj_accept_date/${paramsKey}`}
 			doesNotHavePassword={false}
 		/>
 	);

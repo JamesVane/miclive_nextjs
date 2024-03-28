@@ -41,10 +41,10 @@ function StartPage() {
 				const currentUser = await Auth.currentAuthenticatedUser();
 				if (currentUser.attributes) {
 					if (currentUser.attributes["custom:RoleId"]) {
-						router.push(`/m/${currentUser.attributes["custom:RoleType"]}`);
+						router.push(`/${currentUser.attributes["custom:RoleType"]}`);
 					} else {
 						router.push(
-							`/m/add_info/${currentUser.attributes["custom:RoleType"]}`
+							`/add_info/${currentUser.attributes["custom:RoleType"]}`
 						);
 					}
 				}
@@ -85,7 +85,7 @@ function StartPage() {
 					<Button
 						onClick={() => {
 							dispatch(setSignInDefault());
-							router.push("/m/sign_in");
+							router.push("/sign_in");
 						}}
 						startIcon={<LoginRounded />}
 						sx={{

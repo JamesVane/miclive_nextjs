@@ -63,7 +63,7 @@ function PromoterCurrentEvent({
 					<div className={styles.back_name_div}>
 						<Button
 							color="secondary"
-							onClick={() => router.push("/m/promoter")}
+							onClick={() => router.push("/promoter")}
 							startIcon={<CloseRounded />}
 							sx={{ position: "absolute", left: 0 }}>
 							exit

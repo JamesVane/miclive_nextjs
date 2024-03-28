@@ -4,12 +4,16 @@ import axios from "axios";
 
 export const getLinkPreviewInfo = async (url: string) => {
 	const apiUrl = "https://api.linkpreview.net";
-	const params = new URLSearchParams({ q: url });
-	const TEMP_API_KEY = "f6d9d75d164421f8113fdc923070a18d"; // Replace with your actual API key
+	const data = new URLSearchParams({
+		q: url,
+		fields: "canonical,locale,site_name",
+	});
+	const TEMP_API_KEY = "63f2ba7b6d69598e517fe8a9f3a517cd"; // Replace with your actual API key
 
 	try {
-		const response = await axios.get(`${apiUrl}/?${params.toString()}`, {
+		const response = await axios.post(apiUrl, data.toString(), {
 			headers: {
+				"Content-Type": "application/x-www-form-urlencoded",
 				"X-Linkpreview-Api-Key": TEMP_API_KEY,
 			},
 		});

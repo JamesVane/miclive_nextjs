@@ -27,7 +27,7 @@ function SignedInAsPerformerKeyCheckin({
 	);
 
 	function handleGoToEvent() {
-		router.push(`/m/event/${eventData?.name}/${eventData!.specificEventId}`);
+		router.push(`/event/${eventData?.name}/${eventData!.specificEventId}`);
 	}
 
 	useEffect(() => {
@@ -45,7 +45,7 @@ function SignedInAsPerformerKeyCheckin({
 				} else if (res === "no ticket") {
 					if (eventData) {
 						router.push(
-							`/m/walkin_key/purchase/${checkinKey}/${eventData.specificEventId}`
+							`/walkin_key/purchase/${checkinKey}/${eventData.specificEventId}`
 						);
 					}
 				}

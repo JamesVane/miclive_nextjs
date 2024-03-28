@@ -1,5 +1,5 @@
 /** @format */
-
+"use client";
 import { useState, useCallback } from "react";
 import styles from "./styles.module.css";
 import AppBarMobile from "@mobi/AppBarMobile";
@@ -14,30 +14,24 @@ import {
 } from "@mui/icons-material";
 import PersonRowMobile from "@mobi/PersonRowMobile";
 import EventDateListHelper from "./EventDateListHelper";
-import { AuthEventPageData } from "./EventPageReducer";
 import DescriptionComponent from "@mobi/DescriptionComponent";
 import MessagingButton from "@mobi/Messaging/MessagingButton";
 import Drawer from "@mui/material/Drawer";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
+import { Auth } from "aws-amplify";
+import { EventPageDataType } from "@desk/NewEventPage/NewEventPageReducer";
+import { putPerformerFollowEvent } from "@/api_functions/putPerformerFollowEvent";
 
 interface EventPageProps {
-	AuthEventPageData: AuthEventPageData;
-	isAlreadyFollowing: boolean;
+	AuthEventPageData: EventPageDataType;
 	authStatus: "performer auth" | "not performer";
-	handleBack: () => void;
-	handleFollowButton: () => void;
-	followingInProgress: boolean;
 }
 
-function EventPage({
-	AuthEventPageData,
-	isAlreadyFollowing,
-	authStatus,
-	handleBack,
-	handleFollowButton,
-	followingInProgress,
-}: EventPageProps) {
+function EventPage({ AuthEventPageData, authStatus }: EventPageProps) {
 	const router = useRouter();
+
+	const [isAlreadyFollowing, setIsAlreadyFollowing] = useState(false);
+	const [followingInProgress, setFollowingInProgress] = useState(false);
 
 	const searchParams = useSearchParams();
 	const pathname = usePathname();
@@ -60,6 +54,10 @@ function EventPage({
 		[searchParams]
 	);
 
+	function handleBack() {
+		router.push("/performer");
+	}
+
 	function openModal() {
 		router.push(pathname + "?" + createQueryString("modal", "true"));
 	}
@@ -68,13 +66,47 @@ function EventPage({
 		router.push(pathname + "?" + createQueryString("modal", "false"));
 	}
 
+	const refreshData = () => {
+		router.refresh();
+	};
+
 	const drawerContainerWindowDocumentBody =
 		window !== undefined ? () => window.document.body : undefined;
+
+	async function handleFollowButton() {
+		setFollowingInProgress(true);
+		try {
+			const user = await Auth.currentAuthenticatedUser();
+			const roleId = user.attributes["custom:RoleId"];
+			const roleIdAsNumber =
+				typeof roleId === "string" ? parseInt(roleId) : roleId;
+			if (parsedpageData.base_event_id !== 0) {
+				putPerformerFollowEvent({
+					request_performer_role_id: roleIdAsNumber,
+					request_new_following_id: parsedpageData.base_event_id,
+				}).then(async (res) => {
+					await Auth.updateUserAttributes(user, {
+						"custom:PerformerFollowing": JSON.stringify(res),
+					}).then(() => {
+						refreshData();
+					});
+					setFollowingInProgress(false);
+				});
+			} else {
+				console.log("following failed");
+				setFollowingInProgress(false);
+			}
+		} catch {
+			console.log("following failed");
+			setFollowingInProgress(false);
+		}
+	}
+
+	const parsedpageData = AuthEventPageData.pageState.data;
 
 	return (
 		<>
 			<Drawer
-				// PaperProps={{ ref: swipeablePaperRef }}
 				container={drawerContainerWindowDocumentBody}
 				anchor="bottom"
 				open={modalState}
@@ -99,8 +131,8 @@ function EventPage({
 					<div className={styles.bottom_drawer_tab} />
 
 					<EventDateListHelper
-						previousArray={AuthEventPageData.previousDates}
-						upcomingArray={AuthEventPageData.upcomingDates}
+						previousArray={parsedpageData.previousDates}
+						upcomingArray={parsedpageData.upcomingDates}
 					/>
 				</div>
 			</Drawer>
@@ -156,14 +188,14 @@ function EventPage({
 			<div className={styles.main_div}>
 				<div className={styles.backdrop_banner}>
 					<img
-						src={`https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/event_banner_3X1/banner_${AuthEventPageData.base_event_id}`}
+						src={`https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/event_banner_3X1/banner_${parsedpageData.base_event_id}`}
 						style={{ height: "100%", width: "100%" }}
 					/>
 					<div className={styles.overlay_div}>
 						<div className={styles.main_banner_container}>
 							<div className={styles.main_banner}>
 								<img
-									src={`https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/event_banner_3X1/banner_${AuthEventPageData.base_event_id}`}
+									src={`https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/event_banner_3X1/banner_${parsedpageData.base_event_id}`}
 									style={{ height: "100%", width: "100%" }}
 								/>
 							</div>
@@ -173,7 +205,7 @@ function EventPage({
 							<div className={styles.pic_div}>
 								<div className={styles.pic_deco}>
 									<img
-										src={`https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/event_pictures/event_${AuthEventPageData.base_event_id}.jpg`}
+										src={`https://miclivedevuserphotos.s3.us-east-2.amazonaws.com/event_pictures/event_${parsedpageData.base_event_id}.jpg`}
 										style={{
 											width: "100%",
 											height: "100%",
@@ -183,10 +215,10 @@ function EventPage({
 							</div>
 							<div className={styles.name_tagline}>
 								<div className={styles.name_div}>
-									{AuthEventPageData.event_name}
+									{parsedpageData.event_name}
 								</div>
 								<div className={styles.tagline_div}>
-									{AuthEventPageData.event_tagline}
+									{parsedpageData.event_tagline}
 								</div>
 							</div>
 						</div>
@@ -203,21 +235,21 @@ function EventPage({
 						Buy Ticket
 					</Button>
 				</div>
-				{AuthEventPageData.promoter ? (
+				{parsedpageData.promoter ? (
 					<div className={styles.promoter_dj_row}>
 						<PersonRowMobile
-							info={AuthEventPageData.promoter.promoter_info}
-							name={AuthEventPageData.promoter.promoter_name}
+							info={parsedpageData.promoter.promoter_info}
+							name={parsedpageData.promoter.promoter_name}
 							type="promoter"
-							roleId={AuthEventPageData.promoter.promoter_id}
-							tagline={AuthEventPageData.promoter.promoter_tagline}
-							userSub={AuthEventPageData.promoter.promoter_sub}
-							key={AuthEventPageData.promoter.promoter_sub}
+							roleId={parsedpageData.promoter.promoter_id}
+							tagline={parsedpageData.promoter.promoter_tagline}
+							userSub={parsedpageData.promoter.promoter_sub}
+							key={parsedpageData.promoter.promoter_sub}
 						/>
 					</div>
 				) : null}
 				<div className={styles.desc_dov}>
-					<DescriptionComponent text={AuthEventPageData.event_description} />
+					<DescriptionComponent text={parsedpageData.event_description} />
 				</div>
 			</div>
 		</>

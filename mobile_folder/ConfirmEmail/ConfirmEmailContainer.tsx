@@ -33,7 +33,7 @@ function ConfirmEmailContainer() {
 				}
 				setIsLoading(false);
 			} catch {
-				router.push("/m/sign_in");
+				router.push("/sign_in");
 			}
 		}
 		getUserEmail();
@@ -53,7 +53,7 @@ function ConfirmEmailContainer() {
 			try {
 				const user = await Auth.currentAuthenticatedUser();
 			} catch {
-				router.push("/m/sign_in");
+				router.push("/sign_in");
 			}
 			try {
 				await Auth.verifyCurrentUserAttributeSubmit("email", emailCode);
@@ -73,7 +73,7 @@ function ConfirmEmailContainer() {
 			try {
 				const user = await Auth.currentAuthenticatedUser();
 			} catch {
-				router.push("/m/sign_in");
+				router.push("/sign_in");
 			}
 			const user = await Auth.currentAuthenticatedUser();
 			if (user.attributes) {
@@ -97,7 +97,7 @@ function ConfirmEmailContainer() {
 				setResendSnackMessage("Code re-sent successfully!");
 				setResendCodeLoading(false);
 			} else {
-				router.push("/m/sign_in");
+				router.push("/sign_in");
 			}
 		}
 	}

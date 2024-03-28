@@ -4,7 +4,13 @@
 import React from "react";
 import DjCurrentEvent from "./DjCurrentEvent";
 
-function DjCurrentEventContainer() {
+interface DjCurrentEventContainerProps {
+	specificEventId: string;
+}
+
+function DjCurrentEventContainer({
+	specificEventId,
+}: DjCurrentEventContainerProps) {
 	return <DjCurrentEvent />;
 }
 

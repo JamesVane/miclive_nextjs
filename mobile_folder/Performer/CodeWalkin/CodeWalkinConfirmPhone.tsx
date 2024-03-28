@@ -10,7 +10,7 @@ interface CodeWalkinConfirmPhoneProps {
 function CodeWalkinConfirmPhone({ key }: CodeWalkinConfirmPhoneProps) {
 	return (
 		<QuickConfirmPhoneContainer
-			continueUrl={`/m/walkin_key/${key}`}
+			continueUrl={`/walkin_key/${key}`}
 			userTypeFromParams="performer"
 			doesNotHavePassword={true}
 		/>

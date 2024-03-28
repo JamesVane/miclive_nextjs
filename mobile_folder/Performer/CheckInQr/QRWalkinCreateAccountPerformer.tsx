@@ -12,8 +12,8 @@ function QRWalkinCreateAccountPerformer({
 }: QRWalkinCreateAccountPerformerProps) {
 	return (
 		<WalkinAccountNamePhoneContainer
-			cancelPath={`/m/checkinqr/${uuid}`}
-			continuePath={`/m/checkinqr/${uuid}/confirm`}
+			cancelPath={`/checkinqr/${uuid}`}
+			continuePath={`/checkinqr/${uuid}/confirm`}
 		/>
 	);
 }

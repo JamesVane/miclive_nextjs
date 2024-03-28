@@ -40,30 +40,30 @@ function SettingsModalContainer({ closeModal }: SettingsModalContainerProps) {
 			dispatch(setCurrentSubSlice(null));
 			localStorage.clear();
 			sessionStorage.clear();
-			router.push("/m");
+			router.push("");
 		} catch (error) {
 			console.log("error signing out: ", error);
 		}
 	}
 
 	function handleVerifyEmail() {
-		router.push("/m/confirm_email");
+		router.push("/confirm_email");
 	}
 
 	function handleChangeEmail() {
-		router.push("/m/change_email");
+		router.push("/change_email");
 	}
 
 	function handleChangePhone() {
-		router.push("/m/change_phone");
+		router.push("/change_phone");
 	}
 
 	function handleChangePassword() {
-		router.push("/m/forgot_password?frompath=profile");
+		router.push("/forgot_password?frompath=profile");
 	}
 
 	function handleSetPassword() {
-		router.push("/m/set_password?frompath=profile");
+		router.push("/set_password?frompath=profile");
 	}
 
 	useEffect(() => {
@@ -72,7 +72,7 @@ function SettingsModalContainer({ closeModal }: SettingsModalContainerProps) {
 			try {
 				const user = await Auth.currentAuthenticatedUser({ bypassCache: true });
 			} catch {
-				router.push("/m/sign_in");
+				router.push("/sign_in");
 				return;
 			}
 			const user = await Auth.currentAuthenticatedUser({ bypassCache: true });

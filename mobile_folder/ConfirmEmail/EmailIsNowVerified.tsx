@@ -18,9 +18,9 @@ function EmailIsNowVerified({ currentEmail }: EmailIsNowVerifiedProps) {
 		try {
 			const user = await Auth.currentAuthenticatedUser({ bypassCache: true });
 			const userType = user.attributes["custom:RoleType"];
-			router.push(`/m/${userType}`);
+			router.push(`/${userType}`);
 		} catch {
-			router.push("/m/sign_in");
+			router.push("/sign_in");
 			return;
 		}
 	}

@@ -56,12 +56,12 @@ function PurchaseTicketContainer({
 				.replace(/\s+/g, "")
 				.toLowerCase();
 			if (forCheckin) {
-				router.push(`/m/checkinqr/${uuidFromParams}`);
+				router.push(`/checkinqr/${uuidFromParams}`);
 			} else if (forKeyCheckIn) {
-				router.push(`/m/walkin_key/${walkinKeyFromParams}`);
+				router.push(`/walkin_key/${walkinKeyFromParams}`);
 			} else {
 				router.push(
-					`/m/event/${eventNameSlug}/${pageData.specific_event_id}/ticket`
+					`/event/${eventNameSlug}/${pageData.specific_event_id}/ticket`
 				);
 			}
 			setIsPurchasing(false);
@@ -73,7 +73,7 @@ function PurchaseTicketContainer({
 			.trim()
 			.replace(/\s+/g, "")
 			.toLowerCase();
-		router.push(`/m/event/${eventNameSlug}/${pageData.specific_event_id}`);
+		router.push(`/event/${eventNameSlug}/${pageData.specific_event_id}`);
 	}
 
 	useEffect(() => {

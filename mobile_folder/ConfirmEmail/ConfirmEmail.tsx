@@ -46,7 +46,7 @@ function ConfirmEmail({
 	}
 
 	function handleChangeEmail() {
-		router.push("/m/change_email");
+		router.push("/change_email");
 	}
 
 	return (

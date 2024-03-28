@@ -72,7 +72,7 @@ function ChangeEmail({
 					const user = await Auth.currentAuthenticatedUser();
 					const currrentEmail = user.attributes;
 				} catch {
-					router.push("/m/sign_in");
+					router.push("/sign_in");
 				}
 				const user = await Auth.currentAuthenticatedUser();
 				const emailIsVerified = user.attributes.email_verified;
@@ -98,9 +98,9 @@ function ChangeEmail({
 						setSaveLoading(false);
 						return;
 					}
-					router.push("/m/confirm_email");
+					router.push("/confirm_email");
 				} else {
-					router.push("/m/sign_in");
+					router.push("/sign_in");
 				}
 			}
 		}
@@ -122,7 +122,7 @@ function ChangeEmail({
 				setSaveLoading(false);
 				return;
 			}
-			router.push("/m/confirm_email");
+			router.push("/confirm_email");
 		}
 	}
 	return (

@@ -73,7 +73,7 @@ function PromoterEditEvent({ eventNameFromParams }: PromoterEditEventProps) {
 	function handleBack() {
 		if (selectedPath === "none") {
 			router.push(
-				`/m/promoter/event/${eventNameFromParams}/${dateState.specific_event_id}`
+				`/promoter/event/${eventNameFromParams}/${dateState.specific_event_id}`
 			);
 		} else {
 			setSelectedPath("none");

@@ -37,7 +37,7 @@ function WalkinModal({ setWalkinOpen }: WalkinModalProps) {
 						<Divider variant="middle" flexItem />
 					</div>
 					<Button
-						onClick={() => router.push("/m/walkin_key")}
+						onClick={() => router.push("/walkin_key")}
 						startIcon={<KeyRounded />}
 						sx={{
 							marginTop: "15px",
@@ -49,7 +49,7 @@ function WalkinModal({ setWalkinOpen }: WalkinModalProps) {
 						Event Key
 					</Button>
 					<Button
-						onClick={() => router.push("/m/walkin_qr")}
+						onClick={() => router.push("/walkin_qr")}
 						startIcon={<QrCode2Rounded />}
 						sx={{
 							marginTop: "15px",
@@ -61,7 +61,7 @@ function WalkinModal({ setWalkinOpen }: WalkinModalProps) {
 						QR Code
 					</Button>
 					<Button
-						onClick={() => router.push("/m/walkin_location")}
+						onClick={() => router.push("/walkin_location")}
 						startIcon={<LocationOnRounded />}
 						sx={{
 							marginTop: "15px",

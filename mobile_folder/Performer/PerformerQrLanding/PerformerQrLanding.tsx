@@ -66,11 +66,11 @@ function PerformerQrLanding({
 	}, []);
 
 	function navigateToSignIn() {
-		router.push(`/m/checkinqr/${uuidFromParams}/sign_in`);
+		router.push(`/checkinqr/${uuidFromParams}/sign_in`);
 	}
 
 	function navigateToCreateAccount() {
-		router.push(`/m/checkinqr/${uuidFromParams}/create_account`);
+		router.push(`/checkinqr/${uuidFromParams}/create_account`);
 	}
 
 	return (

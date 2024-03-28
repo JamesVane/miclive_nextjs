@@ -10,7 +10,7 @@ function InvalidQr() {
 	const router = useRouter();
 
 	function navigateHome() {
-		router.push("/m");
+		router.push("/");
 	}
 
 	return (

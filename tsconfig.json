@@ -33,7 +33,8 @@
 		"app/muiprovider.ts",
 		"useWatchableEffect/propWatcher.js",
 		"useWatchableEffect/utils.js",
-		"desktopFolder/PublicProfilePage"
+		"desktopFolder/PublicProfilePage",
+		"desktopFolder/PublicProfilePageContainer"
 	],
 	"exclude": ["node_modules"]
 }

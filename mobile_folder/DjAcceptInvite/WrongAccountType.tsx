@@ -13,7 +13,7 @@ function WrongAccountType({ accountType }: WrongAccountTypeProps) {
 	const router = useRouter();
 
 	function handleGoHome() {
-		router.push(`/m/${accountType}`);
+		router.push(`/${accountType}`);
 	}
 
 	function handleLogOut() {

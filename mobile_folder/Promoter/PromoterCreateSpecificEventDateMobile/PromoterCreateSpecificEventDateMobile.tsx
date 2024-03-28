@@ -65,7 +65,7 @@ function PromoterCreateSpecificEventDateMobile({
 	function handleDone() {
 		dispatch(setToDefaultDate());
 		router.push(
-			`/m/promoter/event/${EventFromRedux.event_name.trim().toLowerCase()}`
+			`/promoter/event/${EventFromRedux.event_name.trim().toLowerCase()}`
 		);
 	}
 

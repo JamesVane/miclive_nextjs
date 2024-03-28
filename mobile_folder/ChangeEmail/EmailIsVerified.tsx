@@ -23,7 +23,7 @@ function EmailIsVerified({
 			const roleType = currentUser.attributes["custom:RoleType"];
 			router.push(`/${roleType}`);
 		} catch {
-			router.push("/m/sign_in");
+			router.push("/sign_in");
 		}
 	}
 

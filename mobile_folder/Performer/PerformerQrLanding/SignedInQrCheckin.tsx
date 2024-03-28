@@ -26,7 +26,7 @@ function SignedInQrCheckin({ eventData, uuid }: SignedInQrCheckinProps) {
 		.toLowerCase();
 	function handleGoToEvent() {
 		router.push(
-			`/m/event/${sluggifiedEventName}/${eventData.specificEventId}/ticket`
+			`/event/${sluggifiedEventName}/${eventData.specificEventId}/ticket`
 		);
 	}
 
@@ -44,7 +44,7 @@ function SignedInQrCheckin({ eventData, uuid }: SignedInQrCheckinProps) {
 					setIsCheckedIn(true);
 				} else if (res === "no ticket") {
 					router.push(
-						`/m/checkinqr/purchase/${uuid}/${eventData.specificEventId}`
+						`/checkinqr/purchase/${uuid}/${eventData.specificEventId}`
 					);
 				}
 			}

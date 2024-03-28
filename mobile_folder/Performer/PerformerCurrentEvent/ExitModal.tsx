@@ -15,7 +15,7 @@ function ExitModal({ cancelExit }: ExitModalProps) {
 	const router = useRouter();
 
 	function handleExit() {
-		router.push("/m/performer");
+		router.push("/performer");
 	}
 
 	function paperPreventDefault(e: any) {

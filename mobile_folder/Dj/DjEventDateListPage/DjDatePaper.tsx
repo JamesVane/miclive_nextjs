@@ -25,9 +25,7 @@ function DjDatePaper({ dateData, isUpcoming }: DjDatePaperProps) {
 	const router = useRouter();
 
 	function handleClick() {
-		router.push(
-			`/m/dj/date_page/${dateData.specific_event_id}/is_dj_for_event`
-		);
+		router.push(`/dj/date_page/${dateData.specific_event_id}/is_dj_for_event`);
 	}
 
 	return (

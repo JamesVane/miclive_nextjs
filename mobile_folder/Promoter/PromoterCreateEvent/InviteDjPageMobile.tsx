@@ -107,7 +107,7 @@ function InviteDjPage() {
 
 	function handleClickDone() {
 		dispatch(setToDefault());
-		router.push("/m/promoter");
+		router.push("/promoter");
 	}
 
 	return (

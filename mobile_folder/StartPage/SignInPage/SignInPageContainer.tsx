@@ -81,7 +81,7 @@ function SignInPageContainer({
 	function navigateToPurchase() {
 		setIsSubmitting(false);
 		setSignInError("");
-		router.push(`/m/buy_ticket/purchase/${keyFromParams}`);
+		router.push(`/buy_ticket/purchase/${keyFromParams}`);
 	}
 
 	async function handleCreateRole(
@@ -170,12 +170,12 @@ function SignInPageContainer({
 			} else {
 				if (user.attributes["custom:RoleId"]) {
 					dispatch(setCurrentSub(userSub));
-					router.push(`/m/${roleType}`);
+					router.push(`/${roleType}`);
 					setIsSubmitting(false);
 					setSignInError("");
 				} else {
 					dispatch(setCurrentSub(userSub));
-					router.push(`/m/add_info/${roleType}`);
+					router.push(`/add_info/${roleType}`);
 					setIsSubmitting(false);
 					setSignInError("");
 				}
@@ -188,12 +188,12 @@ function SignInPageContainer({
 
 	function handleForgotPassword() {
 		dispatch(setForgotPasswordDefault());
-		router.push("/m/forgot_password");
+		router.push("/forgot_password");
 	}
 
 	function handleExit() {
 		if (isForPurchase) {
-			router.push(`/m/event/${eventNameFromParams}/${keyFromParams}`);
+			router.push(`/event/${eventNameFromParams}/${keyFromParams}`);
 		} else if (isForPerformerQr) {
 			router.push(isForPerformerQr);
 		} else if (isForKeyCheckIn) {
@@ -201,7 +201,7 @@ function SignInPageContainer({
 		} else if (isFromDjInvite) {
 			router.push(isFromDjInvite);
 		} else {
-			router.push("/m");
+			router.push("/");
 		}
 	}
 

@@ -80,7 +80,7 @@ function ConfirmPhoneAndEmailContainer({
 							});
 							dispatch(setUserRoleId(Number(userRoleId)));
 
-							const navRoute = `/m/add_info/${userTypeFromParams}`;
+							const navRoute = `/add_info/${userTypeFromParams}`;
 							router.push(navRoute);
 							setMessage("");
 							setIsLoading(false);

@@ -125,7 +125,7 @@ function SignInCode({
 					} else {
 						if (user.attributes["custom:RoleId"]) {
 							dispatch(setCurrentSub(userSub));
-							router.push(`/m/${roleType}`);
+							router.push(`/${roleType}`);
 							setIsSubmitting(false);
 							setSignInError("");
 						} else {

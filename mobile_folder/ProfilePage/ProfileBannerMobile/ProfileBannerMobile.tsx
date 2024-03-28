@@ -17,7 +17,7 @@ function ProfileBannerMobile() {
 	);
 
 	function handleClickEdit() {
-		router.push("/m/profile_banner_edit");
+		router.push("/profile_banner_edit");
 	}
 
 	return (

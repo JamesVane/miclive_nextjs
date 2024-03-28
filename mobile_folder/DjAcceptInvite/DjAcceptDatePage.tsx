@@ -62,7 +62,7 @@ function DjAcceptDatePageMobile() {
 	}, []);
 
 	function handleGoHome() {
-		router.push("/m/dj");
+		router.push("/dj");
 	}
 
 	function handleAcceptInvite() {

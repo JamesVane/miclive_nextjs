@@ -13,8 +13,8 @@ function DjAcceptDateCreateAccountContainer({
 	return (
 		<QuickCreatePhoneNameContainer
 			userTypeFromParams="dj"
-			continuePath={`/m/dj_accept_date/${paramsKey}/confirm`}
-			cancelPath={`/m/dj_accept_date/${paramsKey}`}
+			continuePath={`/dj_accept_date/${paramsKey}/confirm`}
+			cancelPath={`/dj_accept_date/${paramsKey}`}
 		/>
 	);
 }

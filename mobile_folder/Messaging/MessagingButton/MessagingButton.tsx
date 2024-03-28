@@ -13,7 +13,7 @@ function MessagingButton({ notAbsolute }: MessagingButtonProps) {
 
 	return (
 		<div
-			onClick={() => router.push(`/m/direct`)}
+			onClick={() => router.push(`/direct`)}
 			style={{
 				opacity: "0.9",
 				overflow: "hidden",

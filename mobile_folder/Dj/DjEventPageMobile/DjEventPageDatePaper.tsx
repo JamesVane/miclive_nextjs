@@ -29,10 +29,10 @@ function DjEventPageDatePaper({
 	function handleClick() {
 		if (dateInfo.is_dj_for_event) {
 			router.push(
-				`/m/dj/date_page/${dateInfo.specific_event_id}/is_dj_for_event`
+				`/dj/date_page/${dateInfo.specific_event_id}/is_dj_for_event`
 			);
 		} else {
-			router.push(`/m/dj/date_page/${dateInfo.specific_event_id}`);
+			router.push(`/dj/date_page/${dateInfo.specific_event_id}`);
 		}
 	}
 

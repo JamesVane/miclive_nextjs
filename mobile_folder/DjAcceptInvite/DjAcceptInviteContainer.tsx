@@ -56,14 +56,14 @@ function DjAcceptInviteContainer({
 		}
 	}
 
-	const returnToUrl = `/m/dj_accept_date/${inviteUuidFromParams}`;
+	const returnToUrl = `/dj_accept_date/${inviteUuidFromParams}`;
 
 	function navigateToSignIn() {
 		router.push(`${returnToUrl}/sign_in`);
 	}
 
 	function navigateToCreateAccount() {
-		router.push(`/m/dj_accept_date/${inviteUuidFromParams}/create_account`);
+		router.push(`/dj_accept_date/${inviteUuidFromParams}/create_account`);
 	}
 
 	useEffect(() => {

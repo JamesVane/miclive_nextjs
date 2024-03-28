@@ -21,7 +21,7 @@ function ChangePhoneNumberContainer() {
 			try {
 				const user = await Auth.currentAuthenticatedUser({ bypassCache: true });
 			} catch {
-				router.push("/m/sign_in");
+				router.push("/sign_in");
 				return;
 			}
 			const user = await Auth.currentAuthenticatedUser({ bypassCache: true });

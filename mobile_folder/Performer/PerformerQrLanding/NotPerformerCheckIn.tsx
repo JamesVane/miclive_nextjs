@@ -14,7 +14,7 @@ function NotPerformerCheckIn({ accountType }: NotPerformerCheckInProps) {
 	const router = useRouter();
 
 	function handleGoHome() {
-		router.push(`/m/${accountType}`);
+		router.push(`/${accountType}`);
 	}
 	function capitalizeFirstLetter(input: string): string {
 		if (!input || input.length === 0) {

@@ -39,17 +39,15 @@ function PromoterEventPageV2pt0MobileContainer({
 	}, []);
 
 	function handleBack() {
-		router.push("/m/promoter");
+		router.push("/promoter");
 	}
 
 	function handleClickEdit() {
-		router.push(`/m/promoter/event/edit_event/${eventNameFromParams}`);
+		router.push(`/promoter/event/edit_event/${eventNameFromParams}`);
 	}
 
 	function handleCreateDate() {
-		router.push(
-			`/m/promoter/create_date/${pageState.event_data.base_event_id}`
-		);
+		router.push(`/promoter/create_date/${pageState.event_data.base_event_id}`);
 	}
 
 	const pageState = useSelector(

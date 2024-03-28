@@ -148,7 +148,7 @@ function CreateAccountContainer({
 								},
 							})
 								.then(() => {
-									const navigatePath = `/m/confirm/${userTypeFromParams}`;
+									const navigatePath = `/confirm/${userTypeFromParams}`;
 
 									router.push(navigatePath);
 								})
@@ -244,7 +244,7 @@ function CreateAccountContainer({
 	}, [phone]);
 
 	function handleExit() {
-		const navigatePath = "/m";
+		const navigatePath = "/";
 
 		router.push(navigatePath);
 		dispatch(setCreateAccountDefault());

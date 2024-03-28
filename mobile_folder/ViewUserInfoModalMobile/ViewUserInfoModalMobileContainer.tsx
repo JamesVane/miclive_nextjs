@@ -22,7 +22,7 @@ function ViewUserInfoModalMobileContainer() {
 
 	function handleNavigatePromoterPreview() {
 		handleClose();
-		router.push(`/m/promoter_info/${name}`, {
+		router.push(`/promoter_info/${name}`, {
 			state: { from: pathname },
 		});
 	}

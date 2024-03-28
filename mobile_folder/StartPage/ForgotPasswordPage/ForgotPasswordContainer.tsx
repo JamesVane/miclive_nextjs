@@ -167,17 +167,17 @@ function ForgotPasswordContainer({
 	}
 	async function handleExit() {
 		if (fromPathString !== "") {
-			router.push(`/m/${fromPathString}`);
+			router.push(`/${fromPathString}`);
 		} else if (settingFromNoPassword) {
 			try {
 				const currentUser = await Auth.currentAuthenticatedUser();
 				const roleType = currentUser.attributes["custom:RoleType"];
-				router.push(`/m/${roleType}`);
+				router.push(`/${roleType}`);
 			} catch {
-				router.push("/m/sign_in");
+				router.push("/sign_in");
 			}
 		} else {
-			router.push("/m/sign_in");
+			router.push("/sign_in");
 		}
 	}
 

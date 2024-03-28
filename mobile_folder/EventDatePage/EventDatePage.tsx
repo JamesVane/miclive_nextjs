@@ -83,9 +83,7 @@ function EventDatePage({
 		} else if (
 			stateFromReducer.pageState === "log in upcoming with no ticket"
 		) {
-			router.push(
-				`/m/buy_ticket/purchase/${stateFromReducer.specific_event_id}`
-			);
+			router.push(`/buy_ticket/purchase/${stateFromReducer.specific_event_id}`);
 		}
 	}
 

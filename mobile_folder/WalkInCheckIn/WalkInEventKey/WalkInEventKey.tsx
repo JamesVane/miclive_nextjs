@@ -35,7 +35,7 @@ function WalkInEventKey({
 	return (
 		<div className={styles.code_and_qr_main_div}>
 			<Button
-				onClick={() => router.push("/m")}
+				onClick={() => router.push("/")}
 				size="small"
 				color="secondary"
 				sx={{ position: "absolute", left: "0px", top: "0px" }}

@@ -23,7 +23,7 @@ function PromoterCreateEvent() {
 			<div className={styles.header_div}>
 				{currentPage === "DjInvite" ? null : (
 					<Button
-						onClick={() => router.push("/m/promoter")}
+						onClick={() => router.push("/promoter")}
 						color="secondary"
 						sx={{ position: "fixed", left: "0px", top: "0px", zIndex: 1500 }}
 						startIcon={<ArrowBackIosNewRounded />}>

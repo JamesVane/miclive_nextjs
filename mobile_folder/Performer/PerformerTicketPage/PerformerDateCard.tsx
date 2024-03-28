@@ -32,9 +32,7 @@ function PerformerDateCard({ cardInfo, isUpcoming }: PerformerDateCardProps) {
 		.toLowerCase();
 
 	function handleClick() {
-		router.push(
-			`/m/event/${eventNameSlug}/${cardInfo.specific_event_id}/ticket`
-		);
+		router.push(`/event/${eventNameSlug}/${cardInfo.specific_event_id}/ticket`);
 	}
 
 	return (

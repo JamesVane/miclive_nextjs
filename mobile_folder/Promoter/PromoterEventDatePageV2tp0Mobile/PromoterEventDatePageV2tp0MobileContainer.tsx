@@ -47,12 +47,12 @@ function PromoterEventDatePageV2tp0MobileContainer({
 	const noDateLinkLoaded = dateLink === "";
 
 	function handleNavigateBack() {
-		router.push(`/m/promoter/event/${eventNamefromParams}`);
+		router.push(`/promoter/event/${eventNamefromParams}`);
 	}
 
 	function handleEditDate() {
 		router.push(
-			`/m/promoter/event/edit_date/${specificEventIdFromParams}/${eventNamefromParams}`
+			`/promoter/event/edit_date/${specificEventIdFromParams}/${eventNamefromParams}`
 		);
 	}
 

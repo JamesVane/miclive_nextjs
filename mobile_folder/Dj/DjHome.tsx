@@ -57,7 +57,7 @@ function DjHome({ house }: DjHomeProps) {
 	};
 
 	function goToCurrent() {
-		router.push("/m/dj/manage_event/152");
+		router.push("/dj/manage_event/152");
 	}
 
 	return (

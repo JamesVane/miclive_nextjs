@@ -75,7 +75,7 @@ function CheckInPage({ specificEventId, setCheckedIn }: CheckInPageProps) {
 	}
 
 	function handleBack() {
-		router.push("/m/performer");
+		router.push("/performer");
 	}
 
 	const [pageTabState, setPageTabState] = useState<

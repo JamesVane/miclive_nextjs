@@ -13,7 +13,7 @@ function PerformerTickerQuickConfirm({
 	return (
 		<QuickConfirmPhoneContainer
 			userTypeFromParams="performer"
-			continueUrl={`/m/buy_ticket/purchase/${specificEventId}`}
+			continueUrl={`/buy_ticket/purchase/${specificEventId}`}
 			doesNotHavePassword={false}
 		/>
 	);

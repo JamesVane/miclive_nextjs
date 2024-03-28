@@ -97,7 +97,7 @@ function PromoterEditBaseEvent() {
 
 	function handleBack() {
 		if (selectedPath === "none") {
-			router.push(`/m/promoter/event/${baseEventState.event_name}`);
+			router.push(`/promoter/event/${baseEventState.event_name}`);
 		} else {
 			setSelectedPath("none");
 			dispatch(setToDefault());

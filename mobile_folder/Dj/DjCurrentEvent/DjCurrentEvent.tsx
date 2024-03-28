@@ -34,7 +34,7 @@ function DjCurrentEvent() {
 				<div className={styles.back_name_div}>
 					<Button
 						color="secondary"
-						onClick={() => router.push("/m/dj")}
+						onClick={() => router.push("/dj")}
 						startIcon={<CloseRounded />}
 						sx={{ position: "absolute", left: 0 }}>
 						exit

@@ -13,7 +13,7 @@ function WalkInLocation() {
 	return (
 		<div className={styles.location_main}>
 			<Button
-				onClick={() => router.push("/m")}
+				onClick={() => router.push("/")}
 				size="small"
 				color="secondary"
 				sx={{ position: "absolute", left: "0px", top: "0px" }}

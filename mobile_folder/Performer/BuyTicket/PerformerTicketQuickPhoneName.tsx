@@ -14,8 +14,8 @@ function PerformerTicketQuickPhoneName({
 }: PerformerTicketQuickPhoneNameProps) {
 	return (
 		<QuickCreatePhoneNameContainer
-			cancelPath={`/m/event/${eventName}/${specificeventId}`}
-			continuePath={`/m/buy_ticket/confirm/${specificeventId}`}
+			cancelPath={`/event/${eventName}/${specificeventId}`}
+			continuePath={`/buy_ticket/confirm/${specificeventId}`}
 			userTypeFromParams="performer"
 		/>
 	);

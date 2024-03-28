@@ -10,8 +10,8 @@ interface CodeWalkinCreateAccountProps {
 function CodeWalkinCreateAccount({ key }: CodeWalkinCreateAccountProps) {
 	return (
 		<WalkinAccountNamePhoneContainer
-			cancelPath={`/m/walkin_key/${key}`}
-			continuePath={`/m/walkin_key/${key}/confirm`}
+			cancelPath={`/walkin_key/${key}`}
+			continuePath={`/walkin_key/${key}/confirm`}
 		/>
 	);
 }

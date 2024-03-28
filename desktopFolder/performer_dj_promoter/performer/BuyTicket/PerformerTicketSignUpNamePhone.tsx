@@ -15,7 +15,7 @@ function PerformerTicketSignUpNamePhone({
 	return (
 		<QuickSignUpNamePhoneContainer
 			backUrl={`/event/${eventName}/${eventKey}`}
-			nextUrl={`/buy_ticket/confirm/${eventKey}/${eventName}`}
+			nextUrl={`/buy_ticket/confirm/${eventKey}`}
 			userType="performer"
 		/>
 	);

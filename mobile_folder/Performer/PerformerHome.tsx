@@ -86,7 +86,7 @@ function PerformerHome() {
 		if (currentEvent) {
 			const nameSlug = adjustEventName(currentEvent.event_name);
 			router.push(
-				`/m/performer/event/${currentEvent.specific_event_id}/${nameSlug}`
+				`/performer/event/${currentEvent.specific_event_id}/${nameSlug}`
 			);
 		}
 	}

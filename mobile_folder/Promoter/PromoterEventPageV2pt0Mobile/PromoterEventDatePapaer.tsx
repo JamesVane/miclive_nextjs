@@ -29,7 +29,7 @@ function PromoterEventDatePapaer({
 
 	function handleClick() {
 		router.push(
-			`/m/promoter/event/${paramsEventname}/${dateInfo.specific_event_id}`
+			`/promoter/event/${paramsEventname}/${dateInfo.specific_event_id}`
 		);
 	}
 

@@ -60,15 +60,15 @@ function AlertModal({ handleClose }: AlertModalProps) {
 	}, []);
 
 	function handleAddEmail() {
-		router.push("/m/change_email");
+		router.push("/change_email");
 	}
 
 	function handleVerifyEmail() {
-		router.push("/m/confirm_email");
+		router.push("/confirm_email");
 	}
 
 	function handleSetPassword() {
-		router.push("/m/set_password");
+		router.push("/set_password");
 	}
 
 	return (

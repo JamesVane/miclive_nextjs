@@ -167,7 +167,7 @@ function AddInitialAccountInfoContainer({
 			if (imageResponse && taglineResponse) {
 				setIsSubmitting(false);
 				dispatch(setCreateAccountDefault());
-				router.push(`/m/${userTypeFromParams}`);
+				router.push(`/${userTypeFromParams as string}`);
 			} else {
 				setIsSubmitting(false);
 			}

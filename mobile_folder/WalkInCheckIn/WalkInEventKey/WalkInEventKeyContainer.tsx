@@ -57,10 +57,10 @@ function WalkInEventKeyContainer({
 						const roleType = user.attributes["custom:RoleType"];
 						handleSetAccountType(roleType);
 						setIsLoading(false);
-						router.push(`/m/walkin_key/${input}`);
+						router.push(`/walkin_key/${input}`);
 					} catch {
 						setIsLoading(false);
-						router.push(`/m/walkin_key/${input}`);
+						router.push(`/walkin_key/${input}`);
 					}
 				} else {
 					setWrongCodeDisplay(true);
@@ -87,10 +87,10 @@ function WalkInEventKeyContainer({
 	}, []);
 
 	function navigateToSignIn() {
-		router.push(`/m/walkin_key/${ketFromParams}/sign_in`);
+		router.push(`/walkin_key/${ketFromParams}/sign_in`);
 	}
 	function navigateToCreateAccount() {
-		router.push(`/m/walkin_key/${ketFromParams}/create_account`);
+		router.push(`/walkin_key/${ketFromParams}/create_account`);
 	}
 
 	return (

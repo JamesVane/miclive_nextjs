@@ -32,7 +32,7 @@ function PromoterHome() {
 	const [successfullUpload, setSuccessfullUpload] = useState(false);
 
 	function setTab(event: any, newValue: number) {
-		router.push("/m/promoter");
+		router.push("/promoter");
 		dispatch(setMobileTab(newValue));
 	}
 
@@ -40,7 +40,7 @@ function PromoterHome() {
 		if (tab === 0) {
 			dispatch(setMobileTab(1));
 			dispatch(setToDefault());
-			router.push("/m/promoter/create");
+			router.push("/promoter/create");
 		}
 	}, [tab]);
 
