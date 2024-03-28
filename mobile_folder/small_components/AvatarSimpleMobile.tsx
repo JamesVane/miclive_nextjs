@@ -48,8 +48,8 @@ function AvatarSimpleMobile({
 			}}>
 			<Avatar
 				sx={{
-					border: 1,
-					borderColor: "primary.main",
+					// border: 1,
+					// borderColor: "primary.main",
 					height: "100%",
 					width: "100%",
 					backgroundColor: noPicColor,
