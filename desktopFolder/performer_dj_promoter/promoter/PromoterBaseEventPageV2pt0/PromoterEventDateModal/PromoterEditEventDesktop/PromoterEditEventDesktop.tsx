@@ -24,7 +24,6 @@ import { putEditSpecificEventInfoContainer } from "@/api_functions/putEditSpecif
 import { DateTime } from "luxon";
 import { putUpdateEventDescription } from "@/api_functions/putEditSpecificDescription";
 import EditSnacksDesktop from "./EditSnacksDesktop";
-import { Auth } from "aws-amplify";
 import { getPromoterDateModalDataV2pt0 } from "@/api_functions/getPromoterDateModalDataV2pt0";
 import { setPromoterDateInfoV2pt0 } from "@/store/promoterDateInfoV2pt0Slice";
 import { updateDateImageArray } from "@/api_functions/updateDateImageArray";
@@ -82,13 +81,8 @@ function PromoterEditEventDesktop({
 		console.log("editstate", editState);
 		setIsUploading(true);
 		try {
-			const user = await Auth.currentAuthenticatedUser();
-			const roleId = user.attributes["custom:RoleId"];
-			const numberPromoterId: number =
-				typeof roleId === "string" ? Number(roleId) : roleId;
 			putEditSpecificEventInfoContainer(
 				specificEventId,
-				numberPromoterId,
 				editState.specificEvent
 			).then((res) => {
 				if (res.message === "Successfully updated specific_event!") {

@@ -19,7 +19,7 @@ import {
 	addToBaseEventImageArray,
 } from "@/store/promoterCreateEventSlice";
 import imageCompression from "browser-image-compression";
-import { postUploadS3Image } from "@/api_functions/postUploadS3Image";
+import { postUploadS3Image } from "@/api_functions_need_to_add_auth/postUploadS3Image";
 import { v4 as uuidv4 } from "uuid";
 
 function CreateBaseEventDescription() {

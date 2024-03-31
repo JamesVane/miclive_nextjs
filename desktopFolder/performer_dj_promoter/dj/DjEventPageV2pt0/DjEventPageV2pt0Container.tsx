@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import {
 	DjEventPageType,
 	getDjEventPageDataV2pt0,
-} from "@/api_functions/getDjEventPageDataV2pt0";
+} from "@/api_functions_not_user/getDjEventPageDataV2pt0";
 import { Auth } from "aws-amplify";
 import SplashPage from "@/SplashPage";
 import DjEventDateModal from "../DjEventDateModal";

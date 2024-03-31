@@ -1,6 +1,7 @@
 /** @format */
 
 import axios from "axios";
+import { Auth } from "aws-amplify";
 
 interface deleteRemoveDjFromBaseEventParams {
 	request_base_event_id: string;
@@ -45,7 +46,13 @@ export async function deleteRemoveDjFromSpecificEvent(
 	const url = `${endpoint}?request_base_event_id=${params.request_base_event_id}&request_specific_event_id=${params.request_specific_event_id}&request_dj_id=${params.request_dj_id}`;
 
 	try {
-		const response = await axios.delete(url);
+		const currentUser = await Auth.currentAuthenticatedUser();
+		const authToken = currentUser.signInUserSession.idToken.jwtToken;
+		const response = await axios.delete(url, {
+			headers: {
+				Authorization: `Bearer ${authToken}`,
+			},
+		});
 		return response.data;
 	} catch (error) {
 		console.error("Failed to remove DJ:", error);

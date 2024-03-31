@@ -1,4 +1,5 @@
 /** @format */
+import { Auth } from "aws-amplify";
 
 interface CheckInResponse {
 	message?: string;
@@ -25,10 +26,14 @@ export async function checkInPerformerWithManualWalkinUuid({
 	});
 
 	try {
+		const currentUser = await Auth.currentAuthenticatedUser();
+		const authToken = currentUser.signInUserSession.idToken.jwtToken;
+
 		const response = await fetch(`${endpoint}?${queryParams}`, {
 			method: "PUT",
 			headers: {
 				"Content-Type": "application/json",
+				Authorization: `Bearer ${authToken}`,
 			},
 		});
 

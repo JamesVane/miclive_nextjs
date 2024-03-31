@@ -21,14 +21,14 @@ type PerformerEventsResponse = {
 
 export async function getPerformerTicketEventsV2pt0(): Promise<PerformerEventsResponse> {
 	const currentUser = await Auth.currentAuthenticatedUser();
-	const requestPerformerRoleId = currentUser.attributes["custom:RoleId"];
+	const authToken = currentUser.signInUserSession.idToken.jwtToken;
 
 	const endpoint =
 		"https://lxhk6cienf.execute-api.us-east-2.amazonaws.com/Dev/performer/getperformerticketeventsv2pt0";
 	try {
 		const response = await axios.get(endpoint, {
-			params: {
-				request_performer_id: requestPerformerRoleId,
+			headers: {
+				Authorization: `Bearer ${authToken}`,
 			},
 		});
 

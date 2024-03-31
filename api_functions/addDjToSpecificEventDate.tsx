@@ -1,20 +1,22 @@
 /** @format */
+import { Auth } from "aws-amplify";
 
 export async function addDjToSpecificEventDate(
-	request_dj_id: number,
 	request_invite_key: string
 ): Promise<string> {
 	const endpoint =
 		"https://lxhk6cienf.execute-api.us-east-2.amazonaws.com/Dev/putadddjtospecificeventdate";
 
 	try {
+		const currentUser = await Auth.currentAuthenticatedUser();
+		const authToken = currentUser.signInUserSession.idToken.jwtToken;
 		const response = await fetch(endpoint, {
 			method: "PUT",
 			headers: {
 				"Content-Type": "application/json",
+				Authorization: `Bearer ${authToken}`,
 			},
 			body: JSON.stringify({
-				request_dj_id,
 				request_invite_key,
 			}),
 		});

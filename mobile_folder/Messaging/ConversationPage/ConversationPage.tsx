@@ -23,7 +23,7 @@ import {
 import { useDispatch } from "react-redux";
 import { DateTime } from "luxon";
 import { SocketContext } from "@/SocketContext";
-import { postNewMessage } from "@/api_functions/postNewMessage";
+import { postNewMessage } from "@/api_functions_not_user/postNewMessage";
 import { Auth } from "aws-amplify";
 import { useRouter } from "next/navigation";
 

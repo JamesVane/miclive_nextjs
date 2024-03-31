@@ -4,7 +4,7 @@
 import { useState, useEffect } from "react";
 import WalkInEventKey from "./WalkInEventKey";
 import { Auth } from "aws-amplify";
-import { getCheckIfCheckInKeyIsvalid } from "@/api_functions/getCheckIfCheckInKeyIsvalid";
+import { getCheckIfCheckInKeyIsvalid } from "@/api_functions_no_auth/getCheckIfCheckInKeyIsvalid";
 import { useRouter } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/app/LocalizationProviderHelper";

@@ -77,12 +77,9 @@ function EventPage({ AuthEventPageData, authStatus }: EventPageProps) {
 		setFollowingInProgress(true);
 		try {
 			const user = await Auth.currentAuthenticatedUser();
-			const roleId = user.attributes["custom:RoleId"];
-			const roleIdAsNumber =
-				typeof roleId === "string" ? parseInt(roleId) : roleId;
+			const authToken = user.signInUserSession.idToken.jwtToken;
 			if (parsedpageData.base_event_id !== 0) {
-				putPerformerFollowEvent({
-					request_performer_role_id: roleIdAsNumber,
+				putPerformerFollowEvent(authToken, {
 					request_new_following_id: parsedpageData.base_event_id,
 				}).then(async (res) => {
 					await Auth.updateUserAttributes(user, {

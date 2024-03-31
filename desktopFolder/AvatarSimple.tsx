@@ -22,9 +22,11 @@ function AvatarSimple({
 }: AvatarSimple) {
 	const [hasS3Image, setHasS3Image] = useState(true);
 
-	const firstTwoLettersOfPerformerNameCapitolized = username[0]
-		? ((username[0].toUpperCase() + username[1].toUpperCase()) as TwoLetterKey)
-		: ("" as TwoLetterKey);
+	const firstTwoLettersOfPerformerNameCapitolized =
+		username && username[0] && username[1]
+			? ((username[0].toUpperCase() +
+					username[1].toUpperCase()) as TwoLetterKey)
+			: ("" as TwoLetterKey);
 
 	const noPicColor =
 		letterToHexcodeObject[firstTwoLettersOfPerformerNameCapitolized];

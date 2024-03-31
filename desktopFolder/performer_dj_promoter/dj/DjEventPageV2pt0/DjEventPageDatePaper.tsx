@@ -17,7 +17,7 @@ import {
 	setModalNumberIsDj,
 	setModalNumberNotDj,
 } from "@/store/DjEventDateListV2pt0Slice";
-import { DjDateType } from "@/api_functions/getDjEventPageDataV2pt0";
+import { DjDateType } from "@/api_functions_not_user/getDjEventPageDataV2pt0";
 import { useDispatch } from "react-redux";
 
 interface DjEventPageDatePaperProps {

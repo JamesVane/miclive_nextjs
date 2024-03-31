@@ -16,10 +16,10 @@ import { formatMMSS } from "@/generic_functions/time_formaters";
 import {
 	getPerformerProfileAudioKeys,
 	PerformerRoleAudioKeys,
-} from "@/api_functions/getPerformerProfileAudioKeys";
-import { getNumberOfTracksFromBaseEventId } from "@/api_functions/getNumberOfTracksFromBaseEventId";
+} from "@/api_functions_need_to_add_auth/getPerformerProfileAudioKeys";
+import { getNumberOfTracksFromBaseEventId } from "@/api_functions_no_auth/getNumberOfTracksFromBaseEventId";
 import { SubmittedAudioType } from "@/UniversalTypes";
-import { getSubmittedAudioForPerformerFromId } from "@/api_functions/getSubmittedAudioForPerformerFromId";
+import { getSubmittedAudioForPerformerFromId } from "@/api_functions_need_to_add_auth/getSubmittedAudioForPerformerFromId";
 import { setSelectFromExisting } from "@/store/performerSelectFromExistingModalSlice";
 import { setAddNewAudioToEvent } from "@/store/performerAddNewAudioToEventSlice";
 import PerformerSelectFromExistingModal from "@desk/performer_dj_promoter/performer/PerformerSelectFromExistingModal";

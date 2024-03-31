@@ -13,7 +13,6 @@ import { useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
 import SplashPage from "@/SplashPage";
 import { Snackbar, Alert } from "@mui/material";
-import { Auth } from "aws-amplify";
 import MessagingButton from "@mobi/Messaging/MessagingButton";
 import { CalendarMonthRounded, PriorityHighRounded } from "@mui/icons-material";
 import DjEventDateListPage from "./DjEventDateListPage";
@@ -35,10 +34,7 @@ function DjHome({ house }: DjHomeProps) {
 
 	async function fetchData() {
 		try {
-			const user = await Auth.currentAuthenticatedUser();
-			const roleId = user.attributes["custom:RoleId"];
-
-			const EventDateList = await getDjEventDateList(roleId);
+			const EventDateList = await getDjEventDateList();
 
 			if (EventDateList) {
 				dispatch(setDjEventDateList(EventDateList));

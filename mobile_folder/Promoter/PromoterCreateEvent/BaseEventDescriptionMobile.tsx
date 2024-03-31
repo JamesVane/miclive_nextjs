@@ -19,7 +19,7 @@ import ReactQuill from "react-quill";
 import styles from "./styles.module.css";
 import { v4 as uuidv4 } from "uuid";
 import { formats, Pallate } from "@/textEditorSettings";
-import { postUploadS3Image } from "@/api_functions/postUploadS3Image";
+import { postUploadS3Image } from "@/api_functions_need_to_add_auth/postUploadS3Image";
 import imageCompression from "browser-image-compression";
 
 function BaseEventDescriptionMobile() {

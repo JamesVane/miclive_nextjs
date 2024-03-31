@@ -5,21 +5,23 @@ import {
 	AuthEventPageData,
 	EventPageReducerType,
 } from "@desk/NewEventPage/NewEventPageReducer";
+import { Auth } from "aws-amplify";
 
 export async function getEventPageDataForAuthPerformer(
 	request_event_name: string,
-	request_performer_id: string
+	authToken: string
 ): Promise<EventPageReducerType> {
+	const apiEndpoint =
+		"https://lxhk6cienf.execute-api.us-east-2.amazonaws.com/Dev/performer/geteventpagedataforauthperformer";
 	try {
-		const response = await axios.get<AuthEventPageData>(
-			"https://lxhk6cienf.execute-api.us-east-2.amazonaws.com/Dev/performer/geteventpagedataforauthperformer",
-			{
-				params: {
-					request_event_name,
-					request_performer_id,
-				},
-			}
-		);
+		const response = await axios.get<AuthEventPageData>(apiEndpoint, {
+			params: {
+				request_event_name,
+			},
+			headers: {
+				Authorization: `Bearer ${authToken}`,
+			},
+		});
 		return {
 			type: "performer auth",
 			data: response.data as AuthEventPageData,

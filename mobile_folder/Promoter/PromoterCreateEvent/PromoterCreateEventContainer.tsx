@@ -6,7 +6,7 @@ import { useState } from "react";
 import { RootState } from "@/app/LocalizationProviderHelper";
 import { useDispatch } from "react-redux";
 import { createBaseAndSpecificEventContainer } from "@/api_functions/postCreateBaseAndSpecificEvent/postCreateBaseAndSpecificEventContainer";
-import { postUploadS3Image } from "@/api_functions/postUploadS3Image";
+import { postUploadS3Image } from "@/api_functions_need_to_add_auth/postUploadS3Image";
 import CreateBaseEventMobile from "./CreateBaseEventMobile";
 import CreateSpecificEventMobile from "./CreateSpecificEventMobile";
 import CreateEventDescMobile from "./CreateEventDescMobile";
@@ -17,7 +17,6 @@ import { Paper } from "@mui/material";
 import { Crop } from "react-image-crop";
 import BaseEventDescriptionMobile from "./BaseEventDescriptionMobile";
 import CreateEventBanner from "./CreateEventBanner";
-import { Auth } from "aws-amplify";
 import { deleteImageFromS3 } from "@/api_functions/deleteImageFromS3";
 import { updateDateImageArray } from "@/api_functions/updateDateImageArray";
 import { updateBaseEventImageArray } from "@/api_functions/updateBaseEventImageArray";
@@ -100,46 +99,39 @@ function PromoterCreateEventContainer() {
 
 	async function handleCreateEvent() {
 		try {
-			const user = await Auth.currentAuthenticatedUser();
-			const roleId = user.attributes["custom:RoleId"];
+			createBaseAndSpecificEventContainer(EventData).then(async (res) => {
+				if (res.baseEventId) {
+					await getDateReturnArray(res.specificEventId.toString());
+					await getEventReturnArray(res.baseEventId.toString());
 
-			const stringPromoterId =
-				typeof roleId === "number" ? roleId.toString() : roleId;
-			createBaseAndSpecificEventContainer(stringPromoterId, EventData).then(
-				async (res) => {
-					if (res.baseEventId) {
-						await getDateReturnArray(res.specificEventId.toString());
-						await getEventReturnArray(res.baseEventId.toString());
-
-						handleUpdateDjKeyState({
-							dateKey: res.DjDateInviteUrlKey,
-							eventKey: res.DjEventInviteUrlKey,
-						});
-						const [threeBanner, fourBanner] = await Promise.all([
-							postUploadS3Image(
-								EventData.baseEvent.banner3X10,
-								`event_banner_3X1/banner_${res.baseEventId}`
-							),
-							postUploadS3Image(
-								EventData.baseEvent.banner4X10,
-								`event_banner_4X1/banner_${res.baseEventId}`
-							),
-						]);
+					handleUpdateDjKeyState({
+						dateKey: res.DjDateInviteUrlKey,
+						eventKey: res.DjEventInviteUrlKey,
+					});
+					const [threeBanner, fourBanner] = await Promise.all([
 						postUploadS3Image(
-							EventData.baseEvent.imageFile,
-							`event_pictures/event_${res.baseEventId}.jpg`
-						).then(async (res) => {
-							// const eventInfo = await getPromoterEventInfo(promoter_id);
-							// dispatch(setPromoterEventInfoSlice(eventInfo));
-							dispatch(setToDefault());
-							dispatch(switchPage({ page: "DjInvite" }));
-						});
-					} else if (res.message === "An event already exists on this date.") {
-						dispatch(switchPage({ page: "specificEvent" }));
-						setErrorMessage("An event already exists on this date");
-					}
+							EventData.baseEvent.banner3X10,
+							`event_banner_3X1/banner_${res.baseEventId}`
+						),
+						postUploadS3Image(
+							EventData.baseEvent.banner4X10,
+							`event_banner_4X1/banner_${res.baseEventId}`
+						),
+					]);
+					postUploadS3Image(
+						EventData.baseEvent.imageFile,
+						`event_pictures/event_${res.baseEventId}.jpg`
+					).then(async (res) => {
+						// const eventInfo = await getPromoterEventInfo(promoter_id);
+						// dispatch(setPromoterEventInfoSlice(eventInfo));
+						dispatch(setToDefault());
+						dispatch(switchPage({ page: "DjInvite" }));
+					});
+				} else if (res.message === "An event already exists on this date.") {
+					dispatch(switchPage({ page: "specificEvent" }));
+					setErrorMessage("An event already exists on this date");
 				}
-			);
+			});
 		} catch (err) {
 			console.log(err);
 		}

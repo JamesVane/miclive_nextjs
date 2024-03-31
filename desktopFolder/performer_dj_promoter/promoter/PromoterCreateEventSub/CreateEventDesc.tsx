@@ -19,7 +19,7 @@ import { formats, Pallate } from "@/textEditorSettings";
 import SplashLoadingComponent from "@/SplashPage";
 import imageCompression from "browser-image-compression";
 import { v4 as uuidv4 } from "uuid";
-import { postUploadS3Image } from "@/api_functions/postUploadS3Image";
+import { postUploadS3Image } from "@/api_functions_need_to_add_auth/postUploadS3Image";
 
 interface CreateEventDescProps {
 	handleCreateEvent: () => void;

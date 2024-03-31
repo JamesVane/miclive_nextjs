@@ -19,7 +19,6 @@ import _ from "lodash";
 import SplashPage from "@/SplashPage";
 import { Snackbar, Alert } from "@mui/material";
 import { setToDefault } from "@/store/promoterCreateEventSlice";
-import { Auth } from "aws-amplify";
 import MessagingButton from "@mobi/Messaging/MessagingButton";
 import { getPromoterEventListV2pt0 } from "@/api_functions/getPromoterEventListV2pt0";
 import { setPromoterEventListV2pt0Slice } from "@/store/promoterEventListV2pt0Slice";
@@ -46,10 +45,7 @@ function PromoterHome() {
 
 	async function initFetch() {
 		try {
-			const user = await Auth.currentAuthenticatedUser();
-			const roleId = user.attributes["custom:RoleId"];
-
-			getPromoterEventListV2pt0(roleId).then((res) => {
+			getPromoterEventListV2pt0().then((res) => {
 				if (res) {
 					dispatch(setPromoterEventListV2pt0Slice(res));
 				}

@@ -1,4 +1,5 @@
 /** @format */
+import { Auth } from "aws-amplify";
 
 export async function updateDateImageArray(
 	requestSpecificEventId: string,
@@ -9,10 +10,13 @@ export async function updateDateImageArray(
 	url.searchParams.set("request_specific_event_id", requestSpecificEventId);
 
 	try {
+		const currentUser = await Auth.currentAuthenticatedUser();
+		const authToken = currentUser.signInUserSession.idToken.jwtToken;
 		const response = await fetch(url.toString(), {
 			method: "PUT",
 			headers: {
 				"Content-Type": "application/json",
+				Authorization: `Bearer ${authToken}`,
 			},
 			body: JSON.stringify({ image_array: imageArray }),
 		});

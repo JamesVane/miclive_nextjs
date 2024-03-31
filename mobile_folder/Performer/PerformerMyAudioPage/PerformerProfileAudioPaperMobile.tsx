@@ -4,7 +4,7 @@ import S3PlaybackWrapper from "@/audioComponents/S3PlaybackWrapper";
 import styles from "./styles.module.css";
 import { Button, Divider, LinearProgress } from "@mui/material";
 import { useState } from "react";
-import { getPerformerProfileAudioKeys } from "@/api_functions/getPerformerProfileAudioKeys";
+import { getPerformerProfileAudioKeys } from "@/api_functions_need_to_add_auth/getPerformerProfileAudioKeys";
 import { useDispatch } from "react-redux";
 import { setPerformerAudioKey } from "@/store/performerAudioKeysStore";
 import { postRemoveAudioFromSaved } from "@/api_functions/postRemoveAudioFromSaved";
@@ -41,10 +41,7 @@ function PerformerProfileAudioPaperMobile({
 
 	async function removeAudio() {
 		setIsDeleting(true);
-		await postRemoveAudioFromSaved(
-			audioKey.audio_id,
-			audioKey.performer_id
-		).then(() => {
+		await postRemoveAudioFromSaved(audioKey.audio_id).then(() => {
 			refreshAudioKeys();
 			setIsDeleting(false);
 		});

@@ -47,13 +47,11 @@ function DjAcceptDatePageMobile() {
 		async function setAuth() {
 			const currentUser = await Auth.currentAuthenticatedUser();
 			const authRoleId = currentUser.attributes["custom:RoleId"];
-			checkDjInviteDateOverlap(
-				authRoleId,
-				dateObject.startTime,
-				dateObject.endTime
-			).then((res) => {
-				setIsOverlapping(res);
-			});
+			checkDjInviteDateOverlap(dateObject.startTime, dateObject.endTime).then(
+				(res) => {
+					setIsOverlapping(res);
+				}
+			);
 			const authDisplayName = currentUser.attributes["custom:DisplayUsername"];
 			setRoleId(authRoleId);
 			setDisplayName(authDisplayName);
@@ -67,7 +65,7 @@ function DjAcceptDatePageMobile() {
 
 	function handleAcceptInvite() {
 		setIsAccepting(true);
-		addDjToSpecificEventDate(roleId, uuid).then((res) => {
+		addDjToSpecificEventDate(uuid).then((res) => {
 			if (res === "dj added to event") {
 				setIsAccepting(false);
 				setHasAccepted(true);

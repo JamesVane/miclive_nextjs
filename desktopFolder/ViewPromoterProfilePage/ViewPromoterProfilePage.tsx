@@ -13,7 +13,7 @@ import {
 } from "@mui/icons-material";
 import { Button, Tabs, Tab } from "@mui/material";
 import HomeBarV2 from "@desk/HomeBarV2";
-import { PromoterPreviewData } from "@/api_functions/getPromoterPreviewPageDataV2pt0";
+import { PromoterPreviewData } from "@/api_functions_not_user/getPromoterPreviewPageDataV2pt0";
 import PromoterProfileGridSquareHelper from "./PromoterProfileGridSquareHelper";
 
 interface ViewPromoterProfilePageProps {

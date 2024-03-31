@@ -12,15 +12,15 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/app/LocalizationProviderHelper";
 import { setPerformerAudioKey } from "@/store/performerAudioKeysStore";
-import { getPerformerProfileAudioKeys } from "@/api_functions/getPerformerProfileAudioKeys";
+import { getPerformerProfileAudioKeys } from "@/api_functions_need_to_add_auth/getPerformerProfileAudioKeys";
 import {
 	UploadFileRounded,
 	CheckRounded,
 	FileUploadRounded,
 	ClearRounded,
 } from "@mui/icons-material";
-import { postAudio } from "@/api_functions/postAudio";
-import { PostPerformerChangeSubmittedAudioFromExisting } from "@/api_functions/PostPerformerChangeSubmittedAudioFromExisting";
+import { postAudio } from "@/api_functions_need_to_add_auth/postAudio";
+import { PostPerformerChangeSubmittedAudioFromExisting } from "@/api_functions_need_to_add_auth/PostPerformerChangeSubmittedAudioFromExisting";
 import { Auth } from "aws-amplify";
 
 interface UploadAudioProps {

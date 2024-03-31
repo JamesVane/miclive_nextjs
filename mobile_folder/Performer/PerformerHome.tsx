@@ -15,7 +15,7 @@ import {
 } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
-import { getPerformerProfileAudioKeys } from "@/api_functions/getPerformerProfileAudioKeys";
+import { getPerformerProfileAudioKeys } from "@/api_functions_need_to_add_auth/getPerformerProfileAudioKeys";
 import { setPerformerAudioKey } from "@/store/performerAudioKeysStore";
 import SplashPage from "@/SplashPage";
 import { Auth } from "aws-amplify";

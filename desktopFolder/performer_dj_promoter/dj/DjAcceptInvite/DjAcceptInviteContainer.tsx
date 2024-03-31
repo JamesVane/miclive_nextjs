@@ -3,7 +3,7 @@
 
 import { useEffect } from "react";
 import DjAcceptInviteLanding from "./DjAcceptInviteLanding";
-import { getDjCheckDateKey } from "@/api_functions/getDjCheckEvenOrDatetKey";
+import { getDjCheckDateKey } from "@/api_functions_no_auth/getDjCheckEvenOrDatetKey";
 import WrongAccountType from "./WrongAccountType";
 import { useSelector, useDispatch } from "react-redux";
 import {

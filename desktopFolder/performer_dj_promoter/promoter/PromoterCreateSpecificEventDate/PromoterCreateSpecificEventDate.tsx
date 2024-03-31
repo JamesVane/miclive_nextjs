@@ -10,7 +10,6 @@ import { RootState } from "@/app/LocalizationProviderHelper";
 import CreateDateInviteDj from "./CreateDjInviteDj";
 import { createSpecificEventContainer } from "@/api_functions/postCreateSpecificEvent/postCreateSpecificEventContainer";
 import { switchPageDate, setToDefaultDate } from "@/store/CreateEventDateSlice";
-import { Auth } from "aws-amplify";
 import { useRouter } from "next/navigation";
 import HomeBarV2 from "@desk/HomeBarV2";
 import { CloseRounded } from "@mui/icons-material";
@@ -46,18 +45,7 @@ function PromoterCreateSpecificEventDate({
 	}
 
 	async function handleCreateEvent() {
-		try {
-			const user = await Auth.currentAuthenticatedUser();
-		} catch {
-			console.log("error creating event");
-		}
-		const user = await Auth.currentAuthenticatedUser();
-		const roleId = user.attributes["custom:RoleId"];
-		const stringPromoterId: string =
-			typeof roleId === "number" ? roleId.toString() : roleId;
-
 		createSpecificEventContainer(
-			stringPromoterId,
 			EventData,
 			baseEventId,
 			EventFromRedux.event_name,

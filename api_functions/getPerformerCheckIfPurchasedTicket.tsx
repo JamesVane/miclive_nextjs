@@ -9,16 +9,16 @@ export async function getPerformerCheckIfPurchasedTicket(
 	const endpoint =
 		"https://lxhk6cienf.execute-api.us-east-2.amazonaws.com/Dev/checkinforperformer/getperformercheckifpurchasedticket";
 
-	const user = await Auth.currentAuthenticatedUser();
-	const roleId = user.attributes["custom:RoleId"];
-	const request_performer_id =
-		typeof roleId === "string" ? parseInt(roleId) : roleId;
+	const currentUser = await Auth.currentAuthenticatedUser();
+	const authToken = currentUser.signInUserSession.idToken.jwtToken;
 
 	try {
 		const response = await axios.get(endpoint, {
 			params: {
-				request_performer_id,
 				request_specific_event_id,
+			},
+			headers: {
+				Authorization: `Bearer ${authToken}`,
 			},
 		});
 

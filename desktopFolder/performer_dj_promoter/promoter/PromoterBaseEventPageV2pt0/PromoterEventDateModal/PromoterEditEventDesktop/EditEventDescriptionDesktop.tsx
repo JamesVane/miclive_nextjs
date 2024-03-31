@@ -13,7 +13,7 @@ import _ from "lodash";
 import { formats, Pallate } from "@/textEditorSettings";
 import imageCompression from "browser-image-compression";
 import { v4 as uuidv4 } from "uuid";
-import { postUploadS3Image } from "@/api_functions/postUploadS3Image";
+import { postUploadS3Image } from "@/api_functions_need_to_add_auth/postUploadS3Image";
 import { deleteImageFromS3 } from "@/api_functions/deleteImageFromS3";
 import { getEventDateImageArray } from "@/api_functions/getEventDateImageArray";
 import { addStringToDateImageArray } from "@/api_functions/addStringToDateImageArray";

@@ -57,7 +57,6 @@ export const adjustTime = (
 };
 
 export const createSpecificEventContainer = async (
-	promoter_id: string,
 	event_data: promoterCreateDate,
 	base_event_id: number,
 	base_event_name: string,
@@ -87,7 +86,6 @@ export const createSpecificEventContainer = async (
 	};
 
 	const requestBody: RequestBody = {
-		promoter_id: parseInt(promoter_id),
 		base_event_id: base_event_id,
 		specificEvent: specificEvent,
 		base_event_name: base_event_name,

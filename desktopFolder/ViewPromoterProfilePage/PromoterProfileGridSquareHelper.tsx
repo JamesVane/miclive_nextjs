@@ -5,7 +5,7 @@ import EventGridSquare from "@desk/EventGridSquare";
 import { EmptyEventGridSquare } from "@desk/EventGridSquare/EventGridSquare";
 import styles from "./styles.module.css";
 import { useState, useEffect } from "react";
-import { EventObject } from "@/api_functions/getPromoterPreviewPageDataV2pt0";
+import { EventObject } from "@/api_functions_not_user/getPromoterPreviewPageDataV2pt0";
 
 interface PromoterProfileGridSquareHelperProps {
 	eventsArray: EventObject[];

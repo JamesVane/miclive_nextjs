@@ -1,13 +1,21 @@
 /** @format */
 
 import { djManageEventSliceType } from "../store/djManageEventSlice";
+import { Auth } from "aws-amplify";
 
 export async function getDjManageFullState(
 	query_id: string
 ): Promise<djManageEventSliceType> {
-	const response = await fetch(
-		`https://lxhk6cienf.execute-api.us-east-2.amazonaws.com/Dev/djmanageevent/getdjmanagefullstate?query_id=${query_id}`
-	);
+	const currentUser = await Auth.currentAuthenticatedUser();
+	const authToken = currentUser.signInUserSession.idToken.jwtToken;
+	const apiendpoint = `https://lxhk6cienf.execute-api.us-east-2.amazonaws.com/Dev/djmanageevent/getdjmanagefullstate?query_id=${query_id}`;
+	const response = await fetch(apiendpoint, {
+		method: "GET",
+		headers: {
+			"Content-Type": "application/json",
+			Authorization: `Bearer ${authToken}`,
+		},
+	});
 	if (!response.ok) {
 		throw new Error(`HTTP error! status: ${response.status}`);
 	} else {

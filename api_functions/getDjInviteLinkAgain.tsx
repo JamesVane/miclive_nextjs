@@ -1,6 +1,7 @@
 /** @format */
 
 import axios from "axios";
+import { Auth } from "aws-amplify";
 
 const BASE_API_ENDPOINT =
 	"https://lxhk6cienf.execute-api.us-east-2.amazonaws.com/Dev/getdjbaseinvitelinkagain";
@@ -29,9 +30,14 @@ export async function getDjDateInviteLinkAgain(
 	request_specific_event_id: number
 ): Promise<any> {
 	try {
+		const currentUser = await Auth.currentAuthenticatedUser();
+		const authToken = currentUser.signInUserSession.idToken.jwtToken;
 		const response = await axios.get(SPECIFIC_API_ENDPOINT, {
 			params: {
 				request_specific_event_id,
+			},
+			headers: {
+				Authorization: `Bearer ${authToken}`,
 			},
 		});
 

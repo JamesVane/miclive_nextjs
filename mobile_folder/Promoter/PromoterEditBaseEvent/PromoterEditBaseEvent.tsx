@@ -19,9 +19,7 @@ import {
 } from "@/store/promoterEditEventSlice";
 import { RootState } from "@/app/LocalizationProviderHelper";
 import { editBaseEvent } from "@/api_functions/putEditBaseEvent";
-import { setSrc } from "@/store/imgStore";
-import { getSignedUrl } from "@/api_functions/getAnySignedUrl";
-import { postUploadS3Image } from "@/api_functions/postUploadS3Image";
+import { postUploadS3Image } from "@/api_functions_need_to_add_auth/postUploadS3Image";
 import SplashPage from "@/SplashPage";
 import EditSnacksMobile from "../EditSnacksMobile";
 import EditBaseEventDescription from "./EditBaseEventDescription";
@@ -125,25 +123,7 @@ function PromoterEditBaseEvent() {
 		postUploadS3Image(
 			editState.baseEvent.imageFile,
 			`event_pictures/event_${editState.baseEventId}.jpg`
-		).then(async (res: any) => {
-			if (res.data.message == "Image uploaded successfully") {
-				try {
-					const baseEventId = editState.baseEventId!;
-					const signedUrl = await getSignedUrl("event", baseEventId.toString());
-					if (signedUrl) {
-						dispatch(
-							setSrc({
-								type: "event",
-								id: baseEventId.toString(),
-								url: signedUrl,
-							})
-						);
-					}
-				} catch (error) {
-					console.error("Error fetching signed URL:", error);
-				}
-			}
-		});
+		);
 	}
 
 	const basePayload = {

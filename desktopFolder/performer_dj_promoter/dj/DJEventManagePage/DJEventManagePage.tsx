@@ -9,8 +9,8 @@ import {
 } from "@/generic_functions/date_formaters";
 import { RootState } from "@/app/LocalizationProviderHelper";
 import { useSelector, useDispatch } from "react-redux";
-import { putDjNextPerformer } from "@/api_functions/putDjNextPerformer";
-import { putSwitchPerformerCuePosition } from "@/api_functions/putSwitchPerformerCuePosition";
+import { putDjNextPerformer } from "@/api_functions_not_user/putDjNextPerformer";
+import { putSwitchPerformerCuePosition } from "@/api_functions_not_user/putSwitchPerformerCuePosition";
 import { getDjManageFullState } from "@/api_functions/getDjManageFullState";
 import AvatarSimple from "@desk/AvatarSimple";
 import {

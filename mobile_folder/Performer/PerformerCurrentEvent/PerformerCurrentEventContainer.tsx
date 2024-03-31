@@ -34,6 +34,7 @@ function PerformerCurrentEventContainer({
 		async function checkIfChecked() {
 			setIsLoading(true);
 			const user = await Auth.currentAuthenticatedUser();
+			const authToken = user.signInUserSession.idToken.jwtToken;
 			const roleId = user.attributes["custom:RoleId"];
 			const numberRoleId =
 				typeof roleId === "string" ? parseInt(roleId) : roleId;
@@ -41,7 +42,7 @@ function PerformerCurrentEventContainer({
 				setMyRoleId(numberRoleId);
 			}
 
-			checkIfCheckedIn(numberRoleId, Number(specificEventIdFromParams)).then(
+			checkIfCheckedIn(authToken, Number(specificEventIdFromParams)).then(
 				(res) => {
 					setCheckedIn(res);
 					setIsLoading(false);

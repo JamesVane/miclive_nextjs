@@ -14,7 +14,7 @@ import { RootState } from "@/app/LocalizationProviderHelper";
 import { useEffect } from "react";
 import _ from "lodash";
 import { conversationObject } from "./ConversationPageDesktop";
-import { getFirstMessages } from "@/api_functions/getFirstMessages";
+import { getFirstMessages } from "@/api_functions_not_user/getFirstMessages";
 // import { useSessionState } from "@/custom_hooks/useSessionState";
 import { Auth } from "aws-amplify";
 import { setOpenConversationDesktop } from "@/store/openConversationDesktopSlice";

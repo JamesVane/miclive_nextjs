@@ -2,7 +2,7 @@
 
 import React from "react";
 import styles from "./styles.module.css";
-import { PurchasePageData } from "@/api_functions/getPageDataForPurchasePage";
+import { PurchasePageData } from "@/api_functions_no_auth/getPageDataForPurchasePage";
 import { Button, LinearProgress } from "@mui/material";
 import {
 	ArrowBackIosRounded,

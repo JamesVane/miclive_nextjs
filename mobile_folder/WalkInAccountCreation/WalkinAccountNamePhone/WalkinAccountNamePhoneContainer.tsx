@@ -26,8 +26,8 @@ import {
 	unformatPhoneNumber,
 } from "@/generic_functions/formatPhoneNumber";
 import { useRouter } from "next/navigation";
-import { getCheckIfExistingEmailOrUsername } from "@/api_functions/getCheckIfExistingEmailOrUsername";
-import { deleteAccountIfNotConfirmed } from "@/api_functions/deleteAccountIfNotConfirmed";
+import { getCheckIfExistingEmailOrUsername } from "@/api_functions_no_auth/getCheckIfExistingEmailOrUsername";
+import { deleteAccountIfNotConfirmed } from "@/api_functions_no_auth/deleteAccountIfNotConfirmed";
 import { v4 as uuidv4 } from "uuid";
 
 interface CreateAccountContainerProps {

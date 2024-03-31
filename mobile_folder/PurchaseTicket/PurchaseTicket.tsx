@@ -1,7 +1,7 @@
 /** @format */
 
 import { Button, Divider, LinearProgress } from "@mui/material";
-import { PurchasePageData } from "../../api_functions/getPageDataForPurchasePage";
+import { PurchasePageData } from "../../api_functions_no_auth/getPageDataForPurchasePage";
 import {
 	ArrowBackIosRounded,
 	CalendarMonthRounded,

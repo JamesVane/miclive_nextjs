@@ -5,11 +5,9 @@ import ProfileEditing from "./ProfileEditing";
 import { RootState } from "@/app/LocalizationProviderHelper";
 import { useDispatch, useSelector } from "react-redux";
 import SplashPage from "@/SplashPage";
-import { postUploadS3Image } from "@/api_functions/postUploadS3Image";
+import { postUploadS3Image } from "@/api_functions_need_to_add_auth/postUploadS3Image";
 import { Auth } from "aws-amplify";
 import { putUserHasImage } from "@/api_functions/putUserHasImage";
-import { setSrc } from "@/store/imgStore";
-import { getSignedUrl } from "@/api_functions/getAnySignedUrl";
 import { UserProfileResponse } from "@/api_functions/getUserProfile";
 import { postUserInfoObj } from "@/api_functions/postUserInfoObj";
 import { getUserProfile } from "@/api_functions/getUserProfile";
@@ -71,18 +69,11 @@ function ProfileEditingContainer({
 	async function handleUpdateInstagram() {
 		let theresAnError = false;
 		const payload = { IG: instagramValue } as Partial<UserProfileResponse>;
-		const postIgResponse = await postUserInfoObj(
-			performer ? "performer" : promoter ? "promoter" : "dj",
-			payload
-		);
+		const postIgResponse = await postUserInfoObj(payload);
 		if (postIgResponse.status === 200) {
 			try {
 				const user = await Auth.currentAuthenticatedUser();
-				const userId = user.attributes.sub;
-				const fetchedUserProfile = await getUserProfile(
-					performer ? "performer" : promoter ? "promoter" : "dj",
-					userId
-				);
+				const fetchedUserProfile = await getUserProfile();
 				const updatedProfile = {
 					...fetchedUserProfile,
 					info: {
@@ -106,12 +97,10 @@ function ProfileEditingContainer({
 
 	async function updateUserTagline(user: any) {
 		let theresAnError = false;
-		const userSub = user.attributes.sub;
-		const userType = performer ? "performer" : promoter ? "promoter" : "dj";
-		const postTaglineResponse = await postUserTagline(userType, taglineValue);
+		const postTaglineResponse = await postUserTagline(taglineValue);
 		if (postTaglineResponse === "Tagline updated successfully") {
 			try {
-				const fetchedUserProfile = await getUserProfile(userType, userSub);
+				const fetchedUserProfile = await getUserProfile();
 				const updatedProfile = {
 					...fetchedUserProfile,
 					tagline: taglineValue,
@@ -135,11 +124,7 @@ function ProfileEditingContainer({
 	async function updateUsername(user: any) {
 		let theresAnError = false;
 		try {
-			const userSub = user.attributes.sub;
-			const updateUsernameResponse = await putUpdateUsername(
-				usernameValue,
-				userSub
-			);
+			const updateUsernameResponse = await putUpdateUsername(usernameValue);
 			if (updateUsernameResponse === "Successfully changed username") {
 				try {
 					await Auth.updateUserAttributes(user, {
@@ -196,35 +181,7 @@ function ProfileEditingContainer({
 				).then(async (res) => {
 					if (res.data.message == "Image uploaded successfully") {
 						try {
-							const userRoleId = usersStateFromStore.primary_key;
-							const user = await Auth.currentAuthenticatedUser();
-							const userSub = user.attributes.sub;
-							await putUserHasImage(userSub);
-							const signedUrl = await getSignedUrl(
-								performer
-									? "performer"
-									: dj
-									? "dj"
-									: promoter
-									? "promoter"
-									: "performer",
-								userRoleId
-							);
-							if (signedUrl) {
-								dispatch(
-									setSrc({
-										type: performer
-											? "performer"
-											: dj
-											? "dj"
-											: promoter
-											? "promoter"
-											: "performer",
-										id: userRoleId,
-										url: signedUrl,
-									})
-								);
-							}
+							await putUserHasImage();
 							setIsUploading(false);
 							setEditingPicture(false);
 							setImageSelected(false);

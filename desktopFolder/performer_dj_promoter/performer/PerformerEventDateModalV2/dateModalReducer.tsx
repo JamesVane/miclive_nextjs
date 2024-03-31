@@ -6,7 +6,7 @@ import {
 	DJ,
 	ParsedPerformerTicketResponseStructure,
 } from "@/api_functions/getSingleDateInfoWithPerformerId";
-import { ParsedNotPerformerResponseStructure } from "@/api_functions/getSingleDateForNotPerformer";
+import { ParsedNotPerformerResponseStructure } from "@/api_functions_no_auth/getSingleDateForNotPerformer";
 import { SubmittedAudioType } from "@/UniversalTypes";
 
 const defaultPromoterObj = {

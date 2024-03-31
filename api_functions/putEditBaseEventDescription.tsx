@@ -1,4 +1,5 @@
 /** @format */
+import { Auth } from "aws-amplify";
 
 export async function putEditBaseEventDescription(
 	baseEventId: number,
@@ -11,10 +12,14 @@ export async function putEditBaseEventDescription(
 		requestDescription: baseDescription,
 	};
 
+	const currentUser = await Auth.currentAuthenticatedUser();
+	const authToken = currentUser.signInUserSession.idToken.jwtToken;
+
 	const response = await fetch(url, {
 		method: "PUT",
 		headers: {
 			"Content-Type": "application/json",
+			Authorization: `Bearer ${authToken}`,
 		},
 		body: JSON.stringify(body),
 	});

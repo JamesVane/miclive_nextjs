@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setAudioUrl } from "../store/audioUrlStore";
-import { getAudioSignedUrl } from "../api_functions/getAudioSignedUrl";
+import { getAudioSignedUrl } from "../api_functions_need_to_add_auth/getAudioSignedUrl";
 import AudioPlayback from "./AudioPlayback";
 import { RootState } from "@/app/LocalizationProviderHelper";
 import SimpleAudioPlayback from "./SimpleAudioPlayback";

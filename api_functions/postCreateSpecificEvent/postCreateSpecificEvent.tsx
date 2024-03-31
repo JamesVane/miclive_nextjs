@@ -1,6 +1,7 @@
 /** @format */
 
 import axios from "axios";
+import { Auth } from "aws-amplify";
 
 interface Cords {
 	lat: number;
@@ -32,7 +33,6 @@ export interface SpecificEvent {
 }
 
 export interface RequestBody {
-	promoter_id: number;
 	base_event_id: number;
 	specificEvent: SpecificEvent;
 	base_event_name: string;
@@ -49,9 +49,17 @@ export interface ResponseData {
 export const createSpecificEvent = async (
 	body: RequestBody
 ): Promise<ResponseData> => {
+	const currentUser = await Auth.currentAuthenticatedUser();
+	const authToken = currentUser.signInUserSession.idToken.jwtToken;
+
 	const result = await axios.post<ResponseData>(
 		"https://lxhk6cienf.execute-api.us-east-2.amazonaws.com/Dev/createevent/postcreatespecificevent",
-		body
+		body,
+		{
+			headers: {
+				Authorization: `Bearer ${authToken}`,
+			},
+		}
 	);
 	return result.data;
 };

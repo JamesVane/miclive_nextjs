@@ -55,10 +55,9 @@ function QuickConfirmPhoneContainer({
 			).then((res) => {
 				amplifySignIn().then(async (res) => {
 					const user = await Auth.currentAuthenticatedUser();
-					const userSub = user.attributes.sub;
+					const authToken = user.signInUserSession.idToken.jwtToken;
 					if (res) {
-						postCreateAccountBase({
-							request_primary_key: userSub,
+						postCreateAccountBase(authToken, {
 							request_username: username,
 							request_email: email,
 							request_role_name_number:

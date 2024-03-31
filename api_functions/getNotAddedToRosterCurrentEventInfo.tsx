@@ -30,19 +30,22 @@ export async function getNotAddedToRosterCurrentEventInfo({
 	base_event_name: string;
 } | null> {
 	const endpoint = `https://lxhk6cienf.execute-api.us-east-2.amazonaws.com/Dev/getNotAddedToRosterCurrentEventInfo`;
+
 	const requestSpecificEventId = queryKey[1].requestSpecificEventId;
-	const user = await Auth.currentAuthenticatedUser();
-	const requestPerformerRoleId = user.attributes["custom:RoleId"];
+
 	const queryParams = new URLSearchParams({
 		request_specific_event_id: requestSpecificEventId.toString(),
-		request_performer_role_id: requestPerformerRoleId,
 	});
 
 	try {
+		const currentUser = await Auth.currentAuthenticatedUser();
+		const authToken = currentUser.signInUserSession.idToken.jwtToken;
+
 		const response = await fetch(`${endpoint}?${queryParams}`, {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json",
+				Authorization: `Bearer ${authToken}`,
 			},
 		});
 

@@ -13,7 +13,7 @@ import {
 	formatDateString,
 	formatTimeHour,
 } from "@/generic_functions/date_formaters";
-import { DjDateType } from "@/api_functions/getDjEventPageDataV2pt0";
+import { DjDateType } from "@/api_functions_not_user/getDjEventPageDataV2pt0";
 
 interface DjEventPageDatePaperProps {
 	dateInfo: DjDateType;

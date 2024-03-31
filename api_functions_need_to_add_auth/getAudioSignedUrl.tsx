@@ -1,6 +1,5 @@
 /** @format */
 
-// getSignedUrl.ts
 import axios, { AxiosResponse } from "axios";
 
 export interface GetSignedUrlResponse {

@@ -10,7 +10,7 @@ import {
 	reducer as dateReducer,
 } from "./EventDateReducer";
 import { getSingleDateInfoWithPerformerId } from "@/api_functions/getSingleDateInfoWithPerformerId";
-import { getSingleDateForNotPerformer } from "@/api_functions/getSingleDateForNotPerformer";
+import { getSingleDateForNotPerformer } from "@/api_functions_no_auth/getSingleDateForNotPerformer";
 import { putPerformerFollowEvent } from "@/api_functions/putPerformerFollowEvent";
 import SplashPage from "@/SplashPage";
 
@@ -50,28 +50,26 @@ function EventDatePageContainer({
 		const currentUser = await Auth.currentAuthenticatedUser({
 			bypassCache: true,
 		});
-		const requestPerformerRoleId = currentUser.attributes["custom:RoleId"];
 		const followingArrayFromCog = currentUser.attributes[
 			"custom:PerformerFollowing"
 		]
 			? JSON.parse(currentUser.attributes["custom:PerformerFollowing"])
 			: [];
 
-		getSingleDateInfoWithPerformerId(
-			specificEventIdFromParams,
-			requestPerformerRoleId
-		).then((response) => {
-			if (response) {
-				dispatchReducerState(response);
-				setIsAlreadyFollowing(
-					followingArrayFromCog.includes(
-						typeof response.data.base_event_id === "number"
-							? response.data.base_event_id
-							: Number(response.data.base_event_id)
-					)
-				);
+		getSingleDateInfoWithPerformerId(specificEventIdFromParams).then(
+			(response) => {
+				if (response) {
+					dispatchReducerState(response);
+					setIsAlreadyFollowing(
+						followingArrayFromCog.includes(
+							typeof response.data.base_event_id === "number"
+								? response.data.base_event_id
+								: Number(response.data.base_event_id)
+						)
+					);
+				}
 			}
-		});
+		);
 	}
 
 	async function initForEventPage() {
@@ -79,16 +77,14 @@ function EventDatePageContainer({
 			const currentUser = await Auth.currentAuthenticatedUser();
 			const roleType = currentUser.attributes["custom:RoleType"];
 			if (roleType === "performer") {
-				const requestPerformerRoleId = currentUser.attributes["custom:RoleId"];
 				if (eventPageTicketPurchasedDate) {
-					getSingleDateInfoWithPerformerId(
-						specificEventIdFromParams,
-						requestPerformerRoleId
-					).then((response) => {
-						if (response) {
-							dispatchReducerState(response);
+					getSingleDateInfoWithPerformerId(specificEventIdFromParams).then(
+						(response) => {
+							if (response) {
+								dispatchReducerState(response);
+							}
 						}
-					});
+					);
 				} else {
 					getSingleDateForNotPerformer(specificEventIdFromParams, true).then(
 						(response) => {
@@ -128,12 +124,9 @@ function EventDatePageContainer({
 		setFollowingInProgress(true);
 		try {
 			const user = await Auth.currentAuthenticatedUser();
-			const roleId = user.attributes["custom:RoleId"];
-			const roleIdAsNumber =
-				typeof roleId === "string" ? parseInt(roleId) : roleId;
+			const authToken = user.signInUserSession.idToken.jwtToken;
 			if (reducerState.base_event_id !== 0) {
-				putPerformerFollowEvent({
-					request_performer_role_id: roleIdAsNumber,
+				putPerformerFollowEvent(authToken, {
 					request_new_following_id: reducerState.base_event_id,
 				}).then(async (res) => {
 					await Auth.updateUserAttributes(user, {

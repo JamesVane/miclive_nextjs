@@ -1,4 +1,5 @@
 /** @format */
+import { Auth } from "aws-amplify";
 
 interface PerformerQueuePosition {
 	request_performer_role_id: number;
@@ -24,10 +25,14 @@ export async function putChangePerformerQueuePositionForDND({
 	});
 
 	try {
+		const currentUser = await Auth.currentAuthenticatedUser();
+		const authToken = currentUser.signInUserSession.idToken.jwtToken;
+
 		const response = await fetch(`${endpoint}?${queryParams.toString()}`, {
 			method: "PUT",
 			headers: {
 				"Content-Type": "application/json",
+				Authorization: `Bearer ${authToken}`,
 			},
 			body: JSON.stringify(performerQueuePositions),
 		});

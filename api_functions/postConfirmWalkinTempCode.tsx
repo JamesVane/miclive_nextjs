@@ -1,4 +1,5 @@
 /** @format */
+import { Auth } from "aws-amplify";
 
 interface postConfirmWalkinTempCodeInput {
 	requestPhoneNumber: string;
@@ -25,10 +26,14 @@ export async function postConfirmWalkinTempCode({
 	url.searchParams.append("request_specific_event_id", requestSpecificEventId);
 
 	try {
+		const currentUser = await Auth.currentAuthenticatedUser();
+		const authToken = currentUser.signInUserSession.idToken.jwtToken;
+
 		const response = await fetch(url.toString(), {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
+				Authorization: `Bearer ${authToken}`,
 			},
 		});
 

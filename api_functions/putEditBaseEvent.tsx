@@ -1,4 +1,5 @@
 /** @format */
+import { Auth } from "aws-amplify";
 
 interface EditBaseEventPayload {
 	query_name: string;
@@ -10,12 +11,15 @@ export const editBaseEvent = async (
 	payload: EditBaseEventPayload
 ): Promise<any> => {
 	try {
+		const currentUser = await Auth.currentAuthenticatedUser();
+		const authToken = currentUser.signInUserSession.idToken.jwtToken;
 		const response = await fetch(
 			"https://lxhk6cienf.execute-api.us-east-2.amazonaws.com/Dev/editevent/puteditbaseevent",
 			{
 				method: "PUT",
 				headers: {
 					"Content-Type": "application/json",
+					Authorization: `Bearer ${authToken}`,
 				},
 				body: JSON.stringify(payload),
 			}

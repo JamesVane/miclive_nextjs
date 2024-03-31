@@ -1,24 +1,24 @@
 /** @format */
+import { Auth } from "aws-amplify";
 
 // Define TypeScript interfaces for the request and response for clarity and type safety
 interface UpdateUserImageResponse {
 	message: string;
 }
 
-export async function putUserHasImage(
-	requestUserSub: string
-): Promise<UpdateUserImageResponse> {
+export async function putUserHasImage(): Promise<UpdateUserImageResponse> {
 	const endpoint =
 		"https://lxhk6cienf.execute-api.us-east-2.amazonaws.com/Dev/putUserHasImage";
-	const requestBody = { request_user_sub: requestUserSub };
 
 	try {
+		const currentUser = await Auth.currentAuthenticatedUser();
+		const authToken = currentUser.signInUserSession.idToken.jwtToken;
 		const response = await fetch(endpoint, {
 			method: "PUT",
 			headers: {
 				"Content-Type": "application/json",
+				Authorization: `Bearer ${authToken}`,
 			},
-			body: JSON.stringify(requestBody),
 		});
 
 		if (!response.ok) {

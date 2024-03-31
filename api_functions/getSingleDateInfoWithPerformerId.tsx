@@ -2,6 +2,7 @@
 
 import axios from "axios";
 import { SubmittedAudioType } from "@/UniversalTypes";
+import { Auth } from "aws-amplify";
 
 export interface Promoter {
 	promoter_sub: string;
@@ -89,16 +90,19 @@ export type ParsedPerformerTicketResponseStructure =
 	  };
 
 export async function getSingleDateInfoWithPerformerId(
-	request_specific_event_id: string,
-	request_performer_id: string
+	request_specific_event_id: string
 ): Promise<ParsedPerformerTicketResponseStructure | null> {
 	try {
+		const currentUser = await Auth.currentAuthenticatedUser();
+		const authToken = currentUser.signInUserSession.idToken.jwtToken;
 		const response = await axios.get(
 			"https://lxhk6cienf.execute-api.us-east-2.amazonaws.com/Dev/performer/getsingledateinfowithperformerid",
 			{
 				params: {
 					request_specific_event_id,
-					request_performer_id,
+				},
+				headers: {
+					Authorization: `Bearer ${authToken}`,
 				},
 			}
 		);

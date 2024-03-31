@@ -4,10 +4,14 @@ import {
 	PromoterManageEventStateType,
 	PerformerType,
 } from "../store/PromoterManageEventState";
+import { Auth } from "aws-amplify";
 
 export async function getPromoterManageCurrentEventData(
 	request_specific_event_id: string
 ): Promise<PromoterManageEventStateType> {
+	const currentUser = await Auth.currentAuthenticatedUser();
+	const authToken = currentUser.signInUserSession.idToken.jwtToken;
+
 	const endpoint =
 		"https://lxhk6cienf.execute-api.us-east-2.amazonaws.com/Dev/getpromotermanagecurrenteventdata";
 	const queryParam = `?request_specific_event_id=${request_specific_event_id}`;
@@ -18,6 +22,7 @@ export async function getPromoterManageCurrentEventData(
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json",
+				Authorization: `Bearer ${authToken}`,
 			},
 		});
 

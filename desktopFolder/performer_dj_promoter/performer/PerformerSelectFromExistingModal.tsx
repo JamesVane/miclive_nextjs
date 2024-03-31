@@ -9,7 +9,7 @@ import {
 	defaultPerformerSelectFromExistingModal,
 } from "@/store/performerSelectFromExistingModalSlice";
 import { RootState } from "@/app/LocalizationProviderHelper";
-import { PerformerRoleAudioKeys } from "@/api_functions/getPerformerProfileAudioKeys";
+import { PerformerRoleAudioKeys } from "@/api_functions_need_to_add_auth/getPerformerProfileAudioKeys";
 
 interface PerformerSelectFromExistingModalProps {
 	refreshAudio: () => void;

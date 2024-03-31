@@ -1,4 +1,5 @@
 /** @format */
+import { Auth } from "aws-amplify";
 
 interface EventResponse {
 	event_id?: number;
@@ -6,16 +7,17 @@ interface EventResponse {
 	message?: string;
 }
 
-export const getNextUpEvent = async (
-	requestUserId: string
-): Promise<EventResponse> => {
+export const getNextUpEvent = async (): Promise<EventResponse> => {
 	try {
+		const currentUser = await Auth.currentAuthenticatedUser();
+		const authToken = currentUser.signInUserSession.idToken.jwtToken;
 		const response = await fetch(
-			`https://lxhk6cienf.execute-api.us-east-2.amazonaws.com/Dev/getNextUpEvent?request_user_id=${requestUserId}`,
+			`https://lxhk6cienf.execute-api.us-east-2.amazonaws.com/Dev/getNextUpEvent`,
 			{
 				method: "GET",
 				headers: {
 					"Content-Type": "application/json",
+					Authorization: `Bearer ${authToken}`,
 				},
 			}
 		);

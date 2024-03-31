@@ -3,7 +3,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { getCheckIfQrIsValid } from "@/api_functions/getCheckIfQrIsValid";
+import { getCheckIfQrIsValid } from "@/api_functions_no_auth/getCheckIfQrIsValid";
 import SplashPage from "@/SplashPage";
 import InvalidQr from "./InvalidQr";
 import { Auth } from "aws-amplify";

@@ -154,7 +154,13 @@ const ImageUploadCrop = ({
 
 	const { getRootProps, isDragAccept, isDragReject, isDragActive } =
 		useDropzone({
-			accept: { "image/*": ["jpg", "png", "jpeg", "gif"] },
+			accept: {
+				"image/jpeg": [".jpg", ".jpeg"],
+				"image/png": [".png"],
+				"image/gif": [".gif"],
+				"image/webp": [".webp"],
+				"application/pdf": [],
+			},
 			multiple: false,
 			onDrop,
 			noClick: true,

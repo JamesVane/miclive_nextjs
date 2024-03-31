@@ -13,7 +13,6 @@ import { RootState } from "@/app/LocalizationProviderHelper";
 import { useRouter } from "next/navigation";
 import { createSpecificEventContainer } from "@/api_functions/postCreateSpecificEvent/postCreateSpecificEventContainer";
 import { switchPageDate, setToDefaultDate } from "@/store/CreateEventDateSlice";
-import { Auth } from "aws-amplify";
 
 interface PromoterCreateSpecificEventDateMobileProps {
 	baseEventIdFromParams: string;
@@ -38,12 +37,7 @@ function PromoterCreateSpecificEventDateMobile({
 
 	async function handleCreateEvent() {
 		try {
-			const user = await Auth.currentAuthenticatedUser();
-			const roleId = user.attributes["custom:RoleId"];
-			const stringPromoterId: string =
-				typeof roleId === "number" ? roleId.toString() : roleId;
 			createSpecificEventContainer(
-				stringPromoterId,
 				EventData,
 				Number(baseEventIdFromParams),
 				EventFromRedux.event_name,

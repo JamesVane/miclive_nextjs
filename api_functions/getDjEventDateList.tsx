@@ -1,6 +1,7 @@
 /** @format */
 
 import axios from "axios";
+import { Auth } from "aws-amplify";
 
 export type DjTicketEvent = {
 	specific_event_id: number;
@@ -24,18 +25,17 @@ export type upPrevObj = {
 	upcoming_array: DjTicketEvent[];
 };
 
-export async function getDjEventDateList(
-	requestDjId: string
-): Promise<upPrevObj | null> {
+export async function getDjEventDateList(): Promise<upPrevObj | null> {
+	const apiUrl =
+		"https://lxhk6cienf.execute-api.us-east-2.amazonaws.com/Dev/dj/getdjeventdatelistv2pt0";
 	try {
-		const response = await axios.get<upPrevObj>(
-			"https://lxhk6cienf.execute-api.us-east-2.amazonaws.com/Dev/dj/getdjeventdatelistv2pt0",
-			{
-				params: {
-					request_dj_id: requestDjId,
-				},
-			}
-		);
+		const currentUser = await Auth.currentAuthenticatedUser();
+		const authToken = currentUser.signInUserSession.idToken.jwtToken;
+		const response = await axios.get<upPrevObj>(apiUrl, {
+			headers: {
+				Authorization: `Bearer ${authToken}`,
+			},
+		});
 
 		return response.data;
 	} catch (error) {

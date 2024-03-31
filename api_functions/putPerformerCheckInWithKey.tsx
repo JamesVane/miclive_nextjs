@@ -16,13 +16,18 @@ export async function putPerformerCheckInWithKey(
 
 	try {
 		const user = await Auth.currentAuthenticatedUser();
-		const roleId = user.attributes["custom:RoleId"];
-		const request_performer_id =
-			typeof roleId === "number" ? roleId.toString() : roleId;
-		const response = await axios.put(endpoint, {
-			request_key: request_key,
-			request_performer_id: request_performer_id,
-		});
+		const authToken = user.signInUserSession.idToken.jwtToken;
+		const response = await axios.put(
+			endpoint,
+			{
+				request_key: request_key,
+			},
+			{
+				headers: {
+					Authorization: `Bearer ${authToken}`,
+				},
+			}
+		);
 
 		const responseData: CheckInResponse = response.data;
 

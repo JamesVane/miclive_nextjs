@@ -3,7 +3,7 @@
 import axios from "axios";
 
 export async function checkIfCheckedIn(
-	request_performer_id: number,
+	authToken: any,
 	request_specific_event_id: number
 ): Promise<boolean> {
 	try {
@@ -11,8 +11,10 @@ export async function checkIfCheckedIn(
 			"https://lxhk6cienf.execute-api.us-east-2.amazonaws.com/Dev/getcheckifcheckedin";
 		const response = await axios.get(endpoint, {
 			params: {
-				request_performer_id,
 				request_specific_event_id,
+			},
+			headers: {
+				Authorization: `Bearer ${authToken}`,
 			},
 		});
 

@@ -10,7 +10,7 @@ import {
 	defaultDateModalState,
 	reducer as dateReducer,
 } from "./dateModalReducer";
-import { getSingleDateForNotPerformer } from "@/api_functions/getSingleDateForNotPerformer";
+import { getSingleDateForNotPerformer } from "@/api_functions_no_auth/getSingleDateForNotPerformer";
 import { putPerformerFollowEvent } from "@/api_functions/putPerformerFollowEvent";
 import { useRouter } from "next/navigation";
 
@@ -50,15 +50,11 @@ function PerformerEventDateModalContainerV2({
 		const currentUser = await Auth.currentAuthenticatedUser({
 			bypassCache: true,
 		});
-		const requestPerformerRoleId = currentUser.attributes["custom:RoleId"];
 		const followingArrayFromCog = JSON.parse(
 			currentUser.attributes["custom:PerformerFollowing"]
 		);
 
-		getSingleDateInfoWithPerformerId(
-			specificIdfromParams!,
-			requestPerformerRoleId
-		).then((response) => {
+		getSingleDateInfoWithPerformerId(specificIdfromParams!).then((response) => {
 			if (response) {
 				dispatchReducerState(response);
 				setIsAlreadyFollowing(
@@ -77,16 +73,14 @@ function PerformerEventDateModalContainerV2({
 			const currentUser = await Auth.currentAuthenticatedUser();
 			const roleType = currentUser.attributes["custom:RoleType"];
 			if (roleType === "performer") {
-				const requestPerformerRoleId = currentUser.attributes["custom:RoleId"];
 				if (eventPageTicketPurchasedDate) {
-					getSingleDateInfoWithPerformerId(
-						specificIdfromParams!,
-						requestPerformerRoleId
-					).then((response) => {
-						if (response) {
-							dispatchReducerState(response);
+					getSingleDateInfoWithPerformerId(specificIdfromParams!).then(
+						(response) => {
+							if (response) {
+								dispatchReducerState(response);
+							}
 						}
-					});
+					);
 				} else {
 					if (specificIdfromParams) {
 						getSingleDateForNotPerformer(specificIdfromParams, true).then(
@@ -132,12 +126,9 @@ function PerformerEventDateModalContainerV2({
 		setFollowingInProgress(true);
 		try {
 			const user = await Auth.currentAuthenticatedUser();
-			const roleId = user.attributes["custom:RoleId"];
-			const roleIdAsNumber =
-				typeof roleId === "string" ? parseInt(roleId) : roleId;
+			const authToken = user.signInUserSession.idToken.jwtToken;
 			if (reducerState.base_event_id !== 0) {
-				putPerformerFollowEvent({
-					request_performer_role_id: roleIdAsNumber,
+				putPerformerFollowEvent(authToken, {
 					request_new_following_id: reducerState.base_event_id,
 				}).then(async (res) => {
 					await Auth.updateUserAttributes(user, {

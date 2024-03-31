@@ -3,7 +3,7 @@
 import React from "react";
 import styles from "./styles.module.css";
 import DjEventPageDatePaper from "./DjEventPageDatePaper";
-import { DjDateType } from "../../../../api_functions/getDjEventPageDataV2pt0";
+import { DjDateType } from "../../../../api_functions_not_user/getDjEventPageDataV2pt0";
 
 interface DjEventPageListHelperProps {
 	upcomingDates: DjDateType[];

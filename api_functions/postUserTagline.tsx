@@ -22,11 +22,7 @@ function validateTagline(tagline: string): [boolean, string] {
 	}
 }
 
-export async function postUserTagline(
-	queryRole: "performer" | "dj" | "promoter",
-	queryPayload: string
-): Promise<string> {
-	// changed the return type to Promise<number>
+export async function postUserTagline(queryPayload: string): Promise<string> {
 	const [isValid, errorMessage] = validateTagline(queryPayload);
 	if (!isValid) {
 		throw new Error(errorMessage);
@@ -34,23 +30,27 @@ export async function postUserTagline(
 
 	try {
 		const currentUser = await Auth.currentAuthenticatedUser();
-		const queryId = currentUser.attributes.sub;
+		const authToken = currentUser.signInUserSession.idToken.jwtToken;
 
 		const apiUrl =
 			"https://lxhk6cienf.execute-api.us-east-2.amazonaws.com/Dev/currentuserresources/updateusertagline";
 
-		const queryParams = {
-			query_role: queryRole,
-			query_id: queryId,
-			query_payload: queryPayload,
-		};
-
-		const response = await axios.post(apiUrl, null, { params: queryParams });
+		const response = await axios.post(
+			apiUrl,
+			{ query_payload: queryPayload },
+			{
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${authToken}`,
+				},
+			}
+		);
 
 		if (response.status !== 200) {
 			return response.data.error;
 		}
-		return response.data.message; // return the status
+		return response.data.message; // return the message
 	} catch (error) {
 		console.error("Error updating user tagline:", error);
 		throw error;

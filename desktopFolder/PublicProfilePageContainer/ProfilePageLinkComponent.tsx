@@ -1,6 +1,6 @@
 /** @format */
 import { useEffect, useState } from "react";
-import { getLinkPreviewInfo } from "@/api_functions/getLinkPreviewInfo";
+import { getLinkPreviewInfo } from "@/api_functions_no_auth/getLinkPreviewInfo";
 import styles from "./styles.module.css";
 import { InsertLinkRounded } from "@mui/icons-material";
 

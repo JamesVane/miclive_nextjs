@@ -10,7 +10,7 @@ import ReactQuill from "react-quill";
 import { useDispatch, useSelector } from "react-redux";
 import "quill/dist/quill.snow.css";
 import { RootState } from "@/app/LocalizationProviderHelper";
-import { postUploadS3Image } from "@/api_functions/postUploadS3Image";
+import { postUploadS3Image } from "@/api_functions_need_to_add_auth/postUploadS3Image";
 import { setBaseDescription } from "@/store/promoterEditEventSlice";
 import { v4 as uuidv4 } from "uuid";
 import { deleteImageFromS3 } from "@/api_functions/deleteImageFromS3";

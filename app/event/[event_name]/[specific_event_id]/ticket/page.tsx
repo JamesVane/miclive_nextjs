@@ -9,10 +9,10 @@ import {
 	EventPageDataType,
 } from "@desk/NewEventPage/NewEventPageReducer";
 import { getEventPageDataForAuthPerformer } from "@/api_functions/getEventPageDataForAuthPerformer";
-import { getEventPageDataForUnauthenticatedUser } from "@/api_functions/getEventPageDataForUnauthenticatedUser";
+import { getEventPageDataForUnauthenticatedUser } from "@/api_functions_no_auth/getEventPageDataForUnauthenticatedUser";
 import awsExports from "@/aws-exports";
 import { headers } from "next/headers";
-import { getEventMetadata } from "@/api_functions/getEventMetadata";
+import { getEventMetadata } from "@/api_functions_no_auth/getEventMetadata";
 import { UAParser } from "ua-parser-js";
 import MobileEventDatePage from "@mobi/EventDatePage";
 
@@ -81,6 +81,7 @@ async function page({
 			const currentUser = await SSR.Auth.currentAuthenticatedUser({
 				bypassCache: true,
 			});
+			const authToken = currentUser.signInUserSession.idToken.jwtToken;
 			const roleType = currentUser.attributes["custom:RoleType"];
 			const requestPerformerRoleId = currentUser.attributes["custom:RoleId"];
 			const followingArrayNotParsed =
@@ -91,10 +92,7 @@ async function page({
 
 			let data;
 			if (roleType === "performer" && eventName) {
-				data = await getEventPageDataForAuthPerformer(
-					eventName,
-					requestPerformerRoleId
-				);
+				data = await getEventPageDataForAuthPerformer(eventName, authToken);
 			} else {
 				data = await getEventPageDataForUnauthenticatedUser(eventName);
 			}

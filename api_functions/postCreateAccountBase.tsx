@@ -4,7 +4,6 @@ const API_ENDPOINT =
 	"https://lxhk6cienf.execute-api.us-east-2.amazonaws.com/Dev/createaccount/postcreateaccountbase";
 
 type CreateAccountParams = {
-	request_primary_key: string;
 	request_username: string;
 	request_email: string;
 	request_role_name_number: number;
@@ -12,6 +11,7 @@ type CreateAccountParams = {
 };
 
 export const postCreateAccountBase = async (
+	authKey: any,
 	data: CreateAccountParams
 ): Promise<string> => {
 	try {
@@ -19,6 +19,7 @@ export const postCreateAccountBase = async (
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
+				Authorization: `Bearer ${authKey}`,
 			},
 			body: JSON.stringify(data),
 		});

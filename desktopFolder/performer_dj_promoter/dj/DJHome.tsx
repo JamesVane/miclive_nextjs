@@ -2,7 +2,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Auth } from "aws-amplify";
 import { useDispatch } from "react-redux";
 import SplashPage from "@/SplashPage";
 import HomeBarV2 from "@desk/HomeBarV2";
@@ -27,10 +26,7 @@ function DJHome() {
 
 	async function fetchData() {
 		try {
-			const user = await Auth.currentAuthenticatedUser();
-			const roleId = user.attributes["custom:RoleId"];
-
-			const EventDateList = await getDjEventDateList(roleId);
+			const EventDateList = await getDjEventDateList();
 
 			if (EventDateList) {
 				dispatch(setDjEventDateList(EventDateList));

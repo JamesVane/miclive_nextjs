@@ -1,9 +1,9 @@
 /** @format */
 
 import axios from "axios";
+import { Auth } from "aws-amplify";
 
 interface AddPerformerToRosterPayload {
-	request_performer_id: number;
 	request_specific_event_id: number;
 }
 
@@ -14,7 +14,13 @@ export async function addPerformerToRoster(
 		"https://lxhk6cienf.execute-api.us-east-2.amazonaws.com/Dev/signup/postaddperformertoroster";
 
 	try {
-		const response = await axios.post(endpoint, data);
+		const currentUser = await Auth.currentAuthenticatedUser();
+		const authToken = currentUser.signInUserSession.idToken.jwtToken;
+		const response = await axios.post(endpoint, data, {
+			headers: {
+				Authorization: `Bearer ${authToken}`,
+			},
+		});
 		return response.data;
 	} catch (error) {
 		throw new Error(`Failed to add performer to roster: ${error}`);

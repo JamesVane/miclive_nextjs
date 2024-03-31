@@ -5,12 +5,11 @@ import { useEffect, useState } from "react";
 import PurchaseTicket from "./PurchaseTicket";
 import { useRouter } from "next/navigation";
 import { addPerformerToRoster } from "@/api_functions/postAddPerformerToRoster";
-import { Auth } from "aws-amplify";
 import SplashPage from "@/SplashPage";
 import {
 	getPageDataForPurchasePage,
 	PurchasePageData,
-} from "@/api_functions/getPageDataForPurchasePage";
+} from "@/api_functions_no_auth/getPageDataForPurchasePage";
 
 interface PurchaseTicketContainerProps {
 	forCheckin?: boolean;
@@ -36,14 +35,7 @@ function PurchaseTicketContainer({
 	);
 
 	async function addToRoster() {
-		const user = await Auth.currentAuthenticatedUser();
-		const roleId = user.attributes["custom:RoleId"];
-
-		console.log("Number(specificEventId)", Number(specificEventIdFromParams));
-		console.log("Number(roleId)", Number(roleId));
-
 		addPerformerToRoster({
-			request_performer_id: Number(roleId),
 			request_specific_event_id: Number(specificEventIdFromParams),
 		});
 	}

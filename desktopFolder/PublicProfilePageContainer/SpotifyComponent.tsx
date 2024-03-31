@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { getSpotifyAccessToken } from "@/api_functions/getSpotifyAccessToken";
+import { getSpotifyAccessToken } from "@/api_functions_no_auth/getSpotifyAccessToken";
 import styles from "./styles.module.css";
 
 interface SpotifyComponentProps {

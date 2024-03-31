@@ -1,4 +1,5 @@
 /** @format */
+import { Auth } from "aws-amplify";
 
 export async function postCreateAndReturnTempAccountCode(
 	requestPhoneNumber: string,
@@ -12,10 +13,13 @@ export async function postCreateAndReturnTempAccountCode(
 	url.searchParams.append("request_is_new_user", isNewUser ? "true" : "false");
 
 	try {
+		const currentUser = await Auth.currentAuthenticatedUser();
+		const authToken = currentUser.signInUserSession.idToken.jwtToken;
 		const response = await fetch(url.toString(), {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
+				Authorization: `Bearer ${authToken}`,
 			},
 		});
 

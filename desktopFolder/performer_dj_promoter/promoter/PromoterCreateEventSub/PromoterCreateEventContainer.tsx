@@ -10,7 +10,7 @@ import CreateSpecificEvent from "./CreateSpecificEvent";
 import InviteDjPage from "./InviteDjPage";
 import { useDispatch } from "react-redux";
 import { createBaseAndSpecificEventContainer } from "@/api_functions/postCreateBaseAndSpecificEvent/postCreateBaseAndSpecificEventContainer";
-import { postUploadS3Image } from "@/api_functions/postUploadS3Image";
+import { postUploadS3Image } from "@/api_functions_need_to_add_auth/postUploadS3Image";
 import {
 	switchPage,
 	setToDefault,
@@ -19,7 +19,6 @@ import {
 } from "@/store/promoterCreateEventSlice";
 import CreateBaseEventDescription from "./CreateBaseEventDescription";
 import { useRouter } from "next/navigation";
-import { Auth } from "aws-amplify";
 import { getPromoterEventListV2pt0 } from "@/api_functions/getPromoterEventListV2pt0";
 import { setPromoterEventListV2pt0Slice } from "@/store/promoterEventListV2pt0Slice";
 import CreateEventBanner from "./CreateEventBanner";
@@ -102,59 +101,49 @@ function PromoterCreateEventContainer() {
 
 	async function handleCreateEvent() {
 		try {
-			const user = await Auth.currentAuthenticatedUser();
-			const roleId = user.attributes["custom:RoleId"];
+			createBaseAndSpecificEventContainer(EventData).then(async (res) => {
+				const DjDateInviteUrlKey = res.DjDateInviteUrlKey;
+				const DjEventInviteUrlKey = res.DjEventInviteUrlKey;
+				dispatch(setDjDateKey(DjDateInviteUrlKey));
+				dispatch(setDjEventKey(DjEventInviteUrlKey));
+				if (res.baseEventId) {
+					await getDateReturnArray(res.specificEventId.toString());
+					await getEventReturnArray(res.baseEventId.toString());
 
-			const stringPromoterId =
-				typeof roleId === "number" ? roleId.toString() : roleId;
-			createBaseAndSpecificEventContainer(stringPromoterId, EventData).then(
-				async (res) => {
-					const DjDateInviteUrlKey = res.DjDateInviteUrlKey;
-					const DjEventInviteUrlKey = res.DjEventInviteUrlKey;
-					dispatch(setDjDateKey(DjDateInviteUrlKey));
-					dispatch(setDjEventKey(DjEventInviteUrlKey));
-					if (res.baseEventId) {
-						await getDateReturnArray(res.specificEventId.toString());
-						await getEventReturnArray(res.baseEventId.toString());
-
-						handleUpdateDjKeyState({
-							dateKey: res.DjDateInviteUrlKey,
-							eventKey: res.DjEventInviteUrlKey,
-						});
-						const [threeBanner, fourBanner] = await Promise.all([
-							postUploadS3Image(
-								EventData.baseEvent.banner3X10,
-								`event_banner_3X1/banner_${res.baseEventId}`
-							),
-							postUploadS3Image(
-								EventData.baseEvent.banner4X10,
-								`event_banner_4X1/banner_${res.baseEventId}`
-							),
-						]);
+					handleUpdateDjKeyState({
+						dateKey: res.DjDateInviteUrlKey,
+						eventKey: res.DjEventInviteUrlKey,
+					});
+					const [threeBanner, fourBanner] = await Promise.all([
 						postUploadS3Image(
-							EventData.baseEvent.imageFile,
-							`event_pictures/event_${res.baseEventId}.jpg`
-						).then(async () => {
-							try {
-								const user = await Auth.currentAuthenticatedUser();
-								const roleId = user.attributes["custom:RoleId"];
-
-								getPromoterEventListV2pt0(roleId).then((res) => {
-									if (res) {
-										dispatch(setPromoterEventListV2pt0Slice(res));
-									}
-								});
-							} catch (err) {
-								console.log("Error fetching user profile or perform er data");
-							}
-							dispatch(switchPage({ page: "DjInvite" }));
-						});
-					} else if (res.message === "An event already exists on this date.") {
-						dispatch(switchPage({ page: "specificEvent" }));
-						setErrorMessage("An event already exists on this date");
-					}
+							EventData.baseEvent.banner3X10,
+							`event_banner_3X1/banner_${res.baseEventId}`
+						),
+						postUploadS3Image(
+							EventData.baseEvent.banner4X10,
+							`event_banner_4X1/banner_${res.baseEventId}`
+						),
+					]);
+					postUploadS3Image(
+						EventData.baseEvent.imageFile,
+						`event_pictures/event_${res.baseEventId}.jpg`
+					).then(async () => {
+						try {
+							getPromoterEventListV2pt0().then((res) => {
+								if (res) {
+									dispatch(setPromoterEventListV2pt0Slice(res));
+								}
+							});
+						} catch (err) {
+							console.log("Error fetching user profile or perform er data");
+						}
+						dispatch(switchPage({ page: "DjInvite" }));
+					});
+				} else if (res.message === "An event already exists on this date.") {
+					dispatch(switchPage({ page: "specificEvent" }));
+					setErrorMessage("An event already exists on this date");
 				}
-			);
+			});
 		} catch (err) {
 			console.log(err);
 		}

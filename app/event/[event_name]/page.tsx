@@ -3,17 +3,16 @@
 import React from "react";
 import BaseEventPageSplitter from "@/DeckMobileSplitterPages/BaseEventPageSplitter";
 import type { Metadata, ResolvingMetadata } from "next";
-import { getSignedUrl } from "@/api_functions/getAnySignedUrl";
 import { Amplify, withSSRContext } from "aws-amplify";
 import {
 	eventPageReducer,
 	EventPageDataType,
 } from "@desk/NewEventPage/NewEventPageReducer";
 import { getEventPageDataForAuthPerformer } from "@/api_functions/getEventPageDataForAuthPerformer";
-import { getEventPageDataForUnauthenticatedUser } from "@/api_functions/getEventPageDataForUnauthenticatedUser";
+import { getEventPageDataForUnauthenticatedUser } from "@/api_functions_no_auth/getEventPageDataForUnauthenticatedUser";
 import awsExports from "@/aws-exports";
 import { headers } from "next/headers";
-import { getEventMetadata } from "@/api_functions/getEventMetadata";
+import { getEventMetadata } from "@/api_functions_no_auth/getEventMetadata";
 
 Amplify.configure({ ...awsExports, ssr: true });
 
@@ -79,8 +78,8 @@ async function page({ params }: { params: { event_name: string } }) {
 			const currentUser = await SSR.Auth.currentAuthenticatedUser({
 				bypassCache: true,
 			});
+			const authToken = currentUser.signInUserSession.idToken.jwtToken;
 			const roleType = currentUser.attributes["custom:RoleType"];
-			const requestPerformerRoleId = currentUser.attributes["custom:RoleId"];
 			const followingArrayNotParsed =
 				currentUser.attributes["custom:PerformerFollowing"];
 			const followingArrayFromCog = followingArrayNotParsed
@@ -89,10 +88,7 @@ async function page({ params }: { params: { event_name: string } }) {
 
 			let data;
 			if (roleType === "performer" && eventName) {
-				data = await getEventPageDataForAuthPerformer(
-					eventName,
-					requestPerformerRoleId
-				);
+				data = await getEventPageDataForAuthPerformer(eventName, authToken);
 			} else {
 				data = await getEventPageDataForUnauthenticatedUser(eventName);
 			}

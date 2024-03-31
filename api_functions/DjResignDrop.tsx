@@ -1,6 +1,7 @@
 /** @format */
 
 import axios from "axios";
+import { Auth } from "aws-amplify";
 
 export async function deleteDjResignFromBaseEvent(
 	requestBaseEventId: string,
@@ -45,7 +46,14 @@ export async function deleteDjDropEventDate(
 		"https://lxhk6cienf.execute-api.us-east-2.amazonaws.com/Dev/deletedjdropeventdate";
 
 	try {
-		const response = await axios.delete(endpoint, { params });
+		const currentUser = await Auth.currentAuthenticatedUser();
+		const authToken = currentUser.signInUserSession.idToken.jwtToken;
+		const response = await axios.delete(endpoint, {
+			params,
+			headers: {
+				Authorization: `Bearer ${authToken}`,
+			},
+		});
 		return response.data;
 	} catch (error: any) {
 		throw new Error(`Failed to drop DJ event date: ${error.message}`);

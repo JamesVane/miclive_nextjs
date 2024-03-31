@@ -6,7 +6,7 @@ import ViewPromoterProfilePage from "./ViewPromoterProfilePage";
 import {
 	getPromoterPreviewPageDataV2pt0,
 	PromoterPreviewData,
-} from "@/api_functions/getPromoterPreviewPageDataV2pt0";
+} from "@/api_functions_not_user/getPromoterPreviewPageDataV2pt0";
 import SplashPage from "@/SplashPage";
 import { Auth } from "aws-amplify";
 import { useDispatch, useSelector } from "react-redux";

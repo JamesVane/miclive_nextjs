@@ -1,4 +1,5 @@
 /** @format */
+import { Auth } from "aws-amplify";
 
 export async function getBaseEventImageArray(
 	requestBaseEventId: string
@@ -8,7 +9,13 @@ export async function getBaseEventImageArray(
 	url.searchParams.set("request_base_event_id", requestBaseEventId);
 
 	try {
-		const response = await fetch(url.toString());
+		const currentUser = await Auth.currentAuthenticatedUser();
+		const authToken = currentUser.signInUserSession.idToken.jwtToken;
+		const response = await fetch(url.toString(), {
+			headers: {
+				Authorization: `Bearer ${authToken}`,
+			},
+		});
 		if (!response.ok) {
 			throw new Error(`HTTP error! Status: ${response.status}`);
 		}

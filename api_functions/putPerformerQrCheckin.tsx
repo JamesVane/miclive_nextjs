@@ -8,14 +8,11 @@ export async function putPerformerQrCheckin(
 	const endpoint =
 		"https://lxhk6cienf.execute-api.us-east-2.amazonaws.com/Dev/checkinforperformer/putperformerqrcheckin";
 
-	const user = await Auth.currentAuthenticatedUser();
-	const roleId = user.attributes["custom:RoleId"];
-	const request_performer_id =
-		typeof roleId === "string" ? Number(roleId) : roleId;
+	const currentUser = await Auth.currentAuthenticatedUser();
+	const authToken = currentUser.signInUserSession.idToken.jwtToken;
 
 	const requestData = {
 		request_id: request_id,
-		request_performer_id: request_performer_id,
 	};
 
 	try {
@@ -23,6 +20,7 @@ export async function putPerformerQrCheckin(
 			method: "PUT",
 			headers: {
 				"Content-Type": "application/json",
+				Authorization: `Bearer ${authToken}`,
 			},
 			body: JSON.stringify(requestData),
 		});

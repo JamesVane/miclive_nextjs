@@ -12,7 +12,7 @@ import {
 	setDjEventDateModalDataV2pt0ForTheirEvent,
 	setDjEventDateModalDataV2pt0ForNOTTheirEvent,
 } from "@/store/djEventDateModalDataV2pt0";
-import { getSingleDateForNotPerformer } from "@/api_functions/getSingleDateForNotPerformer";
+import { getSingleDateForNotPerformer } from "@/api_functions_no_auth/getSingleDateForNotPerformer";
 import SplashPage from "@/SplashPage";
 import { Auth } from "aws-amplify";
 import DropDateModalMobile from "./DropDateModalMobile";
@@ -76,14 +76,13 @@ function DjDatePageContainer({
 		setDroppingOrResigning(true);
 		const currentUser = await Auth.currentAuthenticatedUser();
 		const displayName = currentUser.attributes["custom:DisplayUsername"];
-		const djRoleId = currentUser.attributes["custom:RoleId"];
 		deleteDjDropEventDate({
 			request_base_event_id: base_event_id.toString(),
 			request_specific_event_id: specific_event_id.toString(),
 			request_dj_name: displayName,
 		}).then((response) => {
 			if (response.message === "Success") {
-				getDjEventDateList(djRoleId).then((response) => {
+				getDjEventDateList().then((response) => {
 					if (response) {
 						dispatch(setDjEventDateList(response));
 						handleNavigateBack();

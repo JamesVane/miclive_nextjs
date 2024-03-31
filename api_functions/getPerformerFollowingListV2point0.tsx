@@ -13,17 +13,17 @@ export async function getPerformerFollowingListV2point0(): Promise<
 	Event[] | null
 > {
 	const currentUser = await Auth.currentAuthenticatedUser();
-	const requestPerformerRoleId = currentUser.attributes["custom:RoleId"];
+	const authToken = currentUser.signInUserSession.idToken.jwtToken;
 
 	const endpoint =
 		"https://lxhk6cienf.execute-api.us-east-2.amazonaws.com/Dev/performer/getperformerfollowinglistv2point0";
-	const queryParam = `?request_performer_role_id=${encodeURIComponent(
-		requestPerformerRoleId
-	)}`;
-	const fullUrl = endpoint + queryParam;
 
 	try {
-		const response = await axios.get(fullUrl);
+		const response = await axios.get(endpoint, {
+			headers: {
+				Authorization: `Bearer ${authToken}`,
+			},
+		});
 		return response.data as Event[];
 	} catch (error) {
 		console.error("Error fetching performer following list:", error);

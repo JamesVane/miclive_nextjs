@@ -11,16 +11,7 @@ import defaulprofile from "./images/defaultprofile.png";
 import Image from "next/image";
 
 interface SkeletonOrImageProps {
-	type:
-		| "performer"
-		| "promoter"
-		| "dj"
-		| "event"
-		| "qr"
-		| "event4X1"
-		| "event3X1"
-		| "promoter3X1"
-		| "promoter4X1";
+	type: "qr";
 	id: string | number;
 }
 

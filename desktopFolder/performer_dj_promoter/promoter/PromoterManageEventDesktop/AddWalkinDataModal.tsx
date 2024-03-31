@@ -12,9 +12,9 @@ import {
 } from "@mui/material";
 import { CloseRounded, CheckCircle } from "@mui/icons-material";
 import DividerH from "@/universalComponents/DividerH";
-import { getNumberOfTracksFromBaseEventId } from "@/api_functions/getNumberOfTracksFromBaseEventId";
+import { getNumberOfTracksFromBaseEventId } from "@/api_functions_no_auth/getNumberOfTracksFromBaseEventId";
 import PerformerTicketSubmitAudioPaper from "@desk/performer_dj_promoter/performer/PerformerTicketSubmitAudioPaper";
-import { getSubmittedAudioForPerformerFromId } from "@/api_functions/getSubmittedAudioForPerformerFromId";
+import { getSubmittedAudioForPerformerFromId } from "@/api_functions_need_to_add_auth/getSubmittedAudioForPerformerFromId";
 import { SubmittedAudioType } from "@/UniversalTypes";
 import { useDispatch } from "react-redux";
 import { setAddNewAudioToEvent } from "@/store/performerAddNewAudioToEventSlice";
@@ -24,7 +24,7 @@ import PerformerSelectFromExistingModal from "@desk/performer_dj_promoter/perfor
 import {
 	getPerformerProfileAudioKeys,
 	PerformerRoleAudioKeys,
-} from "@/api_functions/getPerformerProfileAudioKeys";
+} from "@/api_functions_need_to_add_auth/getPerformerProfileAudioKeys";
 import { formatMMSS } from "@/generic_functions/time_formaters";
 import { checkInPerformerWithManualWalkinUuid } from "@/api_functions/checkInPerformerWithManualWalkinUuid";
 

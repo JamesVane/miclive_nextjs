@@ -58,7 +58,6 @@ export const adjustTime = (
 
 export async function putEditSpecificEventInfoContainer(
 	specificEventId: number,
-	promoterId: number,
 	eventInfo: incomingEventInfo
 ) {
 	console.log("request specific id", specificEventId);
@@ -91,7 +90,6 @@ export async function putEditSpecificEventInfoContainer(
 	};
 	const response = await putEditSpecificEventInfo(
 		specificEventId,
-		promoterId,
 		newEventInfo
 	);
 	return response;

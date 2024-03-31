@@ -10,7 +10,7 @@ import styles from "./styles.module.css";
 import PersonRow from "@desk/PersonRow";
 import DescriptionComponent from "@desk/DescriptionComponent";
 import DjEventPageListHelper from "./DjEventPageListHelper";
-import { DjEventPageType } from "../../../../api_functions/getDjEventPageDataV2pt0";
+import { DjEventPageType } from "../../../../api_functions_not_user/getDjEventPageDataV2pt0";
 
 interface DjEventPageV2pt0Props {
 	handleBack: () => void;

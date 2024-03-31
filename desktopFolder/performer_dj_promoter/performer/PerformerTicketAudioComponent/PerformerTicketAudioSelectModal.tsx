@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import styles from "./styles.module.css";
-import { PostPerformerChangeSubmittedAudioFromExisting } from "@/api_functions/PostPerformerChangeSubmittedAudioFromExisting";
+import { PostPerformerChangeSubmittedAudioFromExisting } from "@/api_functions_need_to_add_auth/PostPerformerChangeSubmittedAudioFromExisting";
 import { RootState } from "@/app/LocalizationProviderHelper";
 import { useDispatch, useSelector } from "react-redux";
 import PerformerTicketAudioSelectRow from "./PerformerTicketAudioSelectRow";
@@ -11,9 +11,9 @@ import { IconButton } from "@mui/material";
 import { CloseRounded } from "@mui/icons-material";
 import { Auth } from "aws-amplify";
 import SplashPage from "@/SplashPage";
-import { getPerformerProfileAudioKeys } from "@/api_functions/getPerformerProfileAudioKeys";
+import { getPerformerProfileAudioKeys } from "@/api_functions_need_to_add_auth/getPerformerProfileAudioKeys";
 import { setPerformerAudioKey } from "@/store/performerAudioKeysStore";
-import { PerformerRoleAudioKeys } from "@/api_functions/getPerformerProfileAudioKeys";
+import { PerformerRoleAudioKeys } from "@/api_functions_need_to_add_auth/getPerformerProfileAudioKeys";
 
 interface PerformerTicketAudioSelectModal {
 	selectFromSongOpen: number;

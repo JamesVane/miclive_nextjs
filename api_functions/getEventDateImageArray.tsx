@@ -1,4 +1,5 @@
 /** @format */
+import { Auth } from "aws-amplify";
 
 export async function getEventDateImageArray(
 	requestSpecificEventId: string
@@ -8,7 +9,13 @@ export async function getEventDateImageArray(
 	url.searchParams.set("request_specific_event_id", requestSpecificEventId);
 
 	try {
-		const response = await fetch(url.toString());
+		const currentUser = await Auth.currentAuthenticatedUser();
+		const authToken = currentUser.signInUserSession.idToken.jwtToken;
+		const response = await fetch(url.toString(), {
+			headers: {
+				Authorization: `Bearer ${authToken}`,
+			},
+		});
 		if (!response.ok) {
 			throw new Error(`HTTP error! Status: ${response.status}`);
 		}

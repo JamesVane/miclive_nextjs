@@ -10,8 +10,8 @@ import {
 	CloseRounded,
 	FileUploadRounded,
 } from "@mui/icons-material";
-import { postAudio } from "../../api_functions/postAudio";
-import { PostPerformerChangeSubmittedAudioFromExisting } from "../../api_functions/PostPerformerChangeSubmittedAudioFromExisting";
+import { postAudio } from "../../api_functions_need_to_add_auth/postAudio";
+import { PostPerformerChangeSubmittedAudioFromExisting } from "../../api_functions_need_to_add_auth/PostPerformerChangeSubmittedAudioFromExisting";
 import { Auth } from "aws-amplify";
 
 interface UploadAudioProps {

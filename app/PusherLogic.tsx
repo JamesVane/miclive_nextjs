@@ -38,26 +38,36 @@ function PusherLogic() {
 		getUserTypeAndRoleId();
 	}, []);
 
-	const { data: eventInfo, refetch: refetchPerformerCurrentEvent } = useQuery({
-		queryKey: [
-			"performerCurrentEventState",
-			{
-				request_specific_event_id: Number(specificEventId),
-			},
-		],
-		queryFn: getPerformerCurrentEventState,
-	});
-
+	const { data: eventInfo, refetch: refetchPerformerCurrentEvent } =
+		userRoleId === "performer"
+			? useQuery({
+					queryKey: [
+						"performerCurrentEventState",
+						{
+							request_specific_event_id: Number(specificEventId),
+						},
+					],
+					queryFn: getPerformerCurrentEventState,
+			  })
+			: {
+					data: null,
+					refetch: () => {},
+			  };
 	const { data: imtermissionTimestampFromQuery, refetch: timestampRefetch } =
-		useQuery({
-			queryKey: [
-				"performerCurrentEventTimestamp",
-				{
-					request_specific_event_id: specificEventId,
-				},
-			],
-			queryFn: getIntermissionStampFromSpecificId,
-		});
+		userRoleId === "performer"
+			? useQuery({
+					queryKey: [
+						"performerCurrentEventTimestamp",
+						{
+							request_specific_event_id: specificEventId,
+						},
+					],
+					queryFn: getIntermissionStampFromSpecificId,
+			  })
+			: {
+					data: null,
+					refetch: () => {},
+			  };
 
 	function PusherInner() {
 		const dispatch = useDispatch();

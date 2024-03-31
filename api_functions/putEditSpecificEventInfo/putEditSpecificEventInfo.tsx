@@ -1,6 +1,7 @@
 /** @format */
 
 import axios from "axios";
+import { Auth } from "aws-amplify";
 
 export type EventInfo = {
 	start_time: string;
@@ -17,16 +18,23 @@ export type EventInfo = {
 
 export async function putEditSpecificEventInfo(
 	query_specific_event_id: number,
-	query_promoter_id: number,
 	eventInfo: EventInfo
 ) {
 	try {
+		const currentUser = await Auth.currentAuthenticatedUser();
+		const authToken = currentUser.signInUserSession.idToken.jwtToken;
+		const apiEndpoint =
+			"https://lxhk6cienf.execute-api.us-east-2.amazonaws.com/Dev/editevent/puteditspecificeventinfo";
 		const response = await axios.put(
-			"https://lxhk6cienf.execute-api.us-east-2.amazonaws.com/Dev/editevent/puteditspecificeventinfo",
+			apiEndpoint,
 			{
 				query_specific_event: eventInfo,
 				query_specific_event_id: query_specific_event_id,
-				query_promoter_id: query_promoter_id,
+			},
+			{
+				headers: {
+					Authorization: `Bearer ${authToken}`,
+				},
 			}
 		);
 		return response.data;

@@ -86,39 +86,35 @@ export async function getPerformerCurrentEventState({
 >): Promise<performerCurrentEventType | null> {
 	const requestSpecificEventId = queryKey[1].request_specific_event_id;
 	if (requestSpecificEventId) {
-		const user = await Auth.currentAuthenticatedUser();
-		const roleId = user.attributes["custom:RoleId"];
-		const request_performer_id =
-			typeof roleId === "string" ? parseInt(roleId) : roleId;
+		const currentUser = await Auth.currentAuthenticatedUser();
+		const authToken = currentUser.signInUserSession.idToken.jwtToken;
 
 		const endpoint =
 			"https://lxhk6cienf.execute-api.us-east-2.amazonaws.com/Dev/getperformercurrenteventstate";
 
 		const url = new URL(endpoint);
 		url.searchParams.set(
-			"request_performer_id",
-			request_performer_id.toString()
-		);
-		url.searchParams.set(
 			"request_specific_event_id",
 			requestSpecificEventId.toString()
 		);
 
 		try {
-			const response = await fetch(url.toString());
+			const response = await fetch(url.toString(), {
+				method: "GET",
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${authToken}`,
+				},
+			});
 
 			if (!response.ok) {
 				throw new Error(`HTTP error! Status: ${response.status}`);
 			}
 
 			const data = await response.json();
-
 			return data;
-		} catch (error: any) {
-			console.error(
-				"There was a problem with the fetch operation:",
-				error.message
-			);
+		} catch (error) {
+			console.error("There was a problem with the fetch operation:", error);
 			throw error;
 		}
 	} else {

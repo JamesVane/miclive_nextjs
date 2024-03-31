@@ -13,7 +13,7 @@ import { setSingleConversationMessage } from "@/store/conversationMessagesSlice"
 import { useDispatch } from "react-redux";
 import _ from "lodash";
 import { DateTime } from "luxon";
-import { putMessageReaction } from "@/api_functions/putMessageReaction";
+import { putMessageReaction } from "@/api_functions_not_user/putMessageReaction";
 import { setUpdateTopMessage } from "@/store/conversationListSlice";
 import { Auth } from "aws-amplify";
 

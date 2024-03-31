@@ -7,7 +7,6 @@ import { WarningRounded } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/app/LocalizationProviderHelper";
 import _ from "lodash";
-import { Auth } from "aws-amplify";
 import HomeBarV2 from "@desk/HomeBarV2";
 import { Tabs, Tab, Button } from "@mui/material";
 import { useRouter } from "next/navigation";
@@ -46,15 +45,12 @@ function PromoterHome() {
 	useEffect(() => {
 		async function fetchData() {
 			try {
-				const user = await Auth.currentAuthenticatedUser();
-				const roleId = user.attributes["custom:RoleId"];
-
-				const nextUpEventReturnData = await getNextUpEvent(roleId);
+				const nextUpEventReturnData = await getNextUpEvent();
 				if (nextUpEventReturnData.event_id) {
 					setNextUpEventId(nextUpEventReturnData.event_id);
 				}
 
-				getPromoterEventListV2pt0(roleId).then((res) => {
+				getPromoterEventListV2pt0().then((res) => {
 					if (res) {
 						dispatch(setPromoterEventListV2pt0Slice(res));
 					}

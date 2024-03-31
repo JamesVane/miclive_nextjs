@@ -54,7 +54,6 @@ function ProfilePageContainer() {
 	async function initPage() {
 		try {
 			const user = await Auth.currentAuthenticatedUser();
-			const userId = user.attributes.sub;
 			const roleType = user.attributes["custom:RoleType"];
 			if (
 				roleType === "performer" ||
@@ -63,7 +62,7 @@ function ProfilePageContainer() {
 			) {
 				setUserType(roleType);
 			}
-			const fetchedUserProfile = await getUserProfile(roleType, userId);
+			const fetchedUserProfile = await getUserProfile();
 			dispatch(setUsersStateProfile(fetchedUserProfile));
 		} catch {
 			router.push("/sign_in");

@@ -31,8 +31,8 @@ import {
 	formatPhoneNumber,
 	unformatPhoneNumber,
 } from "@/generic_functions/formatPhoneNumber";
-import { getCheckIfExistingEmailOrUsername } from "@/api_functions/getCheckIfExistingEmailOrUsername";
-import { deleteAccountIfNotConfirmed } from "@/api_functions/deleteAccountIfNotConfirmed";
+import { getCheckIfExistingEmailOrUsername } from "@/api_functions_no_auth/getCheckIfExistingEmailOrUsername";
+import { deleteAccountIfNotConfirmed } from "@/api_functions_no_auth/deleteAccountIfNotConfirmed";
 import { useRouter } from "next/navigation";
 import { cleanWhitespace } from "@/generic_functions/validationFunctionsForForms";
 

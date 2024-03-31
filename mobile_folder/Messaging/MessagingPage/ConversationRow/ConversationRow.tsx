@@ -17,7 +17,7 @@ import FormatTimeTop from "./FormatTimeTop";
 import FormatTimeBottom from "./FormatTimeBottom";
 import { setUpdateStatus } from "@/store/conversationListSlice";
 import { useDispatch } from "react-redux";
-import { putConversationStatus } from "@/api_functions/putConversationStatus";
+import { putConversationStatus } from "@/api_functions_not_user/putConversationStatus";
 import { Auth } from "aws-amplify";
 
 interface ConversationRowProps {

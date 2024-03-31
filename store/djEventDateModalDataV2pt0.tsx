@@ -1,7 +1,7 @@
 /** @format */
 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { NotPerformerEvent } from "../api_functions/getSingleDateForNotPerformer";
+import { NotPerformerEvent } from "../api_functions_no_auth/getSingleDateForNotPerformer";
 
 export interface PromoterType {
 	promoter_sub: string;

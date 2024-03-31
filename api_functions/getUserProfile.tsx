@@ -16,15 +16,15 @@ export interface UserProfileResponse {
 	username: string;
 }
 
-export async function getUserProfile(
-	role_type: "promoter" | "dj" | "performer",
-	sub: string
-): Promise<UserProfileResponse> {
+export async function getUserProfile(): Promise<UserProfileResponse> {
 	const endpoint =
 		"https://lxhk6cienf.execute-api.us-east-2.amazonaws.com/Dev/getcurrentuserprofileinfo";
-	const queryParams = new URLSearchParams({ role_type, sub });
 
 	try {
+		const user = await Auth.currentAuthenticatedUser();
+		const username = user.attributes["custom:DisplayUsername"];
+		const authToken = user.signInUserSession.idToken.jwtToken;
+
 		const response = await axios.get<{
 			primary_key: string;
 			tagline: string;
@@ -35,11 +35,12 @@ export async function getUserProfile(
 				IG: string | null;
 				Link: string | null;
 			} | null;
-		}>(`${endpoint}?${queryParams.toString()}`);
+		}>(endpoint, {
+			headers: {
+				Authorization: `Bearer ${authToken}`,
+			},
+		});
 		const { primary_key, tagline, info } = response.data;
-
-		const user = await Auth.currentAuthenticatedUser();
-		const username = user.attributes["custom:DisplayUsername"];
 
 		return {
 			primary_key,

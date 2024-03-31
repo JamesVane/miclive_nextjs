@@ -12,7 +12,7 @@ import {
 import { useState } from "react";
 import { swapPerformerCuePositionReducer } from "@/store/djManageEventSlice";
 import { RootState } from "@/app/LocalizationProviderHelper";
-import { putSwitchPerformerCuePosition } from "@/api_functions/putSwitchPerformerCuePosition";
+import { putSwitchPerformerCuePosition } from "@/api_functions_not_user/putSwitchPerformerCuePosition";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "../styles.module.css";
 import _ from "lodash";

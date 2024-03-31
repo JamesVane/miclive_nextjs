@@ -87,7 +87,6 @@ const adjustTime = (
 };
 
 export const createBaseAndSpecificEventContainer = async (
-	promoter_id: string,
 	event_data: PromoterCreateEventType
 ): Promise<ResponseData> => {
 	const baseEvent: BaseEvent = {
@@ -120,7 +119,6 @@ export const createBaseAndSpecificEventContainer = async (
 	};
 
 	const requestBody: RequestBody = {
-		promoter_id: parseInt(promoter_id),
 		baseEvent: baseEvent,
 		specificEvent: specificEvent,
 	};

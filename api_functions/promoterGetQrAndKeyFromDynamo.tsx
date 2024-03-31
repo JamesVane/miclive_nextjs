@@ -1,6 +1,7 @@
 /** @format */
 
 import axios from "axios";
+import { Auth } from "aws-amplify";
 
 export async function promoterGetQrAndKeyFromDynamo(
 	requestSpecificEvent: string
@@ -10,7 +11,14 @@ export async function promoterGetQrAndKeyFromDynamo(
 	const url = `${API_ENDPOINT}?request_specific_event=${requestSpecificEvent}`;
 
 	try {
-		const response = await axios.get(url);
+		const currentUser = await Auth.currentAuthenticatedUser();
+		const authToken = currentUser.signInUserSession.idToken.jwtToken;
+
+		const response = await axios.get(url, {
+			headers: {
+				Authorization: `Bearer ${authToken}`,
+			},
+		});
 		return response.data.Value;
 	} catch (error: any) {
 		throw new Error(`Failed to fetch data: ${error.message}`);

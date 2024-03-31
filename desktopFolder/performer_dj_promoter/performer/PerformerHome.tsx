@@ -15,7 +15,7 @@ import SplashPage from "@/SplashPage";
 import { getPerformerTicketEventsV2pt0 } from "@/api_functions/getPerformerTicketEventsV2pt0";
 import { setPerformerTicketsV2pt0 } from "@/store/performerTicketsV2pt0";
 import PerformerEventDateModalV2 from "./PerformerEventDateModalV2";
-import { getPerformerProfileAudioKeys } from "@/api_functions/getPerformerProfileAudioKeys";
+import { getPerformerProfileAudioKeys } from "@/api_functions_need_to_add_auth/getPerformerProfileAudioKeys";
 import { setPerformerAudioKey } from "@/store/performerAudioKeysStore";
 // import { useSessionState } from "@/custom_hooks/useSessionState";
 

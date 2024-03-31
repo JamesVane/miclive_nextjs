@@ -1,6 +1,7 @@
 /** @format */
 
 import axios from "axios";
+import { Auth } from "aws-amplify";
 
 export interface EventData {
 	event_name: string;
@@ -8,16 +9,16 @@ export interface EventData {
 	base_event_id: number;
 }
 
-export async function getPromoterEventListV2pt0(
-	promoterId: string
-): Promise<EventData[] | null> {
+export async function getPromoterEventListV2pt0(): Promise<EventData[] | null> {
+	const currentUser = await Auth.currentAuthenticatedUser();
+	const authToken = currentUser.signInUserSession.idToken.jwtToken;
 	const endpoint =
 		"https://lxhk6cienf.execute-api.us-east-2.amazonaws.com/Dev/promoter/getpromotereventlistv2pt0";
 
 	try {
 		const response = await axios.get(endpoint, {
-			params: {
-				request_promoter_id: promoterId,
+			headers: {
+				Authorization: `Bearer ${authToken}`,
 			},
 		});
 

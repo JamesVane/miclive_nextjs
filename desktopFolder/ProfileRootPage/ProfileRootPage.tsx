@@ -54,10 +54,9 @@ function ProfileRootPage() {
 	async function loadProfileInfo() {
 		try {
 			const user = await Auth.currentAuthenticatedUser();
-			const userSub = user.attributes.sub;
 			const roleType = user.attributes["custom:RoleType"];
 			setUserType(roleType);
-			const fetchedUserProfile = await getUserProfile(roleType, userSub);
+			const fetchedUserProfile = await getUserProfile();
 			dispatch(setUsersStateProfile(fetchedUserProfile));
 		} catch {
 			setNotAuthenticated(true);

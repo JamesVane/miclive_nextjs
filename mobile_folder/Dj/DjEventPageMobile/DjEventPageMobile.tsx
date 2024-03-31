@@ -10,7 +10,7 @@ import {
 import { Button, Tabs, Tab, LinearProgress } from "@mui/material";
 import styles from "./styles.module.css";
 import PersonRowMobile from "@mobi/PersonRowMobile";
-import { DjEventPageType } from "@/api_functions/getDjEventPageDataV2pt0";
+import { DjEventPageType } from "@/api_functions_not_user/getDjEventPageDataV2pt0";
 import DescriptionComponent from "@mobi/DescriptionComponent";
 import DjEventPageRosterHelper from "./DjEventPageRosterHelper";
 

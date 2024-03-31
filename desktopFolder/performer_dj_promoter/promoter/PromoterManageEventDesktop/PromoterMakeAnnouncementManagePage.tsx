@@ -73,7 +73,6 @@ function PromoterMakeAnnouncementManagePage({
 			request_specific_event_id: specificeventId.toString(),
 			request_message: announcementValue,
 			request_queue_position: eventQueuePosition,
-			request_promoter_or_dj: "promoter",
 			request_sender_name: promoterNameFromUserState,
 		})
 			.then((res) => {
