@@ -38,41 +38,29 @@ function PusherLogic() {
 		getUserTypeAndRoleId();
 	}, []);
 
-	const { data: eventInfo, refetch: refetchPerformerCurrentEvent } =
-		userRoleId === "performer"
-			? useQuery({
-					queryKey: [
-						"performerCurrentEventState",
-						{
-							request_specific_event_id: Number(specificEventId),
-						},
-					],
-					queryFn: getPerformerCurrentEventState,
-			  })
-			: {
-					data: null,
-					refetch: () => {},
-			  };
-	const { data: imtermissionTimestampFromQuery, refetch: timestampRefetch } =
-		userRoleId === "performer"
-			? useQuery({
-					queryKey: [
-						"performerCurrentEventTimestamp",
-						{
-							request_specific_event_id: specificEventId,
-						},
-					],
-					queryFn: getIntermissionStampFromSpecificId,
-			  })
-			: {
-					data: null,
-					refetch: () => {},
-			  };
-
-	function PusherInner() {
-		const dispatch = useDispatch();
+	function PusherInnerPerformer() {
+		const { data: eventInfo, refetch: refetchPerformerCurrentEvent } = useQuery(
+			{
+				queryKey: [
+					"performerCurrentEventState",
+					{
+						request_specific_event_id: Number(specificEventId),
+					},
+				],
+				queryFn: getPerformerCurrentEventState,
+			}
+		);
+		const { data: imtermissionTimestampFromQuery, refetch: timestampRefetch } =
+			useQuery({
+				queryKey: [
+					"performerCurrentEventTimestamp",
+					{
+						request_specific_event_id: specificEventId,
+					},
+				],
+				queryFn: getIntermissionStampFromSpecificId,
+			});
 		useEffect(() => {
-			const userChannelId = `${userType}_${userRoleId}`;
 			const eventChannelId = specificEventId
 				? `event_${specificEventId}`
 				: "event_0";
@@ -80,7 +68,6 @@ function PusherLogic() {
 			const pusher = new Pusher("7519598870db2d634286", {
 				cluster: "us2",
 			});
-			var userChannel = pusher.subscribe(userChannelId);
 			var eventChannel = pusher.subscribe(eventChannelId);
 
 			if (userType === "performer") {
@@ -136,6 +123,28 @@ function PusherLogic() {
 					});
 				}
 			}
+
+			return () => {
+				pusher.unsubscribe(eventChannelId);
+				pusher.disconnect();
+			};
+		}, [specificEventId]);
+		return <></>;
+	}
+
+	function PusherInnerPromoter() {
+		const dispatch = useDispatch();
+		useEffect(() => {
+			const userChannelId = `${userType}_${userRoleId}`;
+			const eventChannelId = specificEventId
+				? `event_${specificEventId}`
+				: "event_0";
+
+			const pusher = new Pusher("7519598870db2d634286", {
+				cluster: "us2",
+			});
+			var userChannel = pusher.subscribe(userChannelId);
+			var eventChannel = pusher.subscribe(eventChannelId);
 
 			if (userType === "promoter") {
 				if (specificEventId) {
@@ -193,7 +202,13 @@ function PusherLogic() {
 	return (
 		<>
 			{userType && userType !== "" && userRoleId && userRoleId !== "" ? (
-				<PusherInner />
+				<>
+					{userType === "performer" ? (
+						<PusherInnerPerformer />
+					) : (
+						<PusherInnerPromoter />
+					)}
+				</>
 			) : (
 				<></>
 			)}
