@@ -1,3 +1,3 @@
 SELECT *
-FROM roster
-WHERE specific_event = 159;
+FROM specific_event
+WHERE specific_event_id = 159;

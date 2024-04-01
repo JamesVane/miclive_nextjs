@@ -55,12 +55,12 @@ function PromoterManageEventDesktop({
 	}
 
 	async function handleQrAndId() {
-		promoterGetQrAndKeyFromDynamo(specificEventId).then((res) => {
-			setCheckinUuidAndQr({
-				uuid: res.qr_code_uuid,
-				key: res.check_in_id,
-			});
-		});
+		// promoterGetQrAndKeyFromDynamo(specificEventId).then((res) => {
+		// 	setCheckinUuidAndQr({
+		// 		uuid: res.qr_code_uuid,
+		// 		key: res.check_in_id,
+		// 	});
+		// });
 	}
 
 	function handleClostChangeAudioModal() {

@@ -128,10 +128,16 @@ const PromoterManageEventState = createSlice({
 			state.roster.checked_in = returnObj;
 		},
 		setNextPerformer: (state, action: PayloadAction<number>) => {
-			state.event_cue_position = action.payload;
-			state.roster.has_performed[action.payload - 1] =
-				state.roster.checked_in[action.payload - 1];
-			delete state.roster.checked_in[action.payload - 1];
+			const newQueuePos = Number(action.payload) - 1;
+			console.log("action.payload:", action.payload);
+			console.log(
+				"state.roster.checked_in[Number(newQueuePos)]:",
+				state.roster.checked_in[Number(newQueuePos)]
+			);
+			state.roster.has_performed[Number(newQueuePos)] =
+				state.roster.checked_in[Number(newQueuePos)];
+			delete state.roster.checked_in[Number(newQueuePos)];
+			state.event_cue_position = Number(action.payload);
 		},
 		setEventhasStarted: (state, action: PayloadAction<boolean>) => {
 			if (action.payload === true) {

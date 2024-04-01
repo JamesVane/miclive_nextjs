@@ -59,6 +59,20 @@ function PromoterManageHeader({
 	} = event;
 
 	const [intermissionTime, setIntermissionTime] = useState(0);
+	const [intermissionEndNextQueue, setIntermissionEndNextQueue] = useState(0);
+
+	function handleSetIntermissionEndNextQueue(nextQueue: number) {
+		if (intermissionEndNextQueue === 0) {
+			setIntermissionEndNextQueue(nextQueue);
+		}
+	}
+
+	useEffect(() => {
+		if (intermissionEndNextQueue !== 0) {
+			dispatch(setNextPerformer(intermissionEndNextQueue));
+			dispatch(setImtermissionTimestamp(null));
+		}
+	}, [intermissionEndNextQueue]);
 
 	const currentPerformerObject = rosterObject.checked_in[eventQueuePosition];
 
@@ -87,6 +101,7 @@ function PromoterManageHeader({
 			const now = new Date().getTime();
 			const timeInSeconds = Math.max(Math.floor((endTime - now) / 1000), 0);
 
+			console.log("INTERMISSION SET!!");
 			setIntermissionTime(timeInSeconds);
 		} else {
 			setIntermissionTime(0);
@@ -97,9 +112,9 @@ function PromoterManageHeader({
 		() => {
 			if (intermissionTime > 0) {
 				setIntermissionTime((prevTime) => {
-					if (prevTime <= 1) {
-						dispatch(setNextPerformer(eventQueuePosition + 1));
-						dispatch(setImtermissionTimestamp(null));
+					console.log("prevTime:", prevTime);
+					if (prevTime == 1) {
+						handleSetIntermissionEndNextQueue(eventQueuePosition + 1);
 						return 0; // reset time
 					}
 					return prevTime - 1;

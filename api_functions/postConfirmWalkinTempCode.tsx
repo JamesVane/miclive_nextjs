@@ -38,17 +38,13 @@ export async function postConfirmWalkinTempCode({
 		});
 
 		if (!response.ok) {
-			throw new Error(`HTTP error! Status: ${response.status}`);
-		}
-
-		const data = await response.json();
-		if (data.error) {
 			return {
 				uuid: "",
 				performerRoleId: "",
 				error: "Incorrect Code.",
 			};
 		} else {
+			const data = await response.json();
 			return {
 				uuid: data.new_uuid,
 				performerRoleId: data.return_performer_role_id,
