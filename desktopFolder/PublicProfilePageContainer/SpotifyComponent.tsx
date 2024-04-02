@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getSpotifyAccessToken } from "@/api_functions_no_auth/getSpotifyAccessToken";
 import styles from "./styles.module.css";
+import { isMobile } from "react-device-detect";
 
 interface SpotifyComponentProps {
 	url: string;
@@ -46,19 +47,20 @@ function SpotifyComponent({ url }: SpotifyComponentProps) {
 		// 		marginTop: "10px",
 		// 		backgroundColor: "green",
 		// 	}}>
-		<div className={styles.spotify_container}>
+		<div
+			className={styles.spotify_container}
+			style={{ marginTop: isMobile ? "5px" : "10px" }}>
 			<iframe
 				style={{
 					borderRadius: "12px",
 					width: "calc(100% - 10px)",
-					marginTop: "10px",
-					height: "160px",
-					maxHeight: "160px",
+					height: isMobile ? "75px" : "160px",
+					maxHeight: isMobile ? "75px" : "160px",
 					display: "flex",
 				}}
 				src={`https://open.spotify.com/embed/track/${url}?utm_source=generator`}
 				width="100%"
-				height="160"
+				height={isMobile ? "75" : "160"}
 				frameBorder="0"
 				// allowfullscreen=""
 				allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"

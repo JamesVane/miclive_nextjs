@@ -12,6 +12,7 @@ import NotAuthProfilePage from "./NotAuthProfilePage";
 import styles from "./styles.module.css";
 import ProfileEditing from "./ProfileEditing";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
+import LandingEditingPageContainer from "./LandingEditingPage/LandingEditingPageContainer";
 
 function ProfileRootPage() {
 	const dispatch = useDispatch();
@@ -23,6 +24,14 @@ function ProfileRootPage() {
 		? searchParams.get("editing") === "true"
 			? true
 			: searchParams.get("editing") === "false"
+			? false
+			: false
+		: false;
+
+	const landingEditingOpen = searchParams.get("landingediting")
+		? searchParams.get("landingediting") === "true"
+			? true
+			: searchParams.get("landingediting") === "false"
 			? false
 			: false
 		: false;
@@ -40,9 +49,16 @@ function ProfileRootPage() {
 	function openEditing() {
 		router.push(pathname + "?" + createQueryString("editing", "true"));
 	}
+	function openEditLanding() {
+		router.push(pathname + "?" + createQueryString("landingediting", "true"));
+	}
 
 	function closeEditing() {
 		router.push(pathname + "?" + createQueryString("editing", "false"));
+	}
+
+	function closeEditlanding() {
+		router.push(pathname + "?" + createQueryString("landingediting", "false"));
 	}
 
 	const [isLoading, setIsLoading] = useState(true);
@@ -80,7 +96,9 @@ function ProfileRootPage() {
 						<NotAuthProfilePage />
 					) : (
 						<>
-							{editingIsOpen ? (
+							{landingEditingOpen ? (
+								<LandingEditingPageContainer />
+							) : editingIsOpen ? (
 								<ProfileEditing
 									promoter={userType === "promoter"}
 									performer={userType === "performer"}
@@ -89,6 +107,7 @@ function ProfileRootPage() {
 								/>
 							) : (
 								<HomeProfilePaper
+									openEditLanding={openEditLanding}
 									handleEdit={openEditing}
 									promoter={userType === "promoter"}
 									performer={userType === "performer"}

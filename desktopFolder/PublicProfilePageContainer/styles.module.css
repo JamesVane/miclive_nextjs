@@ -180,8 +180,6 @@
 	overflow: hidden;
 }
 .youtube_player_outer {
-	margin-top: 5px;
-	width: calc(100% - 10px);
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -190,7 +188,6 @@
 	overflow: hidden;
 	backdrop-filter: brightness(70%) blur(3px);
 	background-color: rgba(255, 255, 255, 0.1);
-	height: 270px;
 }
 /* .event_section_tag {
 	width: 100%;

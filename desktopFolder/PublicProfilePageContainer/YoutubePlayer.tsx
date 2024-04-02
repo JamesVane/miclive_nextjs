@@ -3,10 +3,22 @@
 import React from "react";
 import styles from "./styles.module.css";
 import ReactPlayer from "react-player/youtube";
+import { isMobile } from "react-device-detect";
 
-function YoutubePlayer() {
+interface YoutubePlayerProps {
+	url: string;
+	fullWidth?: boolean;
+}
+
+function YoutubePlayer({ url, fullWidth }: YoutubePlayerProps) {
 	return (
-		<div className={styles.youtube_player_outer}>
+		<div
+			className={styles.youtube_player_outer}
+			style={{
+				marginTop: fullWidth ? "0px" : "5px",
+				height: isMobile ? "180px" : "270px",
+				width: fullWidth ? "100%" : "calc(100% - 10px)",
+			}}>
 			<div className={styles.youtube_player_div}>
 				<ReactPlayer
 					style={{
@@ -16,9 +28,8 @@ function YoutubePlayer() {
 						height: "100%",
 						minHeight: "100%",
 						maxHeight: "100%",
-						objectFit: "cover",
 					}}
-					url="https://www.youtube.com/watch?v=iFIvpsNpWLk"
+					url={url}
 				/>
 			</div>
 		</div>

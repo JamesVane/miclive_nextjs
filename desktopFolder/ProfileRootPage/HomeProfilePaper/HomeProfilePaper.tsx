@@ -10,6 +10,7 @@ import {
 	LocalOfferRounded,
 	AccountBoxRounded,
 	CameraAltRounded,
+	PortraitRounded,
 } from "@mui/icons-material";
 import styles from "./styles.module.css";
 import HomeBarV2 from "@desk/HomeBarV2";
@@ -22,6 +23,7 @@ interface HomeProfilePaperProps {
 	dj?: boolean;
 	promoter?: boolean;
 	handleEdit: () => void;
+	openEditLanding: () => void;
 }
 
 function HomeProfilePaper({
@@ -29,6 +31,7 @@ function HomeProfilePaper({
 	dj,
 	promoter,
 	handleEdit,
+	openEditLanding,
 }: HomeProfilePaperProps) {
 	const router = useRouter();
 
@@ -209,8 +212,26 @@ function HomeProfilePaper({
 							<div className={styles.divider_div}>
 								<Divider variant="middle" flexItem />
 							</div>
+							<Button
+								onClick={openEditLanding}
+								sx={{
+									marginTop: "50px",
+								}}
+								startIcon={<EditRounded />}
+								size="large"
+								variant="contained">
+								edit landing page
+							</Button>
+							<Button
+								sx={{
+									marginTop: "20px",
+								}}
+								startIcon={<PortraitRounded />}
+								size="large"
+								variant="contained">
+								view landing page
+							</Button>
 						</div>
-						{/* {promoter ? <ProfileBannerComponent /> : null} */}
 					</div>
 				</>
 			) : (

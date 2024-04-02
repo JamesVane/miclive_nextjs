@@ -9,6 +9,9 @@ import horizLogo from "@/images/miclive_svg_horiz.svg";
 import { IosShareRounded, EmailRounded } from "@mui/icons-material";
 import AvatarSimpleMobile from "@/mobile_folder/small_components/AvatarSimpleMobile";
 import MobileDateProfilePage from "./MobileDateProfilePage";
+import YoutubePlayer from "./YoutubePlayer";
+import ProfilePageLinkComponent from "./ProfilePageLinkComponent";
+import SpotifyComponent from "./SpotifyComponent";
 
 function PublicProfileMobile() {
 	const tempIgUrl =
@@ -216,6 +219,31 @@ function PublicProfileMobile() {
 				</div>
 				<MobileDateProfilePage />
 				<MobileDateProfilePage />
+				<YoutubePlayer url={"https://www.youtube.com/watch?v=iFIvpsNpWLk"} />
+				<div
+					style={{
+						marginTop: "5px",
+						width: "100%",
+						display: "flex",
+						flexDirection: "column",
+						alignItems: "center",
+						justifyContent: "center",
+					}}>
+					<SpotifyComponent url={"6QHlEUJAtLzAtb1ZmhSamg"} />
+				</div>
+				<SpotifyComponent url={"6P5ulGKtC4x6RnFbzfpq8O"} />
+				<div
+					style={{
+						marginTop: "5px",
+						width: "100%",
+						display: "flex",
+						flexDirection: "column",
+						alignItems: "center",
+						justifyContent: "center",
+					}}>
+					<ProfilePageLinkComponent url="https://www.est-gee.com/" />
+				</div>
+				<ProfilePageLinkComponent url="https://cmgthelabel.shop/" />
 			</div>
 		</>
 	);

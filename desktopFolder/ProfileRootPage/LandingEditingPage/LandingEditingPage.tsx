@@ -1,21 +1,21 @@
 /** @format */
 
-import React from "react";
+import { useState } from "react";
+import HomeBarV2 from "@desk/HomeBarV2";
+import { Tabs, Tab, TextField } from "@mui/material";
 import styles from "./styles.module.css";
+import { Button, Divider, InputAdornment, Avatar } from "@mui/material";
+import { AddRounded, MailRounded, ImageRounded } from "@mui/icons-material";
 import rapper_background_dev from "@/images/rapper_background_dev.webp";
 import Image from "next/image";
-import AvatarSimple from "@desk/AvatarSimple";
-import { Avatar, IconButton } from "@mui/material";
-import { IosShareRounded } from "@mui/icons-material";
-import EmailWidget from "./EmailWidget";
-import YoutubePlayer from "./YoutubePlayer";
-import EventDateProfileCard from "./EventDateProfileCard";
-import ProfilePageLinkComponent from "./ProfilePageLinkComponent";
-import SpotifyComponent from "./SpotifyComponent";
-import horizLogo from "@/images/miclive_svg_horiz.svg";
-// 850 / 340
+import AddYoutube from "./AddYoutube";
+import AddSong from "./AddSong";
+import AddLink from "./AddLink";
 
-function PublicProfilePage() {
+function LandingEditingPage() {
+	const [modalOpen, setModalOpen] = useState<"YT" | "song" | "link" | null>(
+		null
+	);
 	const tempIgUrl =
 		"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/2048px-Instagram_icon.png";
 	const tempTikTok =
@@ -35,223 +35,362 @@ function PublicProfilePage() {
 		"data:image/png;base64,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";
 	const tempSoundcloud =
 		"data:image/png;base64,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";
+	function handleCloseModal() {
+		setModalOpen(null);
+	}
 	return (
 		<>
-			<div className={styles.mic_live_div}>
-				<Image style={{ width: "88%" }} alt="logo" src={horizLogo} />
-			</div>
-			<div className={styles.desktop_background_back}>
-				<Image
+			{modalOpen ? (
+				<div className={styles.modal_main} onClick={handleCloseModal}>
+					<div
+						className={styles.modal_paper}
+						onClick={(e) => e.stopPropagation()}>
+						{modalOpen === "YT" ? (
+							<AddYoutube closeModal={handleCloseModal} />
+						) : modalOpen === "song" ? (
+							<AddSong closeModal={handleCloseModal} />
+						) : modalOpen === "link" ? (
+							<AddLink />
+						) : null}
+					</div>
+				</div>
+			) : null}
+			<HomeBarV2>
+				<div
 					style={{
 						height: "100%",
-						width: "100%",
-						objectFit: "cover",
-					}}
-					alt="dev"
-					src={rapper_background_dev}
-				/>
-			</div>
-			<div className={styles.fade_overlay_desktop}>
-				<div className={styles.front_desktop_background}>
-					<Image
-						style={{
-							height: "100%",
-							width: "100%",
-							objectFit: "cover",
-						}}
-						alt="dev"
-						src={rapper_background_dev}
-					/>
-				</div>
-			</div>
-			<div className={styles.main_div_desktop}>
-				<div className={styles.desktop_content_div}>
-					<EmailWidget />
-					<div className={styles.desktop_top}>
-						<div className={styles.pic_div_desktop}>
-							<AvatarSimple
-								ninety
-								type="performer"
-								username="estgee"
-								id={208}
-							/>
-						</div>
-						<div className={styles.desktop_top_right}>
-							<div className={styles.person_name}>EST Gee</div>
-							<div className={styles.tagline}>I NEVER FELT NUN</div>
-						</div>
-					</div>
-					<div className={styles.events_container_desk}>
-						<div className={styles.event_section_row}>
-							<EventDateProfileCard />
-							<EventDateProfileCard />
-						</div>
-					</div>
-					<YoutubePlayer url={"https://www.youtube.com/watch?v=iFIvpsNpWLk"} />
-					{/* <ProfilePageLinkComponent
-						// url={"https://www.youtube.com/watch?v=iFIvpsNpWLk"}
-						url={"https://mui.com/material-ui/react-drawer/"}
-					/> */}
-					<SpotifyComponent url={"6QHlEUJAtLzAtb1ZmhSamg"} />
-					<SpotifyComponent url={"6P5ulGKtC4x6RnFbzfpq8O"} />
-
-					<ProfilePageLinkComponent url="https://www.est-gee.com/" />
-					<ProfilePageLinkComponent url="https://cmgthelabel.shop/" />
-				</div>
-			</div>
-			<div className={styles.font_fade_container}>
-				<div className={styles.front_fade_div} />
-			</div>
-			<div className={styles.desktop_socials_div}>
-				<IconButton
-					sx={{
-						height: "70px",
-						width: "70px",
-						marginBottom: "10px",
-						border: "2px solid rgba(136, 134, 97, .2)",
+						display: "flex",
+						flexDirection: "row",
+						alignItems: "flex-end",
 					}}>
-					<IosShareRounded
-						color="primary"
+					<Tabs
+						value={"profile"}
+						textColor="primary"
+						indicatorColor="primary"
+						aria-label="secondary tabs example">
+						<Tab
+							value="profile"
+							label={"edit landing page"}
+							sx={{ fontSize: "25px" }}
+						/>
+					</Tabs>
+				</div>
+			</HomeBarV2>
+			<div className={styles.main_div}>
+				<div className={styles.left_div}>
+					<Button variant="outlined" startIcon={<ImageRounded />}>
+						change background picture
+					</Button>
+					<div className={styles.background_pic_display}>
+						<Image
+							style={{
+								height: "100%",
+								width: "100%",
+								objectFit: "cover",
+							}}
+							alt="dev"
+							src={rapper_background_dev}
+						/>
+					</div>
+				</div>
+				<div className={styles.divider_vert}>
+					<Divider orientation="vertical" variant="middle" flexItem />
+				</div>
+				<div className={styles.center_div}>
+					<div className={styles.add_buttons_div}>
+						<Button
+							onClick={() => {
+								setModalOpen("YT");
+							}}
+							startIcon={<AddRounded />}
+							variant="outlined">
+							Youtube video
+						</Button>
+						<Button
+							onClick={() => {
+								setModalOpen("song");
+							}}
+							startIcon={<AddRounded />}
+							variant="outlined">
+							song
+						</Button>
+						<Button
+							onClick={() => {
+								setModalOpen("link");
+							}}
+							startIcon={<AddRounded />}
+							variant="outlined">
+							link
+						</Button>
+					</div>
+				</div>
+				<div className={styles.divider_vert}>
+					<Divider orientation="vertical" variant="middle" flexItem />
+				</div>
+				<div className={styles.right_div}>
+					<TextField
+						InputProps={{
+							startAdornment: (
+								<InputAdornment position="start">
+									<MailRounded />
+								</InputAdornment>
+							),
+						}}
 						sx={{
-							height: "45px",
-							width: "45px",
-							marginTop: "-5px",
+							width: "calc(100% - 10px)",
+							alignSelf: "flex-end",
+							marginBottom: "10px",
 						}}
+						label="Email"
+						placeholder="Email address"
 					/>
-				</IconButton>
-				<Avatar
-					sx={{
-						height: "70px",
-						width: "70px",
-						marginBottom: "10px",
-					}}>
-					<img
-						alt="IG"
-						src={tempIgUrl}
-						style={{
-							width: "100%",
-							height: "100%",
-							objectFit: "cover",
+					<TextField
+						InputProps={{
+							startAdornment: (
+								<InputAdornment position="start">
+									<Avatar
+										sx={{
+											height: "30px",
+											width: "30px",
+										}}>
+										<img
+											alt="IG"
+											src={tempIgUrl}
+											style={{
+												width: "100%",
+												height: "100%",
+												objectFit: "cover",
+											}}
+										/>
+									</Avatar>
+								</InputAdornment>
+							),
 						}}
-					/>
-				</Avatar>
-				<Avatar
-					sx={{
-						height: "70px",
-						width: "70px",
-						marginBottom: "10px",
-					}}>
-					<img
-						alt="tiktok"
-						src={tempTikTok}
-						style={{
-							width: "100%",
-							height: "100%",
-							objectFit: "cover",
+						sx={{
+							width: "calc(100% - 10px)",
+							alignSelf: "flex-end",
+							marginBottom: "10px",
 						}}
+						label="Instagram"
+						placeholder="Instagram profile URL"
 					/>
-				</Avatar>
-				<Avatar
-					sx={{
-						height: "70px",
-						width: "70px",
-						marginBottom: "10px",
-					}}>
-					<img
-						alt="snap"
-						src={tempSnap}
-						style={{
-							width: "120%",
-							height: "120%",
-							objectFit: "cover",
+					<TextField
+						InputProps={{
+							startAdornment: (
+								<InputAdornment position="start">
+									<Avatar
+										sx={{
+											height: "30px",
+											width: "30px",
+										}}>
+										<img
+											alt="tiktok"
+											src={tempTikTok}
+											style={{
+												width: "100%",
+												height: "100%",
+												objectFit: "cover",
+											}}
+										/>
+									</Avatar>
+								</InputAdornment>
+							),
 						}}
-					/>
-				</Avatar>
-				<Avatar
-					sx={{
-						height: "70px",
-						width: "70px",
-						marginBottom: "10px",
-					}}>
-					<img
-						alt="spotify"
-						src={tempSpotify}
-						style={{
-							width: "150%",
-							height: "150%",
-							objectFit: "cover",
+						sx={{
+							width: "calc(100% - 10px)",
+							alignSelf: "flex-end",
+							marginBottom: "10px",
 						}}
+						label="TikTok"
+						placeholder="TikTok profile URL"
 					/>
-				</Avatar>
-				<Avatar
-					sx={{
-						height: "70px",
-						width: "70px",
-						marginBottom: "10px",
-					}}>
-					<img
-						alt="applemusic"
-						src={tempApple}
-						style={{
-							width: "105%",
-							height: "105%",
-							objectFit: "cover",
+
+					<TextField
+						InputProps={{
+							startAdornment: (
+								<InputAdornment position="start">
+									<Avatar
+										sx={{
+											height: "30px",
+											width: "30px",
+										}}>
+										<img
+											alt="snap"
+											src={tempSnap}
+											style={{
+												width: "100%",
+												height: "100%",
+												objectFit: "cover",
+											}}
+										/>
+									</Avatar>
+								</InputAdornment>
+							),
 						}}
-					/>
-				</Avatar>
-				<Avatar
-					sx={{
-						height: "70px",
-						width: "70px",
-						marginBottom: "10px",
-						backgroundColor: "#000000",
-					}}>
-					<img
-						alt="x"
-						src={tempX}
-						style={{
-							width: "70%",
-							height: "70%",
-							objectFit: "cover",
+						sx={{
+							width: "calc(100% - 10px)",
+							alignSelf: "flex-end",
+							marginBottom: "10px",
 						}}
+						label="SnapChat"
+						placeholder="SnapChat profile URL"
 					/>
-				</Avatar>
-				<Avatar
-					sx={{
-						height: "70px",
-						width: "70px",
-						marginBottom: "10px",
-					}}>
-					<img
-						alt="youtube"
-						src={tempYT}
-						style={{
-							width: "100%",
-							height: "100%",
-							objectFit: "cover",
+					<TextField
+						InputProps={{
+							startAdornment: (
+								<InputAdornment position="start">
+									<Avatar
+										sx={{
+											height: "30px",
+											width: "30px",
+										}}>
+										<img
+											alt="spotify"
+											src={tempSpotify}
+											style={{
+												width: "150%",
+												height: "150%",
+												objectFit: "cover",
+											}}
+										/>
+									</Avatar>
+								</InputAdornment>
+							),
 						}}
-					/>
-				</Avatar>
-				<Avatar
-					sx={{
-						height: "70px",
-						width: "70px",
-						marginBottom: "10px",
-					}}>
-					<img
-						alt="soundcloud"
-						src={tempSoundcloud}
-						style={{
-							width: "115%",
-							height: "115%",
-							objectFit: "cover",
-							marginRight: "-2px",
+						sx={{
+							width: "calc(100% - 10px)",
+							alignSelf: "flex-end",
+							marginBottom: "10px",
 						}}
+						label="Spotify"
+						placeholder="Spotify profile URL"
 					/>
-				</Avatar>
+					<TextField
+						InputProps={{
+							startAdornment: (
+								<InputAdornment position="start">
+									<Avatar
+										sx={{
+											height: "30px",
+											width: "30px",
+										}}>
+										<img
+											alt="applemusic"
+											src={tempApple}
+											style={{
+												width: "100%",
+												height: "100%",
+												objectFit: "cover",
+											}}
+										/>
+									</Avatar>
+								</InputAdornment>
+							),
+						}}
+						sx={{
+							width: "calc(100% - 10px)",
+							alignSelf: "flex-end",
+							marginBottom: "10px",
+						}}
+						label="Apple Music"
+						placeholder="Apple Music profile URL"
+					/>
+					<TextField
+						InputProps={{
+							startAdornment: (
+								<InputAdornment position="start">
+									<Avatar
+										sx={{
+											height: "30px",
+											width: "30px",
+											backgroundColor: "#000000",
+										}}>
+										<img
+											alt="x"
+											src={tempX}
+											style={{
+												width: "70%",
+												height: "70%",
+												objectFit: "cover",
+											}}
+										/>
+									</Avatar>
+								</InputAdornment>
+							),
+						}}
+						sx={{
+							width: "calc(100% - 10px)",
+							alignSelf: "flex-end",
+							marginBottom: "10px",
+						}}
+						label="X (Twitter)"
+						placeholder="X (Twitter) profile URL"
+					/>
+					<TextField
+						InputProps={{
+							startAdornment: (
+								<InputAdornment position="start">
+									<Avatar
+										sx={{
+											height: "30px",
+											width: "30px",
+										}}>
+										<img
+											alt="youtube"
+											src={tempYT}
+											style={{
+												width: "100%",
+												height: "100%",
+												objectFit: "cover",
+											}}
+										/>
+									</Avatar>
+								</InputAdornment>
+							),
+						}}
+						sx={{
+							width: "calc(100% - 10px)",
+							alignSelf: "flex-end",
+							marginBottom: "10px",
+						}}
+						label="YouToube"
+						placeholder="YouToube profile URL"
+					/>
+					<TextField
+						InputProps={{
+							startAdornment: (
+								<InputAdornment position="start">
+									<Avatar
+										sx={{
+											height: "30px",
+											width: "30px",
+										}}>
+										<img
+											alt="soundcloud"
+											src={tempSoundcloud}
+											style={{
+												width: "115%",
+												height: "115%",
+												objectFit: "cover",
+												marginRight: "-2px",
+											}}
+										/>
+									</Avatar>
+								</InputAdornment>
+							),
+						}}
+						sx={{
+							width: "calc(100% - 10px)",
+							alignSelf: "flex-end",
+							marginBottom: "10px",
+						}}
+						label="Soundcloud"
+						placeholder="Soundcloud profile URL"
+					/>
+				</div>
 			</div>
 		</>
 	);
 }
 
-export default PublicProfilePage;
+export default LandingEditingPage;
